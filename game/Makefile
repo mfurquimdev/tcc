@@ -13,6 +13,7 @@
 # ├── inc
 # ├── main.c
 # ├── Makefile
+# ├── map
 # ├── obj
 # └── src
 #-------------------------------------------------------------------------------
@@ -23,52 +24,63 @@
 NAME=big_points
 
 #-------------------------------------------------------------------------------
+# Versão do projeto
+#-------------------------------------------------------------------------------
+#MAJOR_VERSION=0
+#MINOR_VERSION=0
+#MICRO_VERSION=1
+#VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(MICRO_VERSION)
+
+#-------------------------------------------------------------------------------
 # Diretórios
 #-------------------------------------------------------------------------------
-INC_DIR=./inc
-OBJ_DIR=./obj
 SRC_DIR=./src
-BIN_DIR=./bin
+OBJ_DIR=./obj
 MAP_DIR=./map
-
-TARGET=$(BIN_DIR)/$(NAME)
-
-CC=gcc
+INC_DIR=./inc
+BIN_DIR=./bin
 
 #-------------------------------------------------------------------------------
-# C and Object Files
+# C, Header, Object and Mapping Files
 #-------------------------------------------------------------------------------
 SRC_MAIN= main.c
 SRC = ${wildcard $(SRC_DIR)/*.c}
 OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.c=.o}}}
 MAP = ${addprefix $(MAP_DIR)/, ${notdir ${OBJ:.o=.funcmap}}}
+INC = -I$(INC_DIR)
 
 #-------------------------------------------------------------------------------
-# Flags
+# Compilador, flags e bibliotecas
 #-------------------------------------------------------------------------------
+CC=gcc
 CFLAGS= -Wall -pedantic -ansi -g
-INCLUDES= -I$(INC_DIR)
-LIBS=
+LIB=
+
+TARGET=$(BIN_DIR)/$(NAME)
 
 .PHONY: clean
 
-all:
-	@mkdir -vp $(OBJ_DIR) $(MAP_DIR) $(BIN_DIR)
+all: dirs
+	@echo
 	$(MAKE) $(TARGET)
 
+dirs:
+	@mkdir -vp $(OBJ_DIR) $(MAP_DIR) $(BIN_DIR)
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@echo Building $@
-	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
+	@echo
+	@echo Building. $@
+	$(CC) -c $^ -o $@ $(CFLAGS) $(INC)
 
 $(MAP_DIR)/%.funcmap: $(OBJ_DIR)/%.o
-	@echo MappingF $@
-	@objdump -d $< > $@
+	@echo Mapping.. $@
+	objdump -d $^ > $@
 
 $(TARGET): $(MAP)
-	@echo Building $@
-	@$(CC) $(OBJ) $(SRC_MAIN) -o $@ $(LIBS)
+	@echo
+	@echo Linking.. $@
+	$(CC) -o $@ $(SRC_MAIN) $(OBJ) $(LIB)
 
 clean:
 	@echo Cleaning...
-	@find . -name *.o -exec rm {} \;
 	@rm -rvf *~ $(OBJ_DIR)/*.o $(MAP_DIR)/*.funcmap $(BIN_DIR)/*
