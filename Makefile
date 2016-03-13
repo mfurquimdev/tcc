@@ -43,7 +43,6 @@ BIN_DIR=./bin
 #-------------------------------------------------------------------------------
 # C, Header, Object and Mapping Files
 #-------------------------------------------------------------------------------
-SRC_MAIN= main.c
 SRC = ${wildcard $(SRC_DIR)/*.c}
 OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.c=.o}}}
 MAP = ${addprefix $(MAP_DIR)/, ${notdir ${OBJ:.o=.funcmap}}}
@@ -53,7 +52,7 @@ INC = -I$(INC_DIR)
 # Compilador, flags e bibliotecas
 #-------------------------------------------------------------------------------
 CC=gcc
-CFLAGS= -Wall -pedantic -ansi -g
+CFLAGS= -Wall -Wextra -pedantic -ansi -g -std=c99
 LIB=
 
 TARGET=$(BIN_DIR)/$(NAME)
@@ -72,15 +71,21 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo Building. $@
 	$(CC) -c $^ -o $@ $(CFLAGS) $(INC)
 
-$(MAP_DIR)/%.funcmap: $(OBJ_DIR)/%.o
-	@echo Mapping.. $@
-	objdump -d $^ > $@
-
-$(TARGET): $(MAP)
+$(TARGET): $(OBJ)
 	@echo
 	@echo Linking.. $@
-	$(CC) -o $@ $(SRC_MAIN) $(OBJ) $(LIB)
+	$(CC) -o $@ $(OBJ) $(LIB)
+
+
+map: $(MAP_DIR)/%.funcmap
+	@echo
+	@echo Mapping.. $@
+
+$(MAP_DIR)/%.funcmap: $(OBJ_DIR)/%.o
+	objdump -d $^ > $@
 
 clean:
 	@echo Cleaning...
 	@rm -rvf *~ $(OBJ_DIR)/*.o $(MAP_DIR)/*.funcmap $(BIN_DIR)/*
+
+.PRECIOUS: %.o
