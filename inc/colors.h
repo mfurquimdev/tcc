@@ -1,3 +1,6 @@
+#ifndef COLORS_H
+#define COLORS_H
+
 /*******************************************************************************
  * Cores
  ******************************************************************************/
@@ -20,3 +23,5 @@ static const char color_yellow[] = "amarelo";
 static const char color_purple[] = "roxo";
 static const char color_white[] = "branco";
 static const char color_black[] = "preto";
+
+#endif
