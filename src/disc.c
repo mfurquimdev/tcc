@@ -74,37 +74,37 @@ char* disc_get_color_char(struct Disc* disc)
     switch (disc_get_color_int(disc)) {
         case 0:
         char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_RED));
-        strncpy(char_color, COLOR_RED, sizeof(COLOR_RED));
+        strncpy(char_color, COLOR_RED, strlen(COLOR_RED));
         break;
 
         case 1:
         char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_GREEN));
-        strncpy(char_color, COLOR_GREEN, sizeof(COLOR_GREEN));
+        strncpy(char_color, COLOR_GREEN, strlen(COLOR_GREEN));
         break;
 
         case 2:
         char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_BLUE));
-        strncpy(char_color, COLOR_BLUE, sizeof(COLOR_BLUE));
+        strncpy(char_color, COLOR_BLUE, strlen(COLOR_BLUE));
         break;
 
         case 3:
         char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_YELLOW));
-        strncpy(char_color, COLOR_YELLOW, sizeof(COLOR_YELLOW));
+        strncpy(char_color, COLOR_YELLOW, strlen(COLOR_YELLOW));
         break;
 
         case 4:
         char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_PURPLE));
-        strncpy(char_color, COLOR_PURPLE, sizeof(COLOR_PURPLE));
+        strncpy(char_color, COLOR_PURPLE, strlen(COLOR_PURPLE));
         break;
 
         case 5:
         char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_WHITE));
-        strncpy(char_color, COLOR_WHITE, sizeof(COLOR_WHITE));
+        strncpy(char_color, COLOR_WHITE, strlen(COLOR_WHITE));
         break;
 
         case 6:
         char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_BLACK));
-        strncpy(char_color, COLOR_BLACK, sizeof(COLOR_BLACK));
+        strncpy(char_color, COLOR_BLACK, strlen(COLOR_BLACK));
         break;
     }
 
