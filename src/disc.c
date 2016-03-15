@@ -33,37 +33,46 @@ int get_color_int(struct Disc* disc)
 
 char* get_color_char(struct Disc* disc)
 {
+    char* char_color = NULL;
+    
     switch (get_color_int(disc)) {
         case 0:
-        return color_red;
+        char_color = (char*) malloc(sizeof(char)*sizeof(color_red));
+        strncpy(char_color, color_red, sizeof(color_red));
         break;
 
         case 1:
-        return color_green;
+        char_color = (char*) malloc(sizeof(char)*sizeof(color_green));
+        strncpy(char_color, color_green, sizeof(color_green));
         break;
 
         case 2:
-        return color_blue;
+        char_color = (char*) malloc(sizeof(char)*sizeof(color_blue));
+        strncpy(char_color, color_blue, sizeof(color_blue));
         break;
 
         case 3:
-        return color_yellow;
+        char_color = (char*) malloc(sizeof(char)*sizeof(color_yellow));
+        strncpy(char_color, color_yellow, sizeof(color_yellow));
         break;
 
         case 4:
-        return color_purple;
+        char_color = (char*) malloc(sizeof(char)*sizeof(color_purple));
+        strncpy(char_color, color_purple, sizeof(color_purple));
         break;
 
         case 5:
-        return color_white;
+        char_color = (char*) malloc(sizeof(char)*sizeof(color_white));
+        strncpy(char_color, color_white, sizeof(color_white));
         break;
 
         case 6:
-        return color_black;
+        char_color = (char*) malloc(sizeof(char)*sizeof(color_black));
+        strncpy(char_color, color_black, sizeof(color_black));
         break;
     }
 
-    return NULL;
+    return char_color;
 }
 
 int destroy_disc(struct Disc* disc)
