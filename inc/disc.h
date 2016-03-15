@@ -9,8 +9,9 @@ struct Disc {
 
 struct Disc* create_disc(enum colors);
 int destroy_disc(struct Disc*);
-int set_color(struct Disc*, enum colors);
-int get_color_int(struct Disc*);
-char* get_color_char(struct Disc*);
+int disc_set_color(struct Disc*, enum colors);
+int disc_get_color_int(struct Disc*);
+char* disc_get_color_char(struct Disc*);
+void print_disc(struct Disc*);
 
 #endif

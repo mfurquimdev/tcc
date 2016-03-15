@@ -13,62 +13,98 @@ struct Disc* create_disc(enum colors color)
     struct Disc* newDisc = NULL;
     newDisc = (struct Disc*) malloc(sizeof(struct Disc));
 
-    set_color(newDisc, color);
-    fprintf(stderr, "%p Disc color: %s\n", (void*) newDisc, get_color_char(newDisc));
+    disc_set_color(newDisc, color);
+//  fprintf(stderr, "%p Disc color: %s\n", (void*) newDisc, disc_get_color_char(newDisc));
 
     return newDisc;
 }
 
-int set_color(struct Disc* disc, enum colors color)
+void print_disc(struct Disc* disc)
+{
+    switch (disc_get_color_int(disc)) {
+        case 0:
+        fprintf(stderr, ANSI_B_COLOR_RED " " ANSI_COLOR_RESET " ");
+        break;
+
+        case 1:
+        fprintf(stderr, ANSI_B_COLOR_GREEN " " ANSI_COLOR_RESET " ");
+        break;
+
+        case 2:
+        fprintf(stderr, ANSI_B_COLOR_BLUE " " ANSI_COLOR_RESET " ");
+        break;
+
+        case 3:
+        fprintf(stderr, ANSI_B_COLOR_YELLOW " " ANSI_COLOR_RESET " ");
+        break;
+
+        case 4:
+        fprintf(stderr, ANSI_B_COLOR_MAGENTA " " ANSI_COLOR_RESET " ");
+        break;
+
+        case 5:
+        fprintf(stderr, ANSI_B_COLOR_WHITE " " ANSI_COLOR_RESET " ");
+        break;
+
+        case 6:
+        fprintf(stderr, ANSI_B_COLOR_BLACK " " ANSI_COLOR_RESET " ");
+        break;
+    }
+
+    return ;
+}
+
+
+int disc_set_color(struct Disc* disc, enum colors color)
 {
     disc->_color = color;
 
     return 0;
 }
 
-int get_color_int(struct Disc* disc)
+int disc_get_color_int(struct Disc* disc)
 {
     return disc->_color;
 }
 
-char* get_color_char(struct Disc* disc)
+char* disc_get_color_char(struct Disc* disc)
 {
     char* char_color = NULL;
-    
-    switch (get_color_int(disc)) {
+
+    switch (disc_get_color_int(disc)) {
         case 0:
-        char_color = (char*) malloc(sizeof(char)*sizeof(color_red));
-        strncpy(char_color, color_red, sizeof(color_red));
+        char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_RED));
+        strncpy(char_color, COLOR_RED, sizeof(COLOR_RED));
         break;
 
         case 1:
-        char_color = (char*) malloc(sizeof(char)*sizeof(color_green));
-        strncpy(char_color, color_green, sizeof(color_green));
+        char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_GREEN));
+        strncpy(char_color, COLOR_GREEN, sizeof(COLOR_GREEN));
         break;
 
         case 2:
-        char_color = (char*) malloc(sizeof(char)*sizeof(color_blue));
-        strncpy(char_color, color_blue, sizeof(color_blue));
+        char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_BLUE));
+        strncpy(char_color, COLOR_BLUE, sizeof(COLOR_BLUE));
         break;
 
         case 3:
-        char_color = (char*) malloc(sizeof(char)*sizeof(color_yellow));
-        strncpy(char_color, color_yellow, sizeof(color_yellow));
+        char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_YELLOW));
+        strncpy(char_color, COLOR_YELLOW, sizeof(COLOR_YELLOW));
         break;
 
         case 4:
-        char_color = (char*) malloc(sizeof(char)*sizeof(color_purple));
-        strncpy(char_color, color_purple, sizeof(color_purple));
+        char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_PURPLE));
+        strncpy(char_color, COLOR_PURPLE, sizeof(COLOR_PURPLE));
         break;
 
         case 5:
-        char_color = (char*) malloc(sizeof(char)*sizeof(color_white));
-        strncpy(char_color, color_white, sizeof(color_white));
+        char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_WHITE));
+        strncpy(char_color, COLOR_WHITE, sizeof(COLOR_WHITE));
         break;
 
         case 6:
-        char_color = (char*) malloc(sizeof(char)*sizeof(color_black));
-        strncpy(char_color, color_black, sizeof(color_black));
+        char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_BLACK));
+        strncpy(char_color, COLOR_BLACK, sizeof(COLOR_BLACK));
         break;
     }
 
