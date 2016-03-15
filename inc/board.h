@@ -11,7 +11,7 @@ struct Board {
 
 struct Board* create_board();
 int destroy_board(struct Board*);
-
 void print_board(struct Board*);
+int board_move_pawn(struct Board*, int);
 
 #endif

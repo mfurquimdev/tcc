@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "board.h"
 #include "pawn.h"
@@ -23,6 +24,26 @@ struct Board* create_board()
     return newBoard;
 }
 
+int board_move_pawn(struct Board* board, int color)
+{
+    size_t i = 0;
+    int pawn_position = pawn_get_position(board->pawns[color]);
+    if (pawn_position >= 0) {
+        i = pawn_position + 1;
+    }
+
+    for (; i < 60; i++) {
+        if (disc_get_color_int(board->discs[i]) == color) {
+            pawn_set_position(board->pawns[color], i);
+
+            break;
+        }
+    }
+
+    return 0;
+}
+
+
 void print_board(struct Board* board)
 {
     for (int i = -5; i < 60; i++) {
@@ -38,9 +59,16 @@ void print_board(struct Board* board)
             continue;
         }
         else {
-            print_disc(board->discs[i]);
+            if (board->discs[i] != NULL) {
+                print_disc(board->discs[i]);
+            }
+            else {
+                fprintf(stderr, "  ");
+            }
         }
     }
+
+    fprintf(stderr, "\n");
 
     return ;
 }

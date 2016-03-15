@@ -7,19 +7,37 @@
 #include "pawn.h"
 #include "board.h"
 
-#define DEBUG_ON 0
-
 /*******************************************************************************
  * Main
  ******************************************************************************/
 
 int main()
 {
-    if (DEBUG_ON) fprintf(stderr, "Main\n");
-
     struct Board* board = NULL;
 
     board = create_board();
+    print_board(board);
+    board_move_pawn(board, 1);
+    print_board(board);
+    board_move_pawn(board, 1);
+    print_board(board);
+    board_move_pawn(board, 1);
+    print_board(board);
+    board_move_pawn(board, 1);
+    print_board(board);
+    board_move_pawn(board, 1);
+    print_board(board);
+    board_move_pawn(board, 1);
+    print_board(board);
+    board_move_pawn(board, 1);
+    print_board(board);
+    board_move_pawn(board, 1);
+    print_board(board);
+    board_move_pawn(board, 1);
+    print_board(board);
+    board_move_pawn(board, 1);
+    print_board(board);
+    board_move_pawn(board, 1);
     print_board(board);
     destroy_board(board);
 
