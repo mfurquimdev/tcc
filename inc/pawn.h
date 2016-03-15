@@ -5,6 +5,7 @@
 
 struct Pawn {
     enum colors _color;
+    int _position;
 }Pawn;
 
 struct Pawn* create_pawn(enum colors);
@@ -13,5 +14,7 @@ int pawn_set_color(struct Pawn*, enum colors);
 int pawn_get_color_int(struct Pawn*);
 char* pawn_get_color_char(struct Pawn*);
 void print_pawn(struct Pawn*);
+int pawn_set_position(struct Pawn*, int);
+int pawn_get_position(struct Pawn*);
 
 #endif

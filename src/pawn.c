@@ -14,8 +14,8 @@ struct Pawn* create_pawn(enum colors color)
 
     if (color != ENUM_BLACK && color != ENUM_WHITE) {
         newPawn = (struct Pawn*) malloc(sizeof(struct Pawn));
-
         pawn_set_color(newPawn, color);
+        pawn_set_position(newPawn,-1-color);
 //      fprintf(stderr, "%p Pawn color: %s\n", (void*) newPawn, pawn_get_color_char(newPawn));
     }
     else {
@@ -52,6 +52,16 @@ void print_pawn(struct Pawn* pawn)
     return ;
 }
 
+int pawn_set_position(struct Pawn* pawn, int position)
+{
+    pawn->_position = position;
+    return 0;
+}
+
+int pawn_get_position(struct Pawn* pawn)
+{
+    return pawn->_position;
+}
 
 int pawn_set_color(struct Pawn* pawn, enum colors color)
 {
@@ -72,27 +82,27 @@ char* pawn_get_color_char(struct Pawn* pawn)
     switch (pawn_get_color_int(pawn)) {
         case 0:
         char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_RED));
-        strncpy(char_color, COLOR_RED, sizeof(COLOR_RED));
+        strncpy(char_color, COLOR_RED, strlen(COLOR_RED));
         break;
 
         case 1:
         char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_GREEN));
-        strncpy(char_color, COLOR_GREEN, sizeof(COLOR_GREEN));
+        strncpy(char_color, COLOR_GREEN, strlen(COLOR_GREEN));
         break;
 
         case 2:
         char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_BLUE));
-        strncpy(char_color, COLOR_BLUE, sizeof(COLOR_BLUE));
+        strncpy(char_color, COLOR_BLUE, strlen(COLOR_BLUE));
         break;
 
         case 3:
         char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_YELLOW));
-        strncpy(char_color, COLOR_YELLOW, sizeof(COLOR_YELLOW));
+        strncpy(char_color, COLOR_YELLOW, strlen(COLOR_YELLOW));
         break;
 
         case 4:
         char_color = (char*) malloc(sizeof(char)*sizeof(COLOR_PURPLE));
-        strncpy(char_color, COLOR_PURPLE, sizeof(COLOR_PURPLE));
+        strncpy(char_color, COLOR_PURPLE, strlen(COLOR_PURPLE));
         break;
     }
 
