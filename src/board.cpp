@@ -26,13 +26,7 @@ struct Board* create_board()
 
 int board_move_pawn(struct Board* board, int color)
 {
-    size_t i = 0;
-    int pawn_position = pawn_get_position(board->pawns[color]);
-    if (pawn_position >= 0) {
-        i = pawn_position + 1;
-    }
-
-    for (; i < 60; i++) {
+    for (size_t i = pawn_get_position(board->pawns[color]); i < 60; i++) {
         if (disc_get_color_int(board->discs[i]) == color) {
             pawn_set_position(board->pawns[color], i);
 
@@ -46,7 +40,7 @@ int board_move_pawn(struct Board* board, int color)
 
 void print_board(struct Board* board)
 {
-    for (int i = -5; i < 60; i++) {
+    for (size_t i = 0; i < 60; i++) {
         unsigned char drawn = 0;
         for (size_t j = 0; j < 5; j++) {
             if (pawn_get_position(board->pawns[j]) == i) {
@@ -63,12 +57,12 @@ void print_board(struct Board* board)
                 print_disc(board->discs[i]);
             }
             else {
-                fprintf(stderr, "  ");
+                fprintf(stdout, "  ");
             }
         }
     }
 
-    fprintf(stderr, "\n");
+    fprintf(stdout, "\n");
 
     return ;
 }
@@ -79,11 +73,13 @@ int destroy_board(struct Board* board)
         for (size_t i = 0; i < 60; i++)
             if (board->discs[i] != NULL)
                 destroy_disc(board->discs[i]);
+    free(board->discs);
 
     if (board->pawns != NULL)
         for (size_t i = 0; i < 5; i++)
             if (board->pawns[i] != NULL)
                 destroy_pawn(board->pawns[i]);
+    free(board->pawns);
 
     return 0;
 }

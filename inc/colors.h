@@ -28,7 +28,7 @@ static const char COLOR_PURPLE[]    = "roxo";
 static const char COLOR_WHITE[]     = "branco";
 static const char COLOR_BLACK[]     = "preto";
 
-enum colors
+enum Colors
 {
     ENUM_RED,
     ENUM_GREEN,

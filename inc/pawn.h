@@ -3,18 +3,24 @@
 
 #include "colors.h"
 
-struct Pawn {
-    enum colors _color;
-    int _position;
-}Pawn;
+class Pawn
+{
+public:
+    Pawn(Colors);
+    ~Pawn();
 
-struct Pawn* create_pawn(enum colors);
-int destroy_pawn(struct Pawn*);
-int pawn_set_color(struct Pawn*, enum colors);
-int pawn_get_color_int(struct Pawn*);
-char* pawn_get_color_char(struct Pawn*);
-void print_pawn(struct Pawn*);
-int pawn_set_position(struct Pawn*, int);
-int pawn_get_position(struct Pawn*);
+    void color(Colors);
+    Colors color();
+    const char* color_str();
+
+    void position(unsigned int);
+    unsigned int position();
+
+    void draw();
+
+private:
+    Colors _color;
+    unsigned int _position;
+}
 
 #endif

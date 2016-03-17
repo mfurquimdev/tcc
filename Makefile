@@ -43,16 +43,17 @@ BIN_DIR=./bin
 #-------------------------------------------------------------------------------
 # C, Header, Object and Mapping Files
 #-------------------------------------------------------------------------------
-SRC = ${wildcard $(SRC_DIR)/*.c}
-OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.c=.o}}}
+#SRC = ${wildcard $(SRC_DIR)/*.cpp}
+SRC = disc.cpp main.cpp
+OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.cpp=.o}}}
 MAP = ${addprefix $(MAP_DIR)/, ${notdir ${OBJ:.o=.funcmap}}}
 INC = -I$(INC_DIR)
 
 #-------------------------------------------------------------------------------
 # Compilador, flags e bibliotecas
 #-------------------------------------------------------------------------------
-CC=gcc
-CFLAGS= -Wall -Wextra -pedantic -ansi -g -std=c99
+CC=g++
+CFLAGS= -Wall -Wextra -pedantic -ansi -g -std=c++11
 LIB=
 
 TARGET=$(BIN_DIR)/$(NAME)
@@ -66,7 +67,7 @@ all: dirs
 dirs:
 	@mkdir -vp $(OBJ_DIR) $(MAP_DIR) $(BIN_DIR)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@echo
 	@echo Building. $@
 	$(CC) -c $^ -o $@ $(CFLAGS) $(INC)

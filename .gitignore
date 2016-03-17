@@ -8,6 +8,9 @@ obj
 # Map files
 map
 
+# Debug
+*.err
+
 # Object files
 *.o
 *.ko
