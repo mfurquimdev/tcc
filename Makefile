@@ -44,7 +44,7 @@ BIN_DIR=./bin
 # C, Header, Object and Mapping Files
 #-------------------------------------------------------------------------------
 #SRC = ${wildcard $(SRC_DIR)/*.cpp}
-SRC = disc.cpp main.cpp
+SRC = pawn.cpp disc.cpp main.cpp
 OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.cpp=.o}}}
 MAP = ${addprefix $(MAP_DIR)/, ${notdir ${OBJ:.o=.funcmap}}}
 INC = -I$(INC_DIR)

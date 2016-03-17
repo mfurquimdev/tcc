@@ -4,22 +4,19 @@
 
 #include "colors.h"
 #include "disc.h"
-//#include "pawn.h"
+#include "pawn.h"
 //#include "board.h"
 
 int main()
 {
-/*    ,
-    ENUM_GREEN,
-    ENUM_BLUE,
-    ENUM_YELLOW,
-    ENUM_PURPLE,
-    ENUM_WHITE,
-    ENUM_BLACK
-*/
     Disc* disc = new Disc(ENUM_RED);
+    Pawn* pawn = new Pawn(ENUM_RED);
+
     disc->draw();
+    pawn->draw();
+
     delete(disc);
+    delete(pawn);
 
     return 0;
 }

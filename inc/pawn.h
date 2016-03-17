@@ -21,6 +21,8 @@ public:
 private:
     Colors _color;
     unsigned int _position;
-}
+
+    void reset_position();
+};
 
 #endif
