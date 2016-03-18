@@ -9,14 +9,9 @@
 
 int main()
 {
-    Disc* disc = new Disc(1);
-    Pawn* pawn = new Pawn(1);
-
-    disc->draw();
-    pawn->draw();
-
-    delete(disc);
-    delete(pawn);
+    Board* board = new Board();
+    board->draw();
+    delete(board);
 
     return 0;
 }

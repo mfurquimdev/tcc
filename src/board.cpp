@@ -12,46 +12,26 @@ Board::Board()
         *it = new Pawn(color);
         color++;
     }
-/*
-    this->discs = (Disc**) malloc(sizeof(Disc*)*this->_num_discs);
-    for (size_t i = 0; i < this->_num_discs; i++) {
-        this->discs[i] = new Disc(i%5);
+
+    for (auto it = discs.begin(); it != discs.end(); ++it) {
+        *it = new Disc(color%5);
+        color++;
     }
-*/
 }
 
 Board::~Board()
 {
-/*
-    if (this->discs != NULL) {
-        for (size_t i = this->_num_discs; i >= 0; i--) {
-            if (this->discs[i] != NULL) {
-                delete(this->discs[i]);
-            }
+    for (auto it = discs.begin(); it != discs.end(); ++it) {
+        if (*it != NULL) {
+            delete(*it);
+            *it = NULL;
         }
-        delete(this->pawns);
     }
 
-    if (this->pawns != NULL) {
-        for (size_t i = this->_num_pawns; i >= 0; i--) {
-            if (this->pawns[i] != NULL) {
-                delete(this->pawns[i]);
-            }
-        }
-        delete(this->pawns);
-    }
-*/
-}
-
-/*
-void
-Board::move_pawn(unsigned int color)
-{
-    for (size_t i = this->pawns[color]); i < 60; i++) {
-        if (this->board->discs[i].color() == color) {
-            this->pawns[color].position(i);
-
-            break;
+    for (auto it = pawns.begin(); it != pawns.end(); ++it) {
+        if (*it != NULL) {
+            delete(*it);
+            *it = NULL;
         }
     }
 }
@@ -59,6 +39,17 @@ Board::move_pawn(unsigned int color)
 void
 Board::draw()
 {
+    for (auto it = pawns.begin(); it != pawns.end(); ++it) {
+        Pawn* pawn = *it;
+        pawn->draw();
+    }
+
+    for (auto it = discs.begin(); it != discs.end(); ++it) {
+        Disc* disc = *it;
+        disc->draw();
+    }
+
+    /*
     for (size_t i = 0; i < 60; i++) {
         unsigned char drawn = 0;
         for (size_t j = 0; j < 5; j++) {
@@ -80,11 +71,26 @@ Board::draw()
             }
         }
     }
-
+    */
     fprintf(stdout, "\n");
 
 
 }
+
+
+/*
+void
+Board::move_pawn(unsigned int color)
+{
+    for (size_t i = this->pawns[color]); i < 60; i++) {
+        if (this->board->discs[i].color() == color) {
+            this->pawns[color].position(i);
+
+            break;
+        }
+    }
+}
+
 
 void print_board(struct Board* board)
 {
