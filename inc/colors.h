@@ -39,4 +39,9 @@ enum Colors
     ENUM_BLACK
 };
 
+const char* color_str(unsigned int);
+const char* color_str(Colors);
+unsigned int color_int(Colors);
+Colors int_color(unsigned int);
+
 #endif

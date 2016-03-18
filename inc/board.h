@@ -1,17 +1,23 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-struct Board {
-    struct Pawn** pawns;
-    struct Disc** discs;
+#include "pawn.h"
+#include "disc.h"
 
-    unsigned int num_pawns;
-    unsigned int num_discs;
-}Board;
+#include <array>
 
-struct Board* create_board();
-int destroy_board(struct Board*);
-void print_board(struct Board*);
-int board_move_pawn(struct Board*, int);
+class Board
+{
+public:
+    Board();
+    ~Board();
+
+    void move_pawn(unsigned int);
+    void draw();
+
+private:
+    std::array<Pawn*,5> pawns;
+    std::array<Disc*,55> discs;
+};
 
 #endif

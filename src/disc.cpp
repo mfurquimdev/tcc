@@ -6,7 +6,7 @@
 #include "colors.h"
 
 
-Disc::Disc(Colors color)
+Disc::Disc(unsigned int color)
 {
     this->color(color);
     fprintf(stderr, "[%p]\tDisc\t%s\n", (void*) this, this->color_str());
@@ -18,9 +18,9 @@ Disc::~Disc()
 }
 
 void
-Disc::color(Colors color)
+Disc::color(unsigned int color)
 {
-    this->_color = color;
+    this->_color = this->int_color(color);
 }
 
 Colors
@@ -66,6 +66,44 @@ Disc::color_str()
 
     return char_color;
 }
+
+Colors
+Disc::int_color(unsigned int int_color)
+{
+    Colors color;
+    switch (int_color) {
+        case 0:
+        color = ENUM_RED;
+        break;
+
+        case 1:
+        color = ENUM_GREEN;
+        break;
+
+        case 2:
+        color = ENUM_BLUE;
+        break;
+
+        case 3:
+        color = ENUM_YELLOW;
+        break;
+
+        case 4:
+        color = ENUM_PURPLE;
+        break;
+
+        case 5:
+        color = ENUM_WHITE;
+        break;
+
+        case 6:
+        color = ENUM_BLACK;
+        break;
+    }
+
+    return color;
+}
+
 
 void
 Disc::draw()

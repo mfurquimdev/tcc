@@ -6,10 +6,10 @@
 class Pawn
 {
 public:
-    Pawn(Colors);
+    Pawn(unsigned int);
     ~Pawn();
 
-    void color(Colors);
+    void color(unsigned int);
     Colors color();
     const char* color_str();
 
@@ -21,6 +21,9 @@ public:
 private:
     Colors _color;
     unsigned int _position;
+
+    unsigned int color_int(Colors);
+    Colors int_color(unsigned int);
 
     void reset_position();
 };

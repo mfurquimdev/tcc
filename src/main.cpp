@@ -5,12 +5,12 @@
 #include "colors.h"
 #include "disc.h"
 #include "pawn.h"
-//#include "board.h"
+#include "board.h"
 
 int main()
 {
-    Disc* disc = new Disc(ENUM_RED);
-    Pawn* pawn = new Pawn(ENUM_RED);
+    Disc* disc = new Disc(1);
+    Pawn* pawn = new Pawn(1);
 
     disc->draw();
     pawn->draw();

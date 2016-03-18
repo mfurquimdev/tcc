@@ -6,7 +6,7 @@
 #include "colors.h"
 
 
-Pawn::Pawn(Colors color)
+Pawn::Pawn(unsigned int color)
 {
     this->color(color);
     this->reset_position();
@@ -19,9 +19,14 @@ Pawn::~Pawn()
 }
 
 void
-Pawn::color(Colors color)
+Pawn::color(unsigned int color)
 {
-    this->_color = color;
+    if (color < 5) {
+        this->_color = this->int_color(color);
+    }
+    else {
+        fprintf(stderr, "[%p]\tPawn cannot be of colors white or black\n", (void*) this);
+    }
 }
 
 Colors
@@ -29,6 +34,60 @@ Pawn::color()
 {
     return this->_color;
 }
+
+void
+Pawn::reset_position()
+{
+    unsigned int color_position = this->color_int(this->color());
+    this->position(color_position);
+    return ;
+}
+
+void
+Pawn::position(unsigned int position)
+{
+    this->_position = position;
+
+    return ;
+}
+
+unsigned int
+Pawn::position()
+{
+    return this->_position;
+}
+
+void
+Pawn::draw()
+{
+    switch (this->color()) {
+        case ENUM_RED:
+        fprintf(stdout, ANSI_F_COLOR_RED "P" ANSI_COLOR_RESET " ");
+        break;
+
+        case ENUM_GREEN:
+        fprintf(stdout, ANSI_F_COLOR_GREEN "P" ANSI_COLOR_RESET " ");
+        break;
+
+        case ENUM_BLUE:
+        fprintf(stdout, ANSI_F_COLOR_BLUE "P" ANSI_COLOR_RESET " ");
+        break;
+
+        case ENUM_YELLOW:
+        fprintf(stdout, ANSI_F_COLOR_YELLOW "P" ANSI_COLOR_RESET " ");
+        break;
+
+        case ENUM_PURPLE:
+        fprintf(stdout, ANSI_F_COLOR_MAGENTA "P" ANSI_COLOR_RESET " ");
+        break;
+
+        default:
+        break;
+    }
+
+    return ;
+}
+
 
 const char*
 Pawn::color_str()
@@ -63,77 +122,64 @@ Pawn::color_str()
     return char_color;
 }
 
-void
-Pawn::reset_position()
-{
-    switch (this->color()) {
-        case ENUM_RED:
-        this->position(0);
-        break;
-
-        case ENUM_GREEN:
-        this->position(1);
-        break;
-
-        case ENUM_BLUE:
-        this->position(2);
-        break;
-
-        case ENUM_YELLOW:
-        this->position(3);
-        break;
-
-        case ENUM_PURPLE:
-        this->position(4);
-        break;
-
-        default:
-        break;
-    }
-
-    return ;
-}
-
-void
-Pawn::position(unsigned int position)
-{
-    this->_position = position;
-
-    return ;
-}
-
 unsigned int
-Pawn::position()
+Pawn::color_int(Colors color)
 {
-    return this->_position;
-}
-
-void Pawn::draw()
-{
-    switch (this->color()) {
+    unsigned int int_color = -1;
+    switch (color) {
         case ENUM_RED:
-        fprintf(stdout, ANSI_F_COLOR_RED "P" ANSI_COLOR_RESET " ");
+        int_color = 0;
         break;
 
         case ENUM_GREEN:
-        fprintf(stdout, ANSI_F_COLOR_GREEN "P" ANSI_COLOR_RESET " ");
+        int_color = 1;
         break;
 
         case ENUM_BLUE:
-        fprintf(stdout, ANSI_F_COLOR_BLUE "P" ANSI_COLOR_RESET " ");
+        int_color = 2;
         break;
 
         case ENUM_YELLOW:
-        fprintf(stdout, ANSI_F_COLOR_YELLOW "P" ANSI_COLOR_RESET " ");
+        int_color = 3;
         break;
 
         case ENUM_PURPLE:
-        fprintf(stdout, ANSI_F_COLOR_MAGENTA "P" ANSI_COLOR_RESET " ");
+        int_color = 4;
         break;
 
         default:
         break;
     }
 
-    return ;
+    return int_color;
+}
+
+
+Colors
+Pawn::int_color(unsigned int int_color)
+{
+    Colors color;
+    switch (int_color) {
+        case 0:
+        color = ENUM_RED;
+        break;
+
+        case 1:
+        color = ENUM_GREEN;
+        break;
+
+        case 2:
+        color = ENUM_BLUE;
+        break;
+
+        case 3:
+        color = ENUM_YELLOW;
+        break;
+
+        case 4:
+        color = ENUM_PURPLE;
+        break;
+    }
+
+    return color;
 }
