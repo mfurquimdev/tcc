@@ -3,5 +3,6 @@
 
 void clear_screen();
 unsigned int my_random();
+unsigned int get_instruction();
 
 #endif

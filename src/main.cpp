@@ -1,6 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #include "colors.h"
 #include "disc.h"
@@ -10,19 +11,42 @@
 
 int main()
 {
+
     Board* board = new Board();
-    for (size_t i = 0; i < 9; i++) {
+    clear_screen();
+    board->draw();
+
+    for (size_t i = 0; i < 50; i++) {
+        unsigned int pawn = get_instruction();
+        clear_screen();
+        if (pawn >= 0 && pawn < 5) {
+            board->move_pawn(pawn);
+        }
         board->draw();
-        board->move_pawn(0);
-        board->draw();
-        board->move_pawn(1);
-        board->draw();
-        board->move_pawn(2);
-        board->draw();
-        board->move_pawn(3);
-        board->draw();
-        board->move_pawn(4);
-        board->draw();
+        /*
+        switch (pawn) {
+            case 0:
+            fprintf(stdout, "Moved Pawn Red\n");
+            break;
+
+            case 1:
+            fprintf(stdout, "Moved Pawn Green\n");
+            break;
+
+            case 2:
+            fprintf(stdout, "Moved Pawn Blue\n");
+            break;
+
+            case 3:
+            fprintf(stdout, "Moved Pawn Yellow\n");
+            break;
+
+            case 4:
+            fprintf(stdout, "Moved Pawn Purple\n");
+            break;
+
+        }
+        */
     }
     delete(board);
 

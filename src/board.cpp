@@ -140,57 +140,9 @@ Board::draw()
         }
     }
 
-    fprintf(stdout, "\n");
-
-    return ;
-}
-
-/*
-
-
-void print_board(struct Board* board)
-{
-    for (size_t i = 0; i < 60; i++) {
-        unsigned char drawn = 0;
-        for (size_t j = 0; j < 5; j++) {
-            if (pawn_get_position(board->pawns[j]) == i) {
-                print_pawn(board->pawns[j]);
-                drawn = 1;
-                break;
-            }
-        }
-        if (drawn) {
-            continue;
-        }
-        else {
-            if (board->discs[i] != NULL) {
-                print_disc(board->discs[i]);
-            }
-            else {
-                fprintf(stdout, "  ");
-            }
-        }
+    for (size_t i = 0; i < 12; i++) {
+        fprintf(stdout, "\n");
     }
 
-    fprintf(stdout, "\n");
-
     return ;
 }
-
-int destroy_board(struct Board* board)
-{
-    if (board->discs != NULL)
-        for (size_t i = 0; i < 60; i++)
-            if (board->discs[i] != NULL)
-                destroy_disc(board->discs[i]);
-    free(board->discs);
-
-    if (board->pawns != NULL)
-        for (size_t i = 0; i < 5; i++)
-            if (board->pawns[i] != NULL)
-                destroy_pawn(board->pawns[i]);
-    free(board->pawns);
-
-    return 0;
-}
-*/
