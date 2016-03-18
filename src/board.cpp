@@ -14,7 +14,7 @@ Board::Board()
     }
 
     for (auto it = discs.begin(); it != discs.end(); ++it) {
-        *it = new Disc(color%5);
+        *it = new Disc(color%5, color);
         color++;
     }
 }
@@ -37,16 +37,41 @@ Board::~Board()
 }
 
 void
+Board::move_pawn(unsigned int color)
+{
+    unsigned int pos = pawns.at(color)->position();
+
+    for (size_t i = pos; i < discs.size(); i++) {
+        if ((unsigned int) discs[i]->color() == color) {
+            pawns.at(color)->position(discs[i]->position());
+            break;
+        }
+    }
+
+/*
+    for (size_t i = this->pawns[color]); i < 60; i++) {
+        if (this->board->discs[i].color() == color) {
+            this->pawns[color].position(i);
+
+            break;
+        }
+    }
+*/
+}
+
+void
 Board::draw()
 {
     for (auto it = pawns.begin(); it != pawns.end(); ++it) {
         Pawn* pawn = *it;
         pawn->draw();
+        pawn = NULL;
     }
 
     for (auto it = discs.begin(); it != discs.end(); ++it) {
         Disc* disc = *it;
         disc->draw();
+        disc = NULL;
     }
 
     /*
@@ -77,19 +102,7 @@ Board::draw()
 
 }
 
-
 /*
-void
-Board::move_pawn(unsigned int color)
-{
-    for (size_t i = this->pawns[color]); i < 60; i++) {
-        if (this->board->discs[i].color() == color) {
-            this->pawns[color].position(i);
-
-            break;
-        }
-    }
-}
 
 
 void print_board(struct Board* board)

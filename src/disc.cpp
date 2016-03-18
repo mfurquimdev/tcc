@@ -6,10 +6,11 @@
 #include "colors.h"
 
 
-Disc::Disc(unsigned int color)
+Disc::Disc(unsigned int color, unsigned int position)
 {
     this->color(color);
-    fprintf(stderr, "[%p]\tDisc\t%s\n", (void*) this, this->color_str());
+    this->position(position);
+    fprintf(stderr, "[%p]\tDisc(%2d)\t%s\n", (void*) this, this->position(), this->color_str());
 }
 
 Disc::~Disc()
@@ -28,6 +29,21 @@ Disc::color()
 {
     return this->_color;
 }
+
+void
+Disc::position(unsigned int position)
+{
+    this->_position = position;
+
+    return ;
+}
+
+unsigned int
+Disc::position()
+{
+    return this->_position;
+}
+
 
 const char*
 Disc::color_str()

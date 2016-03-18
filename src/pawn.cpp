@@ -10,7 +10,7 @@ Pawn::Pawn(unsigned int color)
 {
     this->color(color);
     this->reset_position();
-    fprintf(stderr, "[%p]\tPawn(%d)\t%s\n", (void*) this, this->position(), this->color_str());
+    fprintf(stderr, "[%p]\tPawn(%2d)\t%s\n", (void*) this, this->position(), this->color_str());
 }
 
 Pawn::~Pawn()
