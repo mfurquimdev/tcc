@@ -16,14 +16,15 @@ public:
     void position(unsigned int);
     unsigned int position();
 
+    unsigned int color_int(Colors);
+    Colors int_color(unsigned int);
+
     void draw();
 
 private:
     Colors _color;
     unsigned int _position;
 
-    unsigned int color_int(Colors);
-    Colors int_color(unsigned int);
 
     void reset_position();
 };
