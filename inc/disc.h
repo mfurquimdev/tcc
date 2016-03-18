@@ -3,15 +3,26 @@
 
 #include "colors.h"
 
-struct Disc {
-    enum colors _color;
-}Disc;
+class Disc
+{
+public:
+    Disc(unsigned int, unsigned int);
+    ~Disc();
 
-struct Disc* create_disc(enum colors);
-int destroy_disc(struct Disc*);
-int disc_set_color(struct Disc*, enum colors);
-int disc_get_color_int(struct Disc*);
-char* disc_get_color_char(struct Disc*);
-void print_disc(struct Disc*);
+    void color(unsigned int);
+    Colors color();
+    const char* color_str();
+
+    void position(unsigned int);
+    unsigned int position();
+
+    Colors int_color(unsigned int);
+
+    void draw();
+
+private:
+    Colors _color;
+    unsigned int _position;
+};
 
 #endif

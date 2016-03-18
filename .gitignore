@@ -1,11 +1,15 @@
 # Binary files
 bin
+prog
 
 # Object files
 obj
 
 # Map files
 map
+
+# Debug
+*.err
 
 # Object files
 *.o

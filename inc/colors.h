@@ -28,7 +28,7 @@ static const char COLOR_PURPLE[]    = "roxo";
 static const char COLOR_WHITE[]     = "branco";
 static const char COLOR_BLACK[]     = "preto";
 
-enum colors
+enum Colors
 {
     ENUM_RED,
     ENUM_GREEN,
@@ -38,5 +38,10 @@ enum colors
     ENUM_WHITE,
     ENUM_BLACK
 };
+
+const char* color_str(unsigned int);
+const char* color_str(Colors);
+unsigned int color_int(Colors);
+Colors int_color(unsigned int);
 
 #endif
