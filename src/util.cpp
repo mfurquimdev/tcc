@@ -50,3 +50,12 @@ unsigned int my_random()
 
     return val;
 }
+
+/* Example of pair
+
+std::pair<int, int> p;
+p = std::make_pair(9,2);
+
+fprintf(stdout, "%d %d\n", p.first, p.second);
+
+*/
