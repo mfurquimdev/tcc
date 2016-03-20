@@ -3,6 +3,7 @@
 
 #include "pawn.h"
 #include "disc.h"
+#include "stair.h"
 
 #include <array>
 
@@ -14,6 +15,8 @@ public:
 
     void move_pawn(unsigned int);
     void draw();
+
+    Stair* stair;
 
 private:
     std::array<Pawn*,5> pawns;

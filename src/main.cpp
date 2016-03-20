@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <stdio_ext.h>
 
 #include "colors.h"
 #include "disc.h"
@@ -16,37 +17,20 @@ int main()
     clear_screen();
     board->draw();
 
-    for (size_t i = 0; i < 50; i++) {
+    unsigned char quit = 0;
+    while (!quit) {
         unsigned int pawn = get_instruction();
         clear_screen();
         if (pawn >= 0 && pawn < 5) {
             board->move_pawn(pawn);
         }
-        board->draw();
-        /*
-        switch (pawn) {
-            case 0:
-            fprintf(stdout, "Moved Pawn Red\n");
-            break;
-
-            case 1:
-            fprintf(stdout, "Moved Pawn Green\n");
-            break;
-
-            case 2:
-            fprintf(stdout, "Moved Pawn Blue\n");
-            break;
-
-            case 3:
-            fprintf(stdout, "Moved Pawn Yellow\n");
-            break;
-
-            case 4:
-            fprintf(stdout, "Moved Pawn Purple\n");
-            break;
-
+        else {
+            fprintf(stdout, "Quer fechar o jogo?\n\t0 - Nao\n\t1 - Sim\n");
+            scanf("%d", &quit);
+            __fpurge(stdin);
+            clear_screen();
         }
-        */
+        board->draw();
     }
     delete(board);
 
