@@ -174,16 +174,13 @@ Stair::draw()
     }
     fprintf(stdout, "|");
 
-    fprintf(stdout, ANSI_COLOR_RESET "_");
     if (this->_current_position > i-1) {
         this->_stair[i-1]->paint();
     }
     else {
         fprintf(stdout, ANSI_COLOR_RESET);
     }
-    fprintf(stdout, "0");
-
-    fprintf(stdout, ANSI_COLOR_RESET "___");
+    fprintf(stdout, "_0_");
 
     if (this->_current_position > i-2) {
         this->_stair[i-2]->paint();
@@ -191,9 +188,7 @@ Stair::draw()
     else {
         fprintf(stdout, ANSI_COLOR_RESET);
     }
-    fprintf(stdout, "1");
-
-    fprintf(stdout, ANSI_COLOR_RESET "___");
+    fprintf(stdout, "__1_");
 
     if (this->_current_position > i-3) {
         this->_stair[i-3]->paint();
@@ -201,9 +196,7 @@ Stair::draw()
     else {
         fprintf(stdout, ANSI_COLOR_RESET);
     }
-    fprintf(stdout, "2");
-
-    fprintf(stdout, ANSI_COLOR_RESET "___");
+    fprintf(stdout, "__2_");
 
     if (this->_current_position > i-4) {
         this->_stair[i-4]->paint();
@@ -211,9 +204,7 @@ Stair::draw()
     else {
         fprintf(stdout, ANSI_COLOR_RESET);
     }
-    fprintf(stdout, "3");
-
-    fprintf(stdout, ANSI_COLOR_RESET "___");
+    fprintf(stdout, "__3_");
 
     if (this->_current_position > i-5) {
         this->_stair[i-5]->paint();
@@ -221,12 +212,13 @@ Stair::draw()
     else {
         fprintf(stdout, ANSI_COLOR_RESET);
     }
-    fprintf(stdout, "4");
-
-    fprintf(stdout, ANSI_COLOR_RESET "_");
+    fprintf(stdout, "__4_");
 
     if (this->_current_position > i-1) {
         this->_stair[i-1]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
     }
     fprintf(stdout, "|\n");
 
