@@ -2,6 +2,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <stdio_ext.h>
+#include <array>
 
 #include "colors.h"
 #include "disc.h"
@@ -16,38 +18,53 @@ int main()
     clear_screen();
     board->draw();
 
-    for (size_t i = 0; i < 50; i++) {
+    unsigned char quit = 0;
+    while (!quit) {
         unsigned int pawn = get_instruction();
         clear_screen();
-        if (pawn >= 0 && pawn < 5) {
+        if (pawn < 5) {
             board->move_pawn(pawn);
         }
-        board->draw();
-        /*
-        switch (pawn) {
-            case 0:
-            fprintf(stdout, "Moved Pawn Red\n");
-            break;
-
-            case 1:
-            fprintf(stdout, "Moved Pawn Green\n");
-            break;
-
-            case 2:
-            fprintf(stdout, "Moved Pawn Blue\n");
-            break;
-
-            case 3:
-            fprintf(stdout, "Moved Pawn Yellow\n");
-            break;
-
-            case 4:
-            fprintf(stdout, "Moved Pawn Purple\n");
-            break;
-
+        else {
+            fprintf(stdout, "Quer fechar o jogo?\n\t0 - Nao\n\t1 - Sim\n");
+            scanf("%c", &quit);
+            __fpurge(stdin);
+            clear_screen();
         }
-        */
+        board->draw();
     }
+
+    std::array<std::pair<Colors, int>,5> colors_worth;
+    colors_worth = board->retrieve_colors_worth();
+
+    for (size_t i = 0; i < 5; i++) {
+        switch (colors_worth[i].first) {
+            case ENUM_RED:
+            fprintf(stdout, ANSI_F_COLOR_RED        "P" ANSI_COLOR_RESET);
+            break;
+
+            case ENUM_GREEN:
+            fprintf(stdout, ANSI_F_COLOR_GREEN      "P" ANSI_COLOR_RESET);
+            break;
+
+            case ENUM_BLUE:
+            fprintf(stdout, ANSI_F_COLOR_BLUE       "P" ANSI_COLOR_RESET);
+            break;
+
+            case ENUM_YELLOW:
+            fprintf(stdout, ANSI_F_COLOR_YELLOW     "P" ANSI_COLOR_RESET);
+            break;
+
+            case ENUM_PURPLE:
+            fprintf(stdout, ANSI_F_COLOR_MAGENTA    "P" ANSI_COLOR_RESET);
+            break;
+
+            default:
+            break;
+        }
+        fprintf(stdout, "\t%d\n", colors_worth[i].second);
+    }
+
     delete(board);
 
 

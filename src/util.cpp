@@ -26,7 +26,7 @@ unsigned int get_instruction()
     fprintf(stdout, ANSI_F_COLOR_YELLOW     "Peao " ANSI_COLOR_RESET "3\n");
     fprintf(stdout, ANSI_F_COLOR_MAGENTA    "Peao " ANSI_COLOR_RESET "4\n");
     scanf("%u", &pawn_color);
-    __fpurge(stdin);
+//    __fpurge(stdin);
 
     return pawn_color;
 }

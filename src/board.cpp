@@ -44,6 +44,7 @@ Board::Board()
         }
     }
 
+    stair = new Stair();
 
 
 }
@@ -67,10 +68,18 @@ Board::~Board()
     }
 }
 
+std::array<std::pair<Colors, int>,5>
+Board::retrieve_colors_worth()
+{
+    return this->stair->retrieve_colors_worth();
+}
+
+
 void
 Board::move_pawn(unsigned int color)
 {
     unsigned int pawn_pos = pawns.at(color)->position();
+    unsigned char moved = 0;
 
     fprintf(stderr, "\n[%p]\tMove pawn(%d)\t\n", (void*) pawns.at(color), pawn_pos);
 
@@ -84,10 +93,15 @@ Board::move_pawn(unsigned int color)
             disc->color() == pawns.at(color)->color()) {
                 pawns.at(color)->position(disc_pos);
                 fprintf(stderr, "%d\n", pawns.at(color)->position());
+                moved = 1;
                 break;
         }
 
         disc = NULL;
+    }
+
+    if (!moved) {
+        stair->step_up(pawns.at(color));
     }
 
     return ;
@@ -97,6 +111,9 @@ void
 Board::draw()
 {
     fprintf(stderr, "\nDraw Board\n");
+
+    stair->draw();
+
     for (unsigned int current_position = 0; current_position < 60;) {
         unsigned char drawn = 0;
         fprintf(stderr, "%d\t", current_position);
@@ -107,6 +124,7 @@ Board::draw()
             if (pawn->position() == current_position) {
                 fprintf(stderr, "Pawn(%d) %s\n", current_position, pawn->color_str());
                 pawn->draw();
+                fprintf(stdout, " ");
                 drawn = 1;
                 current_position++;
                 break;
