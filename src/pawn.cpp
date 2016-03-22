@@ -62,23 +62,54 @@ Pawn::draw()
 {
     switch (this->color()) {
         case ENUM_RED:
-        fprintf(stdout, ANSI_F_COLOR_RED "P" ANSI_COLOR_RESET);
+        fprintf(stdout, ANSI_F_COLOR_RED "P");
         break;
 
         case ENUM_GREEN:
-        fprintf(stdout, ANSI_F_COLOR_GREEN "P" ANSI_COLOR_RESET);
+        fprintf(stdout, ANSI_F_COLOR_GREEN "P");
         break;
 
         case ENUM_BLUE:
-        fprintf(stdout, ANSI_F_COLOR_BLUE "P" ANSI_COLOR_RESET);
+        fprintf(stdout, ANSI_F_COLOR_BLUE "P");
         break;
 
         case ENUM_YELLOW:
-        fprintf(stdout, ANSI_F_COLOR_YELLOW "P" ANSI_COLOR_RESET);
+        fprintf(stdout, ANSI_F_COLOR_YELLOW "P");
         break;
 
         case ENUM_PURPLE:
-        fprintf(stdout, ANSI_F_COLOR_MAGENTA "P" ANSI_COLOR_RESET);
+        fprintf(stdout, ANSI_F_COLOR_MAGENTA "P");
+        break;
+
+        default:
+        break;
+    }
+
+    return ;
+}
+
+void
+Pawn::paint()
+{
+    switch (this->color()) {
+        case ENUM_RED:
+        fprintf(stdout, ANSI_F_COLOR_RED);
+        break;
+
+        case ENUM_GREEN:
+        fprintf(stdout, ANSI_F_COLOR_GREEN);
+        break;
+
+        case ENUM_BLUE:
+        fprintf(stdout, ANSI_F_COLOR_BLUE);
+        break;
+
+        case ENUM_YELLOW:
+        fprintf(stdout, ANSI_F_COLOR_YELLOW);
+        break;
+
+        case ENUM_PURPLE:
+        fprintf(stdout, ANSI_F_COLOR_MAGENTA);
         break;
 
         default:

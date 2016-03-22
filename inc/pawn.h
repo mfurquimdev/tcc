@@ -20,6 +20,7 @@ public:
     Colors int_color(unsigned int);
 
     void draw();
+    void paint();
 
 private:
     Colors _color;

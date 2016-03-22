@@ -14,59 +14,223 @@ Stair::~Stair()
 void
 Stair::draw()
 {
-    for (size_t i = 0; i < 5; i++) {
-        for (size_t j = 0; j < 4-i; j++) {
-            fprintf(stdout, "    ");
-        }
+    int i = 0;
 
-        if (i != 0) {
-            fprintf(stdout, "|");
-        }
-
-        if (i < this->_current_position) {
-            fprintf(stdout, "_");
-            this->_stair[i]->draw();
-            fprintf(stdout, "_");
-        }
-        else {
-            fprintf(stdout, "___");
-        }
-
-        for (size_t j = 0; j < i*4; j++) {
-            fprintf(stdout, " ");
-        }
-
-        if (i != 0) {
-            fprintf(stdout, "|");
-        }
-        fprintf(stdout, "\n");
+    for (size_t j = 0; j < 120; j++) {
+        fprintf(stdout, " ");
+    }
+    if (this->_current_position > i) {
+        this->_stair[i]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
     }
 
-/*
-
-
-    for (size_t k = 0; k < 5; k++) {
-        for (size_t i = 0; i < 5; i++) {
-            fprintf(stdout, " ");
-        }
-        for (size_t i = 0; i < 60+(5-k); i++) {
-            fprintf(stdout, "  ");
-        }
-        if (k < this->_current_position) {
-            fprintf(stdout, "_");
-            this->_stair[k]->draw();
-            fprintf(stdout, "_");
-        }
-        else {
-            fprintf(stdout, "___");
-        }
-        if (k != 0) {
-            fprintf(stdout, "|");
-        }
-        fprintf(stdout, "\n");
+    fprintf(stdout, "                 _");
+    if (this->_current_position > i) {
+        this->_stair[i]->draw();
     }
-*/
-    fprintf(stdout, "\n");
+    else {
+        fprintf(stdout, "_");
+    }
+    fprintf(stdout, "_\n");
+    i++;
+
+    for (size_t j = 0; j < 120; j++) {
+        fprintf(stdout, " ");
+    }
+
+    if (this->_current_position > i) {
+        this->_stair[i]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+
+    fprintf(stdout, "             _");
+    if (this->_current_position > i) {
+        this->_stair[i]->draw();
+    }
+    else {
+        fprintf(stdout, "_");
+    }
+    fprintf(stdout, "_");
+
+
+    if (this->_current_position > i-1) {
+        this->_stair[i-1]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+    fprintf(stdout, "|   |\n");
+    i++;
+
+    for (size_t j = 0; j < 120; j++) {
+        fprintf(stdout, " ");
+    }
+
+    if (this->_current_position > i) {
+        this->_stair[i]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+
+    fprintf(stdout, "         _");
+    if (this->_current_position > i) {
+        this->_stair[i]->draw();
+    }
+    else {
+        fprintf(stdout, "_");
+    }
+    fprintf(stdout, "_");
+
+
+    if (this->_current_position > i-1) {
+        this->_stair[i-1]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+
+    fprintf(stdout, "|       |\n");
+    i++;
+
+    for (size_t j = 0; j < 120; j++) {
+        fprintf(stdout, " ");
+    }
+
+    if (this->_current_position > i) {
+        this->_stair[i]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+
+    fprintf(stdout, "     _");
+    if (this->_current_position > i) {
+        this->_stair[i]->draw();
+    }
+    else {
+        fprintf(stdout, "_");
+    }
+    fprintf(stdout, "_");
+
+
+    if (this->_current_position > i-1) {
+        this->_stair[i-1]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+
+    fprintf(stdout, "|           |\n");
+    i++;
+
+    for (size_t j = 0; j < 120; j++) {
+        fprintf(stdout, " ");
+    }
+
+    if (this->_current_position > i) {
+        this->_stair[i]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+
+    fprintf(stdout, " _");
+    if (this->_current_position > i) {
+        this->_stair[i]->draw();
+    }
+    else {
+        fprintf(stdout, "_");
+    }
+    fprintf(stdout, "_");
+
+    if (this->_current_position > i-1) {
+        this->_stair[i-1]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+
+    fprintf(stdout, "|               |\n");
+    i++;
+
+    for (size_t j = 0; j < 120; j++) {
+        fprintf(stdout, " ");
+    }
+
+    if (this->_current_position > i-1) {
+        this->_stair[i-1]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+
+    if (this->_current_position > i-1) {
+        this->_stair[i-1]->paint();
+    }
+    fprintf(stdout, "|");
+
+    fprintf(stdout, ANSI_COLOR_RESET "_");
+    if (this->_current_position > i-1) {
+        this->_stair[i-1]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+    fprintf(stdout, "0");
+
+    fprintf(stdout, ANSI_COLOR_RESET "___");
+
+    if (this->_current_position > i-2) {
+        this->_stair[i-2]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+    fprintf(stdout, "1");
+
+    fprintf(stdout, ANSI_COLOR_RESET "___");
+
+    if (this->_current_position > i-3) {
+        this->_stair[i-3]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+    fprintf(stdout, "2");
+
+    fprintf(stdout, ANSI_COLOR_RESET "___");
+
+    if (this->_current_position > i-4) {
+        this->_stair[i-4]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+    fprintf(stdout, "3");
+
+    fprintf(stdout, ANSI_COLOR_RESET "___");
+
+    if (this->_current_position > i-5) {
+        this->_stair[i-5]->paint();
+    }
+    else {
+        fprintf(stdout, ANSI_COLOR_RESET);
+    }
+    fprintf(stdout, "4");
+
+    fprintf(stdout, ANSI_COLOR_RESET "_");
+
+    if (this->_current_position > i-1) {
+        this->_stair[i-1]->paint();
+    }
+    fprintf(stdout, "|\n");
+
+    fprintf(stdout, ANSI_COLOR_RESET "\n");
 
     return ;
 }

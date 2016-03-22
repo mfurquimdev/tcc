@@ -116,7 +116,6 @@ Board::draw()
 
             if (pawn->position() == current_position) {
                 fprintf(stderr, "Pawn(%d) %s\n", current_position, pawn->color_str());
-                fprintf(stdout, " ");
                 pawn->draw();
                 fprintf(stdout, " ");
                 drawn = 1;
