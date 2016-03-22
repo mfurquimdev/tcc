@@ -1,6 +1,7 @@
 #include "stair.h"
 
 #include <cstdlib>
+#include <array>
 
 Stair::Stair()
 {
@@ -11,6 +12,21 @@ Stair::~Stair()
 {
 }
 
+std::array<std::pair<Colors, int>,5>
+Stair::retrieve_colors_worth()
+{
+    std::array<std::pair<Colors, int>,5> colors_worth;
+    std::pair<Colors, int> pzero = std::make_pair(ENUM_WHITE,0);
+    colors_worth.fill(pzero);
+
+    for (size_t i = 0; i < this->_current_position; i++) {
+        std::pair<Colors, int> pawn_worth = std::make_pair(this->_stair[i]->color(), 4-i);
+        colors_worth[i] = pawn_worth;
+    }
+
+    return colors_worth;
+}
+
 void
 Stair::draw()
 {
@@ -19,7 +35,7 @@ Stair::draw()
     for (size_t j = 0; j < 120; j++) {
         fprintf(stdout, " ");
     }
-    if (this->_current_position > i) {
+    if ((int) this->_current_position > i) {
         this->_stair[i]->paint();
     }
     else {
@@ -27,7 +43,7 @@ Stair::draw()
     }
 
     fprintf(stdout, "                 _");
-    if (this->_current_position > i) {
+    if ((int) this->_current_position > i) {
         this->_stair[i]->draw();
     }
     else {
@@ -40,7 +56,7 @@ Stair::draw()
         fprintf(stdout, " ");
     }
 
-    if (this->_current_position > i) {
+    if ((int) this->_current_position > i) {
         this->_stair[i]->paint();
     }
     else {
@@ -48,7 +64,7 @@ Stair::draw()
     }
 
     fprintf(stdout, "             _");
-    if (this->_current_position > i) {
+    if ((int) this->_current_position > i) {
         this->_stair[i]->draw();
     }
     else {
@@ -57,7 +73,7 @@ Stair::draw()
     fprintf(stdout, "_");
 
 
-    if (this->_current_position > i-1) {
+    if ((int) this->_current_position > i-1) {
         this->_stair[i-1]->paint();
     }
     else {
@@ -70,7 +86,7 @@ Stair::draw()
         fprintf(stdout, " ");
     }
 
-    if (this->_current_position > i) {
+    if ((int) this->_current_position > i) {
         this->_stair[i]->paint();
     }
     else {
@@ -78,7 +94,7 @@ Stair::draw()
     }
 
     fprintf(stdout, "         _");
-    if (this->_current_position > i) {
+    if ((int) this->_current_position > i) {
         this->_stair[i]->draw();
     }
     else {
@@ -87,7 +103,7 @@ Stair::draw()
     fprintf(stdout, "_");
 
 
-    if (this->_current_position > i-1) {
+    if ((int) this->_current_position > i-1) {
         this->_stair[i-1]->paint();
     }
     else {
@@ -101,7 +117,7 @@ Stair::draw()
         fprintf(stdout, " ");
     }
 
-    if (this->_current_position > i) {
+    if ((int) this->_current_position > i) {
         this->_stair[i]->paint();
     }
     else {
@@ -109,7 +125,7 @@ Stair::draw()
     }
 
     fprintf(stdout, "     _");
-    if (this->_current_position > i) {
+    if ((int) this->_current_position > i) {
         this->_stair[i]->draw();
     }
     else {
@@ -118,7 +134,7 @@ Stair::draw()
     fprintf(stdout, "_");
 
 
-    if (this->_current_position > i-1) {
+    if ((int) this->_current_position > i-1) {
         this->_stair[i-1]->paint();
     }
     else {
@@ -132,7 +148,7 @@ Stair::draw()
         fprintf(stdout, " ");
     }
 
-    if (this->_current_position > i) {
+    if ((int) this->_current_position > i) {
         this->_stair[i]->paint();
     }
     else {
@@ -140,7 +156,7 @@ Stair::draw()
     }
 
     fprintf(stdout, " _");
-    if (this->_current_position > i) {
+    if ((int) this->_current_position > i) {
         this->_stair[i]->draw();
     }
     else {
@@ -148,7 +164,7 @@ Stair::draw()
     }
     fprintf(stdout, "_");
 
-    if (this->_current_position > i-1) {
+    if ((int) this->_current_position > i-1) {
         this->_stair[i-1]->paint();
     }
     else {
@@ -162,19 +178,19 @@ Stair::draw()
         fprintf(stdout, " ");
     }
 
-    if (this->_current_position > i-1) {
+    if ((int) this->_current_position > i-1) {
         this->_stair[i-1]->paint();
     }
     else {
         fprintf(stdout, ANSI_COLOR_RESET);
     }
 
-    if (this->_current_position > i-1) {
+    if ((int) this->_current_position > i-1) {
         this->_stair[i-1]->paint();
     }
     fprintf(stdout, "|");
 
-    if (this->_current_position > i-1) {
+    if ((int) this->_current_position > i-1) {
         this->_stair[i-1]->paint();
     }
     else {
@@ -182,7 +198,7 @@ Stair::draw()
     }
     fprintf(stdout, "_0_");
 
-    if (this->_current_position > i-2) {
+    if ((int) this->_current_position > i-2) {
         this->_stair[i-2]->paint();
     }
     else {
@@ -190,7 +206,7 @@ Stair::draw()
     }
     fprintf(stdout, "__1_");
 
-    if (this->_current_position > i-3) {
+    if ((int) this->_current_position > i-3) {
         this->_stair[i-3]->paint();
     }
     else {
@@ -198,7 +214,7 @@ Stair::draw()
     }
     fprintf(stdout, "__2_");
 
-    if (this->_current_position > i-4) {
+    if ((int) this->_current_position > i-4) {
         this->_stair[i-4]->paint();
     }
     else {
@@ -206,7 +222,7 @@ Stair::draw()
     }
     fprintf(stdout, "__3_");
 
-    if (this->_current_position > i-5) {
+    if ((int) this->_current_position > i-5) {
         this->_stair[i-5]->paint();
     }
     else {
@@ -214,7 +230,7 @@ Stair::draw()
     }
     fprintf(stdout, "__4_");
 
-    if (this->_current_position > i-1) {
+    if ((int) this->_current_position > i-1) {
         this->_stair[i-1]->paint();
     }
     else {

@@ -15,7 +15,7 @@ public:
 
     void move_pawn(unsigned int);
     void draw();
-
+    std::array<std::pair<Colors, int>,5> retrieve_colors_worth();
     Stair* stair;
 
 private:

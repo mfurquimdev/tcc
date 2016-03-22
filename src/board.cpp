@@ -68,6 +68,13 @@ Board::~Board()
     }
 }
 
+std::array<std::pair<Colors, int>,5>
+Board::retrieve_colors_worth()
+{
+    return this->stair->retrieve_colors_worth();
+}
+
+
 void
 Board::move_pawn(unsigned int color)
 {
