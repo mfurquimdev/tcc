@@ -68,6 +68,69 @@ Board::~Board()
     }
 }
 
+unsigned char
+Board::is_avaliable(Disc* disc)
+{
+    unsigned char available = 1;
+
+    if (disc->position() > 59) {
+        available = 0;
+    }
+    else {
+        for (size_t i = 0; i < 5; i++) {
+            if (this->pawns[i]->position() == disc->position()) {
+                available = 0;
+                break;
+            }
+        }
+    }
+
+    return available;
+}
+
+std::pair<Disc*, Disc*>
+Board::get_adjacent_discs(unsigned int color)
+{
+    Disc* null_disc = NULL;
+    std::pair<Disc*, Disc*> adjacent = std::make_pair(null_disc,null_disc);
+    unsigned int pawn_pos = pawns.at(color)->position();
+
+    Disc* prev_disc = NULL;
+    Disc* next_disc = NULL;
+
+    unsigned char is_behind = 1;
+
+    for (size_t i = 0; i < 55; i++) {
+        unsigned int disc_pos = this->discs[i]->position();
+        if (disc_pos == pawn_pos) {
+            continue;
+        }
+
+        if (!this->is_avaliable(discs[i])) {
+            continue;
+        }
+
+        if (is_behind) {
+            if (disc_pos < pawn_pos) {
+                prev_disc = this->discs[i];
+            }
+            else {
+                is_behind = 0;
+            }
+        }
+
+        if (!is_behind) {
+            next_disc = this->discs[i];
+            break;
+        }
+    }
+
+    adjacent = std::make_pair(prev_disc, next_disc);
+
+    return adjacent;
+}
+
+
 std::array<std::pair<Colors, int>,5>
 Board::retrieve_colors_worth()
 {
@@ -75,11 +138,14 @@ Board::retrieve_colors_worth()
 }
 
 
-void
+unsigned char
 Board::move_pawn(unsigned int color)
 {
+    fprintf(stderr, "move_pawn(%d)\n", color);
+
     unsigned int pawn_pos = pawns.at(color)->position();
     unsigned char moved = 0;
+    unsigned char stepped_up = 0;
 
     fprintf(stderr, "\n[%p]\tMove pawn(%d)\t\n", (void*) pawns.at(color), pawn_pos);
 
@@ -102,9 +168,10 @@ Board::move_pawn(unsigned int color)
 
     if (!moved) {
         stair->step_up(pawns.at(color));
+        stepped_up = 1;
     }
 
-    return ;
+    return stepped_up;
 }
 
 void
@@ -157,10 +224,17 @@ Board::draw()
             current_position++;
         }
     }
-
-    for (size_t i = 0; i < 12; i++) {
-        fprintf(stdout, "\n");
+    printf(ANSI_COLOR_RESET "\n\n");
+    for (size_t i = 0; i < 60; i++) {
+        printf("%d ", i/10);
     }
+
+    printf("\n");
+    for (size_t i = 0; i < 60; i++) {
+        printf("%d ", i%10);
+    }
+
+    fprintf(stdout, "\n\n\n\n\n\n\n\n\n\n\n");
 
     return ;
 }
