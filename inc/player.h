@@ -11,7 +11,7 @@ public:
     ~Player();
 
     void collect_disc(Disc*);
-
+    void pick_up(std::pair<Disc*, Disc*>);
 
 private:
     std::array<Disc*,25> _disc_poll;
