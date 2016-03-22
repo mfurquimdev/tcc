@@ -20,8 +20,10 @@ Stair::retrieve_colors_worth()
     colors_worth.fill(pzero);
 
     for (size_t i = 0; i < this->_current_position; i++) {
-        std::pair<Colors, int> pawn_worth = std::make_pair(this->_stair[i]->color(), 4-i);
-        colors_worth[i] = pawn_worth;
+        if (this->_stair[i] != (Pawn*) NULL) {
+            std::pair<Colors, int> pawn_worth = std::make_pair(this->_stair[i]->color(), 4-i);
+            colors_worth[i] = pawn_worth;
+        }
     }
 
     return colors_worth;

@@ -226,12 +226,12 @@ Board::draw()
     }
     printf(ANSI_COLOR_RESET "\n\n");
     for (size_t i = 0; i < 60; i++) {
-        printf("%d ", i/10);
+        printf("%lu ", i/10);
     }
 
     printf("\n");
     for (size_t i = 0; i < 60; i++) {
-        printf("%d ", i%10);
+        printf("%lu ", i%10);
     }
 
     fprintf(stdout, "\n\n\n\n\n\n\n\n\n\n\n");
