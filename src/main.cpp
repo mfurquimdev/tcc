@@ -12,10 +12,30 @@
 #include "util.h"
 #include "player.h"
 
+Game* initialize()
+{
+    Game* game = NULL;
+
+    unsigned char num_players = 2;
+//    num_players = ask_num_players();
+
+    unsigned char num_pawns = 5;
+//    num_pawns = ask_num_pawns();
+
+    unsigned char num_discs = 55;
+//    num_discs = ask_num_discs();
+
+    game = new Game(num_players, num_pawns, num_discs);
+
+    return game;
+}
+
 int main()
 {
-    Player* player = new Player(0);
-    Board* board = new Board();
+    Game* game = NULL;
+    game = initialize();
+    game->loop();
+    delete(game);
 
     clear_screen();
     board->draw();
