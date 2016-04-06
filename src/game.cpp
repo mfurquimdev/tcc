@@ -16,6 +16,7 @@ Game::Game(unsigned char num_players,
     number_pawns(num_pawns);
     number_discs(num_discs);
     init_players();
+    init_board();
 }
 
 Game::~Game()
@@ -25,6 +26,8 @@ Game::~Game()
     for (auto player: players()) {
         delete(player);
     }
+
+    delete(board());
 }
 
 /**
@@ -102,6 +105,10 @@ Game::draw(unsigned char current_player)
         player->draw();
     }
 
+    printf("\n");
+
+    board()->draw();
+
     return ;
 }
 
@@ -117,6 +124,16 @@ Game::init_players(void)
         Player* new_player = new Player(player_id);
         this->_players.push_back(new_player);
     }
+
+    return ;
+}
+
+void
+Game::init_board(void)
+{
+    fprintf(stderr, "\tinit_board(void)\n");
+
+    this->_board = new Board(number_discs());
 
     return ;
 }
@@ -174,4 +191,10 @@ std::vector<Player*>
 Game::players(void)
 {
     return this->_players;
+}
+
+Board*
+Game::board(void)
+{
+    return this->_board;
 }

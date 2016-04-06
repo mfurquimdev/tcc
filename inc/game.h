@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "player.h"
+#include "board.h"
 
 #include <vector>
 
@@ -20,6 +21,9 @@ private:
     unsigned char choose_pawn(void);
     unsigned char choose_disc(unsigned char);
 
+    void init_players(void);
+    void init_board(void);
+
     /* Getters and Setters */
     void number_players(unsigned char);
     unsigned char number_players(void);
@@ -30,14 +34,16 @@ private:
     void number_discs(unsigned char);
     unsigned char number_discs(void);
 
-    void init_players(void);
     std::vector<Player*> players(void);
+
+    Board* board(void);
 
     /* Variables */
     unsigned char _num_players;
     unsigned char _num_pawns;
     unsigned char _num_discs;
     std::vector<Player*> _players;
+    Board* _board;
 };
 
 #endif
