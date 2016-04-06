@@ -1,5 +1,7 @@
 #include "game.h"
 
+#include <cstdlib>
+
 Game* initialize()
 {
     Game* game = NULL;

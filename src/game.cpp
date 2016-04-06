@@ -6,7 +6,7 @@ Game::Game(unsigned char num_players,
             unsigned char num_pawns,
             unsigned char num_discs)
 {
-    fprintf(stderr, "Game(%2d,%2d,%2d)\n",
+    fprintf(stderr, "Constructor\tGame(%d,%d,%2d)\n",
         (int) num_players,
         (int) num_pawns,
         (int) num_discs);
@@ -18,13 +18,13 @@ Game::Game(unsigned char num_players,
 
 Game::~Game()
 {
-    fprintf(stderr, "Game destroyer\n");
+    fprintf(stderr, "Game destructor\n");
 }
 
 void
-Game::loop()
+Game::loop(void)
 {
-    fprintf(stderr, "Game loop\n");
+    fprintf(stderr, "Game loop(void)\n");
     unsigned char quit = 0;
 
     while (!quit) {
@@ -38,21 +38,46 @@ Game::loop()
 
             draw(id_player);
 
-            fprintf(stderr, "\tChoose pawn\n");
+            unsigned char chosen_pawn = 0;
+            chosen_pawn = choose_pawn();
 
             draw(id_player);
 
-            fprintf(stderr, "\tChoose disc\n");
+            choose_disc(chosen_pawn);
+
+            quit = id_player;
 
             if (quit) {
                 fprintf(stderr, "Quitting\n");
                 break;
             }
         }
-        quit = 1;
     }
 
     return ;
+}
+
+unsigned char
+Game::choose_pawn(void)
+{
+    fprintf(stderr, "\tchoose_pawn(void)\n");
+
+    unsigned char chosen_pawn = 0;
+
+    return chosen_pawn;
+}
+
+unsigned char
+Game::choose_disc(unsigned char chosen_pawn)
+{
+    fprintf(stderr, "\tchoose_disc(%d)\n", (int) chosen_pawn);
+
+    unsigned char chosen_disc = 0;
+
+    // Dummy Attribution
+    chosen_disc += chosen_pawn;
+
+    return chosen_disc;
 }
 
 void
