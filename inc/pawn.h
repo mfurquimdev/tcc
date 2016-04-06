@@ -9,6 +9,8 @@ public:
     ~Pawn();
 
     void draw(void);
+    void paint();
+
     unsigned char color(void);
 
 private:

@@ -60,6 +60,36 @@ Pawn::draw(void)
     return ;
 }
 
+void
+Pawn::paint()
+{
+    switch (color()) {
+        case 0:
+        printf(ANSI_F_COLOR_RED);
+        break;
+
+        case 1:
+        printf(ANSI_F_COLOR_GREEN);
+        break;
+
+        case 2:
+        printf(ANSI_F_COLOR_BLUE);
+        break;
+
+        case 3:
+        printf(ANSI_F_COLOR_YELLOW);
+        break;
+
+        case 4:
+        printf(ANSI_F_COLOR_MAGENTA);
+        break;
+
+        default:
+        break;
+    }
+
+    return ;
+}
 
 /**
  * Private functions

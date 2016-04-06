@@ -11,6 +11,8 @@ Board::Board(unsigned char num_discs, unsigned char num_pawns)
     number_pawns(num_pawns);
     init_discs();
     init_pawns();
+
+    this->_stair = new Stair();
 }
 
 Board::~Board()
@@ -24,6 +26,8 @@ Board::~Board()
     for (auto pawn: pawns()) {
         delete(pawn);
     }
+
+    delete(this->_stair);
 }
 
 /**
@@ -33,6 +37,8 @@ Board::~Board()
 void
 Board::draw()
 {
+    stair()->draw();
+
     for (auto pawn: pawns()) {
         pawn->draw();
     }
@@ -132,4 +138,10 @@ Board::number_pawns(unsigned char num_pawns)
     this->_num_pawns = num_pawns;
 
     return ;
+}
+
+Stair*
+Board::stair(void)
+{
+    return this->_stair;
 }
