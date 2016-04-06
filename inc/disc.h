@@ -4,14 +4,17 @@
 class Disc
 {
 public:
-    Disc(unsigned char, unsigned char);
+    Disc(unsigned char);
     ~Disc();
 
-    void draw();
+    void draw(void);
+    unsigned char color(void);
 
 private:
+
+    void color(unsigned char);
+
     unsigned char _color;
-    unsigned char _position;
 };
 
 #endif

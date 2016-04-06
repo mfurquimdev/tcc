@@ -12,11 +12,11 @@ public:
     ~Game();
 
     void loop(void);
-    void draw(unsigned char);
 
 private:
 
     /* Functions */
+    void draw(unsigned char);
     unsigned char choose_pawn(void);
     unsigned char choose_disc(unsigned char);
 

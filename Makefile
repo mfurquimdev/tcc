@@ -71,11 +71,15 @@ all: dirs
 
 	@echo
 	@echo Executing...
-	@./prog 2> debug.err
+	@./prog > output.out 2> debug.err
 
 	@echo
 	@echo Debugging...
 	@cat debug.err
+
+	@echo
+	@echo Printing game...
+	@cat output.out
 
 dirs:
 	@mkdir -vp $(OBJ_DIR) $(MAP_DIR) $(BIN_DIR)

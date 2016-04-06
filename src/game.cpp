@@ -38,13 +38,11 @@ Game::loop(void)
     unsigned char quit = 0;
 
     while (!quit) {
-        fprintf(stderr, "Not quit\n");
-
         for (unsigned char id_player = 0;
                 id_player < number_players();
                 id_player++)
         {
-            fprintf(stderr, "\nPlayer %d\n", (int) id_player);
+            fprintf(stderr, "\nid_player %d\n", (int) id_player);
 
             draw(id_player);
 
@@ -55,10 +53,11 @@ Game::loop(void)
 
             choose_disc(chosen_pawn);
 
+            // Just a dummy way to quit
             quit = id_player;
 
             if (quit) {
-                fprintf(stderr, "Quitting\n");
+                fprintf(stderr, "\nQuitting\n");
                 break;
             }
         }
@@ -97,7 +96,7 @@ Game::choose_disc(unsigned char chosen_pawn)
 void
 Game::draw(unsigned char current_player)
 {
-    fprintf(stderr, "\tDraw(%d)\n", (int) current_player);
+    fprintf(stderr, "\tdraw(%d)\n", (int) current_player);
 
     for (auto player: players()) {
         player->draw();
