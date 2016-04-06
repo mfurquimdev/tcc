@@ -1,5 +1,6 @@
 #include "board.h"
 
+#include <iostream>
 #include <cstdio>
 #include <random>
 
@@ -11,6 +12,16 @@ Board::Board(unsigned char num_discs, unsigned char num_pawns)
     number_pawns(num_pawns);
     init_discs();
     init_pawns();
+
+    for (auto pawn: pawns()) {
+        std::pair<Disc*, Pawn*> disc_pawn = std::make_pair((Disc*) NULL, pawn);
+        this->_printable_board.push_back(disc_pawn);
+    }
+
+    for (auto disc: discs()) {
+        std::pair<Disc*, Pawn*> disc_pawn = std::make_pair(disc, (Pawn*) NULL);
+        this->_printable_board.push_back(disc_pawn);
+    }
 
     this->_stair = new Stair();
 }
@@ -39,13 +50,18 @@ Board::draw()
 {
     stair()->draw();
 
-    for (auto pawn: pawns()) {
-        pawn->draw();
+    for (auto pair: this->_printable_board) {
+        if (pair.second != NULL) {
+            pair.second->draw();
+        }
+        else if (pair.first != NULL) {
+            pair.first->draw();
+        }
+        else {
+            printf("  ");
+        }
     }
-
-    for (auto disc: discs()) {
-        disc->draw();
-    }
+    printf("\n");
 
     return ;
 }

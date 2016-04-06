@@ -35,6 +35,8 @@ private:
     std::vector<Pawn*> pawns(void);
     Stair* stair(void);
 
+    std::vector<std::pair<Disc*, Pawn*> > _printable_board;
+
     unsigned char _num_discs;
     std::vector<Disc*> _discs;
 
