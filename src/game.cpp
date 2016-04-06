@@ -6,7 +6,8 @@ Game::Game(unsigned char num_players,
             unsigned char num_pawns,
             unsigned char num_discs)
 {
-    fprintf(stderr, "Constructor\tGame(%d,%d,%2d)\n",
+    fprintf(stderr, "[%p]\tGame(%d,%d,%2d)\n",
+        (void*) this,
         (int) num_players,
         (int) num_pawns,
         (int) num_discs);
@@ -14,12 +15,21 @@ Game::Game(unsigned char num_players,
     number_players(num_players);
     number_pawns(num_pawns);
     number_discs(num_discs);
+    init_players();
 }
 
 Game::~Game()
 {
-    fprintf(stderr, "Game destructor\n");
+    fprintf(stderr, "[%p]\tGame destructor\n", (void*) this);
+
+    for (auto player: players()) {
+        delete(player);
+    }
 }
+
+/**
+ * Public functions
+ */
 
 void
 Game::loop(void)
@@ -57,6 +67,10 @@ Game::loop(void)
     return ;
 }
 
+/**
+ * Private functions
+ */
+
 unsigned char
 Game::choose_pawn(void)
 {
@@ -85,8 +99,32 @@ Game::draw(unsigned char current_player)
 {
     fprintf(stderr, "\tDraw(%d)\n", (int) current_player);
 
+    for (auto player: players()) {
+        player->draw();
+    }
+
     return ;
 }
+
+void
+Game::init_players(void)
+{
+    fprintf(stderr, "\tinit_players(void)\n");
+
+    for (unsigned char player_id = 0;
+            player_id < number_players();
+            player_id++)
+    {
+        Player* new_player = new Player(player_id);
+        this->_players.push_back(new_player);
+    }
+
+    return ;
+}
+
+/**
+ * Getters and Setters
+ */
 
 void
 Game::number_players(unsigned char num_players)
@@ -131,4 +169,10 @@ unsigned char
 Game::number_discs(void)
 {
     return this->_num_discs;
+}
+
+std::vector<Player*>
+Game::players(void)
+{
+    return this->_players;
 }

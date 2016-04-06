@@ -1,6 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "player.h"
+
+#include <vector>
+
 class Game
 {
 public:
@@ -26,10 +30,14 @@ private:
     void number_discs(unsigned char);
     unsigned char number_discs(void);
 
+    void init_players(void);
+    std::vector<Player*> players(void);
+
     /* Variables */
     unsigned char _num_players;
     unsigned char _num_pawns;
     unsigned char _num_discs;
+    std::vector<Player*> _players;
 };
 
 #endif
