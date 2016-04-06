@@ -1,112 +1,56 @@
 #include "game.h"
-#include "board.h"
-#include "player.h"
 
-using namespace std;
+#include <cstdio>
 
-Game::Game(
-    unsigned char number_players,
-    unsigned char number_pawns,
-    unsigned char number_discs)
+Game::Game(unsigned char num_players,
+            unsigned char num_pawns,
+            unsigned char num_discs)
 {
-    board = new Board(number_pawns, number_discs);
+    fprintf(stderr, "Game(%2d,%2d,%2d)\n",
+        (int) num_players,
+        (int) num_pawns,
+        (int) num_discs);
 
-    for (unsigned char i = 0; i < number_players; i++) {
-        Player* player = new Player(i);
-        players.push_back(player)
-    }
+    number_players(num_players);
+    number_pawns(num_pawns);
+    number_discs(num_discs);
 }
 
 Game::~Game()
 {
-    if (players != NULL) {
-        vector<Player>::reverse_iterator rit = players.rbegin();
-        while (rit != players.rend()) {
-            if ((*rit) != NULL) {
-                destroy((*rit));
-            }
-            ++rit;
-        }
-    }
-
-    if (board != NULL) {
-        delete(board);
-    }
+    fprintf(stderr, "Game destroyer\n");
 }
 
 void
 Game::loop()
 {
+    fprintf(stderr, "Game loop\n");
     unsigned char quit = 0;
 
     while (!quit) {
-        for (unsigned char i = 0; i < (unsigned char) players.size(); i++) {
+        fprintf(stderr, "Not quit\n");
 
-            draw(i+1);
+        for (unsigned char id_player = 0;
+                id_player < number_players();
+                id_player++)
+        {
+            fprintf(stderr, "\nPlayer %d\n", (int) id_player);
 
-            pawn_to_move = moving_pawn(board);
+            draw(id_player);
 
-            draw(i+1);
+            fprintf(stderr, "\tChoose pawn\n");
 
-            picking_disc(board, pawn_to_move);
+            draw(id_player);
+
+            fprintf(stderr, "\tChoose disc\n");
 
             if (quit) {
+                fprintf(stderr, "Quitting\n");
                 break;
             }
         }
+        quit = 1;
     }
-
-    return ;
-}
-
-unsigned char
-Game::moving_pawn(Board* board)
-{
-    /* Run AI (instead of input)
-    if(ai) {
-        run_ai(board);
-    }
-    else {
-    */
-
-    // Input
-    unsigned char pawn_to_move = 0;
-    pawn_to_move = ask_pawn_to_move(board);
-
-    // Update game entities
-    board->move_pawn(pawn_to_move);
-
-    return pawn_to_move;
-}
-
-unsigned char
-Game::ask_pawn_to_move(Board* board)
-{
-    unsigned char pawn_to_move = 0;
-    
-
-
-    return pawn_to_move;
-}
-
-void
-Game::picking_disc()
-{
-    /* Run AI (instead of input)
-    if(ai) {
-        run_ai(board);
-    }
-    else {
-    */
-
-    // Input
-    unsigned char disc_to_pick = 0;
-    disc_to_pick = ask_disc_to_pick(board, pawn_to_move);
-
-    // Update game entities
-    Disc* disc_picked = (Disc*) NULL;
-    disc_picked = board->pick_disc(disc_to_pick);
-    players.at(i)->pick_disc(disc_picked);
 
     return ;
 }
@@ -114,13 +58,52 @@ Game::picking_disc()
 void
 Game::draw(unsigned char current_player)
 {
-    printf("Player %d\n", (int) current_player);
-
-    for (vector<Player> it = players.begin(); it != players.end(); ++it) {
-        (*it)->draw();
-    }
-
-    board->draw();
+    fprintf(stderr, "\tDraw(%d)\n", (int) current_player);
 
     return ;
+}
+
+void
+Game::number_players(unsigned char num_players)
+{
+    fprintf(stderr, "\tnumber_players(%d)\n", (int) num_players);
+    this->_num_players = num_players;
+
+    return ;
+}
+
+unsigned char
+Game::number_players(void)
+{
+    return this->_num_players;
+}
+
+void
+Game::number_pawns(unsigned char num_pawns)
+{
+    fprintf(stderr, "\tnumber_pawns(%d)\n", (int) num_pawns);
+    this->_num_pawns = num_pawns;
+
+    return ;
+}
+
+unsigned char
+Game::number_pawns(void)
+{
+    return this->_num_pawns;
+}
+
+void
+Game::number_discs(unsigned char num_discs)
+{
+    fprintf(stderr, "\tnumber_discs(%d)\n", (int) num_discs);
+    this->_num_discs = num_discs;
+
+    return ;
+}
+
+unsigned char
+Game::number_discs(void)
+{
+    return this->_num_discs;
 }

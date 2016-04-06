@@ -8,17 +8,22 @@ public:
     ~Game();
 
     void loop();
+    void draw(unsigned char);
 
 private:
-    Board* board;
-    std::vector<Player> players;
 
-    unsigned char moving_pawn(Board*);
-    unsigned char ask_pawn_to_move(Board*);
+    void number_players(unsigned char);
+    unsigned char number_players(void);
 
-    void picking_disc();
+    void number_pawns(unsigned char);
+    unsigned char number_pawns(void);
 
-    void draw(unsigned char);
+    void number_discs(unsigned char);
+    unsigned char number_discs(void);
+
+    unsigned char _num_players;
+    unsigned char _num_pawns;
+    unsigned char _num_discs;
 };
 
 #endif
