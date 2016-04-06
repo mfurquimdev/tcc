@@ -21,7 +21,7 @@ Game::Game(unsigned char num_players,
 
 Game::~Game()
 {
-    fprintf(stderr, "[%p]\tGame destructor\n", (void*) this);
+    fprintf(stderr, "\n[%p]\tGame destructor\n", (void*) this);
 
     for (auto player: players()) {
         delete(player);
@@ -39,13 +39,16 @@ Game::loop(void)
 {
     fprintf(stderr, "Game loop(void)\n");
     unsigned char quit = 0;
+    unsigned long long int turn = 0;
 
     while (!quit) {
         for (unsigned char id_player = 0;
                 id_player < number_players();
                 id_player++)
         {
-            fprintf(stderr, "\nid_player %d\n", (int) id_player);
+            fprintf(stderr, "\nturn %llu\tid_player %d\n",
+                turn,
+                (int) id_player);
 
             draw(id_player);
 
@@ -63,6 +66,8 @@ Game::loop(void)
                 fprintf(stderr, "\nQuitting\n");
                 break;
             }
+
+            turn++;
         }
     }
 
@@ -133,7 +138,7 @@ Game::init_board(void)
 {
     fprintf(stderr, "\tinit_board(void)\n");
 
-    this->_board = new Board(number_discs());
+    this->_board = new Board(number_discs(), number_pawns());
 
     return ;
 }

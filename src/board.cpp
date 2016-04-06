@@ -3,20 +3,26 @@
 #include <cstdio>
 #include <random>
 
-Board::Board(unsigned char num_discs)
+Board::Board(unsigned char num_discs, unsigned char num_pawns)
 {
-    fprintf(stderr, "[%p]\tBoard(%d)\n", (void*) this, (int) num_discs);
+    fprintf(stderr, "[%p]\tBoard(%d,%d)\n", (void*) this, (int) num_discs, (int) num_pawns);
 
     number_discs(num_discs);
+    number_pawns(num_pawns);
     init_discs();
+    init_pawns();
 }
 
 Board::~Board()
 {
-    fprintf(stderr, "[%p]\tBoard destructor\n", (void*) this);
+    fprintf(stderr, "\n[%p]\tBoard destructor\n", (void*) this);
 
     for (auto disc: discs()) {
         delete(disc);
+    }
+
+    for (auto pawn: pawns()) {
+        delete(pawn);
     }
 }
 
@@ -27,6 +33,10 @@ Board::~Board()
 void
 Board::draw()
 {
+    for (auto pawn: pawns()) {
+        pawn->draw();
+    }
+
     for (auto disc: discs()) {
         disc->draw();
     }
@@ -66,6 +76,16 @@ Board::init_discs(void)
     return ;
 }
 
+void
+Board::init_pawns(void)
+{
+    for (unsigned char pawn_color = 0; pawn_color < number_pawns(); pawn_color++) {
+        Pawn* new_pawn = new Pawn(pawn_color);
+        this->_pawns.push_back(new_pawn);
+    }
+    return ;
+}
+
 /**
  * Getters and Setters
  */
@@ -73,9 +93,14 @@ Board::init_discs(void)
 std::vector<Disc*>
 Board::discs(void)
 {
-    return _discs;
+    return this->_discs;
 }
 
+std::vector<Pawn*>
+Board::pawns(void)
+{
+    return this->_pawns;
+}
 
 unsigned char
 Board::number_discs(void)
@@ -89,6 +114,22 @@ Board::number_discs(unsigned char num_discs)
     fprintf(stderr, "\tnumber_discs(%d)\n", (int) num_discs);
 
     this->_num_discs = num_discs;
+
+    return ;
+}
+
+unsigned char
+Board::number_pawns(void)
+{
+    return this->_num_pawns;
+}
+
+void
+Board::number_pawns(unsigned char num_pawns)
+{
+    fprintf(stderr, "\tnumber_pawns(%d)\n", (int) num_pawns);
+
+    this->_num_pawns = num_pawns;
 
     return ;
 }

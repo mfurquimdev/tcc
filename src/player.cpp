@@ -13,7 +13,7 @@ Player::Player(unsigned char id)
 
 Player::~Player()
 {
-    fprintf(stderr, "[%p]\tPlayer destructor\n", (void*) this);
+    fprintf(stderr, "\n[%p]\tPlayer destructor\n", (void*) this);
 
     for (auto disc: disc_poll()) {
         delete(disc);
@@ -29,7 +29,7 @@ Player::draw(void)
 {
     fprintf(stderr, "\t\tdraw(void)\n");
 
-    printf("\nPlayer %d\n", player_id());
+    printf("\nPlayer %d\nDisc Poll:\t", player_id());
     for (auto disc: disc_poll()) {
         disc->draw();
     }
