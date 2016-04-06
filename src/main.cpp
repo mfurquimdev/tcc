@@ -1,72 +1,32 @@
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <stdio_ext.h>
-#include <array>
+#include "game.h"
 
-#include "colors.h"
-#include "disc.h"
-#include "pawn.h"
-#include "board.h"
-#include "util.h"
+#include <cstdlib>
+
+Game* initialize()
+{
+    Game* game = NULL;
+
+    unsigned char num_players = 2;
+//    num_players = ask_num_players();
+
+    unsigned char num_pawns = 5;
+//    num_pawns = ask_num_pawns();
+
+    unsigned char num_discs = 55;
+//    num_discs = ask_num_discs();
+
+    game = new Game(num_players, num_pawns, num_discs);
+
+    return game;
+}
+
 
 int main()
 {
-
-    Board* board = new Board();
-    clear_screen();
-    board->draw();
-
-    unsigned char quit = 0;
-    while (!quit) {
-        unsigned int pawn = get_instruction();
-        clear_screen();
-        if (pawn < 5) {
-            board->move_pawn(pawn);
-        }
-        else {
-            fprintf(stdout, "Quer fechar o jogo?\n\t0 - Nao\n\t1 - Sim\n");
-            scanf("%c", &quit);
-            __fpurge(stdin);
-            clear_screen();
-        }
-        board->draw();
-    }
-
-    std::array<std::pair<Colors, int>,5> colors_worth;
-    colors_worth = board->retrieve_colors_worth();
-
-    for (size_t i = 0; i < 5; i++) {
-        switch (colors_worth[i].first) {
-            case ENUM_RED:
-            fprintf(stdout, ANSI_F_COLOR_RED        "P" ANSI_COLOR_RESET);
-            break;
-
-            case ENUM_GREEN:
-            fprintf(stdout, ANSI_F_COLOR_GREEN      "P" ANSI_COLOR_RESET);
-            break;
-
-            case ENUM_BLUE:
-            fprintf(stdout, ANSI_F_COLOR_BLUE       "P" ANSI_COLOR_RESET);
-            break;
-
-            case ENUM_YELLOW:
-            fprintf(stdout, ANSI_F_COLOR_YELLOW     "P" ANSI_COLOR_RESET);
-            break;
-
-            case ENUM_PURPLE:
-            fprintf(stdout, ANSI_F_COLOR_MAGENTA    "P" ANSI_COLOR_RESET);
-            break;
-
-            default:
-            break;
-        }
-        fprintf(stdout, "\t%d\n", colors_worth[i].second);
-    }
-
-    delete(board);
-
+    Game* game = NULL;
+    game = initialize();
+    game->loop();
+    delete(game);
 
     return 0;
 }

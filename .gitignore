@@ -8,6 +8,9 @@ obj
 # Map files
 map
 
+# Backup files
+bk/
+
 # Debug
 *.err
 

@@ -1,26 +1,47 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "pawn.h"
 #include "disc.h"
+#include "pawn.h"
 #include "stair.h"
 
-#include <array>
+#include <vector>
 
 class Board
 {
 public:
-    Board();
+    Board(unsigned char, unsigned char);
     ~Board();
 
-    void move_pawn(unsigned int);
+    /* Use pair to print.
+    std::pair<Disc*, Pawn*>.
+    if pair.second != NULL print pawn;
+    else if pair.first != NULL print disc;
+    else print blank space*/
     void draw();
-    std::array<std::pair<Colors, int>,5> retrieve_colors_worth();
-    Stair* stair;
 
 private:
-    std::array<Pawn*,5> pawns;
-    std::array<Disc*,55> discs;
+
+    void init_discs(void);
+    void init_pawns(void);
+
+    unsigned char number_discs(void);
+    void number_discs(unsigned char);
+
+    unsigned char number_pawns(void);
+    void number_pawns(unsigned char);
+
+    std::vector<Disc*> discs(void);
+    std::vector<Pawn*> pawns(void);
+    Stair* stair(void);
+
+    unsigned char _num_discs;
+    std::vector<Disc*> _discs;
+
+    unsigned char _num_pawns;
+    std::vector<Pawn*> _pawns;
+
+    Stair* _stair;
 };
 
 #endif

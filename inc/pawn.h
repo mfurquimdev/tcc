@@ -1,33 +1,23 @@
 #ifndef PAWN_H
 #define PAWN_H
 
-#include "colors.h"
 
 class Pawn
 {
 public:
-    Pawn(unsigned int);
+    Pawn(unsigned char);
     ~Pawn();
 
-    void color(unsigned int);
-    Colors color();
-    const char* color_str();
-
-    void position(unsigned int);
-    unsigned int position();
-
-    unsigned int color_int(Colors);
-    Colors int_color(unsigned int);
-
-    void draw();
+    void draw(void);
     void paint();
 
+    unsigned char color(void);
+
 private:
-    Colors _color;
-    unsigned int _position;
 
+    void color(unsigned char);
 
-    void reset_position();
+    unsigned char _color;
 };
 
 #endif

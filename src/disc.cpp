@@ -1,158 +1,99 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "disc.h"
-#include "colors.h"
+
+#include <cstdio>
 
 
-Disc::Disc(unsigned int color, unsigned int position)
+#define ANSI_B_COLOR_WHITE   "\x1b[47m"
+#define ANSI_B_COLOR_BLACK   "\x1b[40m"
+#define ANSI_B_COLOR_RED     "\x1b[41m"
+#define ANSI_B_COLOR_GREEN   "\x1b[42m"
+#define ANSI_B_COLOR_YELLOW  "\x1b[43m"
+#define ANSI_B_COLOR_BLUE    "\x1b[44m"
+#define ANSI_B_COLOR_MAGENTA "\x1b[45m"
+
+#define ANSI_COLOR_RESET   "\x1b[0m"
+
+
+Disc::Disc(unsigned char colour)
 {
-    this->color(color);
-    this->position(position);
-    fprintf(stderr, "[%p]\tDisc(%2d)\t%s\n", (void*) this, this->position(), this->color_str());
+    fprintf(stderr, "[%p]\tDisc(%d)\n", (void*) this, (int) colour);
+
+    color(colour);
 }
+
 
 Disc::~Disc()
 {
-    fprintf(stderr, "[%p] destroy disc\n", (void*) this);
+    fprintf(stderr, "[%p]\tDisc destructor\n", (void*) this);
 }
+
+
+/**
+ * Public functions
+ */
 
 void
-Disc::color(unsigned int color)
+Disc::draw(void)
 {
-    this->_color = this->int_color(color);
+    switch (color()) {
+        case 0:
+        printf(ANSI_B_COLOR_RED " " ANSI_COLOR_RESET " ");
+        break;
+
+        case 1:
+        printf(ANSI_B_COLOR_GREEN " " ANSI_COLOR_RESET " ");
+        break;
+
+        case 2:
+        printf(ANSI_B_COLOR_BLUE " " ANSI_COLOR_RESET " ");
+        break;
+
+        case 3:
+        printf(ANSI_B_COLOR_YELLOW " " ANSI_COLOR_RESET " ");
+        break;
+
+        case 4:
+        printf(ANSI_B_COLOR_MAGENTA " " ANSI_COLOR_RESET " ");
+        break;
+
+        case 5:
+        printf(ANSI_B_COLOR_WHITE " " ANSI_COLOR_RESET " ");
+        break;
+
+        case 6:
+        printf(ANSI_B_COLOR_BLACK " " ANSI_COLOR_RESET " ");
+        break;
+
+        default:
+        printf("  ");
+        break;
+    }
+
+    return ;
 }
 
-Colors
-Disc::color()
+
+/**
+ * Private functions
+ */
+
+
+/**
+ * Getters and Setters
+ */
+
+
+unsigned char
+Disc::color(void)
 {
     return this->_color;
 }
 
 void
-Disc::position(unsigned int position)
+Disc::color(unsigned char color)
 {
-    this->_position = position;
-
-    return ;
-}
-
-unsigned int
-Disc::position()
-{
-    return this->_position;
-}
-
-
-const char*
-Disc::color_str()
-{
-    const char* char_color = NULL;
-
-    switch (this->color()) {
-        case ENUM_RED:
-        char_color = COLOR_RED;
-        break;
-
-        case ENUM_GREEN:
-        char_color = COLOR_GREEN;
-        break;
-
-        case ENUM_BLUE:
-        char_color = COLOR_BLUE;
-        break;
-
-        case ENUM_YELLOW:
-        char_color = COLOR_YELLOW;
-        break;
-
-        case ENUM_PURPLE:
-        char_color = COLOR_PURPLE;
-        break;
-
-        case ENUM_WHITE:
-        char_color = COLOR_WHITE;
-        break;
-
-        case ENUM_BLACK:
-        char_color = COLOR_BLACK;
-        break;
-    }
-
-    return char_color;
-}
-
-Colors
-Disc::int_color(unsigned int int_color)
-{
-    Colors color;
-    switch (int_color) {
-        case 0:
-        color = ENUM_RED;
-        break;
-
-        case 1:
-        color = ENUM_GREEN;
-        break;
-
-        case 2:
-        color = ENUM_BLUE;
-        break;
-
-        case 3:
-        color = ENUM_YELLOW;
-        break;
-
-        case 4:
-        color = ENUM_PURPLE;
-        break;
-
-        case 5:
-        color = ENUM_WHITE;
-        break;
-
-        case 6:
-        color = ENUM_BLACK;
-        break;
-    }
-
-    return color;
-}
-
-
-void
-Disc::draw()
-{
-    switch (this->color()) {
-        case ENUM_RED:
-        fprintf(stdout, ANSI_B_COLOR_RED " " ANSI_COLOR_RESET " ");
-        break;
-
-        case ENUM_GREEN:
-        fprintf(stdout, ANSI_B_COLOR_GREEN " " ANSI_COLOR_RESET " ");
-        break;
-
-        case ENUM_BLUE:
-        fprintf(stdout, ANSI_B_COLOR_BLUE " " ANSI_COLOR_RESET " ");
-        break;
-
-        case ENUM_YELLOW:
-        fprintf(stdout, ANSI_B_COLOR_YELLOW " " ANSI_COLOR_RESET " ");
-        break;
-
-        case ENUM_PURPLE:
-        fprintf(stdout, ANSI_B_COLOR_MAGENTA " " ANSI_COLOR_RESET " ");
-        break;
-
-        case ENUM_WHITE:
-        fprintf(stdout, ANSI_B_COLOR_WHITE " " ANSI_COLOR_RESET " ");
-        break;
-
-        case ENUM_BLACK:
-        fprintf(stdout, ANSI_B_COLOR_BLACK " " ANSI_COLOR_RESET " ");
-        break;
-    }
+    fprintf(stderr, "\tcolor(%d)\n", (int) color);
+    this->_color = color;
 
     return ;
 }
