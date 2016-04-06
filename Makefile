@@ -61,8 +61,21 @@ TARGET=$(BIN_DIR)/$(NAME)
 .PHONY: clean
 
 all: dirs
+	@clear
+	@clear
+	@$(MAKE) clean
+
 	@echo
+	@echo Compiling...
 	$(MAKE) $(TARGET)
+
+	@echo
+	@echo Executing...
+	@./prog 2> debug.err
+
+	@echo
+	@echo Debugging...
+	@cat debug.err
 
 dirs:
 	@mkdir -vp $(OBJ_DIR) $(MAP_DIR) $(BIN_DIR)
