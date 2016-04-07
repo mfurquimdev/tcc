@@ -7,18 +7,15 @@
 
 #include <vector>
 
+#define ANSI_COLOR_RESET   "\x1b[0m"
+
 class Board
 {
 public:
     Board(unsigned char, unsigned char);
     ~Board();
 
-    /* Use pair to print.
-    std::pair<Disc*, Pawn*>.
-    if pair.second != NULL print pawn;
-    else if pair.first != NULL print disc;
-    else print blank space*/
-    void draw();
+    void draw(void);
 
 private:
 

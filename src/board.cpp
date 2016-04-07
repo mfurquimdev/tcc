@@ -61,7 +61,28 @@ Board::draw()
             printf("  ");
         }
     }
+
+    printf("\n          ");
+    for (unsigned char i = 0; i < number_discs(); i++) {
+        discs().at(i)->paint();
+        printf("%d ", (int) (i/10));
+    }
+
     printf("\n");
+
+    for (unsigned char i = 0; i < number_pawns(); i++) {
+        pawns().at(i)->paint();
+        printf("%d ", (int) i);
+    }
+
+    printf(ANSI_COLOR_RESET);
+
+    for (unsigned char i = 0; i < number_discs(); i++) {
+        discs().at(i)->paint();
+        printf("%d ", (int) (i%10));
+    }
+    printf(ANSI_COLOR_RESET "\n");
+
 
     return ;
 }

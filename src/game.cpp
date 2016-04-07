@@ -1,6 +1,7 @@
 #include "game.h"
 
 #include <cstdio>
+#include <stdio_ext.h>
 
 Game::Game(unsigned char num_players,
             unsigned char num_pawns,
@@ -52,12 +53,13 @@ Game::loop(void)
 
             draw(id_player);
 
-            unsigned char chosen_pawn = 0;
+            unsigned char chosen_pawn;
             chosen_pawn = choose_pawn();
 
             draw(id_player);
 
-            choose_disc(chosen_pawn);
+            unsigned char chosen_disc;
+            chosen_disc = choose_disc(chosen_pawn);
 
             // Just a dummy way to quit
             quit = id_player;
@@ -83,22 +85,26 @@ Game::choose_pawn(void)
 {
     fprintf(stderr, "\tchoose_pawn(void)\n");
 
-    unsigned char chosen_pawn = 0;
+    printf("Qual peao desejas mover?\n");
+    unsigned short int chosen_pawn;
+    scanf("%hu", &chosen_pawn);
 
-    return chosen_pawn;
+    fprintf(stderr, "chosen_pawn [%hu]\n", chosen_pawn);
+    return (unsigned char) chosen_pawn;
 }
 
 unsigned char
 Game::choose_disc(unsigned char chosen_pawn)
 {
-    fprintf(stderr, "\tchoose_disc(%d)\n", (int) chosen_pawn);
+    fprintf(stderr, "\tchoose_disc(%hu)\n", (unsigned short int) chosen_pawn);
 
-    unsigned char chosen_disc = 0;
+    printf("Qual disco desejas pegar?\n");
+    unsigned short int chosen_disc;
 
-    // Dummy Attribution
-    chosen_disc += chosen_pawn;
+    scanf("%hu", &chosen_disc);
 
-    return chosen_disc;
+    fprintf(stderr, "chosen_disc [%hu]\n", chosen_disc);
+    return (unsigned char) chosen_disc;
 }
 
 void
