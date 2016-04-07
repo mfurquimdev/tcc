@@ -16,6 +16,7 @@ public:
     ~Board();
 
     void draw(void);
+    unsigned char move_pawn(unsigned char);
 
 private:
 

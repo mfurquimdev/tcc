@@ -55,6 +55,7 @@ Game::loop(void)
 
             unsigned char chosen_pawn;
             chosen_pawn = choose_pawn();
+            board()->move_pawn(chosen_pawn);
 
             draw(id_player);
 
