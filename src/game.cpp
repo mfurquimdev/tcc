@@ -59,14 +59,15 @@ Game::loop(void)
             }
             board()->move_pawn(chosen_pawn);
 
-/*
+
             unsigned short int chosen_disc;
-            chosen_disc = choose_disc(chosen_pawn);
-*/
-            if (quit) {
-                fprintf(stderr, "\nQuitting\n");
+            chosen_disc = choose_disc(id_player, chosen_pawn);
+            if (chosen_disc == 128) {
+                quit = 1;
                 break;
             }
+            board()->pick_disc(chosen_disc);
+
 
             turn++;
         }
@@ -96,17 +97,23 @@ Game::choose_pawn(unsigned short int id_player)
 }
 
 unsigned short int
-Game::choose_disc(unsigned short int chosen_pawn)
+Game::choose_disc(unsigned short int id_player, unsigned short int chosen_pawn)
 {
     fprintf(stderr, "\tchoose_disc(%hu)\n", (unsigned short int) chosen_pawn);
 
-    printf("Qual disco desejas pegar?\n");
     unsigned short int chosen_disc;
 
-    scanf("%hu", &chosen_disc);
+//    do {
+        draw(id_player);
+        printf("Player %d\tQual disco desejas pegar?\n", id_player);
+        scanf("%hu", &chosen_disc);
+        fprintf(stderr, "chosen_disc [%hu]\n", chosen_disc);
+//    } while (chosen_pawn != 128 && board()->invalid_move(chosen_disc));
+
 
     fprintf(stderr, "chosen_disc [%hu]\n", chosen_disc);
-    return (unsigned short int) chosen_disc;
+
+    return chosen_disc;
 }
 
 void

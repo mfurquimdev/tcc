@@ -18,6 +18,7 @@ public:
     void draw(void);
     unsigned short int invalid_move(unsigned short int);
     std::vector<std::pair<Disc*, Pawn*> >::iterator move_pawn(unsigned short int);
+    void pick_disc(unsigned short int);
 
 private:
 

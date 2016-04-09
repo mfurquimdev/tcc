@@ -45,25 +45,12 @@ Board::~Board()
  * Public functions
  */
 
-std::vector<std::pair<Disc*, Pawn*> >::iterator
-Board::find_pawn_index(Pawn* pawn)
+void
+Board::pick_disc(unsigned short int chosen_disc)
 {
-    std::vector<std::pair<Disc*, Pawn*> >::iterator it = this->_printable_board.begin();
-    for (; it != this->_printable_board.end(); ++it) {
-        std::pair<Disc*, Pawn*> disc_pawn = *it;
-        Pawn* p_pawn = disc_pawn.second;
+    this->_printable_board.at(number_pawns()+chosen_disc).first = NULL;
 
-        if (p_pawn != NULL) {
-            if (pawn->color() == p_pawn->color()) {
-                p_pawn = NULL;
-                break;
-            }
-        }
-
-        p_pawn = NULL;
-    }
-
-    return it;
+    return ;
 }
 
 std::vector<std::pair<Disc*, Pawn*> >::iterator
@@ -161,22 +148,32 @@ Board::draw()
 
     printf("\n          ");
     for (unsigned short int i = 0; i < number_discs(); i++) {
-        discs().at(i)->paint();
-        printf("%d ", (int) (i/10));
+        if (this->_printable_board.at(number_pawns()+i).first != NULL) {
+            discs().at(i)->paint();
+            printf("%d ", i/10);
+        }
+        else {
+            printf("  ");
+        }
     }
 
     printf("\n");
 
     for (unsigned short int i = 0; i < number_pawns(); i++) {
         pawns().at(i)->paint();
-        printf("%d ", (int) i);
+        printf("%hu ", i);
     }
 
     printf(ANSI_COLOR_RESET);
 
     for (unsigned short int i = 0; i < number_discs(); i++) {
-        discs().at(i)->paint();
-        printf("%d ", (int) (i%10));
+        if (this->_printable_board.at(number_pawns()+i).first != NULL) {
+            discs().at(i)->paint();
+            printf("%d ", i%10);
+        }
+        else {
+            printf("  ");
+        }
     }
     printf(ANSI_COLOR_RESET "\n");
 
@@ -187,6 +184,27 @@ Board::draw()
 /**
  * Private functions
  */
+
+std::vector<std::pair<Disc*, Pawn*> >::iterator
+Board::find_pawn_index(Pawn* pawn)
+{
+    std::vector<std::pair<Disc*, Pawn*> >::iterator it = this->_printable_board.begin();
+    for (; it != this->_printable_board.end(); ++it) {
+        std::pair<Disc*, Pawn*> disc_pawn = *it;
+        Pawn* p_pawn = disc_pawn.second;
+
+        if (p_pawn != NULL) {
+            if (pawn->color() == p_pawn->color()) {
+                p_pawn = NULL;
+                break;
+            }
+        }
+
+        p_pawn = NULL;
+    }
+
+    return it;
+}
 
 void
 Board::init_discs(void)
