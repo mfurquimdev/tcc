@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <algorithm>
 
-Player::Player(unsigned char id)
+Player::Player(unsigned short int id)
 {
     fprintf(stderr, "[%p]\tPlayer(%d)\n", (void*) this, (int) id);
 
@@ -52,7 +52,7 @@ bool sort_disc (Disc* d1, Disc* d2)
  */
 
 void
-Player::player_id(unsigned char id)
+Player::player_id(unsigned short int id)
 {
     fprintf(stderr, "\tplayer_id(%d)\n", (int) id);
     this->_id = id;
@@ -60,7 +60,7 @@ Player::player_id(unsigned char id)
     return ;
 }
 
-unsigned char
+unsigned short int
 Player::player_id(void)
 {
     return this->_id;
@@ -77,7 +77,7 @@ Player::init_discs(void)
 {
 
     // Random discs
-    for (unsigned char i = 0; i < 17; i++) {
+    for (unsigned short int i = 0; i < 17; i++) {
         Disc* new_disc = new Disc(((player_id()+1)*i)%8);
         this->_discs.push_back(new_disc);
     }

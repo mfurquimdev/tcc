@@ -20,18 +20,18 @@
 class Disc
 {
 public:
-    Disc(unsigned char);
+    Disc(unsigned short int);
     ~Disc();
 
     void draw(void);
-    unsigned char color(void);
+    unsigned short int color(void);
     void paint(void);
 
 private:
 
-    void color(unsigned char);
+    void color(unsigned short int);
 
-    unsigned char _color;
+    unsigned short int _color;
 };
 
 #endif

@@ -12,12 +12,12 @@
 class Board
 {
 public:
-    Board(unsigned char, unsigned char);
+    Board(unsigned short int, unsigned short int);
     ~Board();
 
     void draw(void);
-    unsigned char invalid_move(unsigned char);
-    std::vector<std::pair<Disc*, Pawn*> >::iterator move_pawn(unsigned char);
+    unsigned short int invalid_move(unsigned short int);
+    std::vector<std::pair<Disc*, Pawn*> >::iterator move_pawn(unsigned short int);
 
 private:
 
@@ -26,11 +26,11 @@ private:
     void init_discs(void);
     void init_pawns(void);
 
-    unsigned char number_discs(void);
-    void number_discs(unsigned char);
+    unsigned short int number_discs(void);
+    void number_discs(unsigned short int);
 
-    unsigned char number_pawns(void);
-    void number_pawns(unsigned char);
+    unsigned short int number_pawns(void);
+    void number_pawns(unsigned short int);
 
     std::vector<Disc*> discs(void);
     std::vector<Pawn*> pawns(void);
@@ -38,10 +38,10 @@ private:
 
     std::vector<std::pair<Disc*, Pawn*> > _printable_board;
 
-    unsigned char _num_discs;
+    unsigned short int _num_discs;
     std::vector<Disc*> _discs;
 
-    unsigned char _num_pawns;
+    unsigned short int _num_pawns;
     std::vector<Pawn*> _pawns;
 
     Stair* _stair;

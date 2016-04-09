@@ -14,10 +14,10 @@ Stair::~Stair()
 
 }
 
-unsigned char
+unsigned short int
 Stair::contains(Pawn* pawn)
 {
-    unsigned char it_contains = 0;
+    unsigned short int it_contains = 0;
 
     for(auto step: this->_steps) {
         if (pawn->color() == step->color()) {

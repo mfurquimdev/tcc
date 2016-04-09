@@ -4,7 +4,7 @@
 #include <cstdio>
 #include <random>
 
-Board::Board(unsigned char num_discs, unsigned char num_pawns)
+Board::Board(unsigned short int num_discs, unsigned short int num_pawns)
 {
     fprintf(stderr, "[%p]\tBoard(%d,%d)\n", (void*) this, (int) num_discs, (int) num_pawns);
 
@@ -67,11 +67,11 @@ Board::find_pawn_index(Pawn* pawn)
 }
 
 std::vector<std::pair<Disc*, Pawn*> >::iterator
-Board::move_pawn(unsigned char chosen_pawn)
+Board::move_pawn(unsigned short int chosen_pawn)
 {
     fprintf(stderr, "\tmove_pawn(%d)\n", chosen_pawn);
     Pawn* pawn = pawns().at(chosen_pawn);
-    unsigned char moved = 0;
+    unsigned short int moved = 0;
 
     std::vector<std::pair<Disc*, Pawn*> >::iterator it = find_pawn_index(pawn);
     for (; it != this->_printable_board.end(); ++it) {
@@ -103,11 +103,11 @@ Board::move_pawn(unsigned char chosen_pawn)
     return it;
 }
 
-unsigned char
-Board::invalid_move(unsigned char chosen_pawn)
+unsigned short int
+Board::invalid_move(unsigned short int chosen_pawn)
 {
     fprintf(stderr, "\tintavlid_move(%d)\n", chosen_pawn);
-    unsigned char invalid = 0;
+    unsigned short int invalid = 0;
 
     if (chosen_pawn >= number_pawns()) {
         invalid = 1;
@@ -160,21 +160,21 @@ Board::draw()
     }
 
     printf("\n          ");
-    for (unsigned char i = 0; i < number_discs(); i++) {
+    for (unsigned short int i = 0; i < number_discs(); i++) {
         discs().at(i)->paint();
         printf("%d ", (int) (i/10));
     }
 
     printf("\n");
 
-    for (unsigned char i = 0; i < number_pawns(); i++) {
+    for (unsigned short int i = 0; i < number_pawns(); i++) {
         pawns().at(i)->paint();
         printf("%d ", (int) i);
     }
 
     printf(ANSI_COLOR_RESET);
 
-    for (unsigned char i = 0; i < number_discs(); i++) {
+    for (unsigned short int i = 0; i < number_discs(); i++) {
         discs().at(i)->paint();
         printf("%d ", (int) (i%10));
     }
@@ -197,7 +197,7 @@ Board::init_discs(void)
     std::default_random_engine generator;
     std::uniform_int_distribution<int> distribution(0,6);
 
-    for (unsigned char disc_num = 0; disc_num < number_discs();) {
+    for (unsigned short int disc_num = 0; disc_num < number_discs();) {
         int nonce = distribution(generator);
 
         if (/* nonce_color != White && nonce_color != Black && qte < 9 */
@@ -219,7 +219,7 @@ Board::init_discs(void)
 void
 Board::init_pawns(void)
 {
-    for (unsigned char pawn_color = 0; pawn_color < number_pawns(); pawn_color++) {
+    for (unsigned short int pawn_color = 0; pawn_color < number_pawns(); pawn_color++) {
         Pawn* new_pawn = new Pawn(pawn_color);
         this->_pawns.push_back(new_pawn);
     }
@@ -242,14 +242,14 @@ Board::pawns(void)
     return this->_pawns;
 }
 
-unsigned char
+unsigned short int
 Board::number_discs(void)
 {
     return this->_num_discs;
 }
 
 void
-Board::number_discs(unsigned char num_discs)
+Board::number_discs(unsigned short int num_discs)
 {
     fprintf(stderr, "\tnumber_discs(%d)\n", (int) num_discs);
 
@@ -258,14 +258,14 @@ Board::number_discs(unsigned char num_discs)
     return ;
 }
 
-unsigned char
+unsigned short int
 Board::number_pawns(void)
 {
     return this->_num_pawns;
 }
 
 void
-Board::number_pawns(unsigned char num_pawns)
+Board::number_pawns(unsigned short int num_pawns)
 {
     fprintf(stderr, "\tnumber_pawns(%d)\n", (int) num_pawns);
 
