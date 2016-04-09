@@ -16,11 +16,11 @@ public:
     ~Board();
 
     void draw(void);
+    unsigned char invalid_move(unsigned char);
     std::vector<std::pair<Disc*, Pawn*> >::iterator move_pawn(unsigned char);
 
 private:
 
-    unsigned char invalid_move(unsigned char);
     std::vector<std::pair<Disc*, Pawn*> >::iterator find_pawn_index(Pawn*);
 
     void init_discs(void);

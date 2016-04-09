@@ -18,7 +18,7 @@ private:
 
     /* Functions */
     void draw(unsigned char);
-    unsigned char choose_pawn(void);
+    unsigned char choose_pawn(unsigned char);
     unsigned char choose_disc(unsigned char);
 
     void init_players(void);

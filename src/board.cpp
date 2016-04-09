@@ -85,7 +85,7 @@ Board::move_pawn(unsigned char chosen_pawn)
                 (*it).second = NULL;
             }
         }
-        else if (p_disc != NULL) {
+        else if (p_pawn == NULL && p_disc != NULL) {
             fprintf(stderr, "d: %d\t", p_disc->color());
             if (pawn->color() == p_disc->color()) {
                 (*it).second = pawn;
@@ -106,33 +106,39 @@ Board::move_pawn(unsigned char chosen_pawn)
 unsigned char
 Board::invalid_move(unsigned char chosen_pawn)
 {
-    fprintf(stderr, "\tmove_pawn(%d)\n", chosen_pawn);
-    Pawn* pawn = pawns().at(chosen_pawn);
-    unsigned char pawn_index = 0;
+    fprintf(stderr, "\tintavlid_move(%d)\n", chosen_pawn);
     unsigned char invalid = 0;
 
-    std::vector<std::pair<Disc*, Pawn*> >::iterator it = this->_printable_board.begin();
-    for (; it != this->_printable_board.end(); ++it) {
-        std::pair<Disc*, Pawn*> disc_pawn = *it;
-        Disc* p_disc = disc_pawn.first;
-        Pawn* p_pawn = disc_pawn.second;
-
-        if (p_pawn == NULL && p_disc != NULL) {
-            fprintf(stderr, "d: %d\t", p_disc->color());
-            if (pawn->color() == p_disc->color()) {
-                (*it).second = pawn;
-                break;
-            }
-        }
-        fprintf(stderr, "\n");
-    }
-
-    if (stair()->contains(pawn) &&
-        pawn_index >= number_discs() + number_pawns())
-    {
+    if (chosen_pawn >= number_pawns()) {
         invalid = 1;
     }
+    else {
+        Pawn* pawn = pawns().at(chosen_pawn);
 
+        std::vector<std::pair<Disc*, Pawn*> >::iterator it = find_pawn_index(pawn);
+
+        for (; it != this->_printable_board.end(); ++it) {
+            std::pair<Disc*, Pawn*> disc_pawn = *it;
+            Disc* p_disc = disc_pawn.first;
+            Pawn* p_pawn = disc_pawn.second;
+
+            if (p_pawn == NULL && p_disc != NULL) {
+                fprintf(stderr, "d: %d\t", p_disc->color());
+                if (pawn->color() == p_disc->color()) {
+                    break;
+                }
+            }
+            fprintf(stderr, "\n");
+        }
+
+        if (stair()->contains(pawn) &&
+            it == this->_printable_board.end())
+        {
+            invalid = 1;
+        }
+    }
+
+    fprintf(stderr, "invalid [%d]\n", (int) invalid);
     return invalid;
 }
 

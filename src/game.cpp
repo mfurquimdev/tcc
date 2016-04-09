@@ -51,17 +51,14 @@ Game::loop(void)
                 turn,
                 (int) id_player);
 
-            draw(id_player);
-
             unsigned char chosen_pawn;
-            chosen_pawn = choose_pawn();
+            chosen_pawn = choose_pawn(id_player);
             board()->move_pawn(chosen_pawn);
 
-            draw(id_player);
-
+/*
             unsigned char chosen_disc;
             chosen_disc = choose_disc(chosen_pawn);
-
+*/
             if (quit) {
                 fprintf(stderr, "\nQuitting\n");
                 break;
@@ -79,15 +76,18 @@ Game::loop(void)
  */
 
 unsigned char
-Game::choose_pawn(void)
+Game::choose_pawn(unsigned char id_player)
 {
     fprintf(stderr, "\tchoose_pawn(void)\n");
-
-    printf("Qual peao desejas mover?\n");
     unsigned short int chosen_pawn;
-    scanf("%hu", &chosen_pawn);
 
-    fprintf(stderr, "chosen_pawn [%hu]\n", chosen_pawn);
+    do {
+        draw(id_player);
+        printf("Player %d\tQual peao desejas mover?\n", id_player);
+        scanf("%hu", &chosen_pawn);
+        fprintf(stderr, "chosen_pawn [%hu]\n", chosen_pawn);
+    } while(board()->invalid_move(chosen_pawn));
+
     return (unsigned char) chosen_pawn;
 }
 
