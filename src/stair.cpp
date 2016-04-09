@@ -14,6 +14,22 @@ Stair::~Stair()
 
 }
 
+unsigned char
+Stair::contains(Pawn* pawn)
+{
+    unsigned char it_contains = 0;
+
+    for(auto step: this->_steps) {
+        if (pawn->color() == step->color()) {
+            it_contains = 1;
+            break;
+        }
+    }
+
+    return it_contains;
+}
+
+
 void
 Stair::step_up(Pawn* pawn)
 {

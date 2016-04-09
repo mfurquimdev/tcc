@@ -12,6 +12,7 @@ public:
 
     void step_up(Pawn*);
     void draw();
+    unsigned char contains(Pawn*);
 
 private:
     unsigned int _current_position;

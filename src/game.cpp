@@ -62,9 +62,6 @@ Game::loop(void)
             unsigned char chosen_disc;
             chosen_disc = choose_disc(chosen_pawn);
 
-            // Just a dummy way to quit
-            quit = id_player;
-
             if (quit) {
                 fprintf(stderr, "\nQuitting\n");
                 break;

@@ -45,14 +45,35 @@ Board::~Board()
  * Public functions
  */
 
-unsigned char
+std::vector<std::pair<Disc*, Pawn*> >::iterator
+Board::find_pawn_index(Pawn* pawn)
+{
+    std::vector<std::pair<Disc*, Pawn*> >::iterator it = this->_printable_board.begin();
+    for (; it != this->_printable_board.end(); ++it) {
+        std::pair<Disc*, Pawn*> disc_pawn = *it;
+        Pawn* p_pawn = disc_pawn.second;
+
+        if (p_pawn != NULL) {
+            if (pawn->color() == p_pawn->color()) {
+                p_pawn = NULL;
+                break;
+            }
+        }
+
+        p_pawn = NULL;
+    }
+
+    return it;
+}
+
+std::vector<std::pair<Disc*, Pawn*> >::iterator
 Board::move_pawn(unsigned char chosen_pawn)
 {
     fprintf(stderr, "\tmove_pawn(%d)\n", chosen_pawn);
     Pawn* pawn = pawns().at(chosen_pawn);
-    unsigned char pawn_index = 0;
+    unsigned char moved = 0;
 
-    std::vector<std::pair<Disc*, Pawn*> >::iterator it = this->_printable_board.begin();
+    std::vector<std::pair<Disc*, Pawn*> >::iterator it = find_pawn_index(pawn);
     for (; it != this->_printable_board.end(); ++it) {
         std::pair<Disc*, Pawn*> disc_pawn = *it;
         Disc* p_disc = disc_pawn.first;
@@ -68,38 +89,51 @@ Board::move_pawn(unsigned char chosen_pawn)
             fprintf(stderr, "d: %d\t", p_disc->color());
             if (pawn->color() == p_disc->color()) {
                 (*it).second = pawn;
+                moved = 1;
                 break;
             }
         }
         fprintf(stderr, "\n");
     }
-/*
-    unsigned char found = 0;
-    for (auto disc_pawn: this->_printable_board) {
-        fprintf(stderr, "pawn_index %d\n", pawn_index);
-        if (!found &&
-            disc_pawn.second != NULL &&
-            disc_pawn.second->color() == pawn->color())
-        {
-            disc_pawn.second = (Pawn*) NULL;
-            found = 1;
-        }
 
-        if (found &&
-            disc_pawn.first != NULL &&
-            disc_pawn.first->color() == pawn->color())
-        {
-            disc_pawn.second = pawn;
-            break;
-        }
-        pawn_index++;
+    if (!stair()->contains(pawn) && !moved) {
+        stair()->step_up(pawn);
     }
 
-    pawn = (Pawn*) NULL;
+    return it;
+}
 
-    fprintf(stderr, "pawn_index %d\n", pawn_index);
-*/
-    return pawn_index;
+unsigned char
+Board::invalid_move(unsigned char chosen_pawn)
+{
+    fprintf(stderr, "\tmove_pawn(%d)\n", chosen_pawn);
+    Pawn* pawn = pawns().at(chosen_pawn);
+    unsigned char pawn_index = 0;
+    unsigned char invalid = 0;
+
+    std::vector<std::pair<Disc*, Pawn*> >::iterator it = this->_printable_board.begin();
+    for (; it != this->_printable_board.end(); ++it) {
+        std::pair<Disc*, Pawn*> disc_pawn = *it;
+        Disc* p_disc = disc_pawn.first;
+        Pawn* p_pawn = disc_pawn.second;
+
+        if (p_pawn == NULL && p_disc != NULL) {
+            fprintf(stderr, "d: %d\t", p_disc->color());
+            if (pawn->color() == p_disc->color()) {
+                (*it).second = pawn;
+                break;
+            }
+        }
+        fprintf(stderr, "\n");
+    }
+
+    if (stair()->contains(pawn) &&
+        pawn_index >= number_discs() + number_pawns())
+    {
+        invalid = 1;
+    }
+
+    return invalid;
 }
 
 void

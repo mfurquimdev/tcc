@@ -72,6 +72,7 @@ all: dirs
 	@echo
 	@echo Executing...
 	@./prog 2> debug.err
+#	@cat input.in | ./prog 2> debug.err
 #
 #	@echo
 #	@echo Debugging...
