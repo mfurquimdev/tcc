@@ -2,6 +2,8 @@
 
 #include <cstdio>
 #include <stdio_ext.h>
+#include <thread>
+#include <chrono>
 
 Game::Game(unsigned short int num_players,
             unsigned short int num_pawns,
@@ -47,9 +49,8 @@ Game::loop(void)
                 id_player < number_players();
                 id_player++)
         {
-            fprintf(stderr, "\nturn %llu\tid_player %d\n",
-                turn,
-                (int) id_player);
+            fprintf(stderr, "\nturn %llu\tid_player %hu\n",
+                turn, id_player);
 
             unsigned short int chosen_pawn;
             chosen_pawn = choose_pawn(id_player);
@@ -59,6 +60,7 @@ Game::loop(void)
             }
             board()->move_pawn(chosen_pawn);
 
+//            std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
             unsigned short int chosen_disc;
             chosen_disc = choose_disc(id_player, chosen_pawn);
@@ -66,8 +68,12 @@ Game::loop(void)
                 quit = 1;
                 break;
             }
-            board()->pick_disc(chosen_disc);
 
+            Disc* disc_picked = NULL;
+            disc_picked = board()->pick_disc(chosen_disc);
+            players().at(id_player)->gather_disc(disc_picked);
+
+//            std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
             turn++;
         }
@@ -87,8 +93,8 @@ Game::choose_pawn(unsigned short int id_player)
     unsigned short int chosen_pawn;
 
     do {
+        printf("Player %d\tQual peao desejas mover?\n", id_player+1);
         draw(id_player);
-        printf("Player %d\tQual peao desejas mover?\n", id_player);
         scanf("%hu", &chosen_pawn);
         fprintf(stderr, "chosen_pawn [%hu]\n", chosen_pawn);
     } while (chosen_pawn != 128 && board()->invalid_move(chosen_pawn));
@@ -103,14 +109,9 @@ Game::choose_disc(unsigned short int id_player, unsigned short int chosen_pawn)
 
     unsigned short int chosen_disc;
 
-//    do {
-        draw(id_player);
-        printf("Player %d\tQual disco desejas pegar?\n", id_player);
-        scanf("%hu", &chosen_disc);
-        fprintf(stderr, "chosen_disc [%hu]\n", chosen_disc);
-//    } while (chosen_pawn != 128 && board()->invalid_move(chosen_disc));
-
-
+    printf("Player %d\tQual disco desejas pegar?\n", id_player+1);
+    draw(id_player);
+    scanf("%hu", &chosen_disc);
     fprintf(stderr, "chosen_disc [%hu]\n", chosen_disc);
 
     return chosen_disc;
@@ -128,6 +129,9 @@ Game::draw(unsigned short int current_player)
     printf("\n");
 
     board()->draw();
+
+    for (size_t i = 0; i < 20; i++)
+        printf("\n");
 
     return ;
 }

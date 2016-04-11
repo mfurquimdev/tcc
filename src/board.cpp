@@ -45,12 +45,13 @@ Board::~Board()
  * Public functions
  */
 
-void
+Disc*
 Board::pick_disc(unsigned short int chosen_disc)
 {
+    Disc* disc_picked = this->_printable_board.at(number_pawns()+chosen_disc).first;
     this->_printable_board.at(number_pawns()+chosen_disc).first = NULL;
 
-    return ;
+    return disc_picked;
 }
 
 std::vector<std::pair<Disc*, Pawn*> >::iterator

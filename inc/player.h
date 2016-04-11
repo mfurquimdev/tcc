@@ -15,6 +15,7 @@ public:
     ~Player();
 
     void draw(void);
+    void gather_disc(Disc*);
 
 private:
 
