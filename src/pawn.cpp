@@ -2,7 +2,7 @@
 
 #include <cstdio>
 
-Pawn::Pawn(unsigned char colour)
+Pawn::Pawn(unsigned short int colour)
 {
     fprintf(stderr, "[%p]\tPawn(%d)\n", (void*) this, (int) colour);
 
@@ -94,14 +94,14 @@ Pawn::paint(void)
  */
 
 
-unsigned char
+unsigned short int
 Pawn::color(void)
 {
     return this->_color;
 }
 
 void
-Pawn::color(unsigned char color)
+Pawn::color(unsigned short int color)
 {
     fprintf(stderr, "\tcolor(%d)\n", (int) color);
     this->_color = color;

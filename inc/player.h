@@ -11,20 +11,21 @@ bool sort_disc (Disc*, Disc*);
 class Player
 {
 public:
-    Player(unsigned char);
+    Player(unsigned short int);
     ~Player();
 
     void draw(void);
+    void gather_disc(Disc*);
 
 private:
 
     std::vector<Disc*> disc_poll(void);
     void init_discs(void);
 
-    void player_id(unsigned char);
-    unsigned char player_id(void);
+    void player_id(unsigned short int);
+    unsigned short int player_id(void);
 
-    unsigned char _id;
+    unsigned short int _id;
     std::vector<Disc*> _discs;
 };
 

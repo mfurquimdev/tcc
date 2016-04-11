@@ -2,10 +2,12 @@
 
 #include <cstdio>
 #include <stdio_ext.h>
+#include <thread>
+#include <chrono>
 
-Game::Game(unsigned char num_players,
-            unsigned char num_pawns,
-            unsigned char num_discs)
+Game::Game(unsigned short int num_players,
+            unsigned short int num_pawns,
+            unsigned short int num_discs)
 {
     fprintf(stderr, "[%p]\tGame(%d,%d,%2d)\n",
         (void*) this,
@@ -39,36 +41,39 @@ void
 Game::loop(void)
 {
     fprintf(stderr, "Game loop(void)\n");
-    unsigned char quit = 0;
+    unsigned short int quit = 0;
     unsigned long long int turn = 0;
 
     while (!quit) {
-        for (unsigned char id_player = 0;
+        for (unsigned short int id_player = 0;
                 id_player < number_players();
                 id_player++)
         {
-            fprintf(stderr, "\nturn %llu\tid_player %d\n",
-                turn,
-                (int) id_player);
+            fprintf(stderr, "\nturn %llu\tid_player %hu\n",
+                turn, id_player);
 
-            draw(id_player);
-
-            unsigned char chosen_pawn;
-            chosen_pawn = choose_pawn();
-            board()->move_pawn(chosen_pawn);
-
-            draw(id_player);
-
-            unsigned char chosen_disc;
-            chosen_disc = choose_disc(chosen_pawn);
-
-            // Just a dummy way to quit
-            quit = id_player;
-
-            if (quit) {
-                fprintf(stderr, "\nQuitting\n");
+            unsigned short int chosen_pawn;
+            chosen_pawn = choose_pawn(id_player);
+            if (chosen_pawn == 128) {
+                quit = 1;
                 break;
             }
+            board()->move_pawn(chosen_pawn);
+
+//            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+            unsigned short int chosen_disc;
+            chosen_disc = choose_disc(id_player, chosen_pawn);
+            if (chosen_disc == 128) {
+                quit = 1;
+                break;
+            }
+
+            Disc* disc_picked = NULL;
+            disc_picked = board()->pick_disc(chosen_disc);
+            players().at(id_player)->gather_disc(disc_picked);
+
+//            std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
             turn++;
         }
@@ -81,35 +86,39 @@ Game::loop(void)
  * Private functions
  */
 
-unsigned char
-Game::choose_pawn(void)
+unsigned short int
+Game::choose_pawn(unsigned short int id_player)
 {
     fprintf(stderr, "\tchoose_pawn(void)\n");
-
-    printf("Qual peao desejas mover?\n");
     unsigned short int chosen_pawn;
-    scanf("%hu", &chosen_pawn);
 
-    fprintf(stderr, "chosen_pawn [%hu]\n", chosen_pawn);
-    return (unsigned char) chosen_pawn;
+    do {
+        printf("Player %d\tQual peao desejas mover?\n", id_player+1);
+        draw(id_player);
+        scanf("%hu", &chosen_pawn);
+        fprintf(stderr, "chosen_pawn [%hu]\n", chosen_pawn);
+    } while (chosen_pawn != 128 && board()->invalid_move(chosen_pawn));
+
+    return chosen_pawn;
 }
 
-unsigned char
-Game::choose_disc(unsigned char chosen_pawn)
+unsigned short int
+Game::choose_disc(unsigned short int id_player, unsigned short int chosen_pawn)
 {
     fprintf(stderr, "\tchoose_disc(%hu)\n", (unsigned short int) chosen_pawn);
 
-    printf("Qual disco desejas pegar?\n");
     unsigned short int chosen_disc;
 
+    printf("Player %d\tQual disco desejas pegar?\n", id_player+1);
+    draw(id_player);
     scanf("%hu", &chosen_disc);
-
     fprintf(stderr, "chosen_disc [%hu]\n", chosen_disc);
-    return (unsigned char) chosen_disc;
+
+    return chosen_disc;
 }
 
 void
-Game::draw(unsigned char current_player)
+Game::draw(unsigned short int current_player)
 {
     fprintf(stderr, "\tdraw(%d)\n", (int) current_player);
 
@@ -121,6 +130,9 @@ Game::draw(unsigned char current_player)
 
     board()->draw();
 
+    for (size_t i = 0; i < 20; i++)
+        printf("\n");
+
     return ;
 }
 
@@ -129,7 +141,7 @@ Game::init_players(void)
 {
     fprintf(stderr, "\tinit_players(void)\n");
 
-    for (unsigned char player_id = 0;
+    for (unsigned short int player_id = 0;
             player_id < number_players();
             player_id++)
     {
@@ -155,7 +167,7 @@ Game::init_board(void)
  */
 
 void
-Game::number_players(unsigned char num_players)
+Game::number_players(unsigned short int num_players)
 {
     fprintf(stderr, "\tnumber_players(%d)\n", (int) num_players);
     this->_num_players = num_players;
@@ -163,14 +175,14 @@ Game::number_players(unsigned char num_players)
     return ;
 }
 
-unsigned char
+unsigned short int
 Game::number_players(void)
 {
     return this->_num_players;
 }
 
 void
-Game::number_pawns(unsigned char num_pawns)
+Game::number_pawns(unsigned short int num_pawns)
 {
     fprintf(stderr, "\tnumber_pawns(%d)\n", (int) num_pawns);
     this->_num_pawns = num_pawns;
@@ -178,14 +190,14 @@ Game::number_pawns(unsigned char num_pawns)
     return ;
 }
 
-unsigned char
+unsigned short int
 Game::number_pawns(void)
 {
     return this->_num_pawns;
 }
 
 void
-Game::number_discs(unsigned char num_discs)
+Game::number_discs(unsigned short int num_discs)
 {
     fprintf(stderr, "\tnumber_discs(%d)\n", (int) num_discs);
     this->_num_discs = num_discs;
@@ -193,7 +205,7 @@ Game::number_discs(unsigned char num_discs)
     return ;
 }
 
-unsigned char
+unsigned short int
 Game::number_discs(void)
 {
     return this->_num_discs;

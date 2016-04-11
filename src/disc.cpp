@@ -2,7 +2,7 @@
 
 #include <cstdio>
 
-Disc::Disc(unsigned char colour)
+Disc::Disc(unsigned short int colour)
 {
     fprintf(stderr, "[%p]\tDisc(%d)\n", (void*) this, (int) colour);
 
@@ -102,14 +102,14 @@ Disc::paint(void)
  */
 
 
-unsigned char
+unsigned short int
 Disc::color(void)
 {
     return this->_color;
 }
 
 void
-Disc::color(unsigned char color)
+Disc::color(unsigned short int color)
 {
     fprintf(stderr, "\tcolor(%d)\n", (int) color);
     this->_color = color;

@@ -14,6 +14,22 @@ Stair::~Stair()
 
 }
 
+unsigned short int
+Stair::contains(Pawn* pawn)
+{
+    unsigned short int it_contains = 0;
+
+    for(auto step: this->_steps) {
+        if (pawn->color() == step->color()) {
+            it_contains = 1;
+            break;
+        }
+    }
+
+    return it_contains;
+}
+
+
 void
 Stair::step_up(Pawn* pawn)
 {
@@ -40,7 +56,8 @@ Stair::draw()
 
     fprintf(stdout, "                 _");
     if ((int) this->_current_position > i) {
-        this->_steps[i]->draw();
+        this->_steps[i]->paint();
+        printf("P");
     }
     else {
         fprintf(stdout, "_");
@@ -61,7 +78,8 @@ Stair::draw()
 
     fprintf(stdout, "             _");
     if ((int) this->_current_position > i) {
-        this->_steps[i]->draw();
+        this->_steps[i]->paint();
+        printf("P");
     }
     else {
         fprintf(stdout, "_");
@@ -91,7 +109,8 @@ Stair::draw()
 
     fprintf(stdout, "         _");
     if ((int) this->_current_position > i) {
-        this->_steps[i]->draw();
+        this->_steps[i]->paint();
+        printf("P");
     }
     else {
         fprintf(stdout, "_");
@@ -122,7 +141,8 @@ Stair::draw()
 
     fprintf(stdout, "     _");
     if ((int) this->_current_position > i) {
-        this->_steps[i]->draw();
+        this->_steps[i]->paint();
+        printf("P");
     }
     else {
         fprintf(stdout, "_");
@@ -153,7 +173,8 @@ Stair::draw()
 
     fprintf(stdout, " _");
     if ((int) this->_current_position > i) {
-        this->_steps[i]->draw();
+        this->_steps[i]->paint();
+        printf("P");
     }
     else {
         fprintf(stdout, "_");

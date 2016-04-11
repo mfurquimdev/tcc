@@ -12,19 +12,19 @@
 class Pawn
 {
 public:
-    Pawn(unsigned char);
+    Pawn(unsigned short int);
     ~Pawn();
 
     void draw(void);
     void paint(void);
 
-    unsigned char color(void);
+    unsigned short int color(void);
 
 private:
 
-    void color(unsigned char);
+    void color(unsigned short int);
 
-    unsigned char _color;
+    unsigned short int _color;
 };
 
 #endif
