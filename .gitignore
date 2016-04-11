@@ -11,6 +11,9 @@ map
 # Backup files
 bk/
 
+# Video of gameplay
+vid/
+
 # Debug
 *.err
 
