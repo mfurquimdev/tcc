@@ -58,22 +58,28 @@ Game::loop(void)
                 quit = 1;
                 break;
             }
-            board()->move_pawn(chosen_pawn);
+            std::vector<std::pair<Disc*, Pawn*> >::iterator pawn_index;
+            pawn_index = board()->move_pawn(chosen_pawn);
 
-//            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
-            unsigned short int chosen_disc;
-            chosen_disc = choose_disc(id_player, chosen_pawn);
-            if (chosen_disc == 128) {
-                quit = 1;
-                break;
+            if (pawn_index != board()->printable_board().end()) {
+                unsigned short int chosen_disc;
+                chosen_disc = choose_disc(id_player, pawn_index);
+                if (chosen_disc == 128) {
+                    quit = 1;
+                    break;
+                }
+
+                Disc* disc_picked = NULL;
+                disc_picked = board()->pick_disc(chosen_disc);
+                players().at(id_player)->gather_disc(disc_picked);
+
+                std::this_thread::sleep_for(std::chrono::milliseconds(500));
             }
-
-            Disc* disc_picked = NULL;
-            disc_picked = board()->pick_disc(chosen_disc);
-            players().at(id_player)->gather_disc(disc_picked);
-
-//            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            else {
+                // Pick disc at stair's side
+            }
 
             turn++;
         }
@@ -103,13 +109,17 @@ Game::choose_pawn(unsigned short int id_player)
 }
 
 unsigned short int
-Game::choose_disc(unsigned short int id_player, unsigned short int chosen_pawn)
+Game::choose_disc(unsigned short int id_player, std::vector<std::pair<Disc*, Pawn*> >::iterator pawn_index)
 {
-    fprintf(stderr, "\tchoose_disc(%hu)\n", (unsigned short int) chosen_pawn);
+    fprintf(stderr, "\tchoose_disc(%hu)\n", (unsigned short int) id_player);
 
     unsigned short int chosen_disc;
 
-    printf("Player %d\tQual disco desejas pegar?\n", id_player+1);
+    std::pair<unsigned short int, unsigned short int> neighbors;
+    neighbors = board()->find_neighbors(pawn_index);
+
+    printf("Player %d\tQual disco desejas pegar?\n\t0 - Disc %hu\n\t1 - Disc %hu", id_player+1, neighbors.first, neighbors.second);
+
     draw(id_player);
     scanf("%hu", &chosen_disc);
     fprintf(stderr, "chosen_disc [%hu]\n", chosen_disc);

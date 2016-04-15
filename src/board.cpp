@@ -91,6 +91,61 @@ Board::move_pawn(unsigned short int chosen_pawn)
     return it;
 }
 
+std::pair<std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator>, std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator> >
+Board::find_neighbors(std::vector<std::pair<Disc*, Pawn*> >::iterator pawn_index)
+{
+    std::pair<std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator>, std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator> > neighbors;
+
+    unsigned short int index = 0;
+    std::vector<std::pair<Disc*, Pawn*> >::iterator pawn_index_it = this->_printable_board.begin();
+    for (; pawn_index_it != pawn_index; ++pawn_index_it) {
+        ++index;
+    }
+
+    std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator> prev_pair;
+
+    unsigned short int prev_disc = index;
+    std::vector<std::pair<Disc*, Pawn*> >::iterator prev_it = pawn_index_it;
+    for (; prev_it != this->_printable_board.begin(); --prev_it) {
+        std::pair<Disc*, Pawn*> disc_pawn = *prev_it;
+        Disc* p_disc = disc_pawn.first;
+        Pawn* p_pawn = disc_pawn.second;
+
+        if (p_pawn == NULL &&
+            p_disc != NULL) {
+            p_disc = NULL;
+            p_pawn = NULL;
+            break;
+        }
+        p_disc = NULL;
+        p_pawn = NULL;
+        prev_disc--;
+    }
+    prev_pair
+
+    std::vector<std::pair<Disc*, Pawn*> >::iterator next_it = pawn_index_it;
+    unsigned short int next_disc = index;
+    for (; next_it != this->_printable_board.end(); ++next_it) {
+        std::pair<Disc*, Pawn*> disc_pawn = *next_it;
+        Disc* p_disc = disc_pawn.first;
+        Pawn* p_pawn = disc_pawn.second;
+
+        if (p_pawn == NULL &&
+            p_disc != NULL) {
+            p_disc = NULL;
+            p_pawn = NULL;
+            break;
+        }
+        p_disc = NULL;
+        p_pawn = NULL;
+        next_disc++;
+    }
+
+    neighbors
+
+    return neighbors;
+}
+
 unsigned short int
 Board::invalid_move(unsigned short int chosen_pawn)
 {
@@ -180,6 +235,12 @@ Board::draw()
 
 
     return ;
+}
+
+std::vector<std::pair<Disc*, Pawn*> >
+Board::printable_board(void)
+{
+    return this->_printable_board;
 }
 
 /**

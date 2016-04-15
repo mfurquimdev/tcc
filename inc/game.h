@@ -19,7 +19,7 @@ private:
     /* Functions */
     void draw(unsigned short int);
     unsigned short int choose_pawn(unsigned short int);
-    unsigned short int choose_disc(unsigned short int, unsigned short int);
+    unsigned short int choose_disc(unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator);
 
     void init_players(void);
     void init_board(void);
