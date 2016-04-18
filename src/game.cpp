@@ -112,19 +112,41 @@ unsigned short int
 Game::choose_disc(unsigned short int id_player, std::vector<std::pair<Disc*, Pawn*> >::iterator pawn_index)
 {
     fprintf(stderr, "\tchoose_disc(%hu)\n", (unsigned short int) id_player);
-
     unsigned short int chosen_disc;
 
-    std::pair<unsigned short int, unsigned short int> neighbors;
+    std::pair<std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator>, std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator> > neighbors;
+
     neighbors = board()->find_neighbors(pawn_index);
 
-    printf("Player %d\tQual disco desejas pegar?\n\t0 - Disc %hu\n\t1 - Disc %hu", id_player+1, neighbors.first, neighbors.second);
+    do {
+        if (neighbors.first.first > number_discs()) {
+            printf("Player %d\tPegando único disco possível.\n\t1 - Disc %hu\n", id_player+1, neighbors.second.first);
+            draw(id_player);
+            chosen_disc = 1;
+        }
+        else if (neighbors.second.first > number_discs()) {
+            printf("Player %d\tPegando único disco possível.\n\t0 - Disc %hu\n", id_player+1, neighbors.first.first);
+            draw(id_player);
+            chosen_disc = 0;
+        }
+        else if (neighbors.second.first < number_discs()) {
+            printf("Player %d\tQual disco desejas pegar?\n\t0 - Disc %hu\n\t1 - Disc %hu\n", id_player+1, neighbors.first.first, neighbors.second.first);
+            draw(id_player);
+            scanf("%hu", &chosen_disc);
+        }
+    } while(chosen_disc != 0 && chosen_disc != 1);
 
-    draw(id_player);
-    scanf("%hu", &chosen_disc);
+    unsigned short int number_disc;
+    if (chosen_disc == 0) {
+        number_disc = neighbors.first.first;
+    }
+    else {
+        number_disc = neighbors.second.first;
+    }
+
     fprintf(stderr, "chosen_disc [%hu]\n", chosen_disc);
 
-    return chosen_disc;
+    return number_disc;
 }
 
 void
