@@ -1,4 +1,45 @@
 #Revisão Sistemática
+##Tema
+_Big Points_: Um estudo de Teoria dos Jogos
+##String
+"Game Theory Minimax Theory Two-person Zerosum Game"
+
+###periodicos.capes.gov.br
+Título: FINDING NORMALIZED EQUILIBRIUM IN CONVEX-CONCAVE GAMES
+Fonte: International game theory review [0219-1989] Flåm, S D ano:2008 vol:10 fasc:01 pág:37 -51
+
+Título: The Asymptotic Solution of a Recursion Equation Occurring in Stochastic Games
+Fonte: Mathematics of operations research [0364-765X] ano:1976 vol:1 fasc:4 pág:321 -336
+
+Título: Algorithms for discounted stochastic games
+Fonte: Journal of Optimization Theory and Applications [0022-3239] Rao, S ano:1973 vol:11 fasc:6 pág:627 -637
+
+Título: Maximin play in completely mixed strategic games
+Fonte: Theory and Decision [0040-5833] Pruzhansky, Vitaly ano:2013 vol:75 fasc:4 pág:543 -561
+
+Título: MONTE CARLO METHODS IN FUZZY GAME THEORY
+Fonte: New mathematics and natural computation [1793-0057] Abdalla, Areeg ano:2007 vol:03 fasc:02 pág:259 -269
+
+Título: Game theoretical optimization inspired by information theory
+Fonte: Journal of Global Optimization [0925-5001] Topsøe, Flemming ano:2009 vol:43 fasc:4 pág:553 -564
+
+Título: The equivalence of linear programs and zero-sum games
+Fonte: International Journal of Game Theory [0020-7276] Adler, Ilan ano:2013 vol:42 fasc:1 pág:165 -177
+
+Título: Semidefinite programming for min--max problems and games.
+Fonte: Mathematical Programming [0025-5610] Laraki, R ano:2012 vol:131 fasc:1 2 pág:305
+
+Título: On equivalent results in minimax theory
+Fonte: European journal of operational research [0377-2217] Frenk ano:2004 vol:157 fasc:1 pág:46 -58
+
+
+
+
+
+
+
+
+
 ##Ebrary
 Título: "Game Theory"
 
@@ -51,3 +92,13 @@ Citation: Juan Carlos Cesco, “Subordinated Hedonic Games,” Game Theory, vol.
 ###A Tree Formulation for Signaling Games
 Link: http://www.hindawi.com/journals/gt/2013/754398/
 Citation: Xeni Dassiou and Dionysius Glycopantis, “A Tree Formulation for Signaling Games,” Game Theory, vol. 2013, Article ID 754398, 12 pages, 2013. doi:10.1155/2013/754398
+
+##sucupira.capes.gov.br/
+###17/04
+Evento de Classificação: "Qualis 2013"
+Título: "Game Theory"
+"1099-1859; International Journal of Mathematics, Game Theory, and Algebra (B5)""
+
+Evento de Classificação: "Classificação de periódicos 2012"
+Título: "Game Theory"
+"0020-7276; International Journal of Game Theory (Print) (B3)"
