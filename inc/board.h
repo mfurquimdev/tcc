@@ -20,7 +20,7 @@ public:
     std::vector<std::pair<Disc*, Pawn*> >::iterator move_pawn(unsigned short int);
     Disc* pick_disc(unsigned short int);
 
-    std::pair<unsigned short int, unsigned short int> find_neighbors(std::vector<std::pair<Disc*, Pawn*> >::iterator);
+    std::pair<std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator>, std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator> > find_neighbors(std::vector<std::pair<Disc*, Pawn*> >::iterator);
     std::vector<std::pair<Disc*, Pawn*> > printable_board(void);
 
 private:

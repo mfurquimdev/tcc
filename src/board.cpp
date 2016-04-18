@@ -97,7 +97,7 @@ Board::find_neighbors(std::vector<std::pair<Disc*, Pawn*> >::iterator pawn_index
     std::pair<std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator>, std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator> > neighbors;
 
     unsigned short int index = 0;
-    std::vector<std::pair<Disc*, Pawn*> >::iterator pawn_index_it = this->_printable_board.begin();
+    std::vector<std::pair<Disc*, Pawn*> >::iterator pawn_index_it = this->_printable_board.begin()+5;
     for (; pawn_index_it != pawn_index; ++pawn_index_it) {
         ++index;
     }
@@ -121,7 +121,9 @@ Board::find_neighbors(std::vector<std::pair<Disc*, Pawn*> >::iterator pawn_index
         p_pawn = NULL;
         prev_disc--;
     }
-    prev_pair
+    prev_pair = make_pair(prev_disc, prev_it);
+
+    std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator> next_pair;
 
     std::vector<std::pair<Disc*, Pawn*> >::iterator next_it = pawn_index_it;
     unsigned short int next_disc = index;
@@ -140,8 +142,8 @@ Board::find_neighbors(std::vector<std::pair<Disc*, Pawn*> >::iterator pawn_index
         p_pawn = NULL;
         next_disc++;
     }
-
-    neighbors
+    next_pair = make_pair(next_disc, next_it);
+    neighbors = make_pair(prev_pair, next_pair);
 
     return neighbors;
 }
