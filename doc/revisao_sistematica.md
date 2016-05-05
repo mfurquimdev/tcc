@@ -4,6 +4,58 @@ _Big Points_: Um estudo de Teoria dos Jogos
 ##String
 "Game Theory Minimax Theory Two-person Zerosum Game"
 
+<!-- "Game Theory" and "Minimax Theory" and "Two-person Zerosum Game" -->
+
+###EBSCOhost
+
+####Real-time heuristic search
+Korf, R E.
+Artificial Intelligence. Mar 1990, Vol. 42 Issue 2, p189-212. 24p.
+http://search-ebscohost-com.ez54.periodicos.capes.gov.br/login.aspx?direct=true&db=izh&AN=ISTA2602577&lang=pt-br&site=ehost-live
+
+####Effect of Feedback Mode and Task Difficulty on Quality of Timing Decisions in a Zero-Sum Game.
+Tikuisis, Peter
+Vartanian, Oshin
+Mandel, David R.
+DOI: 10.1177/0018720813519676. (AN: 97562569)
+http://search-ebscohost-com.ez54.periodicos.capes.gov.br/login.aspx?direct=true&db=iih&AN=97562569&lang=pt-br&site=ehost-live
+
+####Application of Game Tree Searching Techniques to Sequential Pattern Recognition
+Slagle, James R.
+Lee, Richard C.T.
+Communications of the ACM. Feb71, Vol. 14 Issue 2, p103. 8p. 13 diagrams.
+http://search-ebscohost-com.ez54.periodicos.capes.gov.br/login.aspx?direct=true&db=izh&AN=5221547&lang=pt-br&site=ehost-live
+
+####Big points in C&ast;-algebras and JB&ast;-triples.
+GUERRERO, JULIO BECERRA
+RODRÍGUEZ-PALACIOS, A
+Quarterly Journal of Mathematics. Jun2005, Vol. 56 Issue 2, p141-164. 24p.
+http://search-ebscohost-com.ez54.periodicos.capes.gov.br/login.aspx?direct=true&db=aph&AN=44549571&lang=pt-br&site=ehost-live
+
+####Convex‐Transitive Banach Spaces, Big Points, and the Duality Mapping.
+GUERRERO, JULIO BECERRA
+RODRÍGUEZ-PALACIOS, ANGEL
+Quarterly Journal of Mathematics. Sep2002, Vol. 53 Issue 3, p257-264. 8p.
+http://search-ebscohost-com.ez54.periodicos.capes.gov.br/login.aspx?direct=true&db=aph&AN=44549517&lang=pt-br&site=ehost-live
+
+####Experimental Evidence on Iterated Reasoning in Games.
+Grehl, Sascha
+Tutić, Andreas
+PLoS ONE. 8/27/2015, Vol. 10 Issue 8, p1-19. 19p.
+http://search-ebscohost-com.ez54.periodicos.capes.gov.br/login.aspx?direct=true&db=aph&AN=109132886&lang=pt-br&site=ehost-live
+
+
+####The combinatorial game theory of well-tempered scoring games.
+Johnson, Will
+International Journal of Game Theory. May2014, Vol. 43 Issue 2, p415-438. 24p.
+http://search-ebscohost-com.ez54.periodicos.capes.gov.br/login.aspx?direct=true&db=aph&AN=95753914&lang=pt-br&site=ehost-live
+
+####On the use (and abuse) of Logic in Game Theory.
+Pacuit, Eric
+Journal of Philosophical Logic. Dec2015, Vol. 44 Issue 6, p741-753. 13p.
+
+
+
 ###periodicos.capes.gov.br
 Título: FINDING NORMALIZED EQUILIBRIUM IN CONVEX-CONCAVE GAMES
 Fonte: International game theory review [0219-1989] Flåm, S D ano:2008 vol:10 fasc:01 pág:37 -51
@@ -32,21 +84,20 @@ Fonte: Mathematical Programming [0025-5610] Laraki, R ano:2012 vol:131 fasc:1 2 
 Título: On equivalent results in minimax theory
 Fonte: European journal of operational research [0377-2217] Frenk ano:2004 vol:157 fasc:1 pág:46 -58
 
-
-
-
-
-
-
-
-
 ##Ebrary
 Título: "Game Theory"
 
-```bash
-echo "http://site.ebrary.com/lib/univbrasilia/detail.action?adv.x=1&docID={10264991,10565174,10060519,10146765,10677846,10729361,10654680,10902331,10058113,10212193,10239365}&f00=title&p00=Game+Theory"
-```
-
+http://site.ebrary.com/lib/univbrasilia/detail.action?adv.x=1&docID=10264991&f00=title&p00=Game+Theory
+http://site.ebrary.com/lib/univbrasilia/detail.action?adv.x=1&docID=10565174&f00=title&p00=Game+Theory
+http://site.ebrary.com/lib/univbrasilia/detail.action?adv.x=1&docID=10060519&f00=title&p00=Game+Theory
+http://site.ebrary.com/lib/univbrasilia/detail.action?adv.x=1&docID=10146765&f00=title&p00=Game+Theory
+http://site.ebrary.com/lib/univbrasilia/detail.action?adv.x=1&docID=10677846&f00=title&p00=Game+Theory
+http://site.ebrary.com/lib/univbrasilia/detail.action?adv.x=1&docID=10729361&f00=title&p00=Game+Theory
+http://site.ebrary.com/lib/univbrasilia/detail.action?adv.x=1&docID=10654680&f00=title&p00=Game+Theory
+http://site.ebrary.com/lib/univbrasilia/detail.action?adv.x=1&docID=10902331&f00=title&p00=Game+Theory
+http://site.ebrary.com/lib/univbrasilia/detail.action?adv.x=1&docID=10058113&f00=title&p00=Game+Theory
+http://site.ebrary.com/lib/univbrasilia/detail.action?adv.x=1&docID=10212193&f00=title&p00=Game+Theory
+http://site.ebrary.com/lib/univbrasilia/detail.action?adv.x=1&docID=10239365&f00=title&p00=Game+Theory
 
 ##Capes
 Buscar Periódicos: "Game Theory"
@@ -97,7 +148,7 @@ Citation: Xeni Dassiou and Dionysius Glycopantis, “A Tree Formulation for Sign
 ###17/04
 Evento de Classificação: "Qualis 2013"
 Título: "Game Theory"
-"1099-1859; International Journal of Mathematics, Game Theory, and Algebra (B5)""
+"1099-1859; International Journal of Mathematics, Game Theory, and Algebra (B5)"
 
 Evento de Classificação: "Classificação de periódicos 2012"
 Título: "Game Theory"
