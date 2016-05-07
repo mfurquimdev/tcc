@@ -8,3 +8,7 @@
 
 ##Progresso histórico
 [![Throughput Graph](https://graphs.waffle.io/mfurquim/tcc/throughput.svg)](https://waffle.io/mfurquim/tcc/metrics)
+
+[![Working Graph](https://wakatime.com/@mfurquim/bc01048d-4785-4e46-8eef-23868e04c387.svg)]
+
+<figure><embed src="https://wakatime.com/@mfurquim/bc01048d-4785-4e46-8eef-23868e04c387.svg"></embed></figure>
