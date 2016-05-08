@@ -1,7 +1,6 @@
 # Referencial Teórico
 
 
-
 ## Uma Introdução a Teoria dos Jogos
 Autores: Brigida Alexandre Sartini, Gilmar Garbugio, Humberto José Bortolossi, Polyane Alves Santos e Larissa Santana Barreto
 II Bienal da SBM, Universidade Federal da Bahia.
