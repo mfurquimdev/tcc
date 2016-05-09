@@ -36,20 +36,20 @@ A posição dos peões pode ser apenas de sua respectiva cor. Com essa poda, o n
 ?
 
 # Apêndice
-
 ## Cálculos
-
+### Número de partidas distintas
 \begin{equation} \label{eq_partidas} \tag{e.q. Números de Partidas Distintas}
 \begin{split}
-\#Partidas\ &=\  (\#J-1) * \binom{55}{5} * \binom{50}{5} * \binom{45}{9} * \binom{36}{9} * \binom{27}{9} * \binom{18}{9} * \binom{9}{9}\\
-\#Partidas\ &=\ \dfrac{4 * 55!}{2^{27} * 3^{36} * 5^7 * 7^5}\\
-\#Partidas\ &=\ \dfrac{2^{52} * 3^{26} * 5^{13} * 7^{8} * 11^{5} * 13^{4} * 17^{3} * 19^{2} * 23^{2} * 29 * 31 * 37 * 41 * 43 * 47 * 53}{2^{27} * 3^{36} * 5^7 * 7^5}\\
-\#Partidas\ &=\ \dfrac{2^{25} * 5^{6} * 7^{3} * 11^{5} * 13^{4} * 17^{3} * 19^{2} * 23^{2} * 29 * 31 * 37 * 41 * 43 * 47 * 53}{3^{10}}\\
-\#Partidas\ &=\ 560'483'776'167'774'018'942'304'261'616'685'408'000'000\\
+Partidas\ &=\  (\#J-1) \times \binom{55}{5} \times \binom{50}{5} \times \binom{45}{9} \times \binom{36}{9} \times \binom{27}{9} \times \binom{18}{9} \times \binom{9}{9}\\
+Partidas\ &=\ \dfrac{4 \times 55!}{2^{27} \times 3^{36} \times 5^7 \times 7^5}\\
+Partidas\ &=\ \dfrac{2^{52} \times 3^{26} \times 5^{13} \times 7^{8} \times 11^{5} \times 13^{4} \times 17^{3} \times 19^{2} \times 23^{2} \times 29 \times 31 \times 37 \times 41 \times 43 \times 47 \times 53}{2^{27} \times 3^{36} \times 5^7 \times 7^5}\\
+Partidas\ &=\ \dfrac{2^{25} \times 5^{6} \times 7^{3} \times 11^{5} \times 13^{4} \times 17^{3} \times 19^{2} \times 23^{2} \times 29 \times 31 \times 37 \times 41 \times 43 \times 47 \times 53}{3^{10}}\\
+Partidas\ &=\ 560'483'776'167'774'018'942'304'261'616'685'408'000'000\\
 \end{split}
 \end{equation}
 
-\begin{equation} \label{eq_anos_partidas} \tag{e.q. Tempo de Computação dos Estados}
+### Tempo de computação de todas as partidas
+\begin{equation} \label{eq_anos_partidas} \tag{e.q. Tempo de Computação das Partidas}
 \begin{split}
 Anos\ &=\ \dfrac{N_{partidas\ distintos}}{\nicefrac{partida}{segundo}\times\nicefrac{segundos}{minuto}\times\nicefrac{minutos}{hora}\times\nicefrac{horas}{dia}\times\nicefrac{dias}{ano}}\\
 Anos\ &=\ \dfrac{560'483'776'167'774'018'942'304'261'616'685'408'000'000}{\nicefrac{1}{1}\times\nicefrac{60}{1}\times\nicefrac{60}{1}\times\nicefrac{24}{1}\times\nicefrac{365}{1}}\\
@@ -57,6 +57,7 @@ Anos\ &=\ 17'772'823'952'554'985'379'956'375'622'041'013\\
 \end{split}
 \end{equation}
 
+### Espaço de armazenamento na memória por estado
 \begin{equation} \label{eq_bytes} \tag{e.q. Bytes na memória}
 \begin{split}
 Bytes\ &=\ \dfrac{55}{8} + 5 + 5\times 7\\
@@ -64,11 +65,13 @@ Bytes\ &=\ 47\ bytes
 \end{split}
 \end{equation}
 
+### Número de estados
+#### Caso Geral
 \begin{equation} \label{eq_estados} \tag{e.q. Caso Geral}
 \begin{split}
-\#Estados\ &=\ 2^{55}\times 61\times 5\times (5\times 10 + 2\times 6)\\
-\#Estados\ &=\ 2^{55}\times 61\times 5\times 72\\
-\#Estados\ &=\ 791'192'382'536'448'737'280
+Estados\ &=\ 2^{55}\times 61\times 5\times (5\times 10 + 2\times 6)\\
+Estados\ &=\ 2^{55}\times 61\times 5\times 72\\
+Estados\ &=\ 791'192'382'536'448'737'280
 \end{split}
 \end{equation}
 
@@ -80,10 +83,19 @@ Anos\ &=\ 25'088'545'869'369\\
 \end{split}
 \end{equation}
 
+#### Poda 1
 \begin{equation} \label{eq_poda1} \tag{e.q. Poda 1}
 \begin{split}
-\#Estados\ &=\ 2^{55}\times 11\times 5\times (5\times 10 + 2\times 6)\\
-\#Estados\ &=\ 2^{55}\times 11\times 5\times 72\\
-\#Estados\ &=\ 142'674'036'195'097'313'280
+Estados\ &=\ 2^{55}\times 11\times 5\times (5\times 10 + 2\times 6)\\
+Estados\ &=\ 2^{55}\times 11\times 5\times 72\\
+Estados\ &=\ 142'674'036'195'097'313'280
+\end{split}
+\end{equation}
+
+\begin{equation} \label{eq_anos_estados} \tag{e.q. Tempo de Computação dos Estados}
+\begin{split}
+Anos\ &=\ \dfrac{N_{estados\ distintos}}{\nicefrac{estado}{segundo}\times\nicefrac{segundos}{minuto}\times\nicefrac{minutos}{hora}\times\nicefrac{horas}{dia}\times\nicefrac{dias}{ano}}\\
+Anos\ &=\ \dfrac{142'674'036'195'097'313'280}{\nicefrac{1}{1}\times\nicefrac{60}{1}\times\nicefrac{60}{1}\times\nicefrac{24}{1}\times\nicefrac{365}{1}}\\
+Anos\ &=\ 4'524'164'009'230\\
 \end{split}
 \end{equation}

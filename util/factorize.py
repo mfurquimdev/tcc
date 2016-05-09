@@ -71,3 +71,5 @@ print years < 10**14
 print num_estados
 num_estados = (2**55)*(11*5*72)
 print num_estados
+years = (num_estados/(60*60*24*365))
+print years

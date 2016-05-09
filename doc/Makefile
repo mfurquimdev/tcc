@@ -24,7 +24,9 @@ $(TARGET): $(MKD_FILE)
 	@echo [$@] Making... $(TARGET)
 	$(CC) $(FLAGS) --output=$@ $<
 
-tex: $(TEX_FILE)
+tex: $(TEX_FILE) referencia_bibliografica.tex
+	$(MAKE) $(TEX_FILE)
+	$(MAKE) referencia_bibliografica.tex
 
 $(TEX_FILE): $(MKD_FILE)
 	@mkdir -pv tex
@@ -38,5 +40,18 @@ $(TEX_FILE): $(MKD_FILE)
 	mv tmp.pdf tex/$(TARGET)
 	rm -vf *.log *.aux *.dvi
 
+referencia_bibliografica.tex: referencia_bibliografica.md
+	@mkdir -pv ref
+	@echo [$@] Making...
+	iconv -t utf-8 $< | $(CC) $(FLAGS) --output=ref/$@
+	cat tex/beg.tex > ref/tmp.tex
+	cat ref/$@ >> ref/tmp.tex
+	cat tex/end.tex >> ref/tmp.tex
+	pdflatex ref/tmp.tex
+	pdflatex ref/tmp.tex
+	mv tmp.pdf ref/referencia_bibliografica.pdf
+	rm -vf *.log *.aux *.dvi
+
+
 clean:
-	rm -vf *.log *.aux *.dvi tex/*.pdf $(TARGET)
+	rm -vf *.log *.aux *.dvi tex/*.pdf tex/tcc.tex tex/tmp.tex ref/referencia_bibliografica.tex ref/tmp.tex ref/referencia_bibliografica.pdf $(TARGET)
