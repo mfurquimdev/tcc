@@ -34,6 +34,7 @@ $(TEX_FILE): $(MKD_FILE)
 	cat tex/$@ >> tex/tmp.tex
 	cat tex/end.tex >> tex/tmp.tex
 	pdflatex tex/tmp.tex
+	pdflatex tex/tmp.tex
 	mv tmp.pdf tex/$(TARGET)
 	rm -vf *.log *.aux *.dvi
 

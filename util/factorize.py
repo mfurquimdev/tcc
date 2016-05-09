@@ -55,4 +55,19 @@ for n in all_prime_factors:
 
 def binom(n,k):
     return factorial(n)/(factorial(k)*factorial(n-k))
-print 4*binom(55,5)*binom(50,5)*binom(45,9)*binom(36,9)*binom(27,9)*binom(18,9)*binom(9,9) < 10**42
+
+num_games = 4*binom(55,5)*binom(50,5)*binom(45,9)*binom(36,9)*binom(27,9)*binom(18,9)*binom(9,9)
+print num_games < 10**42
+
+years = (num_games/(60*60*24*365))
+print years < 10**35
+
+num_estados = (2**55)*(61*5*72)
+print num_estados < 10**21
+
+years = (num_estados/(60*60*24*365))
+print years < 10**14
+
+print num_estados
+num_estados = (2**55)*(11*5*72)
+print num_estados
