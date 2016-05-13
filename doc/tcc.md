@@ -99,3 +99,20 @@ Anos\ &=\ \dfrac{142'674'036'195'097'313'280}{\nicefrac{1}{1}\times\nicefrac{60}
 Anos\ &=\ 4'524'164'009'230\\
 \end{split}
 \end{equation}
+
+
+<!--
+\begin{equation*}
+\begin{split}
+  P_{layers}\quad=\{p_1, p_2,...,p_n\}\\
+  \forall p_i \in P_{layers},\quad \exists s_{ij} \in S_i\\
+  S_{i}\ =\ \{s_{i1},s_{i2},...,s_{ij}\},
+\end{split}
+\end{equation*}
+
+
+
+
+% Sendo G = {g_1, g_2,...,g_n} um conjunto finito de jogadores. Cada jogador g_i \existsin G possui um conjunto finito S_i = {s_{i1}, s_{i2},...,s_{im_{i}}} de **estratégias puras** (m_i >= 2). Um vetor s = {s_{1j_1}, s_{2j_2},...,s_{nj_n}}, onde s_{ij_i} é uma estratégia pura para o jogador g_i \existsin G.
+
+-->
