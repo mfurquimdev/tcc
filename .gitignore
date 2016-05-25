@@ -2,6 +2,11 @@
 bin
 prog
 
+# Generated Tex Files
+doc/tex/tmp.tex
+doc/tex/tcc.tex
+doc/ref
+
 # PDF files
 *.pdf
 
