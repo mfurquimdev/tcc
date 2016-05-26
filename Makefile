@@ -68,10 +68,11 @@ all: dirs
 	@echo
 	@echo Compiling...
 	$(MAKE) $(TARGET)
+	@ln -sv bin/big_points prog
 
 	@echo
 	@echo Executing...
-#	@./prog 2> debug.err
+	@./prog 2> debug.err
 	@cat input.in | ./prog 2> debug.err
 #
 #	@echo

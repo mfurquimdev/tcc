@@ -11,7 +11,7 @@ MKD_FILE = $(addsuffix .md, $(basename $(TARGET)))
 TEX_FILE = $(addsuffix .tex, $(basename $(TARGET)))
 
 CC=pandoc
-FLAGS= --from=markdown --to=latex --indented-code-classes=numberLines --highlight-style=zenburn --smart --normalize --listings --ascii --atx-headers --number-sections --base-header-level=1 --latex-engine=xelatex
+FLAGS= --from=markdown --to=latex --indented-code-classes=numberLines --highlight-style=zenburn --smart --normalize --listings --ascii --atx-headers --number-sections --base-header-level=1 
 
 #FLAGS= --from=markdown_github --to=latex --toc --indented-code-classes=numberLines --highlight-style=zenburn --toc-depth=4 --smart --normalize --chapters --listings -T $(TARGET) --ascii --atx-headers
 
