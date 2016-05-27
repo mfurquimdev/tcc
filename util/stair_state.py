@@ -12,5 +12,5 @@ for n in range(0,6):
 
 i = 0
 for b in c:
-    print str(i) + ": " + str(b)
+    print (str(i) + ": " + str(b))
     i += 1
