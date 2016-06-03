@@ -7,6 +7,8 @@ doc/tex/tmp.tex
 doc/tex/tcc.tex
 doc/ref
 
+*.txt
+
 # PDF files
 *.pdf
 
