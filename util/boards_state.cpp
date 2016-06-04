@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdio>
+#include <unistd.h>
 #include <algorithm>
 #include <string>
 #include <map>
@@ -13,23 +14,58 @@ static int counter = 0;
 void add_board(string);
 void move(string,int);
 int move_pawn(string&, int);
+void pick_right(string, int);
+void pick_left(string, int);
 
-int main()
+static int num_discs = 2;
+static int num_pawns = 2;
+
+int main(int argc, char* argv[])
 {
-	string board = "1212";
-	add_board(board);
+	string board = "";
 
-	for (int p = 1; p <= 2; p++) {
-		move(board,p);
+	boards.clear();
+	masks.clear();
+	counter = 0;
+
+	int c;
+	while((c = getopt(argc, argv, "d:p:")) != -1) {
+		switch (c) {
+			case 'd':
+			if(optarg) num_discs = atoi(optarg);
+			break;
+
+			case 'p':
+			if(optarg) num_pawns = atoi(optarg);
+			break;
+		}
 	}
 
+	for (int disc = 0; disc < num_discs; disc++) {
+		for (char pawn = 1; pawn <= (char) num_pawns; pawn++) {
+			board.push_back(pawn+48);
+		}
+	}
+
+	add_board(board);
+
+	for (int p = 1; p <= num_pawns; p++) {
+		move(board,p);
+	}
+	/*
+	printf("\n");
+
 	for(auto p: boards) {
-		cout << "\nKey: " << p.first << "\tValue: " << p.second << endl;
+		cout << "Key: " << p.first << "\tValue: " << p.second << endl;
 	}
 
 	for (size_t i = 0; i < counter; i++) {
-		cout << "\nKey: " << i << "\tValue: " << masks[i] << endl;
+		cout << "Key: " << i << "\tValue: " << masks[i] << endl;
 	}
+	printf("\n");
+	*/
+
+	printf("P: %d\tD: %d\tTotal: %d\n", num_pawns, num_discs, boards.size());
 
 	return 0;
 }
@@ -39,10 +75,8 @@ int move_pawn(string& board, int pawn)
 	// Move Pawn
 	char c_pawn;
 	char n_char = ' ';
-	char buffer[2];
 
-	sprintf(buffer, "%d", pawn);
-	n_char = buffer[0];
+	n_char = (char) pawn+48;
 
 	switch (pawn) {
 		// Red
@@ -95,23 +129,36 @@ int move_pawn(string& board, int pawn)
 	return pawn_pos;
 }
 
-void pick_right(string& board, int pawn)
+void pick_right(string board, int pawn_pos)
 {
-//	board.replace(pawn_pos, 1, 1, '0');
+	int position = board.find_first_not_of("RGBYV0", pawn_pos);
+	if (position != string::npos) {
+		board.replace(position, 1, 1, '0');
+	}
+
+	for (int p = 1; p <= num_pawns; p++) {
+		move(board,p);
+	}
 
 	return ;
 }
 
-void pick_left()
+void pick_left(string board, int pawn_pos)
 {
-//	board.replace(pawn_pos, 1, 1, '0');
+	int position = board.find_last_not_of("RGBYV0", pawn_pos);
+	if (position != string::npos) {
+		board.replace(position, 1, 1, '0');
+	}
+
+	for (int p = 1; p <= num_pawns; p++) {
+		move(board,p);
+	}
 
 	return ;
 }
 
 void move(string board, int pawn)
 {
-	printf("%s\n", board.c_str());
 
 	add_board(board);
 	int pawn_pos = move_pawn(board, pawn);
@@ -120,28 +167,13 @@ void move(string board, int pawn)
 	}
 
 	// Picking discs
-/*
-	position = board.find_first_not_of("RGBYV", pawn_pos);
-	if (position != string::npos) {
-		pick_left(board, position);
-	}
+	pick_right(board, pawn_pos);
+	pick_left(board, pawn_pos);
 
-	position = board.find_last_not_of("RGBYV", pawn_pos);
-
-	if (position != string::npos) {
-		pick_right(board, position);
-	}
-*/
-	printf("%s\n", board.c_str());
-
-	for (int p = 1; p <= 2; p++) {
-		move(board,p);
-	}
+//	printf("%s\n", board.c_str());
 
 	return ;
 }
-
-
 
 void add_board(string board)
 {
