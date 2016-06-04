@@ -12,6 +12,7 @@ static int counter = 0;
 
 void add_board(string);
 void move(string,int);
+int move_pawn(string&, int);
 
 int main()
 {
@@ -22,19 +23,26 @@ int main()
 		move(board,p);
 	}
 
-	for(auto p: boards)
+	for(auto p: boards) {
 		cout << "\nKey: " << p.first << "\tValue: " << p.second << endl;
+	}
+
+	for (size_t i = 0; i < counter; i++) {
+		cout << "\nKey: " << i << "\tValue: " << masks[i] << endl;
+	}
 
 	return 0;
 }
 
-void move(string board, int pawn)
+int move_pawn(string& board, int pawn)
 {
-	printf("%s\n", board.c_str());
-
-	add_board(board);
+	// Move Pawn
 	char c_pawn;
-	char n_char[1] = '';
+	char n_char = ' ';
+	char buffer[2];
+
+	sprintf(buffer, "%d", pawn);
+	n_char = buffer[0];
 
 	switch (pawn) {
 		// Red
@@ -72,12 +80,63 @@ void move(string board, int pawn)
 	if (position == (int) string::npos) {
 		position = -1;
 	}
+	else {
+		board.replace(position, 1, 1, n_char);
+	}
 
-	sprintf(n_char, "%d", pawn);
-	board.replace(
-		board.find_first_of(n_char, position+1), 1, c_pawn);
+	int pawn_pos = board.find_first_of(n_char, position+1);
 
+	if (pawn_pos == (int) string::npos) {
+		return -1;
+	}
+
+	board.replace(pawn_pos, 1, 1, c_pawn);
+
+	return pawn_pos;
+}
+
+void pick_right(string& board, int pawn)
+{
+//	board.replace(pawn_pos, 1, 1, '0');
+
+	return ;
+}
+
+void pick_left()
+{
+//	board.replace(pawn_pos, 1, 1, '0');
+
+	return ;
+}
+
+void move(string board, int pawn)
+{
 	printf("%s\n", board.c_str());
+
+	add_board(board);
+	int pawn_pos = move_pawn(board, pawn);
+	if (pawn_pos < 0) {
+		return ;
+	}
+
+	// Picking discs
+/*
+	position = board.find_first_not_of("RGBYV", pawn_pos);
+	if (position != string::npos) {
+		pick_left(board, position);
+	}
+
+	position = board.find_last_not_of("RGBYV", pawn_pos);
+
+	if (position != string::npos) {
+		pick_right(board, position);
+	}
+*/
+	printf("%s\n", board.c_str());
+
+	for (int p = 1; p <= 2; p++) {
+		move(board,p);
+	}
 
 	return ;
 }
