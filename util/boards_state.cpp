@@ -65,7 +65,8 @@ int main(int argc, char* argv[])
 	printf("\n");
 	*/
 
-	printf("P: %d\tD: %d\tTotal: %d\n", num_pawns, num_discs, boards.size());
+	fprintf(stderr,"P: %d\tD: %d\tTotal: %d\n", num_pawns, num_discs, boards.size());
+	printf("%d\n", boards.size());
 
 	return 0;
 }
