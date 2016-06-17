@@ -83,28 +83,18 @@ Um jogo de _soma constante com dois jogadores_ é um jogo com dois jogadores, no
 1. A tragédia dos comuns
 <!-- 1. Troll na estrada ? -->
 
-
-## Bibliografia
-
-[3] A. A. Cournot, _Recherches sur les Principes Mathématiques de la Théorie des Richesses_, 1838. Traduzido por N. T. Bacon em _Reserches into the Mathematical Principles of the Theory of Wealth_, McMillan, New York, 1927.
-
-[13] J. F. Nash Jr., _Equilibrium Points in n-person Games_. Proceedings of the National Academy of Sciences of the United States of America, pp. 48-49, 1950.
-
-[14] J. F. Nash Jr., _Non-Cooperative Games_. PhD. Thesis. Princeton University Press, 1950.
-
-[16] J. F. Nash Jr., _Non-Cooperative Games_. Annals of Mathematics, pp. 286-295, 1951.
-
-[18] J. von Neumann. _Zur Theorie der Gesellschaftsspiele_. Mathematische Annalen, vol. 100, pp 295-320. Traduzido por S. Bargmann: _On the Theory of Games of Strategy_ em _Contributions to the Theory of Games_, vol. 4, pp. 13-42, A. W. Tucker e R. D. Luce (editores), Princeton University Press, 1959. <!--(1928 ?)-->
-
-[19] J. von Neumann e O. Morgenstern, _Theory of Games and Economic Behavior_. Princeton University Press, 1944.
-
-[21] E. Zermelo, _Über eine Anwendung der Mengdenlehre auf die theories des Schachspiels_. Atas do _Décimo Quinto Congresso Internacional de Matemáticos_, vol. 2, pp. 501-504, 1913.
-
-
-
-
 - Jogo a ser analisado
 - *Regras do jogo* \label{sec:regras_do_jogo}
+
+
+## O jogo Big Points
+### Conceito do jogo
+_Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar peças. São cinco peões de cores distintas, que podem ser usadas por qualquer jogador, para percorrer um caminho de discos coloridos até chegar ao pódio. Durante o percurso, os jogadores coletam alguns destes discos. A pontuação de cada jogador é determinada a partir da ordem de chegada dos peões ao pódio e a quantidade de discos adquiridos de cada cor. Ganha o jogador com a maior pontuação.
+
+### Regras do jogo
+O jogo _Big Points_ pode ser jogado de dois a cinco jogadores. No seu turno, o jogador escolhe qualquer um dos cinco peões, que possuem cores distintas, e o move para cima do próximo\footnote{Apenas é pertmitido um movimento para trás utilizando-se de um disco preto.} disco de sua mesma cor. Em seguida, o jogador deve pegar o próximo disco disponível\footnote{É dito indisponível aqueles discos que já foram pegos por algum jogador ou que possuem um peão em cima.} à frente ou atrás deste peão. Caso não haja discos atrás (à frente) do peão, o jogador deve pegar o disco que está à frente (atrás). <!--e de maneira análoga (semelhante) no caso de não haver discos à frente, o jogador deve pegar o disco atrás.-->
+
+
 
 # Materiais e Métodos
 - O jogo eletrônico está sendo implementado
@@ -128,7 +118,7 @@ Dado uma partida inicial $\gammaup \in \Gamma$ de _Big Points_, sendo $\Gamma$ o
  conjunto contendo todas as $5\times 10^{41}$ partidas distintas, foi calculado
  o número de estados de uma partida. Para calcular o número de estados, é
  preciso determinar as características que definem um estado do jogo. a partir
- da regra na seção \ref{sec:regras_do_jogo}, tem-se que essas características 
+ da regra na seção \ref{sec:regras_do_jogo}, tem-se que essas características
  são: o estado do tabuleiro, o estado dos peões, o estado da escada, o estado
  dos discos na mão dos jogadores, e o qual o jogador atual. Como demonstrado na
  equação \ref{eq_estados}, a quantidade de estados existentes para uma partida,
@@ -160,6 +150,25 @@ A posição dos peões pode ser apenas de sua respectiva cor. Com essa poda, o n
 
 # Discussão e Conclusões
 ?
+
+# Bibliografia
+
+[3] A. A. Cournot, _Recherches sur les Principes Mathématiques de la Théorie des Richesses_, 1838. Traduzido por N. T. Bacon em _Reserches into the Mathematical Principles of the Theory of Wealth_, McMillan, New York, 1927.
+
+[13] J. F. Nash Jr., _Equilibrium Points in n-person Games_. Proceedings of the National Academy of Sciences of the United States of America, pp. 48-49, 1950.
+
+[14] J. F. Nash Jr., _Non-Cooperative Games_. PhD. Thesis. Princeton University Press, 1950.
+
+[16] J. F. Nash Jr., _Non-Cooperative Games_. Annals of Mathematics, pp. 286-295, 1951.
+
+[18] J. von Neumann. _Zur Theorie der Gesellschaftsspiele_. Mathematische Annalen, vol. 100, pp 295-320. Traduzido por S. Bargmann: _On the Theory of Games of Strategy_ em _Contributions to the Theory of Games_, vol. 4, pp. 13-42, A. W. Tucker e R. D. Luce (editores), Princeton University Press, 1959. <!--(1928 ?)-->
+
+[19] J. von Neumann e O. Morgenstern, _Theory of Games and Economic Behavior_. Princeton University Press, 1944.
+
+[21] E. Zermelo, _Über eine Anwendung der Mengdenlehre auf die theories des Schachspiels_. Atas do _Décimo Quinto Congresso Internacional de Matemáticos_, vol. 2, pp. 501-504, 1913.
+
+
+
 
 # Apêndice
 ## Cálculos
@@ -245,4 +254,3 @@ Anos\ &=\ 4'524'164'009'230
 % Sendo G = {g_1, g_2,...,g_n} um conjunto finito de jogadores. Cada jogador g_i \existsin G possui um conjunto finito S_i = {s_{i1}, s_{i2},...,s_{im_{i}}} de **estratégias puras** (m_i >= 2). Um vetor s = {s_{1j_1}, s_{2j_2},...,s_{nj_n}}, onde s_{ij_i} é uma estratégia pura para o jogador g_i \existsin G.
 
 -->
-
