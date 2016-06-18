@@ -5,6 +5,7 @@ A ~~área de~~ Teoria dos Jogos estuda as melhores estratégias dos jogadores em
  estado `da partida` e, como resultado, identificar as melhores heurísticas para  os jogadores e uma possível inteligência artificial.
 
 # Introdução
+<<<<<<< fada7a747a4738c21936ec5990e8b74e8a862f32
 A Teoria dos Jogos é uma ~~teoria~~ `área de estudos, derivada da` matemática,
 criada para se modelar fenômenos que podem ser observados quando dois ou mais
 agentes de decisão interagem entre si. Além de ser usada para estudar assuntos
@@ -28,6 +29,22 @@ Teoria dos Jogos" e deve ficar no capítulo "Fundamentação Teórica".
 `No` século XVIII, James Waldergrave ~~analisa~~ `analisou` um jogo de cartas
 chamado _le Her_ e fornece uma solução que é um equilíbrio de estratégia mista,
 porém não estendeu sua abordagem a uma teoria geral. `Obs.:: inserir referência.`
+=======
+De acordo com Sartini et. al. (2004) "A teoria dos jogos é uma teoria matemática criada para se modelar fenômenos que podem ser observados quando dois ou mais "agentes de decisão" interagem entre si". Pode ser usada para estudar assuntos como eleições, leilões, balança de poder, evolução genética, além de ser estudada no campo da matemática pura.
+
+Existem duas frentes na teoria dos jogos: (a) _teoria econômica dos jogos_, o qual possui motivações predominante econômicas, e (b) _teoria combinatória dos jogos_, que faz uso dos aspectos combinatórios de jogos de mesa e não permite elementos imprevisíveis. Este trabalho fará uso de ambas abordagens, sendo que, a partir da primeira abordagem, é estabelecido um método para se maximizar o ganho (_payoff_) e, a partir da segunda, um método para identificar uma jogada que garantirá a vitória independente do resto do jogo.
+
+## História
+A análise de jogos é praticada desde o século XVIII, quando James Waldergrave analisa um jogo de cartas chamado _Le Her_. No século seguinte, Augustin Cournot faz uso da teoria dos jogos para estudos relacionados à política [3]. Mais recentemente, em 1913, Ernst Zermelo publica o primeiro teorema matemático da teoria dos jogos [21].
+
+Dois grandes matemáticos que se interessaram na área de teoria dos jogos foram Emile Borel, o qual publicou quatro artigos sobre jogos estratégicos, e John von Neumann, que teve uma série de trabalhos relacionados à teoria dos jogos. Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero\footnote{Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.} com duas pessoas possui uma solução em estratégias mistas [18]. Em 1937, forneceu uma nova demonstração baseada em outro teorema (teorema do ponto fixo de Brouwer). Em 1944, Neumann publicou um trabalho, junto a Oscar Morgenstern [19], e com isso, a teoria dos jogos entrou na área da economia e matemática aplicada.
+
+Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que publicou quatro artigos importantes para teoria dos jogos não-cooperativos. Dois destes artigos [13, 16] provando a existência de um equilíbrio de estratégias mistas para jogos não-cooperativos, denominado **equilíbrio de Nash**, que será explicado na seção \ref{subsec:solucoes-de-um-jogo}. Nash recebeu o prêmio Nobel em 1994, junto com John Harsanyi e Reinhard Selten, por sua contribuição para a teoria dos jogos.
+
+
+<!--
+Século XVIII, James Waldergrave analisa um jogo de cartas chamado "_le Her_" e fornece uma solução que é um equilíbrio de estratégia mista, porém não estendeu sua abordagem a uma teoria geral.
+Século XIX, Augustin Cournot escreve sobre duopólio [3]. Em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos [21], afirmando que o xadrez é um jogo estritamente determinado, ou seja, em cada estágio do jogo há pelo menos uma estratégia que garantirá a vitória de um dos jogadoresl, ou no mínimo conduzirá o jogo a um empate.
 
 `No` século XIX Augustin Cournot escreveu sobre o duopólio [3]. Em 1913, Ernst
 Zermelo publicou o primeiro teorema matemático da Teoria dos Jogos [21],
@@ -58,6 +75,10 @@ prêmio Nobel por suas contribuições para a Teoria dos Jogos.
 
 `Obs.: colocar um parágrafo aqui, explicando que nesta seção serão introduzidos
 os conceitos fundamentais da teoria dos jogos, etc...`
+Em 1944, publicou um trabalho na área da economia com Oscar Morgenstern [19]. Com isso, a teoria dos jogos invadiu a economia e a matemática aplicada.
+Em 1950, John Forbes Nash Júnior publicou quatro artigos importantes para a teoria dos jogos não-cooperativos. Em "_Equilibrium Points in n-Person Games_" [14] ([13] ?) e "_Non-cooperative Games_" [16], Nash provou a existência de um equilíbrio de estratégias mistas para jogos não-cooperativos, denominado **equilíbrio de Nash**.
+
+Em 1994, John Forbes Nash Jr., John Harsanyi e Reinhard Selten receberam o prêmio Nobel por suas contribuições para a Teoria dos Jogos.
 
 ### O que é um jogo?
 
@@ -81,6 +102,9 @@ representada` por ~~cada~~ `uma` linha e cada estratégia de seu oponente
 Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo.
 **Dominância** e **Equilíbrio de Nash** são dois conceitos importantes para
 encontrar uma solução de um estado do jogo.
+## Soluções de um jogo
+\label{subsec:solucoes-de-um-jogo}
+Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. **Dominância** e **equilíbrio de Nash** são dois conceitos importantes para encontrar uma solução de um estado do jogo.
 
 É dito que uma determinada estratégia é uma **estratégia dominante** quando esta
 é a única estratégia restante após aplicar a técnica de **dominância estrita
@@ -252,6 +276,8 @@ de um jogo é reduzido, mas ainda se encontra na ordem de $10^{21}$.
 ?
 
 # Bibliografia
+
+apud
 
 [3] A. A. Cournot, _Recherches sur les Principes Mathématiques de la Théorie des Richesses_, 1838. Traduzido por N. T. Bacon em _Reserches into the Mathematical Principles of the Theory of Wealth_, McMillan, New York, 1927.
 
