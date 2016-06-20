@@ -5,7 +5,6 @@ A ~~área de~~ Teoria dos Jogos estuda as melhores estratégias dos jogadores em
  estado `da partida` e, como resultado, identificar as melhores heurísticas para  os jogadores e uma possível inteligência artificial.
 
 # Introdução
-<<<<<<< fada7a747a4738c21936ec5990e8b74e8a862f32
 A Teoria dos Jogos é uma ~~teoria~~ `área de estudos, derivada da` matemática,
 criada para se modelar fenômenos que podem ser observados quando dois ou mais
 agentes de decisão interagem entre si. Além de ser usada para estudar assuntos
@@ -29,7 +28,6 @@ Teoria dos Jogos" e deve ficar no capítulo "Fundamentação Teórica".
 `No` século XVIII, James Waldergrave ~~analisa~~ `analisou` um jogo de cartas
 chamado _le Her_ e fornece uma solução que é um equilíbrio de estratégia mista,
 porém não estendeu sua abordagem a uma teoria geral. `Obs.:: inserir referência.`
-=======
 De acordo com Sartini et. al. (2004) "A teoria dos jogos é uma teoria matemática criada para se modelar fenômenos que podem ser observados quando dois ou mais "agentes de decisão" interagem entre si". Pode ser usada para estudar assuntos como eleições, leilões, balança de poder, evolução genética, além de ser estudada no campo da matemática pura.
 
 Existem duas frentes na teoria dos jogos: (a) _teoria econômica dos jogos_, o qual possui motivações predominante econômicas, e (b) _teoria combinatória dos jogos_, que faz uso dos aspectos combinatórios de jogos de mesa e não permite elementos imprevisíveis. Este trabalho fará uso de ambas abordagens, sendo que, a partir da primeira abordagem, é estabelecido um método para se maximizar o ganho (_payoff_) e, a partir da segunda, um método para identificar uma jogada que garantirá a vitória independente do resto do jogo.
@@ -41,10 +39,59 @@ Dois grandes matemáticos que se interessaram na área de teoria dos jogos foram
 
 Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que publicou quatro artigos importantes para teoria dos jogos não-cooperativos. Dois destes artigos [13, 16] provando a existência de um equilíbrio de estratégias mistas para jogos não-cooperativos, denominado **equilíbrio de Nash**, que será explicado na seção \ref{subsec:solucoes-de-um-jogo}. Nash recebeu o prêmio Nobel em 1994, junto com John Harsanyi e Reinhard Selten, por sua contribuição para a teoria dos jogos.
 
+## O que é um jogo?
 
-<!--
-Século XVIII, James Waldergrave analisa um jogo de cartas chamado "_le Her_" e fornece uma solução que é um equilíbrio de estratégia mista, porém não estendeu sua abordagem a uma teoria geral.
-Século XIX, Augustin Cournot escreve sobre duopólio [3]. Em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos [21], afirmando que o xadrez é um jogo estritamente determinado, ou seja, em cada estágio do jogo há pelo menos uma estratégia que garantirá a vitória de um dos jogadoresl, ou no mínimo conduzirá o jogo a um empate.
+Jogo é interativo
+
+Jogo pode ser simétrico (quando as regras são as mesmas para todos os jogadores)
+
+Common Knowledge, todo mundo sabe as regras do jogo e todos sabem que todo mundo sabe as regras do jogo.
+
+Game Theory
+Strategic interactive decision making
+
+The Strategy of Conflict (1960) Thomas C. Schelling
+Nobel in economics for his work in Game Theory
+
+John von Neumann started think about the optimal way to playing poker
+
+1928 von Neumann publish his first work
+minimax theorem
+
+Reinhard Selten
+1930
+examples are simple, but this are make them useful in developing an intuition on how to solve problem in real world.
+They are anologies
+
+ex post rationality
+fail to look ahead, they rather look behind and see how it was played
+
+Game theory provides a baseline for comparison
+
+1944, The theory of Games and Economic Behavior, John von Neumann & Oskar Morgenstern
+
+Game Theory is the study of strategic interaction among rational players
+
+strategic interaction decision making
+
+games of incomplete information
+
+The tragedy of the commons
+
+Game Theory
+the study of strategic interaction among rational decision makers
+players: people playing the game; each player has a set of strategies
+strategies: what they will do, how they'll respond
+payoffs: result of the interaction of strategies
+
+strategy is a set with what decision you will make for every decision making situation in the game
+
+each players is chosen an strategy,
+these strategies interact,
+and the game plays out to its conclusion.
+
+rationality and common knowledge
+
 
 `No` século XIX Augustin Cournot escreveu sobre o duopólio [3]. Em 1913, Ernst
 Zermelo publicou o primeiro teorema matemático da Teoria dos Jogos [21],
@@ -99,12 +146,38 @@ representada` por ~~cada~~ `uma` linha e cada estratégia de seu oponente
 
 ### Soluções de um jogo
 
+
+
+
+
+
+
+
+
+
+
+Zero-sum game: a vitória de um jogador implica na derrota do outro.
+No Big Points, o jogador com maior pontuação vence. Pode-se dar pontuação 1 caso o jogador em questão é o vencedor, e -1 para o jogador que perdeu. Caso haja mais de um jogador com a maior pontuação do jogo, é dado 0 para o payoff dos dois jogadores.
+
+Outra maneira, mais refinada, de demonstrar a vitória e derrota entre os jogadores é calcular a difereça da pontuação entre eles. O jogador com a maior pontuação mantém sua pontuação, e o restante tem sua pontuação subtraída daquela maior pontuação do jogo (dando um resultado negativo).
+
+
+
+
+
+
+Para analisar um jogo é preciso primeiro representá-lo de uma maneira que seja possível analisá-lo em seguida. **Forma extensiva** [1] é uma das maneiras de representar um jogo, fazendo uso de uma estrutura de árvore, os nós representam estados do jogo enquanto as arestas representam as jogadas possíveis a partir daquele estado. Cada caminho\footnote{Um caminho na árvore é um conjunto de arestas partindo da raíz até uma de suas folhas.} nessa árvore representa uma estra
+
+De acordo com Sartini et. al. (2004), a teoria dos jogos pode ser vista como "a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas sob condições de conflito". Para isso, é preciso definir um jogo de tal maneira que os conflitos sejam evidentes. Uma maneira de representar um jogo não cooperativo é fazer uso de sua **forma normal** [1], no qual é feito uma matriz com cada estratégia de cada jogador. Para cada estratégia do jogador _linha_ tem-se uma estratégia do jogador _coluna_, e o conflito é representado nesta célula da matriz.
+
+Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_** ou **ganho** para cada situação do jogo. Quando essa informação é inserida na matriz da forma normal, tem-se uma **matriz de _payoff_**. Em outras palavras, **matriz de _payoff_** é a representação matricial dos _payoffs_ dos jogadores, onde cada estratégia de um jogador estão representadas por cada linha e cada estratégias de seu oponente estão representadas por cada coluna.
+
 Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo.
 **Dominância** e **Equilíbrio de Nash** são dois conceitos importantes para
 encontrar uma solução de um estado do jogo.
 ## Soluções de um jogo
 \label{subsec:solucoes-de-um-jogo}
-Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. **Dominância** e **equilíbrio de Nash** são dois conceitos importantes para encontrar uma solução de um estado do jogo.
+Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. Dois conceitos importantes para encontrar uma solução de um estado do jogo são **dominância** (minimax) e **equilíbrio de Nash**.
 
 É dito que uma determinada estratégia é uma **estratégia dominante** quando esta
 é a única estratégia restante após aplicar a técnica de **dominância estrita
@@ -176,21 +249,28 @@ arrumar este trecho, e também é bom nomea a matriz com uma variável (por exem
 ## Exemplos
 
 1. Dilema do prisioneiro
+<!--
 1. A batalha dos sexos
 1. _Matching pennies_
 1. Chefe e empregado
 1. A tragédia dos comuns
-<!-- 1. Troll na estrada ? -->
+ 1. Troll na estrada ?
 
+<<<<<<< 584896bb650f86c5b589113c5337cb20bab08412
 `Obs.: detalhar os exemplos. E também, ainda na fundamentação teórica, discutir
 sobre análise de complexidade, análise combinátoria e programação dinâmica`
+=======
+- Jogo a ser analisado
+- *Regras do jogo* \label{sec:regras_do_jogo}
+-->
+>>>>>>> Anotações de video-aula + reescrevendo algumas seções.
 
 ## O jogo Big Points
 ### Conceito do jogo
 _Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar peças. São cinco peões de cores distintas, que podem ser usadas por qualquer jogador, para percorrer um caminho de discos coloridos até chegar ao pódio. Durante o percurso, os jogadores coletam alguns destes discos. A pontuação de cada jogador é determinada a partir da ordem de chegada dos peões ao pódio e a quantidade de discos adquiridos de cada cor. Ganha o jogador com a maior pontuação.
 
 ### Regras do jogo
-O jogo _Big Points_ pode ser jogado de dois a cinco jogadores. No seu turno, o jogador escolhe qualquer um dos cinco peões, que possuem cores distintas, e o move para cima do próximo\footnote{Apenas é pertmitido um movimento para trás utilizando-se de um disco preto.} disco de sua mesma cor. Em seguida, o jogador deve pegar o próximo disco disponível\footnote{É dito indisponível aqueles discos que já foram pegos por algum jogador ou que possuem um peão em cima.} à frente ou atrás deste peão. Caso não haja discos atrás (à frente) do peão, o jogador deve pegar o disco que está à frente (atrás). <!--e de maneira análoga (semelhante) no caso de não haver discos à frente, o jogador deve pegar o disco atrás.-->
+O jogo _Big Points_ pode ser jogado de dois a cinco jogadores. No seu turno, o jogador escolhe qualquer um dos cinco peões, que possuem cores distintas, e o move para cima do próximo disco de sua mesma cor. Em seguida, o jogador deve pegar o próximo disco disponível\footnote{É dito indisponível aqueles discos que já foram pegos por algum jogador ou que possuem um peão em cima.} à frente ou atrás deste peão. Caso não haja discos atrás (à frente) do peão, o jogador deve pegar o disco que está à frente (atrás). Caso o jogador já possua um disco preto no começo do turno, tal jogador pode escolher descartá-lo para realizar um segundo movimento. Este movimento pode ser com qualquer cor de peão como uma jogada normal, mas dessa vez o movimento pode ser feito para trás.
 
 
 
@@ -216,6 +296,18 @@ software utilizada`
 	- A complexidade assintótica do algoritmo (pois o número de entrada pro
  algorítimo é muito grande)
 	- O tempo de processamento para um determinado número de estados
+
+## Definições de termos em Teoria dos Jogos
+
+**Forma extensiva** é a representação do jogo em uma árvore, onde os nós são estados do jogo e as arestas são as jogadas permitidas. [pg. 17]
+
+**Estratégia pura** é um conjunto de escolhas a serem feitas a cada momento que uma decisão precisa ser feita no jogo. [pg. 20]
+
+**Forma normal** é derivada do conjunto de estratégia pura dos jogadores. Matiz [pg.22]
+
+: $$\Gamma = \langle I, \{S_{i}\}_{i\in I}, \{P_{i}\}_{i\in I}\rangle$$
+
+
 
 ## Análise combinatória
 O jobo _Big Points_ possui 55 discos no tabuleiro e podem jogar de dois a cinco
@@ -276,6 +368,8 @@ de um jogo é reduzido, mas ainda se encontra na ordem de $10^{21}$.
 ?
 
 # Bibliografia
+
+[1] Jones A. J., Game Theory 1980, pg. 69
 
 apud
 
