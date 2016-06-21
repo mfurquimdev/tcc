@@ -22,17 +22,25 @@ A Teoria dos Jogos estuda as melhores estratégias dos jogadores em um
 	- Secundários
 - Estrutura do trabalho
 
-
 Por alguns anos a teoria dos jogos vem estudando o comportamento de indivíduos
  sob uma situação de conflito, como em jogos, balança de poder, leilões, e até
- mesmo evolução genética\ref{bib:sartini_IIbienaldasbm}.
-  O foco de estudo deste
- trabalho é a interação entre jogadores
+ mesmo evolução genética\ref{bib:sartini_IIbienaldasbm}. Esta área possui duas
+ frentes de estudo: (a) _teoria econômica dos jogos_, o qual possui motivações
+ predominante econômicas, e (b) _teoria combinatória dos jogos_, que faz uso dos
+ aspectos combinatórios de jogos de mesa e não permite elementos imprevisíveis.
 
-O restante destre trabalho está organizado da seguinte maneira: Na seção
+Este trabalho fará uso de ambas abordagens, sendo que, a partir da primeira
+ abordagem, é estabelecido um método para se maximizar o ganho (_payoff_) e, a
+ partir da segunda, um método para identificar uma jogada que garantirá a
+ vitória independente do resto do jogo.
+
+O restante deste trabalho está organizado da seguinte maneira: Na seção
  \ref{sec:fundamentacao_teorica} é `narrado` uma breve história da teoria dos
- jogos e seus conceitos fundamentais, além de conter explicações para os temas
- de análise de complexidade, análise combinatória e programação dinâmica,
+ jogos e seus conceitos fundamentais, além de conter explicação para os temas
+ de análise de complexidade, análise combinatória e programação dinâmica, e
+ explicação das regras do jogo _Big Points_. A seção seguinte
+ (\ref{sec:metodologia}) lista os equipamentos, _softwares_ e metodologia
+ utilizados para o desenvolvimento do trabalho.
 
 
 # Fundamentação Teórica
@@ -67,6 +75,11 @@ O restante destre trabalho está organizado da seguinte maneira: Na seção
 
 # Cronograma
 \label{sec:cronograma}
+
+1/2016 Estudos de análise combinatória, programação dinâmica
+Produto: simulador contando todos os estados de uma partida reduzida
+2/2016 Intervalo para estudo e desenvolvimento.
+1/2017
 
 # Considerações Finais
 \label{sec:consideracoes_finais}
