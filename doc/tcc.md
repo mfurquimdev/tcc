@@ -87,8 +87,16 @@ duas será abordada neste trabalho`.
 
 
 # Fundamentação Teórica
+De acordo com Sartini et. al. (2004) "A teoria dos jogos é uma teoria matemática criada para se modelar fenômenos que podem ser observados quando dois ou mais "agentes de decisão" interagem entre si". Pode ser usada para estudar assuntos como eleições, leilões, balança de poder, evolução genética, além de ser estudada no campo da matemática pura.
+
+Existem duas frentes na teoria dos jogos: (a) _teoria econômica dos jogos_, o qual possui motivações predominante econômicas, e (b) _teoria combinatória dos jogos_, que faz uso dos aspectos combinatórios de jogos de mesa e não permite elementos imprevisíveis. Este trabalho fará uso de ambas abordagens, sendo que, a partir da primeira abordagem, é estabelecido um método para se maximizar o ganho (_payoff_) e, a partir da segunda, um método para identificar uma jogada que garantirá a vitória independente do resto do jogo.
 
 ## História
+A análise de jogos é praticada desde o século XVIII, quando James Waldergrave analisa um jogo de cartas chamado _Le Her_. No século seguinte, Augustin Cournot faz uso da teoria dos jogos para estudos relacionados à política [3]. Mais recentemente, em 1913, Ernst Zermelo publica o primeiro teorema matemático da teoria dos jogos [21].
+
+Dois grandes matemáticos que se interessaram na área de teoria dos jogos foram Emile Borel, o qual publicou quatro artigos sobre jogos estratégicos, e John von Neumann, que teve uma série de trabalhos relacionados à teoria dos jogos. Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero\footnote{Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.} com duas pessoas possui uma solução em estratégias mistas [18]. Em 1937, forneceu uma nova demonstração baseada em outro teorema (teorema do ponto fixo de Brouwer). Em 1944, Neumann publicou um trabalho, junto a Oscar Morgenstern [19], e com isso, a teoria dos jogos entrou na área da economia e matemática aplicada.
+
+Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que publicou quatro artigos importantes para teoria dos jogos não-cooperativos. Dois destes artigos [13, 16] provando a existência de um equilíbrio de estratégias mistas para jogos não-cooperativos, denominado **equilíbrio de Nash**, que será explicado na seção \ref{subsec:solucoes-de-um-jogo}. Nash recebeu o prêmio Nobel em 1994, junto com John Harsanyi e Reinhard Selten, por sua contribuição para a teoria dos jogos.
 
 `No` século XVIII, James Waldergrave ~~analisa~~ `analisou` um jogo de cartas
 chamado _le Her_ e fornece uma solução que é um equilíbrio de estratégia mista,
@@ -96,6 +104,9 @@ porém não estendeu sua abordagem a uma teoria geral. `Obs.:: inserir referênc
 De acordo com Sartini et. al. (2004) "A teoria dos jogos é uma teoria matemática criada para se modelar fenômenos que podem ser observados quando dois ou mais "agentes de decisão" interagem entre si". Pode ser usada para estudar assuntos como eleições, leilões, balança de poder, evolução genética, além de ser estudada no campo da matemática pura.
 
 Existem duas frentes na teoria dos jogos: (a) _teoria econômica dos jogos_, o qual possui motivações predominante econômicas, e (b) _teoria combinatória dos jogos_, que faz uso dos aspectos combinatórios de jogos de mesa e não permite elementos imprevisíveis. Este trabalho fará uso de ambas abordagens, sendo que, a partir da primeira abordagem, é estabelecido um método para se maximizar o ganho (_payoff_) e, a partir da segunda, um método para identificar uma jogada que garantirá a vitória independente do resto do jogo.
+
+Século XVIII, James Waldergrave analisa um jogo de cartas chamado "_le Her_" e fornece uma solução que é um equilíbrio de estratégia mista, porém não estendeu sua abordagem a uma teoria geral.
+Século XIX, Augustin Cournot escreve sobre duopólio [3]. Em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos [21], afirmando que o xadrez é um jogo estritamente determinado, ou seja, em cada estágio do jogo há pelo menos uma estratégia que garantirá a vitória de um dos jogadoresl, ou no mínimo conduzirá o jogo a um empate.
 
 ## História
 A análise de jogos é praticada desde o século XVIII, quando James Waldergrave analisa um jogo de cartas chamado _Le Her_. No século seguinte, Augustin Cournot faz uso da teoria dos jogos para estudos relacionados à política [3]. Mais recentemente, em 1913, Ernst Zermelo publica o primeiro teorema matemático da teoria dos jogos [21].
@@ -187,6 +198,7 @@ prêmio Nobel por suas contribuições para a Teoria dos Jogos.
 
 `Obs.: colocar um parágrafo aqui, explicando que nesta seção serão introduzidos
 os conceitos fundamentais da teoria dos jogos, etc...`
+
 Em 1944, publicou um trabalho na área da economia com Oscar Morgenstern [19]. Com isso, a teoria dos jogos invadiu a economia e a matemática aplicada.
 Em 1950, John Forbes Nash Júnior publicou quatro artigos importantes para a teoria dos jogos não-cooperativos. Em "_Equilibrium Points in n-Person Games_" [14] ([13] ?) e "_Non-cooperative Games_" [16], Nash provou a existência de um equilíbrio de estratégias mistas para jogos não-cooperativos, denominado **equilíbrio de Nash**.
 
@@ -216,7 +228,9 @@ representada` por ~~cada~~ `uma` linha e cada estratégia de seu oponente
 
 
 
-
+## Soluções de um jogo
+\label{subsec:solucoes-de-um-jogo}
+Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. **Dominância** e **equilíbrio de Nash** são dois conceitos importantes para encontrar uma solução de um estado do jogo.
 
 
 
@@ -331,13 +345,19 @@ _Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar 
 
 ### Regras do jogo
 O jogo _Big Points_ pode ser jogado de dois a cinco jogadores. No seu turno, o jogador escolhe qualquer um dos cinco peões, que possuem cores distintas, e o move para cima do próximo disco de sua mesma cor. Em seguida, o jogador deve pegar o próximo disco disponível\footnote{É dito indisponível aqueles discos que já foram pegos por algum jogador ou que possuem um peão em cima.} à frente ou atrás deste peão. Caso não haja discos atrás (à frente) do peão, o jogador deve pegar o disco que está à frente (atrás). Caso o jogador já possua um disco preto no começo do turno, tal jogador pode escolher descartá-lo para realizar um segundo movimento. Este movimento pode ser com qualquer cor de peão como uma jogada normal, mas dessa vez o movimento pode ser feito para trás.
+- Jogo a ser analisado
+- *Regras do jogo* \label{sec:regras_do_jogo}
 
 
+## O jogo Big Points
+### Conceito do jogo
+_Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar peças. São cinco peões de cores distintas, que podem ser usadas por qualquer jogador, para percorrer um caminho de discos coloridos até chegar ao pódio. Durante o percurso, os jogadores coletam alguns destes discos. A pontuação de cada jogador é determinada a partir da ordem de chegada dos peões ao pódio e a quantidade de discos adquiridos de cada cor. Ganha o jogador com a maior pontuação.
+
+### Regras do jogo
+O jogo _Big Points_ pode ser jogado de dois a cinco jogadores. No seu turno, o jogador escolhe qualquer um dos cinco peões, que possuem cores distintas, e o move para cima do próximo\footnote{Apenas é pertmitido um movimento para trás utilizando-se de um disco preto.} disco de sua mesma cor. Em seguida, o jogador deve pegar o próximo disco disponível\footnote{É dito indisponível aqueles discos que já foram pegos por algum jogador ou que possuem um peão em cima.} à frente ou atrás deste peão. Caso não haja discos atrás (à frente) do peão, o jogador deve pegar o disco que está à frente (atrás).
 
 `Esta parte sobre o Big Points deve fazer parte ainda da fundamentação Teórica`
 
-- Jogo a ser analisado
-- *Regras do jogo* \label{sec:regras_do_jogo}
 
 
 `Este capítulo de Materias e Métodos deve suceder a Fundamentação Teórica`
@@ -384,6 +404,8 @@ Dado uma partida inicial $\gammaup \in \Gamma$ de _Big Points_, sendo $\Gamma$
 partir
  da regra na~~ `De acordo com a` Seção \ref{sec:regras_do_jogo}, tem-se que
 essas características
+ preciso determinar as características que definem um estado do jogo. a partir
+ da regra na seção \ref{sec:regras_do_jogo}, tem-se que essas características
  são: o estado do tabuleiro, o estado dos peões, o estado da escada, o estado
  dos discos na mão dos jogadores e o ~~qual o jogador~~ atual. Como demonstrado
 na equação \ref{eq_estados}, a quantidade de estados existentes para uma partida,
@@ -501,7 +523,6 @@ Anos\ &=\ 96'526'964'154'064'571'465'728
 
 #### Poda 1
 
-<!--
 \begin{equation} \label{eq_poda1} \tag{e.q. Poda 1}
 \begin{split}
 Estados\ &=\ 2^{55}\times 11\times 5\times (5\times 10 + 2\times 6)\\
@@ -519,7 +540,6 @@ Anos\ &=\ 4'524'164'009'230
 \end{equation}
 
 
-<!--
 \begin{equation*}
 \begin{split}
   P_{layers}\quad=\{p_1, p_2,...,p_n\}\\
@@ -532,5 +552,3 @@ Anos\ &=\ 4'524'164'009'230
 
 
 % Sendo G = {g_1, g_2,...,g_n} um conjunto finito de jogadores. Cada jogador g_i \existsin G possui um conjunto finito S_i = {s_{i1}, s_{i2},...,s_{im_{i}}} de **estratégias puras** (m_i >= 2). Um vetor s = {s_{1j_1}, s_{2j_2},...,s_{nj_n}}, onde s_{ij_i} é uma estratégia pura para o jogador g_i \existsin G.
-
--->
