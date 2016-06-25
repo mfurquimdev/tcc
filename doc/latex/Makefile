@@ -1,10 +1,10 @@
-TARGET = TCC_FGA.pdf
+TARGET = mfurquim.pdf
 
 BIBTEX = bibtex
-#LATEX = latex
 LATEX = pdflatex
-DVIPS = dvips
-PS2PDF = ps2pdf
+#LATEX = latex
+#DVIPS = dvips
+#PS2PDF = ps2pdf
 
 VERSION = 0.1.0
 
@@ -16,11 +16,10 @@ FIXOS_SOURCES = informacoes.tex novosComandos.tex fichaCatalografica.tex \
 FIXOS_FILES = $(addprefix $(FIXOS_DIR)/, $(FIXOS_SOURCES))
 
 EDITAVEIS_DIR = editaveis
-EDITAVEIS_SOURCES = informacoes.tex errata.tex dedicatoria.tex \
-					agradecimentos.tex epigrafe.tex resumo.tex abstract.tex \
-					abreviaturas.tex simbolos.tex introducao.tex \
-					textoepostexto.tex cronograma.tex \
-					apendices.tex anexos.tex
+EDITAVEIS_SOURCES = abreviaturas.tex abstract.tex agradecimentos.tex \
+		anexos.tex apendices.tex conclusao.text cronograma.tex dedicatoria.tex \
+		errata.tex introducao.tex metodologia.tex referencial.tex \
+		resultados.tex resumo.tex simbolos.tex
 
 EDITAVEIS_FILES = $(addprefix $(EDITAVEIS_DIR)/, $(EDITAVEIS_SOURCES))
 
