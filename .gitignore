@@ -6,6 +6,15 @@ prog
 doc/tex/tmp.tex
 doc/tex/tcc.tex
 doc/ref
+*.aux
+*.bbl
+*.blg
+*.brf
+*.idx
+*.lof
+*.log
+*.lot
+*.toc
 
 *.txt
 
