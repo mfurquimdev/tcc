@@ -4,33 +4,75 @@
 \section{Histórico da Teoria dos Jogos}
 \label{sec:historico-da-teoria-dos-jogos}
 
-Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII
-tendo como evidência o trabalho de James Waldergrave ao analisar um jogo
-de cartas chamado \emph{Le Her} \cite{Prague_severalmilestones}. No
-século seguinte, Augustin Cournot fez uso da teoria dos jogos para
-estudos relacionados à política \cite{cournot_1838}. Mais recentemente,
-em 1913, Ernst Zermelo publica o primeiro teorema matemático da teoria
-dos jogos \cite{zermelo_1913}.
+Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo
+como evidência uma carta escrita por James Waldegrave ao analisar um jogo de
+baralho chamado \emph{Le Her} \cite{Prague_severalmilestones}. No século
+seguinte, Augustin Cournot fez uso da teoria dos jogos para estudos relacionados
+à política \cite{cournot_1838}. Mais recentemente, em 1913, Ernst Zermelo
+publica o primeiro teorema matemático da teoria dos jogos \cite{zermelo_1913}.
 
-Dois outros grandes matemáticos que se interessaram na teoria dos jogos
-foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile
-Borel publicou três artigos \cite{borel_1921} \cite{borel_1924}
-\cite{borel_1927} e um livro \cite{borel_1938} sobre jogos estratégicos,
-introduzindo uma noção abstrada sobre jogo estratégico e estratégia
-mista. Em 1928, John von Neumann demonstrou que todo jogo finito de soma
-zero\footnote{Um jogo soma zero é um
- jogo no qual a vitória de um jogador implica na derrota do outro.} com
-duas pessoas possui uma solução em estratégias mistas {[}18{]}. Em 1937,
-Neumann forneceu uma nova demonstração baseada em outro teorema (teorema
-do ponto fixo de Brouwer). Em 1944, Neumann publicou um trabalho, junto
-a Oscar Morgenstern {[}19{]}, e com isso, a teoria dos jogos entrou na
-área da economia e matemática aplicada.
+Dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile
+Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou três
+artigos \cite{borel_1921} \cite{borel_1924} \cite{borel_1927} e um livro
+\cite{borel_1938} sobre jogos estratégicos, introduzindo uma noção abstrada
+sobre jogo estratégico e estratégia mista. Em 1928, John von Neumann demonstrou
+que todo jogo finito de soma zero\footnote{Um jogo soma zero é um jogo no qual a
+vitória de um jogador implica na derrota do outro.} com duas pessoas possui uma
+solução em estratégias mistas \cite{neumann_1928}. Em 1944, Neumann publicou um
+trabalho, junto a Oscar Morgenstern \cite{neumann_1944}, e com isso, a teoria
+dos jogos entrou na área da economia e matemática aplicada.
 
-Outro matemático que contribuiu para a área foi John Forbes Nash Júnior,
-quea publicou quatro artigos importantes para teoria dos jogos
-não-cooperativos. Dois destes artigos {[}13, 16{]} provando a existência
-de um equilíbrio de estratégias mistas para jogos não-cooperativos,
-denominado \textbf{equilíbrio de Nash}, que será explicado na seção
-\ref{subsec:solucoes-de-um-jogo}. Nash recebeu o prêmio Nobel em 1994,
-junto com John Harsanyi e Reinhard Selten, por suas contribuições para a
-teoria dos jogos.
+Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que
+publicou quatro artigos importantes para teoria dos jogos não-cooperativos. Dois
+destes artigos \cite{nash_1950} \cite{nash_1951} provando a existência de um
+equilíbrio de estratégias mistas para jogos não-cooperativos, denominado
+\textbf{equilíbrio de Nash}, que será explicado na seção
+\ref{subsubsec:equilibrio-de-nash}. Nash recebeu o prêmio Nobel em 1994, junto
+com John Harsanyi e Reinhard Selten, por suas contribuições para a teoria dos
+jogos.
+
+\section{Histórico da Inteligência Artifical aplicada à Jogos}
+
+No final do século XIX, Von Kempelen inventou um dispositivo chamado \emph{Maelzel Chess Automaton}, capaz de jogar uma partida inteira de xadrez \cite{shannon_1950}. Porém, vários artigos foram publicados após a exibição de tal máquina, incluindo um trabalho por Edgard Allan Poe entitulado \emph{Maelzel's Chess Player} explicando que a máquina era operada por uma pessoa. Uma tentativa mais honesta foi feita em 1914 por Torres y Quevendo, que construiram um dispositivo que jogava um jogo final de xadrez (rei e torre contra rei) \cite{vigneron_1914}. O objetivo da máquina era forçar um cheque-mate no jogador.
+
+Há anos programadores tem se interessado em inteligência artificial com uma perspectiva de programar um computador que consiga ganhar de um ser humano \cite{samuel_1959} \cite{samuel_1967}
+
+\section{Conceitos Fundamentais da Teoria dos Jogos}
+\label{sec:conceitos-fundamentais-da-teoria-dos-jogos}
+
+Esta seção introduz os conceitos fundamentais da teoria dos jogos, tais como definição de um jogo, formas de representá-lo e teoremas para encontrar soluções.
+
+\subsection{Definição de Jogo Não Cooperativo}
+\label{subsec:definicao-de-jogo-nao-cooperativo}
+
+Tendo em mente a definição de um jogo como sendo uma atividade interativa e competitiva no qual os jogadores devem obedecer a um determinado conjunto de regras, um jogo não cooperativo, então, não permite nenhum tipo de acordo entre os jogadores e o ganho de cada jogador é determinado pelo conjunto de regras \cite{jones_1980}.
+
+
+ ., pode ou não ser simétrico\footnote{Um jogo é chamado simétrico quando as regras é a mesma para todos os jogadores.}
+
+
+\newtheorem*{JFN}{Definição. Jogo de n-jogadores na Forma Normal}
+
+\begin{JFN}
+é definido como uma tupla (2n+1)
+$$(J; S_1,...,S_n; u_1(s_1,...,s_n),...,u_n(s_1,...,s_n))$$
+onde $n \geq 2$ é um número natural; $J = \{1,2,...,n\}$ é um dado conjunto finito chamado \textbf{conjunto de jogadores}, onde seus elementos são os jogadores; $\forall i\in \{1,2,...,n\}$, $S_i$ é um conjunto arbitrário chamado \textbf{conjunto de estratégias do jogador} $i$, e $$u_i: S_1 \times S_2 \times ...\times S_n$$
+\end{JFN}
+
+De acordo com \cite{sartini_IIbienaldasbm}, a teoria dos jogos pode ser vista como "a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas sob condições de conflito". Para isso, é preciso definir um jogo de tal maneira que os conflitos sejam evidentes. Uma maneira de representar um jogo não cooperativo é fazer uso de sua forma normal \cite{jones_1980}, no qual é feito uma matriz com cada estratégia de cada jogador. Para cada estratégia do jogador \emph{linha} tem-se uma estratégia do jogador \emph{coluna}, e o conflito é representado nesta célula da matriz.
+
+\subsection{Representação de um Jogo}
+\label{subsec:representacao-de-um-jogo}
+
+Para analisar um jogo é preciso primeiro representá-lo de uma maneira que seja possível analisá-lo em seguida. Forma extensiva \cite{jones_1980} é uma das maneiras de representar um jogo, fazendo uso de uma estrutura de árvore, os nós representam estados do jogo enquanto as arestas representam as jogadas possíveis a partir daquele estado. Cada caminho\footnote{Um caminho na árvore é um conjunto de arestas partindo da raíz até uma de suas folhas.} nessa árvore representa uma estra
+
+
+
+\subsection{Soluções de um jogo}
+\label{sec:solucoes-de-um-jogo}
+
+\subsubsection{Teorema Minimax}
+\label{subsubsec:teorema-minimax}
+
+\subsubsection{Equilíbrio de Nash}
+\label{subsubsec:equilibrio-de-nash}
