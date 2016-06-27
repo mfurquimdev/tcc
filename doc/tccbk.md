@@ -1,87 +1,3 @@
-A Teoria dos Jogos é uma área de estudos, derivada da matemática,
-criada para se modelar fenômenos que podem ser observados quando dois ou mais
-agentes de decisão interagem entre si. Além de ser usada para estudar assuntos
-como eleições, leilões, balança de poder e evolução genética, a Teoria dos Jogos
-também pode ser estudada no campo de matemática pura.
-
-
-pro universo dos
-
-validar os estudos
-replicar os
-
-extrapolada para a economia, política e biologia no campo de evolução genética.
-
-
-Há uma diferença entre Teoria Econômica dos Jogos (motivações predominante
-econômicas) e Teoria Combinatória dos Jogos (aspectos combinatórios de jogos de
-mesa e não permite elementos imprevisíveis). `Obs.: completar dizendo qual das
-duas será abordada neste trabalho`.
-
-
-# Fundamentação Teórica
-De acordo com Sartini et. al. (2004) "A teoria dos jogos é uma teoria matemática criada para se modelar fenômenos que podem ser observados quando dois ou mais "agentes de decisão" interagem entre si". Pode ser usada para estudar assuntos como eleições, leilões, balança de poder, evolução genética, além de ser estudada no campo da matemática pura.
-
-Existem duas frentes na teoria dos jogos: (a) _teoria econômica dos jogos_, o qual possui motivações predominante econômicas, e (b) _teoria combinatória dos jogos_, que faz uso dos aspectos combinatórios de jogos de mesa e não permite elementos imprevisíveis. Este trabalho fará uso de ambas abordagens, sendo que, a partir da primeira abordagem, é estabelecido um método para se maximizar o ganho (_payoff_) e, a partir da segunda, um método para identificar uma jogada que garantirá a vitória independente do resto do jogo.
-
-## História
-
-`No` século XVIII, James Waldergrave ~~analisa~~ `analisou` um jogo de cartas
-chamado _le Her_ e fornece uma solução que é um equilíbrio de estratégia mista,
-porém não estendeu sua abordagem a uma teoria geral. `Obs.:: inserir referência.`
-De acordo com Sartini et. al. (2004) "A teoria dos jogos é uma teoria matemática criada para se modelar fenômenos que podem ser observados quando dois ou mais "agentes de decisão" interagem entre si". Pode ser usada para estudar assuntos como eleições, leilões, balança de poder, evolução genética, além de ser estudada no campo da matemática pura.
-
-Existem duas frentes na teoria dos jogos: (a) _teoria econômica dos jogos_, o qual possui motivações predominante econômicas, e (b) _teoria combinatória dos jogos_, que faz uso dos aspectos combinatórios de jogos de mesa e não permite elementos imprevisíveis. Este trabalho fará uso de ambas abordagens, sendo que, a partir da primeira abordagem, é estabelecido um método para se maximizar o ganho (_payoff_) e, a partir da segunda, um método para identificar uma jogada que garantirá a vitória independente do resto do jogo.
-
-Século XVIII, James Waldergrave analisa um jogo de cartas chamado "_le Her_" e fornece uma solução que é um equilíbrio de estratégia mista, porém não estendeu sua abordagem a uma teoria geral.
-Século XIX, Augustin Cournot escreve sobre duopólio [3]. Em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos [21], afirmando que o xadrez é um jogo estritamente determinado, ou seja, em cada estágio do jogo há pelo menos uma estratégia que garantirá a vitória de um dos jogadoresl, ou no mínimo conduzirá o jogo a um empate.
-
-## História
-A análise de jogos é praticada desde o século XVIII, quando James Waldergrave analisa um jogo de cartas chamado _Le Her_. No século seguinte, Augustin Cournot faz uso da teoria dos jogos para estudos relacionados à política [3]. Mais recentemente, em 1913, Ernst Zermelo publica o primeiro teorema matemático da teoria dos jogos [21].
-
-Dois grandes matemáticos que se interessaram na área de teoria dos jogos foram Emile Borel, o qual publicou quatro artigos sobre jogos estratégicos, e John von Neumann, que teve uma série de trabalhos relacionados à teoria dos jogos. Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero\footnote{Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.} com duas pessoas possui uma solução em estratégias mistas [18]. Em 1937, forneceu uma nova demonstração baseada em outro teorema (teorema do ponto fixo de Brouwer). Em 1944, Neumann publicou um trabalho, junto a Oscar Morgenstern [19], e com isso, a teoria dos jogos entrou na área da economia e matemática aplicada.
-
-Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que publicou quatro artigos importantes para teoria dos jogos não-cooperativos. Dois destes artigos [13, 16] provando a existência de um equilíbrio de estratégias mistas para jogos não-cooperativos, denominado **equilíbrio de Nash**, que será explicado na seção \ref{subsec:solucoes-de-um-jogo}. Nash recebeu o prêmio Nobel em 1994, junto com John Harsanyi e Reinhard Selten, por sua contribuição para a teoria dos jogos.
-
-## O que é um jogo?
-
-Jogo é interativo
-
-Jogo pode ser simétrico (quando as regras são as mesmas para todos os jogadores)
-
-Common Knowledge, todo mundo sabe as regras do jogo e todos sabem que todo mundo sabe as regras do jogo.
-
-Game Theory
-Strategic interactive decision making
-
-The Strategy of Conflict (1960) Thomas C. Schelling
-Nobel in economics for his work in Game Theory
-
-John von Neumann started think about the optimal way to playing poker
-
-1928 von Neumann publish his first work
-minimax theorem
-
-Reinhard Selten
-1930
-examples are simple, but this are make them useful in developing an intuition on how to solve problem in real world.
-They are anologies
-
-ex post rationality
-fail to look ahead, they rather look behind and see how it was played
-
-Game theory provides a baseline for comparison
-
-1944, The theory of Games and Economic Behavior, John von Neumann & Oskar Morgenstern
-
-Game Theory is the study of strategic interaction among rational players
-
-strategic interaction decision making
-
-games of incomplete information
-
-The tragedy of the commons
-
 Game Theory
 the study of strategic interaction among rational decision makers
 players: people playing the game; each player has a set of strategies
@@ -96,41 +12,10 @@ and the game plays out to its conclusion.
 
 rationality and common knowledge
 
-
-`No` século XIX Augustin Cournot escreveu sobre o duopólio [3]. Em 1913, Ernst
-Zermelo publicou o primeiro teorema matemático da Teoria dos Jogos [21],
-afirmando que o xadrez é um jogo estritamente determinado, ou seja, em cada
-estágio do jogo há pelo menos uma estratégia que garantirá a vitória de um dos
-jogadoresl, ou no mínimo conduzirá o jogo a um empate.
-
-Emile Borel reinventou as soluções **minimax** e publicou quatro artigos sobre
-jogos estratégicos. `Obs.: inserir referências a estes artigos`.
-Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero com duas
-pessoas possui uma solução em estratégias mistas [18], utilizando topologia e
-análise funcional.
-
-Em 1937, Neumann forneceu uma nova demonstração baseada no teorema do ponto
-fixo de Brouwer. `Obs.: inserir referência`.
-`Já` em 1944, publicou um trabalho na área da economia com Oscar Morgenstern
-[19]. Com isso, a Teoria dos Jogos invadiu a economia e a matemática aplicada.
-
-Em 1950, John Forbes Nash Júnior publicou quatro artigos importantes para a
-teoria dos jogos não-cooperativos. Em "_Equilibrium Points in n-Person Games_"
-[14] <!--([13] ?)--> e "_Non-cooperative Games_" [16], Nash provou a existência
-de um equilíbrio de estratégias mistas para jogos não-cooperativos, denominado
-Equilíbrio de Nash.
-Em 1994, John Forbes Nash Jr., John Harsanyi e Reinhard Selten receberam o
-prêmio Nobel por suas contribuições para a Teoria dos Jogos.
-
 ## Conceitos Fundamentais da Teoria dos Jogos
 
 `Obs.: colocar um parágrafo aqui, explicando que nesta seção serão introduzidos
 os conceitos fundamentais da teoria dos jogos, etc...`
-
-Em 1944, publicou um trabalho na área da economia com Oscar Morgenstern [19]. Com isso, a teoria dos jogos invadiu a economia e a matemática aplicada.
-Em 1950, John Forbes Nash Júnior publicou quatro artigos importantes para a teoria dos jogos não-cooperativos. Em "_Equilibrium Points in n-Person Games_" [14] ([13] ?) e "_Non-cooperative Games_" [16], Nash provou a existência de um equilíbrio de estratégias mistas para jogos não-cooperativos, denominado **equilíbrio de Nash**.
-
-Em 1994, John Forbes Nash Jr., John Harsanyi e Reinhard Selten receberam o prêmio Nobel por suas contribuições para a Teoria dos Jogos.
 
 ### O que é um jogo?
 
@@ -173,9 +58,6 @@ Outra maneira, mais refinada, de demonstrar a vitória e derrota entre os jogado
 
 
 
-Para analisar um jogo é preciso primeiro representá-lo de uma maneira que seja possível analisá-lo em seguida. **Forma extensiva** [1] é uma das maneiras de representar um jogo, fazendo uso de uma estrutura de árvore, os nós representam estados do jogo enquanto as arestas representam as jogadas possíveis a partir daquele estado. Cada caminho\footnote{Um caminho na árvore é um conjunto de arestas partindo da raíz até uma de suas folhas.} nessa árvore representa uma estra
-
-De acordo com Sartini et. al. (2004), a teoria dos jogos pode ser vista como "a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas sob condições de conflito". Para isso, é preciso definir um jogo de tal maneira que os conflitos sejam evidentes. Uma maneira de representar um jogo não cooperativo é fazer uso de sua **forma normal** [1], no qual é feito uma matriz com cada estratégia de cada jogador. Para cada estratégia do jogador _linha_ tem-se uma estratégia do jogador _coluna_, e o conflito é representado nesta célula da matriz.
 
 Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_** ou **ganho** para cada situação do jogo. Quando essa informação é inserida na matriz da forma normal, tem-se uma **matriz de _payoff_**. Em outras palavras, **matriz de _payoff_** é a representação matricial dos _payoffs_ dos jogadores, onde cada estratégia de um jogador estão representadas por cada linha e cada estratégias de seu oponente estão representadas por cada coluna.
 
@@ -394,11 +276,8 @@ apud
 
 [3] A. A. Cournot, _Recherches sur les Principes Mathématiques de la Théorie des Richesses_, 1838. Traduzido por N. T. Bacon em _Reserches into the Mathematical Principles of the Theory of Wealth_, McMillan, New York, 1927.
 
-[13] J. F. Nash Jr., _Equilibrium Points in n-person Games_. Proceedings of the National Academy of Sciences of the United States of America, pp. 48-49, 1950.
-
 [14] J. F. Nash Jr., _Non-Cooperative Games_. PhD. Thesis. Princeton University Press, 1950.
 
-[16] J. F. Nash Jr., _Non-Cooperative Games_. Annals of Mathematics, pp. 286-295, 1951.
 
 [18] J. von Neumann. _Zur Theorie der Gesellschaftsspiele_. Mathematische Annalen, vol. 100, pp 295-320. Traduzido por S. Bargmann: _On the Theory of Games of Strategy_ em _Contributions to the Theory of Games_, vol. 4, pp. 13-42, A. W. Tucker e R. D. Luce (editores), Princeton University Press, 1959. <!--(1928 ?)-->
 
@@ -489,3 +368,51 @@ Anos\ &=\ 4'524'164'009'230
 
 
 % Sendo G = {g_1, g_2,...,g_n} um conjunto finito de jogadores. Cada jogador g_i \existsin G possui um conjunto finito S_i = {s_{i1}, s_{i2},...,s_{im_{i}}} de **estratégias puras** (m_i >= 2). Um vetor s = {s_{1j_1}, s_{2j_2},...,s_{nj_n}}, onde s_{ij_i} é uma estratégia pura para o jogador g_i \existsin G.
+
+
+# Notes
+pro universo dos
+
+validar os estudos
+replicar os
+
+extrapolada para a economia, política e biologia no campo de evolução genética.
+
+## O que é um jogo?
+
+Jogo é interativo
+
+Jogo pode ser simétrico (quando as regras são as mesmas para todos os jogadores)
+
+Common Knowledge, todo mundo sabe as regras do jogo e todos sabem que todo mundo sabe as regras do jogo.
+
+Game Theory
+Strategic interactive decision making
+
+The Strategy of Conflict (1960) Thomas C. Schelling
+Nobel in economics for his work in Game Theory
+
+John von Neumann started think about the optimal way to playing poker
+
+1928 von Neumann publish his first work
+minimax theorem
+
+Reinhard Selten
+1930
+examples are simple, but this are make them useful in developing an intuition on how to solve problem in real world.
+They are anologies
+
+ex post rationality
+fail to look ahead, they rather look behind and see how it was played
+
+Game theory provides a baseline for comparison
+
+1944, The theory of Games and Economic Behavior, John von Neumann & Oskar Morgenstern
+
+Game Theory is the study of strategic interaction among rational players
+
+strategic interaction decision making
+
+games of incomplete information
+
+The tragedy of the commons
