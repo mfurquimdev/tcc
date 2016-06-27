@@ -416,3 +416,27 @@ strategic interaction decision making
 games of incomplete information
 
 The tragedy of the commons
+
+<!--
+
+\newtheorem*{JFN}{Definição. Jogo de n-jogadores na Forma Normal}
+
+\begin{JFN}
+é definido como uma tupla (2n+1)
+$$(J; S_1,...,S_n; u_1(s_1,...,s_n),...,u_n(s_1,...,s_n))$$
+onde $n \geq 2$ é um número natural; $J = \{1,2,...,n\}$ é um dado conjunto finito chamado \textbf{conjunto de jogadores}, onde seus elementos são os jogadores; $\forall i\in \{1,2,...,n\}$, $S_i$ é um conjunto arbitrário chamado \textbf{conjunto de estratégias do jogador} $i$, e $$u_i: S_1 \times S_2 \times ...\times S_n$$
+\end{JFN}
+
+
+\chapter[Fundamentação Teórica]{Fundamentação Teórica}
+\section{Histórico da Inteligência Artifical aplicada à Jogos}
+
+No final do século XIX, Von Kempelen inventou um dispositivo chamado \emph{Maelzel Chess Automaton}, capaz de jogar uma partida inteira de xadrez \cite{shannon_1950}. Porém, vários artigos foram publicados após a exibição de tal máquina, incluindo um trabalho por Edgard Allan Poe entitulado \emph{Maelzel's Chess Player} explicando que a máquina era operada por uma pessoa. Uma tentativa mais honesta foi feita em 1914 por Torres y Quevendo, que construiram um dispositivo que jogava um jogo final de xadrez (rei e torre contra rei) \cite{vigneron_1914}. O objetivo da máquina era forçar um cheque-mate no jogador.
+
+Há anos programadores tem se interessado em inteligência artificial com uma perspectiva de programar um computador que consiga ganhar de um ser humano \cite{samuel_1959} \cite{samuel_1967}
+
+De acordo com \cite{sartini_IIbienaldasbm}, a teoria dos jogos pode ser vista como "a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas sob condições de conflito". Para isso, é preciso definir um jogo de tal maneira que os conflitos sejam evidentes. Uma maneira de representar um jogo não cooperativo é fazer uso de sua forma normal \cite{jones_1980}, no qual é feito uma matriz com cada estratégia de cada jogador. Para cada estratégia do jogador \emph{linha} tem-se uma estratégia do jogador \emph{coluna}, e o conflito é representado nesta célula da matriz.
+
+Cada caminho\footnote{Um caminho na árvore é um conjunto de arestas partindo da raíz até uma de suas folhas.} nessa árvore representa uma estra
+
+-->
