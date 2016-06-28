@@ -19,7 +19,7 @@ doc/ref
 *.txt
 
 # PDF files
-*.pdf
+.pdf
 
 # Object files
 obj

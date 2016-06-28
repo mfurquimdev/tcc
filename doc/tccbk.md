@@ -1,3 +1,7 @@
+Backward Induction
+- AS long as every player take turns you can start at the end of the game and make your way to the begin.
+- One strategy for every decision node
+
 Game Theory
 the study of strategic interaction among rational decision makers
 players: people playing the game; each player has a set of strategies
