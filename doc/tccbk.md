@@ -73,7 +73,7 @@ Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do j
 encontrar uma solução de um estado do jogo.
 ## Soluções de um jogo
 \label{subsec:solucoes-de-um-jogo}
-Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. Dois conceitos importantes para encontrar uma solução de um estado do jogo são **dominância** (minimax) e **equilíbrio de Nash**.
+ Dois conceitos importantes para encontrar uma solução de um estado do jogo são **dominância** (minimax) e **equilíbrio de Nash**.
 
 É dito que uma determinada estratégia é uma **estratégia dominante** quando esta
 é a única estratégia restante após aplicar a técnica de **dominância estrita
@@ -149,7 +149,7 @@ arrumar este trecho, e também é bom nomea a matriz com uma variável (por exem
 1. _Matching pennies_
 1. Chefe e empregado
 1. A tragédia dos comuns
- 1. Troll na estrada ?
+1. Troll na estrada ?
 
 `Obs.: detalhar os exemplos. E também, ainda na fundamentação teórica, discutir
 sobre análise de complexidade, análise combinátoria e programação dinâmica`
@@ -274,73 +274,6 @@ apud
 
 
 
-
-# Apêndice
-## Cálculos
-### Número de partidas distintas
-<!-- Partidas\ &=\ \dfrac{4 \times 55!}{2^{27} \times 3^{36} \times 5^7 \times 7^5}\\ -->
-\begin{equation} \label{eq_partidas} \tag{e.q. Números de Partidas Distintas}
-\begin{split}
-Partidas\ &=\  (\#J-1) \times \binom{\#D_T}{\#D_W} \times \binom{\#D_{L1}}{\#D_K} \times \binom{\#D_{L2}}{\#D_R} \times \binom{\#D_{L3}}{\#D_G} \times \binom{\#D_{L4}}{\#D_B} \times \binom{\#D_{L5}}{\#D_Y} \times \binom{\#D_{L6}}{\#D_P}\\
-Partidas\ &=\  4\times \binom{55}{5} \times \binom{50}{5} \times \binom{45}{9} \times \binom{36}{9} \times \binom{27}{9} \times \binom{18}{9} \times \binom{9}{9}\\
-Partidas\ &=\ 560'483'776'167'774'018'942'304'261'616'685'408'000'000\\
-Partidas\ &\approx 5\times 10^{41}
-\end{split}
-\end{equation}
-
-### Tempo de computação de todas as partidas
-\begin{equation} \label{eq_anos_partidas} \tag{e.q. Tempo de Computação das Partidas}
-\begin{split}
-Anos\ &=\ \dfrac{N_{partidas\ distintas}}{\nicefrac{partida}{segundo}\times\nicefrac{segundos}{minuto}\times\nicefrac{minutos}{hora}\times\nicefrac{horas}{dia}\times\nicefrac{dias}{ano}}\\
-Anos\ &=\ \dfrac{560'483'776'167'774'018'942'304'261'616'685'408'000'000}{\nicefrac{1}{1}\times\nicefrac{60}{1}\times\nicefrac{60}{1}\times\nicefrac{24}{1}\times\nicefrac{365}{1}}\\
-Anos\ &=\ 96'526'964'154'064'571'465'728\\
-Anos\ &\approx 9\times 10^{34}
-\end{split}
-\end{equation}
-
-### Espaço de armazenamento na memória por estado
-\begin{equation} \label{eq_bytes} \tag{e.q. Bytes na memória}
-\begin{split}
-Bytes\ &=\ \dfrac{55}{8} + 5 + 5\times 7\\
-Bytes\ &=\ 47\ bytes
-\end{split}
-\end{equation}
-
-### Número de estados
-#### Caso Geral
-\begin{equation} \label{eq_estados} \tag{e.q. Caso Geral}
-\begin{split}
-Estados\ &=\ 2^{55}\times 61^{5}\times (10^{5} + 6^{2})\\
-Estados\ &=\ 3'044'074'341'562'580'507'100'339'765'248\\
-Estados\ &\approx 3\times 10^{31}
-\end{split}
-\end{equation}
-
-\begin{equation} \label{eq_anos_estados} \tag{e.q. Tempo de Computação dos Estados}
-\begin{split}
-Anos\ &=\ \dfrac{N_{estados\ distintos}}{\nicefrac{estado}{segundo}\times\nicefrac{segundos}{minuto}\times\nicefrac{minutos}{hora}\times\nicefrac{horas}{dia}\times\nicefrac{dias}{ano}}\\
-Anos\ &=\ \dfrac{3'044'074'341'562'580'507'100'339'765'248}{\nicefrac{1}{1}\times\nicefrac{60}{1}\times\nicefrac{60}{1}\times\nicefrac{24}{1}\times\nicefrac{365}{1}}\\
-Anos\ &=\ 96'526'964'154'064'571'465'728
-\end{split}
-\end{equation}
-
-#### Poda 1
-
-\begin{equation} \label{eq_poda1} \tag{e.q. Poda 1}
-\begin{split}
-Estados\ &=\ 2^{55}\times 11\times 5\times (5\times 10 + 2\times 6)\\
-Estados\ &=\ 2^{55}\times 11\times 5\times 72\\
-Estados\ &=\ 142'674'036'195'097'313'280
-\end{split}
-\end{equation}
-
-\begin{equation} \label{eq_anos_estados} \tag{e.q. Tempo de Computação dos Estados}
-\begin{split}
-Anos\ &=\ \dfrac{N_{estados\ distintos}}{\nicefrac{estado}{segundo}\times\nicefrac{segundos}{minuto}\times\nicefrac{minutos}{hora}\times\nicefrac{horas}{dia}\times\nicefrac{dias}{ano}}\\
-Anos\ &=\ \dfrac{142'674'036'195'097'313'280}{\nicefrac{1}{1}\times\nicefrac{60}{1}\times\nicefrac{60}{1}\times\nicefrac{24}{1}\times\nicefrac{365}{1}}\\
-Anos\ &=\ 4'524'164'009'230
-\end{split}
-\end{equation}
 
 
 \begin{equation*}
