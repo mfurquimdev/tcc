@@ -156,26 +156,6 @@ sobre análise de complexidade, análise combinátoria e programação dinâmica
 - Jogo a ser analisado
 - *Regras do jogo* \label{sec:regras_do_jogo}
 
-## O jogo Big Points
-### Conceito do jogo
-_Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar peças. São cinco peões de cores distintas, que podem ser usadas por qualquer jogador, para percorrer um caminho de discos coloridos até chegar ao pódio. Durante o percurso, os jogadores coletam alguns destes discos. A pontuação de cada jogador é determinada a partir da ordem de chegada dos peões ao pódio e a quantidade de discos adquiridos de cada cor. Ganha o jogador com a maior pontuação.
-
-### Regras do jogo
-O jogo _Big Points_ pode ser jogado de dois a cinco jogadores. No seu turno, o jogador escolhe qualquer um dos cinco peões, que possuem cores distintas, e o move para cima do próximo disco de sua mesma cor. Em seguida, o jogador deve pegar o próximo disco disponível\footnote{É dito indisponível aqueles discos que já foram pegos por algum jogador ou que possuem um peão em cima.} à frente ou atrás deste peão. Caso não haja discos atrás (à frente) do peão, o jogador deve pegar o disco que está à frente (atrás). Caso o jogador já possua um disco preto no começo do turno, tal jogador pode escolher descartá-lo para realizar um segundo movimento. Este movimento pode ser com qualquer cor de peão como uma jogada normal, mas dessa vez o movimento pode ser feito para trás.
-- Jogo a ser analisado
-- *Regras do jogo* \label{sec:regras_do_jogo}
-
-
-## O jogo Big Points
-### Conceito do jogo
-_Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar peças. São cinco peões de cores distintas, que podem ser usadas por qualquer jogador, para percorrer um caminho de discos coloridos até chegar ao pódio. Durante o percurso, os jogadores coletam alguns destes discos. A pontuação de cada jogador é determinada a partir da ordem de chegada dos peões ao pódio e a quantidade de discos adquiridos de cada cor. Ganha o jogador com a maior pontuação.
-
-### Regras do jogo
-O jogo _Big Points_ pode ser jogado de dois a cinco jogadores. No seu turno, o jogador escolhe qualquer um dos cinco peões, que possuem cores distintas, e o move para cima do próximo\footnote{Apenas é pertmitido um movimento para trás utilizando-se de um disco preto.} disco de sua mesma cor. Em seguida, o jogador deve pegar o próximo disco disponível\footnote{É dito indisponível aqueles discos que já foram pegos por algum jogador ou que possuem um peão em cima.} à frente ou atrás deste peão. Caso não haja discos atrás (à frente) do peão, o jogador deve pegar o disco que está à frente (atrás).
-
-`Esta parte sobre o Big Points deve fazer parte ainda da fundamentação Teórica`
-
-
 
 `Este capítulo de Materias e Métodos deve suceder a Fundamentação Teórica`
 # Materiais e Métodos
