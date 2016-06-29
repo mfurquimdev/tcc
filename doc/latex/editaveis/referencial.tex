@@ -4,7 +4,7 @@
 \section{O que é Teoria dos Jogos?}
 \label{sec:o-que-e-teoria-dos-jogos}
 
-Teoria dos jogos é o estudo do comportamento estratégico interdependente\footnote{Estratégia interdependente significa que as ações de uma pessoa interfere no resultado da outra, e vice-versa.}, não apenas vencer ou perder, apesar de às vezes esses dois fatos coincidem. Isso faz com que o escopo seja mais abranjente, desde comportamentos no qual as duas pessoas devem cooperar para ganhar, ou as duas tentam se ajudar, ou, por fim, comportamento de duas pessoas que tentam vencer individualmente.
+Teoria dos jogos é o estudo do comportamento estratégico interdependente\footnote{Estratégia interdependente significa que as ações de uma pessoa interfere no resultado da outra, e vice-versa.}\cite{spaniel_2011}, não apenas o estudo de como vencer ou perder, apesar de às vezes esses dois fatos coincidem. Isso faz com que o escopo seja mais abranjente, desde comportamentos no qual as duas pessoas devem cooperar para ganhar, ou as duas tentam se ajudar, ou, por fim, comportamento de duas pessoas que tentam vencer individualmente.
 
 \section{Histórico da Teoria dos Jogos}
 \label{sec:historico-da-teoria-dos-jogos}
@@ -14,44 +14,51 @@ Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo 
 Dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou três artigos \cite{borel_1921} \cite{borel_1924} \cite{borel_1927} e um livro \cite{borel_1938} sobre jogos estratégicos, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista. Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero\footnote{Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.} com duas pessoas possui uma solução em estratégias mistas \cite{neumann_1928}. Em 1944, Neumann publicou um trabalho, junto a Oscar Morgenstern \cite{neumann_1944}, e com isso, a teoria dos jogos entrou na área da economia e matemática aplicada.
 
 Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que publicou quatro artigos importantes para teoria dos jogos não-cooperativos. Dois destes artigos \cite{nash_1950} \cite{nash_1951} provando a existência de um equilíbrio de estratégias mistas para jogos não-cooperativos, denominado \textbf{equilíbrio de Nash}, que será explicado na seção \ref{subsubsec:equilibrio-de-nash}. Nash recebeu o prêmio Nobel em 1994, junto com John Harsanyi e Reinhard Selten, por suas contribuições para a teoria dos jogos.
+\section{Soluções para jogos}
+\subsection{Dominância estrita}
 
-\subsection{Análise primitiva do jogo \emph{le Her}}
-\label{subsec:analise-primitiva-do-jogo-le-her}
+É dito que uma estratégia é {\bfseries estritamente dominada} para um jogador se esta estratégia gera um ganho maior do que qualquer outra estratégia independente do que o outro jogador fizer. Considera-se que jogadores racionais nunca fazem uso de estratégias estritamente dominadas, pois não há motivos para escolher uma estratégia que sempre será pior em todos os casos. O exemplo do {\bfseries dilema do prisioneiro} demonstra tal conceito.
 
-O objetivo do jogo \emph{le Her} é terminar o jogo com a carta mais alta, sendo que o baralho é contado de Ás ($A$) à Rei ($K$). Essa versão reduzida podia ser jogada apenas com dois jogadores, um deles chamado \emph{dealer} e outro \emph{receiver}. O \emph{dealer} embaralha as cartas e distribui uma carta para o \emph{receiver} e uma para si. O \emph{receiver} tem a escolha de manter sua carta ou trocá-la com o \emph{dealer}, e em seguida o \emph{dealer} tem a mesma opção de manter ou de trocar sua carta com uma carta nova do baralho. A única regra que impede a troca é o caso da carta recebida ser um Rei ($K$), neste caso a troca deve ser desfeita e o jogador mantém sua carta original.
+\subsubsection{O Dilema do Prisioneiro}
+Formulado por Albert W. Tucker em 1950 \cite{sartini_IIbienaldasbm}, o dilema do prisioneiro é, provavelmente, um dos exemplos mais conhecidos na teoria dos jogos. O propósito de Tucker foi ilustrar a dificuldade de se analisar certos tipos de jogos por razões que ficarão óbvias após o exemplo. Eis a situação: dois suspeitos são presos com suspeita de roubo mas os policiais podem apenas provar que os suspeitos invadiram o local. Precisando da confissão dos criminosos, o policial faz a seguinte proposta
+\begin{itemize}
+	\item Se nenhum confessar o roubo, o policial vai prendê-los por intrusão.
+	\item Se um confessar e o outro não, o que confessou será liberto e o calado será preso por 12 meses.
+	\item Se os dois confessarem, ambos serão presos por 8 meses.
+\end{itemize}
 
-%Vários artigos apontam
+Dado essas informações, é possível representá-las no formato {\bfseries matriz de \emph{payoffs}} de acordo com a tabela \ref{tab:dilema-prisioneiro}:
 
-
-\subsection{Dilema do prisioneiro}
-
-Dois suspeitos são presos, a polícia acha que eles vão roubar a loja, mas os policiais podem apenas provar que os suspeitos intrusão, então o policial precisa que um dos criminosos dedure o outro
-
-O acordo:
-- Se nenhum confessar o roubo, o policial vai prendê-los por intrusão.
-- Se um confessar e o outro não, o que confessou será liberto e o calado será preso por 12 meses.
-- Se os dois confessarem, ambos serão presos por 8 meses.
-
-Supondo que os dois querem minimizar seu tempo na cadeia, eles devem confessar à polícia?
-
-
+\begin{table}[ht]
+\centering
 \begin{tabular}{|c|c|c|c|}
-\cline{3-4}
-\multicolumn{1}{c}{} &  & \multicolumn{2}{c|}{\color{red}{Player 2}}\tabularnewline
-\cline{3-4}
-\multicolumn{1}{c}{} &  & \color{red}{Quieto}\  & \color{red}{Confessa}\ \tabularnewline
-\hline
-\multirow{2}{*}{\begin{turn}{90}
-\color{blue}{Player 1}\
-\end{turn}} & \begin{turn}{90}
-\color{blue}{Quieto}\
-\end{turn} & \color{blue}{-1},\color{red}{-1} & \color{blue}{-12},\color{red}{0}\tabularnewline
-\cline{2-4}
- & \begin{turn}{90}
-\color{blue}{Confessa}\
-\end{turn} & \color{blue}{0},\color{red}{-12} & \color{blue}{-8},\color{red}{-8}\tabularnewline
-\hline
+	\cline{3-4}
+	\multicolumn{1}{c}{} &  & \multicolumn{2}{c|}{\color{red}{\bfseries Jogador 2}}\tabularnewline
+	\cline{3-4}
+	\multicolumn{1}{c}{} &  & \color{red}{\scshape Quieto}\  & \color{red}{\scshape Confessa}\ \tabularnewline
+	\hline
+	\multirow{2}{*}{\begin{turn}{90}
+	\color{blue}{\bfseries Jogador 1}\
+	\end{turn}} & \begin{turn}{90}
+	\color{blue}{\scshape Quieto}\
+	\end{turn} & \color{black}{\Large(}\color{blue}{\Large -1}\color{black}{\Large,}\color{red}{\Large -1}\color{black}{\Large)} & \color{black}{\Large(}\color{blue}{\Large -12}\color{black}{\Large,}\color{red}{\Large 0}\color{black}{\Large)}\tabularnewline
+	\cline{2-4}
+	 & \begin{turn}{90}
+	\color{blue}{\scshape Confessa}\
+	\end{turn} & \color{black}{\Large(}\color{blue}{\Large 0}\color{black}{\Large,}\color{red}{\Large -12}\color{black}{\Large)} & \color{black}{\Large(}\color{blue}{\Large -8}\color{black}{\Large,}\color{red}{\Large -8}\color{black}{\Large)}\tabularnewline
+	\hline
 \end{tabular}
+\caption{Dilema do prisioneiro}
+\label{tab:dilema-prisioneiro}
+\end{table}
+
+Considerando que os dois suspeitos querem minimizar seu tempo na cadeia, eles devem confessar à polícia?
+
+Para resolver este jogo é preciso raciocinar como um jogador responderia de acordo com a ação do outro. Supondo que o \emph{\color{red}jogador 2} fique \emph{\color{red}Quieto}, o \emph{\color{blue}jogadora 1} pode ficar \emph{\color{blue}Quieto} e ir pra cadeia por 1 mês, sendo representado na tabela \ref{tab:dilema-prisioneiro} pela célula superior esquerda, ou aceitar a proposta do policial e \emph{\color{blue}Confessar} o crime que iriam cometer, sendo representado pela célula inferior esquerda. Como os jogadores querem minimizar seu tempo na prisão, que é representado por um valor negativo, deve-se buscar o maior valor dentre essas duas escolhas, que neste caso é \emph{\color{blue}Confessar} com um ganho de \emph{\color{blue}0}. Observando a outra possibilidade do \emph{\color{red}jogador 2}, que seria \emph{\color{red}Confessar}, o \emph{\color{blue}jogador 1} teria um ganho de \emph{\color{blue}-12} ao ficar \emph{\color{blue}Quieto} e um ganho de \emph{\color{blue}-8} ao \emph{\color{blue}Confessar}. Em ambos os casos, o \emph{\color{blue}Jogador 1} terá um melhor ganho ao \emph{\color{blue}Confessar}, e como o jogo é simétrico\footnote{Um jogo é dito simétrico quando as regras são as mesmas para todos os jogadores.} o mesmo raciocínio pode ser feito para o \emph{\color{red}Jogador 2}.
+
+Essa preferência de \emph{\color{blue}Confessar} a ficar \emph{\color{blue}Quieto} para cada escolha do outro jogador (\emph{\color{red}Quieto} ou \emph{\color{red}Confessar}) é dito que \emph{\color{blue}Confessar} é estritamente dominante.
+
+\subsection{Eliminação iterada de estratégias estritamente dominadas}
 
 
 \section{Conceitos Fundamentais da Teoria dos Jogos}
@@ -63,6 +70,14 @@ Esta seção introduz os conceitos fundamentais da teoria dos jogos, tais como d
 \label{subsec:definicao-de-jogo-nao-cooperativo}
 
 Tendo em mente a definição de um jogo como sendo uma atividade interativa e competitiva no qual os jogadores devem obedecer a um determinado conjunto de regras, um jogo não cooperativo, então, não permite nenhum tipo de acordo entre os jogadores e o ganho de cada jogador é determinado pelo conjunto de regras \cite{jones_1980}.
+
+
+\subsection{Análise primitiva do jogo \emph{le Her}}
+\label{subsec:analise-primitiva-do-jogo-le-her}
+
+O objetivo do jogo \emph{le Her} é terminar o jogo com a carta mais alta, sendo que o baralho é contado de Ás ($A$) à Rei ($K$). Essa versão reduzida podia ser jogada apenas com dois jogadores, um deles chamado \emph{dealer} e outro \emph{receiver}. O \emph{dealer} embaralha as cartas e distribui uma carta para o \emph{receiver} e uma para si. O \emph{receiver} tem a escolha de manter sua carta ou trocá-la com o \emph{dealer}, e em seguida o \emph{dealer} tem a mesma opção de manter ou de trocar sua carta com uma carta nova do baralho. A única regra que impede a troca é o caso da carta recebida ser um Rei ($K$), neste caso a troca deve ser desfeita e o jogador mantém sua carta original.
+
+%Vários artigos apontam
 
 
 \subsection{Representação de um Jogo}

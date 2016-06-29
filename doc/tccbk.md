@@ -1,5 +1,8 @@
+Simultâneos move games
+-
+
 Backward Induction
-- AS long as every player take turns you can start at the end of the game and make your way to the begin.
+- As long as every player take turns you can start at the end of the game and make your way to the begin.
 - One strategy for every decision node
 
 Game Theory
