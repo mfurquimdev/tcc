@@ -15,7 +15,7 @@ doc/ref
 *.log
 *.lot
 *.toc
-
+doc/latex/tcc.pdf
 *.txt
 
 # PDF files
