@@ -9,11 +9,11 @@ Teoria dos jogos é o estudo do comportamento estratégico interdependente\footn
 \section{Histórico da Teoria dos Jogos}
 \label{sec:historico-da-teoria-dos-jogos}
 
-Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}, explicado na seção \ref{subsec:analise-primitiva-do-jogo-le-her}. No século seguinte, Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política. Mais recentemente, em 1913, Ernst Zermelo publica o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
+Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}, explicado na Seção \ref{subsec:analise-primitiva-do-jogo-le-her}. No século seguinte, Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política. Mais recentemente, em 1913, Ernst Zermelo publica o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
 
 Dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista. Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero\footnote{Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.} com duas pessoas possui uma solução em estratégias mistas. Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
 
-Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que publicou quatro artigos importantes para teoria dos jogos não-cooperativos. Dois destes artigos provando a existência de um equilíbrio de \textbf{estratégias mistas} para jogos não-cooperativos, denominado \textbf{equilíbrio de Nash}. Os conceitos de estratégia mista será explicado na seção \ref{subsubsec:estrategias-mistas} e equilíbrio de nash na seção \ref{subsubsec:equilibrio-de-nash}. Nash recebeu o prêmio Nobel em 1994, junto com John Harsanyi e Reinhard Selten, por suas contribuições para a teoria dos jogos \cite[p.~3--4]{sartini_IIbienaldasbm}.
+Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que publicou quatro artigos importantes para teoria dos jogos não-cooperativos. Dois destes artigos provando a existência de um equilíbrio de \textbf{estratégias mistas} para jogos não-cooperativos, denominado \textbf{equilíbrio de Nash}. Os conceitos de estratégia mista será explicado na Seção \ref{subsubsec:estrategias-mistas} e equilíbrio de nash na Seção \ref{subsubsec:equilibrio-de-nash}. Nash recebeu o prêmio Nobel em 1994, junto com John Harsanyi e Reinhard Selten, por suas contribuições para a teoria dos jogos \cite[p.~3--4]{sartini_IIbienaldasbm}.
 
 \section{Conceitos Fundamentais da Teoria dos Jogos}
 \label{sec:conceitos-fundamentais-da-teoria-dos-jogos}
@@ -34,7 +34,7 @@ Tendo a definição de um jogo como sendo uma atividade interativa e competitiva
 \subsection{Jogo Simétrico e Assimétrico}
 \label{subsec:jogo-simetrico-e-assimetrico}
 
-Um \textbf{jogo simétrico} é um jogo no qual as regras são as mesmas para ambos os jogadores. Em termos mais matemáticos, tem-se a definição \ref{def:jogo-simetrico}.
+Um \textbf{jogo simétrico} é um jogo no qual as regras são as mesmas para ambos os jogadores. Em termos mais matemáticos, tem-se a Definição \ref{def:jogo-simetrico}.
 
 \begin{mydef}\label{def:jogo-simetrico}
 Dado uma matriz $G$ de um jogo, $G$ é a representação de um \textbf{jogo simétrico} se for uma matriz quadrada e $g_{ij} = -g_{ji}$ para cada par $i$, $j$. Em particular, $g_{ii} = 0$ para todo $i$. Portanto, $G$ é uma representação de jogo simétrica se for uma matriz simétrica simpléctica\footnote{Uma matriz é simpléctica se sua diagonal principal for 0.}\footnote{Do inglês \emph{if its matrix is skew-symmetric}.}. \cite{jones_1980}
@@ -57,7 +57,7 @@ Um jogo de dois jogadores e de soma zero significa que a vitória de um jogador 
 \subsection{Forma Extensiva}
 \label{subsec:forma-extensiva}
 
-Uma das formas de representar um jogo, de tal maneira que seja possível analisá-lo em seguida, é a \textbf{forma extensiva} faz uso de uma estrutura de árvore, onde para representar os estados do jogo se faz uso dos nós da árvore, as jogadas possíveis a partir daquele estado são as arestas, e o ganho para o primeiro jogador são as folhas. A figura \ref{fig:renee-v-peter} representa o exemplo \ref{ex:renee-v-peter} na forma extensiva.
+Uma das formas de representar um jogo, de tal maneira que seja possível analisá-lo em seguida, é a \textbf{forma extensiva} faz uso de uma estrutura de árvore, onde para representar os estados do jogo se faz uso dos nós da árvore, as jogadas possíveis a partir daquele estado são as arestas, e o ganho para o primeiro jogador são as folhas. A Figura \ref{fig:renee-v-peter} representa o Exemplo \ref{ex:renee-v-peter} na forma extensiva.
 
 \begin{figure}[ht]
 	\centering
@@ -161,12 +161,12 @@ Uma das formas de representar um jogo, de tal maneira que seja possível analis�
 \subsection{Conjunto Informação}
 \label{subsec:conjunto-informacao}
 
-Um \textbf{conjunto informação}, de acordo com Sartini et al, é um conjunto de estados do jogo que pertencem ao mesmo jogador e os movimentos disponíveis são os mesmos para cada estado \cite{sartini_IIbienaldasbm}. Jones diz, ainda, que um termo mais apropriado seria \textbf{conjunto de ignorância} \cite{jones_1980}, pois indica que ao fazer um movimento, o jogador sabe em qual conjunto informação ele se encontra, mas não sabe dizer em qual estado está. Se o jogo está sendo representado por uma árvore, como na figura \ref{fig:renee-v-peter}, então o conjunto de informação é representado pelo
+Um \textbf{conjunto informação}, de acordo com Sartini et al, é um conjunto de estados do jogo que pertencem ao mesmo jogador e os movimentos disponíveis são os mesmos para cada estado \cite{sartini_IIbienaldasbm}. Jones diz, ainda, que um termo mais apropriado seria \textbf{conjunto de ignorância} \cite{jones_1980}, pois indica que ao fazer um movimento, o jogador sabe em qual conjunto informação ele se encontra, mas não sabe dizer em qual estado está. Se o jogo está sendo representado por uma árvore, como na Figura \ref{fig:renee-v-peter}, então o conjunto de informação é representado pelo
 
 \subsection{Estratégia Pura}
 \label{subsec:estrategia-pura}
 
-\textbf{Estratégia pura} é um conjunto de escolhas a se fazer para cada momento de decisão possível. Voltando ao exemplo \ref{ex:renee-v-peter}, \emph{Peter} pode escolher \emph{Baixa} em sua primeira jogada, ganhando ganhando duas das vezes e perdendo uma, ou pode escolher \emph{Alta} com uma possibilidade de ter que tomar outra decisão. Considerando essas possibilidades, tem-se que as estratégias puras de \emph{Peter} são:
+\textbf{Estratégia pura} é um conjunto de escolhas a se fazer para cada momento de decisão possível. Voltando ao Exemplo \ref{ex:renee-v-peter}, \emph{Peter} pode escolher \emph{Baixa} em sua primeira jogada, ganhando ganhando duas das vezes e perdendo uma, ou pode escolher \emph{Alta} com uma possibilidade de ter que tomar outra decisão. Considerando essas possibilidades, tem-se que as estratégias puras de \emph{Peter} são:
 
 \begin{enumerate}
 	\tightlist
@@ -188,7 +188,7 @@ Enquanto para \emph{Renée}, suas opções são escolher entre as três cartas, 
 \subsection{Forma Normal}
 \label{subsec:forma-normal}
 
-Essa propriedade \textbf{estratégias puras} permite uma outra representação de um jogo chamado de \textbf{forma normal}. Nesta forma o jogo é representado por uma matriz, onde na linha tem-se as estratégias puras do primeiro jogador e na coluna, as do segundo jogador. No caso do exemplo \ref{ex:renee-v-peter}, o jogo é representado pela tabela \ref{tab:forma-normal-do-jogo-renee-v-peter}.
+Essa propriedade \textbf{estratégias puras} permite uma outra representação de um jogo chamado de \textbf{forma normal}. Nesta forma o jogo é representado por uma matriz, onde na linha tem-se as estratégias puras do primeiro jogador e na coluna, as do segundo jogador. No caso do Exemplo \ref{ex:renee-v-peter}, o jogo é representado pela Tabela \ref{tab:forma-normal-do-jogo-renee-v-peter}.
 
 \begin{table}[ht]
 \centering
@@ -212,7 +212,7 @@ Essa propriedade \textbf{estratégias puras} permite uma outra representação d
 \subsection{Matriz de \emph{payoff}}
 \label{subsec:matriz-de-payoff}
 
-Uma matriz de \emph{payoff} nada mais é do que a representação em forma normal com o ganho indicado em cada situação. No caso do exemplo \ref{ex:renee-v-peter} o ganho é e, com isso, tem-se a tabela \ref{tab:matriz-de-payoff-do-jogo-renee-v-peter}.
+Uma matriz de \emph{payoff} nada mais é do que a representação em forma normal com o ganho indicado em cada situação. No caso do Exemplo \ref{ex:renee-v-peter} o ganho é e, com isso, tem-se a Tabela \ref{tab:matriz-de-payoff-do-jogo-renee-v-peter}.
 
 \begin{table}[ht]
 \centering
@@ -254,7 +254,7 @@ Dois suspeitos são presos com suspeita de roubo mas os policiais podem apenas p
 Considerando que os dois suspeitos desejam minimizar seu tempo na cadeia, eles devem confessar à polícia?
 \end{myex}
 
-Dado essas informações do exemplo \ref{ex:dilema-do-prisioneiro}, é possível representá-las no formato {\bfseries matriz de \emph{payoffs}} de acordo com a tabela \ref{tab:dilema-prisioneiro}, onde o ganho do \emph{jogador linha} é representado pelo número à esquerda dentro de uma célula, e o ganho do \emph{jogador coluna} é representado à direita.
+Dado essas informações do Exemplo \ref{ex:dilema-do-prisioneiro}, é possível representá-las no formato {\bfseries matriz de \emph{payoffs}} de acordo com a Tabela \ref{tab:dilema-prisioneiro}, onde o ganho do \emph{jogador linha} é representado pelo número à esquerda dentro de uma célula, e o ganho do \emph{jogador coluna} é representado à direita.
 
 \begin{table}[ht]
 \centering
@@ -279,13 +279,13 @@ Dado essas informações do exemplo \ref{ex:dilema-do-prisioneiro}, é possível
 \label{tab:dilema-prisioneiro}
 \end{table}
 
-Para resolver este jogo é preciso raciocinar como um jogador responderia de acordo com a ação do outro. Supondo que o \emph{jogador coluna} fique \emph{Negar}, o \emph{jogador linha} pode \emph{Negar} e ir pra cadeia por 1 mês, sendo representado na tabela \ref{tab:dilema-prisioneiro} pela célula superior esquerda, ou aceitar a proposta do policial e \emph{Confessar} o crime que iriam cometer, sendo representado pela célula inferior esquerda. Como os jogadores querem minimizar seu tempo na prisão, que é representado por um valor negativo, deve-se buscar o maior valor dentre essas duas escolhas, que neste caso é \emph{Confessar} com um ganho de \emph{0}. Observando a outra possibilidade do \emph{jogador coluna}, que seria \emph{Confessar}, o \emph{jogador linha} teria um ganho de \emph{-12} ao \emph{Negar} e um ganho de \emph{-8} ao \emph{Confessar}. Em ambos os casos, o \emph{jogador linha} terá um melhor ganho ao \emph{Confessar}, e como o jogo é simétrico o mesmo raciocínio pode ser feito para o \emph{jogador coluna}.
+Para resolver este jogo é preciso raciocinar como um jogador responderia de acordo com a ação do outro. Supondo que o \emph{jogador coluna} fique \emph{Negar}, o \emph{jogador linha} pode \emph{Negar} e ir pra cadeia por 1 mês, sendo representado na Tabela \ref{tab:dilema-prisioneiro} pela célula superior esquerda, ou aceitar a proposta do policial e \emph{Confessar} o crime que iriam cometer, sendo representado pela célula inferior esquerda. Como os jogadores querem minimizar seu tempo na prisão, que é representado por um valor negativo, deve-se buscar o maior valor dentre essas duas escolhas, que neste caso é \emph{Confessar} com um ganho de \emph{0}. Observando a outra possibilidade do \emph{jogador coluna}, que seria \emph{Confessar}, o \emph{jogador linha} teria um ganho de \emph{-12} ao \emph{Negar} e um ganho de \emph{-8} ao \emph{Confessar}. Em ambos os casos, o \emph{jogador linha} terá um melhor ganho ao \emph{Confessar}, e como o jogo é simétrico o mesmo raciocínio pode ser feito para o \emph{jogador coluna}.
 
 Essa preferência de \emph{Confessar} a \emph{Negar} para cada escolha do outro jogador (\emph{Negar} ou \emph{Confessar}) é dito que \emph{Confessar} é estritamente dominante.
 
 \subsubsection{Eliminação iterada de estratégias estritamente dominadas}
 
-Eliminação por dominância estrita iterada, como o próprio nome já diz, é um processo iterado no qual estratégias são eliminadas por serem dominadas estritamente \cite{spaniel_2011}. Se uma estratégia for estritamente dominada, elimine-a imediatamente, não importando a ordem da eliminação. Se ao final do processo sobrar apenas uma única célula, este resultado será alcançado começando a eliminação por qualquer estratégia estritamente dominada. Considere a tabela \ref{tab:dominancia-estrita-iterada}.
+Eliminação por dominância estrita iterada, como o próprio nome já diz, é um processo iterado no qual estratégias são eliminadas por serem dominadas estritamente \cite{spaniel_2011}. Se uma estratégia for estritamente dominada, elimine-a imediatamente, não importando a ordem da eliminação. Se ao final do processo sobrar apenas uma única célula, este resultado será alcançado começando a eliminação por qualquer estratégia estritamente dominada. Considere a Tabela \ref{tab:dominancia-estrita-iterada}.
 
 \begin{table}[ht]
 \centering
@@ -314,12 +314,12 @@ Eliminação por dominância estrita iterada, como o próprio nome já diz, é u
 \label{tab:dominancia-estrita-iterada}
 \end{table}
 
-Na tabela \ref{tab:dominancia-estrita-iterada}, o \emph{jogador linha} tem três estratégias \emph{cima}, \emph{meio} e \emph{baixo}, enquanto o \emph{jogador coluna} possui as estratégias \emph{esquerda}, \emph{centro} e \emph{direita}, gerando um total de 9 resultados.
+Na Tabela \ref{tab:dominancia-estrita-iterada}, o \emph{jogador linha} tem três estratégias \emph{cima}, \emph{meio} e \emph{baixo}, enquanto o \emph{jogador coluna} possui as estratégias \emph{esquerda}, \emph{centro} e \emph{direita}, gerando um total de 9 resultados.
 Observando as estratégias do \emph{jogador linha}, não é possível fazer nenhuma dominância estrita, pois o \emph{jogador linha} possui uma preferência diferente de suas próprias estratégias para cada estratégia do \emph{jogador coluna}. No caso da estratégia \emph{esquerda}, a melhor estratégia para o \emph{jogador linha} é \emph{cima}, assim como \emph{centro} e \emph{meio}, e \emph{direita} e \emph{baixo}.
 
 Porém, observando as estratégias \emph{centro} e \emph{direita}, é possível eliminar a segunda estratégia por dominância estrita, pois, para o \emph{jogador coluna}, todos os ganhos da estratégia \emph{centro} são melhores do que os ganhos da estratégia \emph{direita}. Com a eliminação da estratégia \emph{direita}, é possível eliminar a estratégia \emph{baixo}, que é estritamente dominada pela estratégia \emph{meio} para o \emph{jogador linha}. Com essas duas eliminações, é possível eliminar as estratégias \emph{esquerda}, pois, para o jogador \emph{jogador coluna}, é estritamente dominada pela estratégia \emph{centro}, e por fim, para o jogador \emph{jogador linha}, a estratégia \emph{cima} é estritamente dominada pela estratégia \emph{meio}.
 
-No final da eliminação iterada de estratégias estritamente dominadas. sobra apenas uma única célula da tabela \ref{tab:dominancia-estrita-iterada}, como demonstrado na tabela \ref{tab:final-dominancia-estrita-iterada}, e é chamado de \textbf{equilíbrio de estratégia dominante}.
+No final da eliminação iterada de estratégias estritamente dominadas. sobra apenas uma única célula da Tabela \ref{tab:dominancia-estrita-iterada}, como demonstrado na Tabela \ref{tab:final-dominancia-estrita-iterada}, e é chamado de \textbf{equilíbrio de estratégia dominante}.
 
 \begin{table}[ht]
 \centering
@@ -338,7 +338,7 @@ No final da eliminação iterada de estratégias estritamente dominadas. sobra a
 
 \subsubsection{Estratégias mistas}
 
-Considere a situação a seguir: Dois caçadores devem decidir o que caçar no dia e levar o equipamento apropriado. Eles sabem que, no local de caça, existem duas lebres, que valem uma unidade de carne cada, e um veado, que vale seis unidades de carne. O veado vale mais carne dividindo para cada um do que a soma das duas lebres, mas é preciso o auxílio do outro caçador para caçar um veado, enquanto as lebres podem ser caçadas sem nenhuma ajuda \cite{spaniel_2011}. Estas informações são condensadas na tabela \ref{tab:caca-ao-viado}.
+Considere a situação a seguir: Dois caçadores devem decidir o que caçar no dia e levar o equipamento apropriado. Eles sabem que, no local de caça, existem duas lebres, que valem uma unidade de carne cada, e um veado, que vale seis unidades de carne. O veado vale mais carne dividindo para cada um do que a soma das duas lebres, mas é preciso o auxílio do outro caçador para caçar um veado, enquanto as lebres podem ser caçadas sem nenhuma ajuda \cite{spaniel_2011}. Estas informações são condensadas na Tabela \ref{tab:caca-ao-viado}.
 
 \begin{table}[ht]
 \centering

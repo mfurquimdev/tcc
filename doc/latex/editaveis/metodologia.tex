@@ -17,7 +17,7 @@ A possibilidade de encontrar a solução para este jogo depende da quantidade de
 
 \subsection{Espaço de armazenamento}
 
-A quantidade de memória necessária para armazenar um \emph{estado} do jogo depende das características que descrevem um \emph{estado}. Como dito anteriormente, o jogo pode ter até cinco jogadores, possui um tabuleiro com 55 discos, uma escada com cinco degraus, e cinco peões no qual a posição varia entre 0 e 60. Considerando que o estado inicial do tabuleiro é aleatório mas conhecido desde o começo da partida e que os discos não mudam de posição, é possível representar o tabuleiro com uma máscara binária indicando se o disco está ou não disponível, $\nicefrac{55\ D_{iscos}}{8\ B_{its}}$. A posição de cada peão pode ser representada por um \emph{char}, pois varia apenas entre 0 e 60, sendo que 0 indica que o peão não está no tabuleiro, 1 a 55 indica a posição que o peão está no tabuleiro e 56 a 60 indica a posição na escada. Por fim, para representar a mão de cada jogador, foi utilizado sete \emph{chars}, cada um indicando a quantidade de discos de uma determinada cor, e como são cinco jogadores, tem-se $5\cdot 7$. Todos esses \emph{bytes} são somados como demonstrado na equanção \ref{eq:bytes}, totalizando $47$ bytes na memória por estado da partida.
+A quantidade de memória necessária para armazenar um \emph{estado} do jogo depende das características que descrevem um \emph{estado}. Como dito anteriormente, o jogo pode ter até cinco jogadores, possui um tabuleiro com 55 discos, uma escada com cinco degraus, e cinco peões no qual a posição varia entre 0 e 60. Considerando que o estado inicial do tabuleiro é aleatório mas conhecido desde o começo da partida e que os discos não mudam de posição, é possível representar o tabuleiro com uma máscara binária indicando se o disco está ou não disponível, $\nicefrac{55\ D_{iscos}}{8\ B_{its}}$. A posição de cada peão pode ser representada por um \emph{char}, pois varia apenas entre 0 e 60, sendo que 0 indica que o peão não está no tabuleiro, 1 a 55 indica a posição que o peão está no tabuleiro e 56 a 60 indica a posição na escada. Por fim, para representar a mão de cada jogador, foi utilizado sete \emph{chars}, cada um indicando a quantidade de discos de uma determinada cor, e como são cinco jogadores, tem-se $5\cdot 7$. Todos esses \emph{bytes} são somados como demonstrado na Equação \ref{eq:bytes}, totalizando $47$ bytes na memória por estado da partida.
 
 \begin{equation} \label{eq:bytes} \tag{e.q. Bytes na memória}
 \begin{split}
@@ -27,7 +27,7 @@ Bytes\ &=\ 47\ bytes
 \end{equation}
 
 \subsection{Quantidade de partidas distintas}
-As características importantes que distinguem uma partida da outra no jogo \emph{Big Points} são: (a) a quantidade de jogadores e; (b) a ordem dos discos no tabuleiro. O jogo pode ser jogado de dois a cinco jogadores ($J$) e o tabuleiro possui 55 discos no total ($D_T$), 5 das cores \emph{branco} ($D_W$) e \emph{preto} ($D_K$), e 9 das cores \emph{Vermelho} ($D_R$), \emph{Verde} ($D_G$), \emph{Azul} ($D_B$), \emph{Amarelo} ($D_Y$) e \emph{Violeta} ($D_V$). Com isso, tem-se que a quantidade de jogos distintos é a combinação dos discos e dos jogadores. Considerando $\#D_{L1} = \#D_T - \#D_W$ como o restante dos discos após a primeira combinação, $\#D_{L2} = \#D_{L1} - \#D_K$ o restante da segunda combinação, e assim sucessivamente, temos a equação \ref{eq:partidas}.
+As características importantes que distinguem uma partida da outra no jogo \emph{Big Points} são: (a) a quantidade de jogadores e; (b) a ordem dos discos no tabuleiro. O jogo pode ser jogado de dois a cinco jogadores ($J$) e o tabuleiro possui 55 discos no total ($D_T$), 5 das cores \emph{branco} ($D_W$) e \emph{preto} ($D_K$), e 9 das cores \emph{Vermelho} ($D_R$), \emph{Verde} ($D_G$), \emph{Azul} ($D_B$), \emph{Amarelo} ($D_Y$) e \emph{Violeta} ($D_V$). Com isso, tem-se que a quantidade de jogos distintos é a combinação dos discos e dos jogadores. Considerando $\#D_{L1} = \#D_T - \#D_W$ como o restante dos discos após a primeira combinação, $\#D_{L2} = \#D_{L1} - \#D_K$ o restante da segunda combinação, e assim sucessivamente, temos a Equação \ref{eq:partidas}.
 
  \begin{equation}
 	 \label{eq:partidas}
@@ -40,7 +40,7 @@ As características importantes que distinguem uma partida da outra no jogo \emp
  \end{split}
  \end{equation}
 
-Como demonstrado na equação \ref{eq:partidas}, a quantidade de partidas distintas é superior a $5\times 10^{41}$. Considerando a possibilidade de solucionar uma partida do jogo por segundo, este resolução levaria mais do que $10^{34}$ anos, como demonstrado na equação \ref{eq:anos_partidas}.
+Como demonstrado na Equação \ref{eq:partidas}, a quantidade de partidas distintas é superior a $5\times 10^{41}$. Considerando a possibilidade de solucionar uma partida do jogo por segundo, este resolução levaria mais do que $10^{34}$ anos, como demonstrado na Equação \ref{eq:anos_partidas}.
 
  \begin{equation} \label{eq:anos_partidas} \tag{e.q. Tempo de Computação das Partidas}
  \begin{split}
@@ -54,7 +54,7 @@ Como demonstrado na equação \ref{eq:partidas}, a quantidade de partidas distin
 \subsection{Quantidade de estados}
 \label{subsec:quantidade-de-estados}
 
-Dado uma partida inicial $\gammaup \in \Gamma$ de \emph{Big Points}, sendo $\Gamma$ o conjunto contendo todas as $5\times 10^{41}$ partidas distintas, foi calculado a quantidade de estados de $\gammaup$. Para realizar este cálculo do número de estados, foi preciso determinar as características que definem um estado do jogo. De acordo com a seção \ref{subsec:regras-do-jogo}, tem-se que essas características são: (a) o estado do tabuleiro; (b) o estado dos peões; (c) o estado da escada; (d) o estado dos discos na mão dos jogadores e; (e) o jogador atual.
+Dado uma partida inicial $\gammaup \in \Gamma$ de \emph{Big Points}, sendo $\Gamma$ o conjunto contendo todas as $5\times 10^{41}$ partidas distintas, foi calculado a quantidade de estados de $\gammaup$. Para realizar este cálculo do número de estados, foi preciso determinar as características que definem um estado do jogo. De acordo com a Seção \ref{subsec:regras-do-jogo}, tem-se que essas características são: (a) o estado do tabuleiro; (b) o estado dos peões; (c) o estado da escada; (d) o estado dos discos na mão dos jogadores e; (e) o jogador atual.
 
 \subsubsection{Quantidade de Estados do Tabuleiro}
 
@@ -66,7 +66,7 @@ A próxima característica que define o estado de uma partida é o estado dos pe
 
 \subsubsection{Quantidade de Estados da Escada}
 
-O terceiro estado importante é o estado da escada. Inicialmente a escada pode estar vazia, e então pode ter um peão de qualquer cor no topo. Para cada peão no topo da escada, é possível ter qualquer outra cor, que não seja aquela já escolhida, na posição anterior à do topo. Seguindo essa lógica, tem-se que a quantidade de estados da escada é um somatório de arranjos como demonstrado na equação \ref{eq:estado_da_escada}.
+O terceiro estado importante é o estado da escada. Inicialmente a escada pode estar vazia, e então pode ter um peão de qualquer cor no topo. Para cada peão no topo da escada, é possível ter qualquer outra cor, que não seja aquela já escolhida, na posição anterior à do topo. Seguindo essa lógica, tem-se que a quantidade de estados da escada é um somatório de arranjos como demonstrado na Equação \ref{eq:estado_da_escada}.
 
 \begin{equation} \label{eq:estado_da_escada} \tag{e.q. Estado da escada}
 \begin{split}
@@ -81,7 +81,7 @@ O terceiro estado importante é o estado da escada. Inicialmente a escada pode e
 
 A outra característica é o estado dos discos na mão dos jogadores. Entendendo que a quantidade de discos é sempre a mesma ao longo do jogo e que a única coisa que altera é o local do disco (se está no tabuleiro ou na mão de algum jogador), então a seguinte equação sempre deve ser respeitada: $F+J_1+J_2+J_3+J_4+J_5 = 10$. Nessa simples representação, o $F$ corresponde à quantidade de discos que estão fora da mão dos jogadores, $J_1$ à $J_5$ à quantidade de discos na mão dos jogadores de 1 à 5.
 
-Uma outra abordagem para explicar tal estado é imaginar que cada disco corresponde ao caracter \emph{o} e o símbolo \emph{+} separa a mão dos jogadores e tabuleiro. Logo, é fácil de ver que no estado inicial, todos os discos estão no tabuleiro, sendo representado pelo estado $oooooooooo+++++=10$. Caso o primeiro jogador consiga um disco daquela cor, o estado é alterado para $ooooooooo+o++++=10$. Se, posteriormente, o jogador 4 colete 3 discos e o jogador 5 mais 5, o estado seria $o+o+++ooo+ooooo=10$. O cálculo para descobrir a quantidade de estados para cada disco comum é uma combinação de 15 elementos tomados de 5 a 5, como demonstrado na equação \ref{eq:estado_dos_discos_comuns}, e para cada disco especial é a combinação de 10 elementos tomados de 5 a 5, como demonstrado na equação \ref{eq:estado_dos_discos_especiais}.
+Uma outra abordagem para explicar tal estado é imaginar que cada disco corresponde ao caracter \emph{o} e o símbolo \emph{+} separa a mão dos jogadores e tabuleiro. Logo, é fácil de ver que no estado inicial, todos os discos estão no tabuleiro, sendo representado pelo estado $oooooooooo+++++=10$. Caso o primeiro jogador consiga um disco daquela cor, o estado é alterado para $ooooooooo+o++++=10$. Se, posteriormente, o jogador 4 colete 3 discos e o jogador 5 mais 5, o estado seria $o+o+++ooo+ooooo=10$. O cálculo para descobrir a quantidade de estados para cada disco comum é uma combinação de 15 elementos tomados de 5 a 5, como demonstrado na Equação \ref{eq:estado_dos_discos_comuns}, e para cada disco especial é a combinação de 10 elementos tomados de 5 a 5, como demonstrado na Equação \ref{eq:estado_dos_discos_especiais}.
 
 \begin{equation} \label{eq:estado_dos_discos_comuns} \tag{e.q. Estado dos discos comuns}
 \begin{split}
@@ -101,7 +101,7 @@ Uma outra abordagem para explicar tal estado é imaginar que cada disco correspo
 \end{split}
 \end{equation}
 
-Ao final, tem-se que a quantidade de estados distintos dos discos é igual ao produto dos estados de cada disco individual, resultando na equação \ref{eq:estado_dos_discos}
+Ao final, tem-se que a quantidade de estados distintos dos discos é igual ao produto dos estados de cada disco individual, resultando na Equação \ref{eq:estado_dos_discos}
 
 \begin{equation} \label{eq:estado_dos_discos} \tag{e.q. Estado dos discos}
 \begin{split}
@@ -119,7 +119,7 @@ A quantidade de estados distintos para o jogador atual é simplesmente a quantid
 
 \subsubsection{Quantidade de Estados Total}
 
-Como demonstrado na equação \ref{eq:estados}, a quantidade de estados existentes para uma partida é o produto de todos os estados. Considerando um caso geral, esse número excede $6\times 10^{37}$, levando mais de $2\times 10^{30}$ anos para calcular todos os estados a uma velocidade de $1 \nicefrac{E_{stado}}{S_{egundo}}$.
+Como demonstrado na Equação \ref{eq:estados}, a quantidade de estados existentes para uma partida é o produto de todos os estados. Considerando um caso geral, esse número excede $6\times 10^{37}$, levando mais de $2\times 10^{30}$ anos para calcular todos os estados a uma velocidade de $1 \nicefrac{E_{stado}}{S_{egundo}}$.
 
 \begin{equation} \label{eq:estados} \tag{e.q. Caso Geral}
 \begin{split}
@@ -144,7 +144,7 @@ Podas são limites impostos à busca na árvore de possibilidades de jogadas. A 
 
 \subsubsection{Poda por Posição do Peão}
 
-No cálculo da quantidade de estados distintos para a posição dos peões foi levado em consideração que um peão poderia estar em qualquer uma de 61 posições. Na verdade, um peão só pode ficar em cima dos discos de sua própria cor, reduzindo esse número para $1+9+5=11$, sendo que o peão pode estar fora do tabuleiro (1), em cima de algum disco de sua cor (9) e em algum degrau da escada (5). Porém, mesmo com essa poda, o número de estados distintos do jogo, de acordo com a equação \ref{eq:poda1}, é superior a $1\times 10^{34}$, demorando mais do que $3\times10^{26}$ anos para resolver um jogo (equação \ref{eq:anos_poda1}).
+No cálculo da quantidade de estados distintos para a posição dos peões foi levado em consideração que um peão poderia estar em qualquer uma de 61 posições. Na verdade, um peão só pode ficar em cima dos discos de sua própria cor, reduzindo esse número para $1+9+5=11$, sendo que o peão pode estar fora do tabuleiro (1), em cima de algum disco de sua cor (9) e em algum degrau da escada (5). Porém, mesmo com essa poda, o número de estados distintos do jogo, de acordo com a Equação \ref{eq:poda1}, é superior a $1\times 10^{34}$, demorando mais do que $3\times10^{26}$ anos para resolver um jogo (Equação \ref{eq:anos_poda1}).
 
 \begin{equation} \label{eq:poda1} \tag{e.q. Poda por posição}
 \begin{split}
@@ -167,6 +167,6 @@ Anos\ &\approx 3\times10^{26}
 
 Foi desenvolvido um programa para calcular a quantidade aproximada de estados distintos de uma partida reduzida do jogo \emph{Big Points}. Dado $d$ discos e $p$ peões, o programa realiza todos os movimentos possíveis no primeiro turno, movendo uma vez com cada peão, além de capturar o disco atrás e à frente do peão. Então, recursivamente, a função de mover e coletar discos é chamada, cobrindo cada possibilidade de jogada.
 
-O cálculo da quantidade de estados difere do proposto da seção \ref{subsec:quantidade-de-estados} pois não representa o tabuleiro como uma máscara binária, mas sim como um conjunto de caracteres. O caracter 0 representa que aquele disco naquela posição está indisponível, ou seja, já foi capturado por um jogador. Os caracteres 1,2,3,4 e 5 representam as cores Vermelha, Verde, Azul, Amarela e Violeta, respectivamente, e os caracteres \emph{R}, \emph{G}, \emph{B}, \emph{Y}, \emph{V} representam os peões Vermelho, Verde, Azul, Amarelo e Violeta, respectivamente, percorrendo o tabuleiro até o fim. Não foi levado em consideração os discos na mão dos jogadores, e nem os estados da escada.
+O cálculo da quantidade de estados difere do proposto da Seção \ref{subsec:quantidade-de-estados} pois não representa o tabuleiro como uma máscara binária, mas sim como um conjunto de caracteres. O caracter 0 representa que aquele disco naquela posição está indisponível, ou seja, já foi capturado por um jogador. Os caracteres 1,2,3,4 e 5 representam as cores Vermelha, Verde, Azul, Amarela e Violeta, respectivamente, e os caracteres \emph{R}, \emph{G}, \emph{B}, \emph{Y}, \emph{V} representam os peões Vermelho, Verde, Azul, Amarelo e Violeta, respectivamente, percorrendo o tabuleiro até o fim. Não foi levado em consideração os discos na mão dos jogadores, e nem os estados da escada.
 
 \lstinputlisting[language=C, firstline=7,label = {cod:boards-state}, caption = {\textit{Quantidade de Estados Aproximados}} ]{../../util/boards_state.cpp }
