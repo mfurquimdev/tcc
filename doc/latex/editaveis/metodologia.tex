@@ -6,33 +6,37 @@
 \label{sec:levantamento-bibliografico}
 Após a definição do tema, foi realizado uma pesquisa a respeito dos conceitos básicos da Teoria dos Jogos, a existência de trabalhos semelhantes e materiais suficientes para a realização deste trabalho.
 
-
 \section{Lista de Equipamentos e Softwares}
 \label{sec:lista-de-equipamentos-e-softwares}
 
 Para a realização deste trabalho foi utilizado um computador da linha \emph{Inspiron 14Rx} fabricado pela \emph{Dell}, no qual possui processador \emph{Intel Core i7} de 2,2 GHz, GPU \emph{NVIDIA GeForce GT 630M} de 1GB e 8GB de memória RAM. Quanto aos softwares utilizados, foram apenas os pacotes básicos de desenvolvimento em C/C++, incluindo \emph{GCC} e \emph{GNU Makefile}. Para serviço de versionamento foi utilizado o \emph{GitHub} e para controle de tarefas e \emph{issues} foi utilizado o \emph{waffle.io}.
 
-
 \section{Análise combinatória}
 
+A possibilidade de encontrar a solução para este jogo depende da quantidade de estados existentes e da quantidade de espaço cada estado ocupará na memória. Se for possível calcular para uma partida, foi feito uma análise combinatória para descobrir a possibilidade de encontrar uma solução para várias partidas distintas.
+
 \subsection{Número de partidas distintas}
-O jogo \emph{Big Points} possui 55 discos no tabuleiro e podem jogar de dois a cinco jogadores. Com isso, tem-se que a quantidade de jogos distintos, como demonstrado na equação \ref{eq_partidas}, é maior do que $5\times 10^{41}$. Considerando a possibilidade de calcular a melhor estratégia para cada jogo por segundo, este cálculo levaria mais do que $10^{34}$ anos.
+As características importantes que distinguem uma partida da outra no jogo \emph{Big Points} são: (a) a quantidade de jogadores e; (b) a ordem dos discos no tabuleiro. O jogo pode ser jogado de dois a cinco jogadores ($J$) e o tabuleiro possui 55 discos no total ($D_T$), 5 das cores \emph{branco} ($D_W$) e \emph{preto} ($D_K$), e 9 das cores \emph{Vermelho} ($D_R$), \emph{Verde} ($D_G$), \emph{Azul} ($D_B$), \emph{Amarelo} ($D_Y$) e \emph{Violeta} ($D_V$). Com isso, tem-se que a quantidade de jogos distintos é a combinação dos discos e dos jogadores, como demonstrado na equação \ref{eq_partidas}, resultando em um número maior do que $5\times 10^{41}$.
+
+Considerando $\#D_{L1} = \#D_T - \#D_W$ como o restante dos discos após a primeira combinação, $\#D_{L2} = \#D_{L1} - \#D_K$ o restante da segunda combinação, e assim sucessivamente, temos a equação \ref{eq_partidas}.
 
  \begin{equation}
 	 \label{eq_partidas}
 	 \tag{e.q. Números de Partidas Distintas}
  \begin{split}
- Partidas\ &=\  (\#J-1) \times \binom{\#D_T}{\#D_W} \times \binom{\#D_{L1}}{\#D_K} \times \binom{\#D_{L2}}{\#D_R} \times \binom{\#D_{L3}}{\#D_G} \times \binom{\#D_{L4}}{\#D_B} \times \binom{\#D_{L5}}{\#D_Y} \times \binom{\#D_{L6}}{\#D_P}\\
- Partidas\ &=\  4\times \binom{55}{5} \times \binom{50}{5} \times \binom{45}{9} \times \binom{36}{9} \times \binom{27}{9} \times \binom{18}{9} \times \binom{9}{9}\\
+ Partidas\ &=\  (\#J-1) \cdot \binom{\#D_T}{\#D_W} \cdot \binom{\#D_{L1}}{\#D_K} \cdot \binom{\#D_{L2}}{\#D_R} \cdot \binom{\#D_{L3}}{\#D_G} \cdot \binom{\#D_{L4}}{\#D_B} \cdot \binom{\#D_{L5}}{\#D_Y} \cdot \binom{\#D_{L6}}{\#D_V}\\
+ Partidas\ &=\  4\cdot \binom{55}{5} \cdot \binom{50}{5} \cdot \binom{45}{9} \cdot \binom{36}{9} \cdot \binom{27}{9} \cdot \binom{18}{9} \cdot \binom{9}{9}\\
  Partidas\ &=\ 560'483'776'167'774'018'942'304'261'616'685'408'000'000\\
  Partidas\ &\approx 5\times 10^{41}
  \end{split}
  \end{equation}
 
+Considerando a possibilidade de solucionar uma partida do jogo por segundo, este cálculo levaria mais do que $10^{34}$ anos, como demonstrado na equação \ref{eq_anos_partidas}.
+
  \begin{equation} \label{eq_anos_partidas} \tag{e.q. Tempo de Computação das Partidas}
  \begin{split}
- Anos\ &=\ \dfrac{N_{partidas\ distintas}}{\nicefrac{partida}{segundo}\times\nicefrac{segundos}{minuto}\times\nicefrac{minutos}{hora}\times\nicefrac{horas}{dia}\times\nicefrac{dias}{ano}}\\
- Anos\ &=\ \dfrac{560'483'776'167'774'018'942'304'261'616'685'408'000'000}{\nicefrac{1}{1}\times\nicefrac{60}{1}\times\nicefrac{60}{1}\times\nicefrac{24}{1}\times\nicefrac{365}{1}}\\
+ Anos\ &=\ \dfrac{N_{partidas\ distintas}}{\nicefrac{partida}{segundo}\cdot\nicefrac{segundos}{minuto}\cdot\nicefrac{minutos}{hora}\cdot\nicefrac{horas}{dia}\cdot\nicefrac{dias}{ano}}\\
+ Anos\ &=\ \dfrac{560'483'776'167'774'018'942'304'261'616'685'408'000'000}{\nicefrac{1}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{24}{1}\cdot\nicefrac{365}{1}}\\
  Anos\ &=\ 96'526'964'154'064'571'465'728\\
  Anos\ &\approx 9\times 10^{34}
  \end{split}
@@ -44,7 +48,7 @@ Dado uma partida inicial $\gammaup \in \Gamma$ de \emph{Big Points}, sendo $\Gam
 
 \begin{equation} \label{eq_estados} \tag{e.q. Caso Geral}
 \begin{split}
-Estados\ &=\ 2^{55}\times 61^{5}\times (10^{5} + 6^{2})\\
+Estados\ &=\ 2^{55}\cdot 61^{5}\cdot (10^{5} + 6^{2})\\
 Estados\ &=\ 3'044'074'341'562'580'507'100'339'765'248\\
 Estados\ &\approx 3\times 10^{31}
 \end{split}
@@ -52,19 +56,19 @@ Estados\ &\approx 3\times 10^{31}
 
 \begin{equation} \label{eq_anos_estados} \tag{e.q. Tempo de Computação dos Estados}
 \begin{split}
-Anos\ &=\ \dfrac{N_{estados\ distintos}}{\nicefrac{estado}{segundo}\times\nicefrac{segundos}{minuto}\times\nicefrac{minutos}{hora}\times\nicefrac{horas}{dia}\times\nicefrac{dias}{ano}}\\
-Anos\ &=\ \dfrac{3'044'074'341'562'580'507'100'339'765'248}{\nicefrac{1}{1}\times\nicefrac{60}{1}\times\nicefrac{60}{1}\times\nicefrac{24}{1}\times\nicefrac{365}{1}}\\
+Anos\ &=\ \dfrac{N_{estados\ distintos}}{\nicefrac{estado}{segundo}\cdot\nicefrac{segundos}{minuto}\cdot\nicefrac{minutos}{hora}\cdot\nicefrac{horas}{dia}\cdot\nicefrac{dias}{ano}}\\
+Anos\ &=\ \dfrac{3'044'074'341'562'580'507'100'339'765'248}{\nicefrac{1}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{24}{1}\cdot\nicefrac{365}{1}}\\
 Anos\ &=\ 96'526'964'154'064'571'465'728
 \end{split}
 \end{equation}
 
 \subsection{Espaço de armazenamento}
 
-A quantidade de memória necessária para armazenar um \emph{estado} do jogo depende das características que descrevem um \emph{estado}. Como dito anteriormente, o jogo pode ter até cinco jogadores, possui um tabuleiro com 55 discos, uma escada com cinco degraus, e cinco peões no qual a posição varia entre 0 e 60. Considerando que o estado inicial do tabuleiro é aleatório mas conhecido desde o começo da partida e que os discos não mudam de posição, é possível representar o tabuleiro com uma máscara binária indicando se o disco está ou não disponível, $\nicefrac{55\ D_{iscos}}{8\ B_{its}}$. A posição de cada peão pode ser representada por um \emph{char}, pois varia apenas entre 0 e 60, sendo que 0 indica que o peão não está no tabuleiro, 1 a 55 indica a posição que o peão está no tabuleiro e 56 a 60 indica a posição na escada. Por fim, para representar a mão de cada jogador, foi utilizado sete \emph{chars}, cada um indicando a quantidade de discos de uma determinada cor, e como são cinco jogadores, tem-se $5\times 7$. Todos esses \emph{bytes} são somados como demonstrado na equanção \ref{eq_bytes}, totalizando $47$ bytes.
+A quantidade de memória necessária para armazenar um \emph{estado} do jogo depende das características que descrevem um \emph{estado}. Como dito anteriormente, o jogo pode ter até cinco jogadores, possui um tabuleiro com 55 discos, uma escada com cinco degraus, e cinco peões no qual a posição varia entre 0 e 60. Considerando que o estado inicial do tabuleiro é aleatório mas conhecido desde o começo da partida e que os discos não mudam de posição, é possível representar o tabuleiro com uma máscara binária indicando se o disco está ou não disponível, $\nicefrac{55\ D_{iscos}}{8\ B_{its}}$. A posição de cada peão pode ser representada por um \emph{char}, pois varia apenas entre 0 e 60, sendo que 0 indica que o peão não está no tabuleiro, 1 a 55 indica a posição que o peão está no tabuleiro e 56 a 60 indica a posição na escada. Por fim, para representar a mão de cada jogador, foi utilizado sete \emph{chars}, cada um indicando a quantidade de discos de uma determinada cor, e como são cinco jogadores, tem-se $5\cdot 7$. Todos esses \emph{bytes} são somados como demonstrado na equanção \ref{eq_bytes}, totalizando $47$ bytes na memória por estado da partida.
 
 \begin{equation} \label{eq_bytes} \tag{e.q. Bytes na memória}
 \begin{split}
-Bytes\ &=\ \dfrac{55}{8} + 5 + 5\times 7\\
+Bytes\ &=\ \dfrac{55}{8} + 5 + 5\cdot 7\\
 Bytes\ &=\ 47\ bytes
 \end{split}
 \end{equation}
@@ -79,21 +83,19 @@ de um jogo é reduzido, mas ainda se encontra na ordem de $10^{21}$.
 
 \begin{equation} \label{eq_poda1} \tag{e.q. Poda por posição}
 \begin{split}
-Estados\ &=\ 2^{55}\times 11\times 5\times (5\times 10 + 2\times 6)\\
-Estados\ &=\ 2^{55}\times 11\times 5\times 72\\
+Estados\ &=\ 2^{55}\cdot 11\cdot 5\cdot (5\times 10 + 2\cdot 6)\\
+Estados\ &=\ 2^{55}\cdot 11\cdot 5\cdot 72\\
 Estados\ &=\ 142'674'036'195'097'313'280
 \end{split}
 \end{equation}
 
 \begin{equation} \label{eq_anos_estados} \tag{e.q. Tempo de Computação dos Estados}
 \begin{split}
-Anos\ &=\ \dfrac{N_{estados\ distintos}}{\nicefrac{estado}{segundo}\times\nicefrac{segundos}{minuto}\times\nicefrac{minutos}{hora}\times\nicefrac{horas}{dia}\times\nicefrac{dias}{ano}}\\
-Anos\ &=\ \dfrac{142'674'036'195'097'313'280}{\nicefrac{1}{1}\times\nicefrac{60}{1}\times\nicefrac{60}{1}\times\nicefrac{24}{1}\times\nicefrac{365}{1}}\\
+Anos\ &=\ \dfrac{N_{estados\ distintos}}{\nicefrac{estado}{segundo}\cdot\nicefrac{segundos}{minuto}\cdot\nicefrac{minutos}{hora}\cdot\nicefrac{horas}{dia}\cdot\nicefrac{dias}{ano}}\\
+Anos\ &=\ \dfrac{142'674'036'195'097'313'280}{\nicefrac{1}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{24}{1}\cdot\nicefrac{365}{1}}\\
 Anos\ &=\ 4'524'164'009'230
 \end{split}
 \end{equation}
-
-
 
 
 \begin{itemize}

@@ -4,71 +4,187 @@
 \section{O que é Teoria dos Jogos?}
 \label{sec:o-que-e-teoria-dos-jogos}
 
-Teoria dos jogos é o estudo do comportamento estratégico interdependente\footnote{Estratégia interdependente significa que as ações de uma pessoa interfere no resultado da outra, e vice-versa.}\cite{spaniel_2011}, não apenas o estudo de como vencer ou perder em um jogo, apesar de às vezes esses dois fatos coincidem. Isso faz com que o escopo seja mais abranjente, desde comportamentos no qual as duas pessoas devem cooperar para ganhar, ou as duas tentam se ajudar, ou, por fim, comportamento de duas pessoas que tentam vencer individualmente.
+Teoria dos jogos é o estudo do comportamento estratégico interdependente\footnote{Estratégia interdependente significa que as ações de uma pessoa interfere no resultado da outra, e vice-versa.} \cite{spaniel_2011}, não apenas o estudo de como vencer ou perder em um jogo, apesar de às vezes esses dois fatos coincidem. Isso faz com que o escopo seja mais abranjente, desde comportamentos no qual as duas pessoas devem cooperar para ganhar, ou as duas tentam se ajudar, ou, por fim, comportamento de duas pessoas que tentam vencer individualmente.
 
 \section{Histórico da Teoria dos Jogos}
 \label{sec:historico-da-teoria-dos-jogos}
 
-Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite{Prague_severalmilestones}, explicado na seção \ref{subsec:analise-primitiva-do-jogo-le-her}. No século seguinte, Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política \cite{cournot_1838}. Mais recentemente, em 1913, Ernst Zermelo publica o primeiro teorema matemático da teoria dos jogos \cite{zermelo_1913}.
+Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}, explicado na seção \ref{subsec:analise-primitiva-do-jogo-le-her}. No século seguinte, Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política. Mais recentemente, em 1913, Ernst Zermelo publica o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
 
-Dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou três artigos \cite{borel_1921} \cite{borel_1924} \cite{borel_1927} e um livro \cite{borel_1938} sobre jogos estratégicos, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista. Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero\footnote{Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.} com duas pessoas possui uma solução em estratégias mistas \cite{neumann_1928}. Em 1944, Neumann publicou um trabalho, junto a Oscar Morgenstern \cite{neumann_1944}, e com isso, a teoria dos jogos entrou na área da economia e matemática aplicada.
+Dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista. Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero\footnote{Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.} com duas pessoas possui uma solução em estratégias mistas. Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
 
-Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que publicou quatro artigos importantes para teoria dos jogos não-cooperativos. Dois destes artigos \cite{nash_1950} \cite{nash_1951} provando a existência de um equilíbrio de estratégias mistas para jogos não-cooperativos, denominado \textbf{equilíbrio de Nash}, que será explicado na seção \ref{subsubsec:equilibrio-de-nash}. Nash recebeu o prêmio Nobel em 1994, junto com John Harsanyi e Reinhard Selten, por suas contribuições para a teoria dos jogos.
+Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que publicou quatro artigos importantes para teoria dos jogos não-cooperativos. Dois destes artigos provando a existência de um equilíbrio de \textbf{estratégias mistas} para jogos não-cooperativos, denominado \textbf{equilíbrio de Nash}. Os conceitos de estratégia mista será explicado na seção \ref{subsubsec:estrategias-mistas} e equilíbrio de nash na seção \ref{subsubsec:equilibrio-de-nash}. Nash recebeu o prêmio Nobel em 1994, junto com John Harsanyi e Reinhard Selten, por suas contribuições para a teoria dos jogos \cite[p.~3--4]{sartini_IIbienaldasbm}.
 
 \section{Conceitos Fundamentais da Teoria dos Jogos}
 \label{sec:conceitos-fundamentais-da-teoria-dos-jogos}
 
-Esta seção introduz os conceitos fundamentais da teoria dos jogos, tais como definição de um jogo não cooperativo, formas de representá-lo e teoremas para encontrar soluções.
+Esta seção introduz os conceitos fundamentais da teoria dos jogos, tais como definição de um jogo não cooperativo, formas de representá-lo e teoremas para encontrar soluções. Para tanto, considere o exemplo do jogo \emph{Renée v Peter} retirado do livro \cite{jones_1980}.
+
+\theoremstyle{definition}
+\newtheorem{ex:renee-v-peter}{Exemplo}
+
+\begin{ex:renee-v-peter}\label{ex:renee-v-peter}
+O jogo \emph{Renée v Peter} é jogado com três cartas: Rei ($K$), Dez ($T$) e Dois ($D$). \emph{Renée} escolhe uma carta dentre as três, coloca-a voltada para baixo e \emph{Peter} escolhe \emph{Alta} ou \emph{Baixa}. \emph{Peter} ganha R\$ 3 de \emph{Renée} se acertar (\emph{Alta} $=\ K$ e \emph{Baixa} $=\ D$), mas deve pagar R\$ 2 se errar.
+
+Caso a carta escolhida por \emph{Renée} seja o $T$, se \emph{Peter} escolheu \emph{baixa}, então \emph{Renée} deve pagar R\$ 2, se \emph{Peter} escolheu \emph{alta}, então \emph{Renée} escolhe uma dentre as duas cartas restantes. Se \emph{Peter} acertar a segunda carta, \emph{Renée} deve pagar R\$ 1, mas ganha R\$ 3 se \emph{Peter} errar.
+\end{ex:renee-v-peter}
 
 \subsection{Definição de Jogo Não Cooperativo}
 \label{subsec:definicao-de-jogo-nao-cooperativo}
 
-Considerando a definição de um jogo como sendo uma atividade interativa e competitiva no qual os jogadores devem obedecer a um determinado conjunto de regras, então um jogo não cooperativo não permite nenhum tipo de acordo entre os jogadores e o ganho de cada jogador é determinado pelo conjunto de regras \cite{jones_1980}.
+Considerando a definição de um jogo como sendo uma atividade interativa e competitiva no qual os jogadores devem obedecer a um determinado conjunto de regras, então um \textbf{jogo não cooperativo} não permite nenhum tipo de acordo entre os jogadores e o ganho de cada jogador é determinado pelo conjunto de regras \cite{jones_1980}.
 
-\subsection{Estratégia Pura}
-\label{subsec:estrategia-pura}
+\subsection{Representação de um Jogo}
+\label{subsec:representacao-de-um-jogo}
 
-Estratégia pura é um conjunto de escolhas a se fazer para cada momento de decisão possível. Considere o seguinte exemplo retirado do livro de Willian Spaniel \cite{spaniel_2011}: Uma empresa $A$ quer entrar no mercado onde outra empresa $B$ possui o monopólio. Se a empresa $A$ entrar no mercado, a outra pode decidir aceitar ou declarar uma guerra de preços. Considerando que a empresa $A$ só quer entrar no mercado se a empresa $B$ não declarar guerra de preços, e que a guerra de preços não é lucrativa para a empresa $B$, a situação é representada na figura \ref{fig:jogo-do-monopolio}.
+Há duas formas de representar um jogo de uma maneira que seja possível analisá-lo em seguida: (a) \textbf{forma extensiva} e; (b) \textbf{forma normal}. A forma extensiva faz uso de uma estrutura de árvore, onde para representar os estados do jogo se faz uso dos nós da árvore, as jogadas possíveis a partir daquele estado são as arestas, e o ganho para o primeiro jogador são as folhas. A figura \ref{fig:renee-v-peter} representa o exemplo \ref{ex:renee-v-peter} na forma extensiva.
 
-\begin{figure}
+\begin{figure}[ht]
 	\centering
 	\begin{tikzpicture}
 	  [
 	    grow                    = down,
-	    level distance          = 3.5cm,
 	    edge from parent/.style = {draw, -latex},
 	    every node/.style       = {font=\footnotesize},
 	    sloped,
-		level 1/.style			= {sibling distance=3cm},
-		level 2/.style			= {sibling distance=2cm}
+		level 1/.style			= {
+			sibling distance=2.5cm,
+			level distance=1.5cm
+		},
+		level 2/.style			= {
+			sibling distance=1.5cm,
+			level distance=2cm
+		},
+		level 3/.style			= {
+			sibling distance=2cm,
+			level distance=1.5cm
+		},
+		level 4/.style			= {
+			sibling distance=1.5cm,
+			level distance=2cm
+		}
 		]
-	  \node {Empresa $A$}
-	  	child { node {(2,2)}
-	  		edge from parent node [above] {Ficar de Fora} }
-	    child { node {Empresa $B$} {
-				child { node {(3,1)}
-					edge from parent node [above] {Aceitar}
-					}
-				child { node {(0,0)}
-					edge from parent node [above] {Guerra}
-					}
+		\node {\emph{Renée}}
+		child {
+			node (P1){\emph{Peter}} {
+				child {
+					node {-3}
+					edge from parent node [above] {\emph{Alta}}
 				}
-			edge from parent node [above] {Entrar}
+				child {
+					node {2}
+					edge from parent node [above] {\emph{Baixa}}
+				}
+			}
+			edge from parent node [above] {$K$}
+		}
+		child {
+			node (P2) {\emph{Peter}} {
+				child {
+					node (R){\emph{Renée}} {
+						child {
+							node (P21) {\emph{Peter}} {
+							child {
+								node {-1}
+								edge from parent node [above] {\emph{Alta}}
+							}
+							child {
+								node {3}
+								edge from parent node [above] {\emph{Baixa}}
+							}
+							}
+							edge from parent node [above] {$K$}
+						}
+						child {
+							node (P22) {\emph{Peter}} {
+							child {
+								node {3}
+								edge from parent node [above] {\emph{Alta}}
+							}
+							child {
+								node {-1}
+								edge from parent node [above] {\emph{Baixa}}
+							}
+							}
+							edge from parent node [above] {$D$}
+						}
+					}
+					edge from parent node [above] {\emph{Alta}}
+				}
+				child {
+				node {1}
+				edge from parent node [above] {\emph{Baixa}}
+				}
+			}
+			edge from parent node [above] {$T$}
+		}
+		child {
+			node (P3) {\emph{Peter}} {
+				child {
+					node {2}
+					edge from parent node [above] {\emph{Alta}}
+				}
+				child {
+					node {-3}
+					edge from parent node [above] {\emph{Baixa}}
+				}
+			}
+			edge from parent node [above] {$D$}
 		};
+		\draw[thick, rounded corners] ($(P1.north west)+(-0.1,-0.1)$) rectangle ($(P3.south east)+(0.1,+0.1)$);
+		\draw[thick, rounded corners] ($(P21.north west)+(-0.1,-0.1)$) rectangle ($(P22.south east)+(0.1,+0.1)$);
 	\end{tikzpicture}
-	\caption{Jogo do monopólio, fonte: \cite{spaniel_2011}}
-	\label{fig:jogo-do-monopolio}
+	\caption{Árvore do jogo Renée v Peter}
+	\label{fig:renee-v-peter}
 \end{figure}
 
+A segunda maneira de representar um jogo é a \textbf{forma normal}.
+
+\subsection{Função Utilidade (\emph{payoff})}
+\label{subsec:funcao-utilidade}
+
+Uma \textbf{função utilidade} para um jogador determina o ganho para aquele jogador ao executar sua estratégia. Uma definição mais matemática é dada por Sartini et al como:
+
+\theoremstyle{definition}
+\newtheorem{def:funcao-utilidade}{Definição}
+
+\begin{def:funcao-utilidade}
+Uma \emph{função utilidade} para o jogador $i$ é uma função real $u_i:\Psi_T \rightarrow \mathbb{R}$ definida no conjunto $\Psi_T$ das jogadas completas. O valor de $u_i$ em cada jogada determina o \emph{payoff} do jogador $i$ para esta jogada. \cite{sartini_IIbienaldasbm}
+\end{def:funcao-utilidade}
+
+\subsection{Jogo de dois jogadores e soma zero}
+\label{subsec:jogo-de-dois-jogadores-e-soma-zero}
+
+Um jogo de dois jogadores e de soma zero significa que a vitória de um jogador implica na derrota do outro. Por convenção, o ganho ao final do jogo é representado pelo ganho do primeiro jogador, normalmente seguindo a seguinte representação: $1$ caso ele ganhe, $-1$ caso ele perca e $0$ caso ele empate. Caso explicado nas regras do jogo, o ganho pode ser calculado pela \textbf{função utilidade}.
+
+\subsection{Conjunto Informação}
+\label{subsec:conjunto-informacao}
+
+Um \textbf{conjunto informação}, de acordo com Sartini et al, é um conjunto de estados do jogo que pertencem ao mesmo jogador e os movimentos disponíveis são os mesmos para cada estado \cite{sartini_IIbienaldasbm}. Jones diz, ainda, que um termo mais apropriado seria \textbf{conjunto de ignorância} \cite{jones_1980}, pois indica que ao fazer um movimento, o jogador sabe em qual conjunto informação ele se encontra, mas não sabe dizer em qual estado está. Se o jogo está sendo representado por uma árvore, como na figura \ref{fig:renee-v-peter}, então o conjunto de informação é representado pelo
+
+\subsection{Estratégia Pura}
+\label{subsec:estrategia-pura}
+
+\textbf{Estratégia pura} é um conjunto de escolhas a se fazer para cada momento de decisão possível. Voltando ao exemplo \ref{ex:renee-v-peter}, \emph{Peter} pode escolher \emph{Baixa} em sua primeira jogada, ganhando ganhando duas das vezes e perdendo uma, ou pode escolher \emph{Alta} com uma possibilidade de ter que tomar outra decisão
+
+%Neste caso, o jogador $A$ possui três estratégias puras: $AI$ jogar \emph{Pedra}; $AII$ jogar \emph{Papel} e; $AIII$ jogar \emph{Tesoura}. Já o jogador $B$ possui 9 estratégias: $BI$ jogar \emph{Pedra},
+
+
+
+
+
+
+
+
 \subsection{Soluções para jogos}
-Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. Há soluções para os jogos que as escolhas dos jogadores são feitas simultaneamente e soluções para os jogos que possuem turnos. Para o primeiro caso, as soluções são encontradas fazendo uso de \textbf{dominância estrita iterada}, enquanto para o segundo caso a solução é encontrada utilizando-se de \textbf{\emph{backward induction}}.
+Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. Há soluções para os jogos que as escolhas dos jogadores são feitas simultaneamente e soluções para os jogos que possuem turnos. Para o primeiro caso, as soluções são encontradas fazendo uso de \textbf{dominância estrita iterada}, teorema \textbf{minimax} ou \textbf{equilíbrio de Nash}, podendo ser com \textbf{estratégias mistas} ou não, enquanto para o segundo caso a solução é encontrada utilizando-se de \textbf{\emph{backward induction}}.
 
 \subsubsection{Dominância estrita}
 
 É dito que uma estratégia é {\bfseries estritamente dominada} para um jogador se esta estratégia gera um ganho maior do que qualquer outra estratégia independente do que o outro jogador fizer. Considera-se que jogadores racionais nunca fazem uso de estratégias estritamente dominadas, pois não há motivos para escolher uma estratégia que sempre será pior em todos os casos. O exemplo do {\bfseries dilema do prisioneiro} demonstra tal conceito.
 
-\subsubsubsection{O Dilema do Prisioneiro}
 Formulado por Albert W. Tucker em 1950 \cite{sartini_IIbienaldasbm}, o dilema do prisioneiro é, provavelmente, um dos exemplos mais conhecidos na teoria dos jogos. O propósito de Tucker foi ilustrar a dificuldade de se analisar certos tipos de jogos por razões que ficarão óbvias após o exemplo. Eis a situação: dois suspeitos são presos com suspeita de roubo mas os policiais podem apenas provar que os suspeitos invadiram o local. Precisando da confissão dos criminosos, o policial faz a seguinte proposta
+
 \begin{itemize}
 	\tightlist
 	\item Se nenhum confessar o roubo, o policial vai prendê-los por intrusão.
@@ -160,7 +276,7 @@ No final da eliminação iterada de estratégias estritamente dominadas. sobra a
 \label{tab:final-dominancia-estrita-iterada}
 \end{table}
 
-\subsubsection{Estratégia Pura}
+\subsubsection{Estratégias mistas}
 
 Considere a situação a seguir: Dois caçadores devem decidir o que caçar no dia e levar o equipamento apropriado. Eles sabem que, no local de caça, existem duas lebres, que valem uma unidade de carne cada, e um veado, que vale seis unidades de carne. O veado vale mais carne dividindo para cada um do que a soma das duas lebres, mas é preciso o auxílio do outro caçador para caçar um veado, enquanto as lebres podem ser caçadas sem nenhuma ajuda \cite{spaniel_2011}. Estas informações são condensadas na tabela \ref{tab:caca-ao-viado}.
 
@@ -187,8 +303,7 @@ Considere a situação a seguir: Dois caçadores devem decidir o que caçar no d
 \label{tab:caca-ao-viado}
 \end{table}
 
-
-
+Pode parecer óbvio que o resultado desse jogo é os dois caçadores escolherem caçar \emph{Veado}, pois o ganho para ambos é maior do que em qualquer outra situação, mas esse não é bem o caso.
 
 \subsubsection{Teorema Minimax}
 \label{subsubsec:teorema-minimax}
@@ -196,6 +311,8 @@ Considere a situação a seguir: Dois caçadores devem decidir o que caçar no d
 \subsubsection{Equilíbrio de Nash}
 \label{subsubsec:equilibrio-de-nash}
 
+\subsubsection{Estratégias Mistas}
+\label{subsubsec:estrategias-mistas}
 
 
 \subsection{Análise primitiva do jogo \emph{le Her}}
@@ -204,13 +321,6 @@ Considere a situação a seguir: Dois caçadores devem decidir o que caçar no d
 O objetivo do jogo \emph{le Her} é terminar o jogo com a carta mais alta, sendo que o baralho é contado de Ás ($A$) à Rei ($K$). Essa versão reduzida podia ser jogada apenas com dois jogadores, um deles chamado \emph{dealer} e outro \emph{receiver}. O \emph{dealer} embaralha as cartas e distribui uma carta para o \emph{receiver} e uma para si. O \emph{receiver} tem a escolha de manter sua carta ou trocá-la com o \emph{dealer}, e em seguida o \emph{dealer} tem a mesma opção de manter ou de trocar sua carta com uma carta nova do baralho. A única regra que impede a troca é o caso da carta recebida ser um Rei ($K$), neste caso a troca deve ser desfeita e o jogador mantém sua carta original.
 
 %Vários artigos apontam
-
-
-\subsection{Representação de um Jogo}
-\label{subsec:representacao-de-um-jogo}
-
-Há duas formas de representar um jogo de uma maneira que seja possível analisá-lo em seguida, a \textbf{forma extensiva} e a \textbf{forma normal}. A forma extensiva faz uso de uma estrutura de árvore, onde os nós representam estados do jogo e as arestas representam as jogadas possíveis a partir daquele estado. Dado um jogo $\Gamma$, não cooperativo com \emph{n} jogadores tem-se:
-
 
 \section{O Jogo \emph{Big Points}}
 \subsection{Conceito do Jogo}

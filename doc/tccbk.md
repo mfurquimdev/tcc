@@ -187,58 +187,6 @@ software utilizada`
 
 
 ## Análise combinatória
-O jobo _Big Points_ possui 55 discos no tabuleiro e podem jogar de dois a cinco
-jogadores. Com isso, tem-se que a quantidade de jogos distintos, como
- demonstrado na equação `Obs.: traga estas equações para esta parte do texto, não as deixe em apêndice`.
-\ref{eq_partidas}, é maior do que $5\times 10^{41}$.
- Considerando a possibilidade de calcular a melhor estratégia para cada jogo por
- segundo, este cálculo levaria mais do que $10^{34}$ anos.
-
-Dado uma partida inicial $\gammaup \in \Gamma$ de _Big Points_, sendo $\Gamma$
- o conjunto contendo todas as $5\times 10^{41}$ partidas distintas, foi calculado
- o número de estados de uma partida. Para calcular o número de estados, é
- preciso determinar as características que definem um estado do jogo.  ~~a
-partir
- da regra na~~ `De acordo com a` Seção \ref{sec:regras_do_jogo}, tem-se que
-essas características
- preciso determinar as características que definem um estado do jogo. a partir
- da regra na seção \ref{sec:regras_do_jogo}, tem-se que essas características
- são: o estado do tabuleiro, o estado dos peões, o estado da escada, o estado
- dos discos na mão dos jogadores e o ~~qual o jogador~~ atual. Como demonstrado
-na equação \ref{eq_estados}, a quantidade de estados existentes para uma partida,
- considerando um caso geral, é maior do que $3\times 10^{30}$, levando mais de
- $9\times 10^{22}$ anos para calcular todos os estados a uma velocidade de
- $1 \nicefrac{E_{stado}}{M_{inuto}}$.
-
-A quantidade de memória necessária para armazenar um _estado_ do jogo depende
-~~de
- quais~~ `das` características `que` descrevem um _estado_. Como dito
-anteriormente, o jogo
- pode ser jogado até cinco jogadores, possui um tabuleiro com 55 discos, uma
- escada com cinco degraus, e cinco peões no qual a posição varia entre 0 e 60.
- `Obs.: deste trecho em diante o texto ficou confuso. Favor reescrever` Considerando as estruturas _array<boolean>_  Feito um cálculo simples de soma
- das estruturas utilizadas, o valor, em bytes, para armazenar um _estado_ é 47
- bytes.
-
-### Poda
-
-A quantidade de estados distintos para cada partida ~~é~~ `foi` calculada da
-seguinte
-maneira: cada um dos cinco possíveis jogadores pode ter entre zero e cinco
-discos das cores branco e preta, assim como pode ter entre zero e dez discos das
-cores restantes; cada peão pode estar em uma posição entre zero e dez
-(considerando apenas os de sua cor); e, por fim, cada espaço de disco no
-tabuleiro pode ou não estar ocupado. Partindo destas informações, temos
-~~o cálculo~~ `a Equação` \ref{eq_poda1}. `Obs.: novamente, trazer as equações
-para este capítulo`.
-
-- **Poda 1**
-
-A posição dos peões pode ser `determinada considerando-se` apenas `as casas do
-tabuleiro` de sua respectiva cor. Com essa poda, o número de estados distintos
-de um jogo é reduzido, mas ainda se encontra na ordem de $10^{21}$.
-
-`Obs.: escrever a expressão resultante da poda`
 
 # Resultados
 ?
@@ -274,6 +222,9 @@ apud
 
 
 
+
+# Apêndice
+## Cálculos
 
 
 \begin{equation*}
@@ -360,3 +311,40 @@ De acordo com \cite{sartini_IIbienaldasbm}, a teoria dos jogos pode ser vista co
 Cada caminho\footnote{Um caminho na árvore é um conjunto de arestas partindo da raíz até uma de suas folhas.} nessa árvore representa uma estra
 
 -->
+
+
+
+
+seguinte exemplo retirado do livro de Willian Spaniel \cite{spaniel_2011}: Uma empresa $A$ quer entrar no mercado onde outra empresa $B$ possui o monopólio. Se a empresa $A$ entrar no mercado, a outra pode decidir aceitar ou declarar uma guerra de preços. Considerando que a empresa $A$ só quer entrar no mercado se a empresa $B$ não declarar guerra de preços, e que a guerra de preços não é lucrativa para a empresa $B$, a situação é representada na figura \ref{fig:jogo-do-monopolio}.
+
+\begin{figure}[ht]
+   \centering
+   \begin{tikzpicture}
+	 [
+	   grow                    = down,
+	   level distance          = 3.5cm,
+	   edge from parent/.style = {draw, -latex},
+	   every node/.style       = {font=\footnotesize},
+	   sloped,
+	   level 1/.style			= {sibling distance=3cm},
+	   level 2/.style			= {sibling distance=2cm}
+	   ]
+	 \node {Empresa $A$}
+	   child { node {(2,2)}
+		   edge from parent node [above] {Ficar de Fora} }
+	   child { node {Empresa $B$} {
+			   child { node {(3,1)}
+				   edge from parent node [above] {Aceitar}
+				   }
+			   child { node {(0,0)}
+				   edge from parent node [above] {Guerra}
+				   }
+			   }
+		   edge from parent node [above] {Entrar}
+	   };
+   \end{tikzpicture}
+   \caption{Jogo do monopólio, fonte: \cite{spaniel_2011}}
+   \label{fig:jogo-do-monopolio}
+\end{figure}
+
+Neste caso. a empresa $A$ possui duas estratégias \emph{Ficar de Fora} do mercado e \emph{Entrar}, enquanto a empresa $B$ tem as estratégias \emph{Aceitar} ou entrar em \emph{Guerra}. As duas estratégias dos dois jogadores são estratégias pura pois contém todas as
