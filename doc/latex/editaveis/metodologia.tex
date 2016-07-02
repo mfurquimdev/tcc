@@ -15,14 +15,23 @@ Para a realização deste trabalho foi utilizado um computador da linha \emph{In
 
 A possibilidade de encontrar a solução para este jogo depende da quantidade de estados existentes e da quantidade de espaço cada estado ocupará na memória. Se for possível calcular para uma partida, foi feito uma análise combinatória para descobrir a possibilidade de encontrar uma solução para várias partidas distintas.
 
-\subsection{Número de partidas distintas}
-As características importantes que distinguem uma partida da outra no jogo \emph{Big Points} são: (a) a quantidade de jogadores e; (b) a ordem dos discos no tabuleiro. O jogo pode ser jogado de dois a cinco jogadores ($J$) e o tabuleiro possui 55 discos no total ($D_T$), 5 das cores \emph{branco} ($D_W$) e \emph{preto} ($D_K$), e 9 das cores \emph{Vermelho} ($D_R$), \emph{Verde} ($D_G$), \emph{Azul} ($D_B$), \emph{Amarelo} ($D_Y$) e \emph{Violeta} ($D_V$). Com isso, tem-se que a quantidade de jogos distintos é a combinação dos discos e dos jogadores, como demonstrado na equação \ref{eq_partidas}, resultando em um número maior do que $5\times 10^{41}$.
+\subsection{Espaço de armazenamento}
 
-Considerando $\#D_{L1} = \#D_T - \#D_W$ como o restante dos discos após a primeira combinação, $\#D_{L2} = \#D_{L1} - \#D_K$ o restante da segunda combinação, e assim sucessivamente, temos a equação \ref{eq_partidas}.
+A quantidade de memória necessária para armazenar um \emph{estado} do jogo depende das características que descrevem um \emph{estado}. Como dito anteriormente, o jogo pode ter até cinco jogadores, possui um tabuleiro com 55 discos, uma escada com cinco degraus, e cinco peões no qual a posição varia entre 0 e 60. Considerando que o estado inicial do tabuleiro é aleatório mas conhecido desde o começo da partida e que os discos não mudam de posição, é possível representar o tabuleiro com uma máscara binária indicando se o disco está ou não disponível, $\nicefrac{55\ D_{iscos}}{8\ B_{its}}$. A posição de cada peão pode ser representada por um \emph{char}, pois varia apenas entre 0 e 60, sendo que 0 indica que o peão não está no tabuleiro, 1 a 55 indica a posição que o peão está no tabuleiro e 56 a 60 indica a posição na escada. Por fim, para representar a mão de cada jogador, foi utilizado sete \emph{chars}, cada um indicando a quantidade de discos de uma determinada cor, e como são cinco jogadores, tem-se $5\cdot 7$. Todos esses \emph{bytes} são somados como demonstrado na equanção \ref{eq:bytes}, totalizando $47$ bytes na memória por estado da partida.
+
+\begin{equation} \label{eq:bytes} \tag{e.q. Bytes na memória}
+\begin{split}
+Bytes\ &=\ \dfrac{55}{8} + 5 + 5\cdot 7\\
+Bytes\ &=\ 47\ bytes
+\end{split}
+\end{equation}
+
+\subsection{Quantidade de partidas distintas}
+As características importantes que distinguem uma partida da outra no jogo \emph{Big Points} são: (a) a quantidade de jogadores e; (b) a ordem dos discos no tabuleiro. O jogo pode ser jogado de dois a cinco jogadores ($J$) e o tabuleiro possui 55 discos no total ($D_T$), 5 das cores \emph{branco} ($D_W$) e \emph{preto} ($D_K$), e 9 das cores \emph{Vermelho} ($D_R$), \emph{Verde} ($D_G$), \emph{Azul} ($D_B$), \emph{Amarelo} ($D_Y$) e \emph{Violeta} ($D_V$). Com isso, tem-se que a quantidade de jogos distintos é a combinação dos discos e dos jogadores. Considerando $\#D_{L1} = \#D_T - \#D_W$ como o restante dos discos após a primeira combinação, $\#D_{L2} = \#D_{L1} - \#D_K$ o restante da segunda combinação, e assim sucessivamente, temos a equação \ref{eq:partidas}.
 
  \begin{equation}
-	 \label{eq_partidas}
-	 \tag{e.q. Números de Partidas Distintas}
+	 \label{eq:partidas}
+	 \tag{e.q. Quantidades de Partidas Distintas}
  \begin{split}
  Partidas\ &=\  (\#J-1) \cdot \binom{\#D_T}{\#D_W} \cdot \binom{\#D_{L1}}{\#D_K} \cdot \binom{\#D_{L2}}{\#D_R} \cdot \binom{\#D_{L3}}{\#D_G} \cdot \binom{\#D_{L4}}{\#D_B} \cdot \binom{\#D_{L5}}{\#D_Y} \cdot \binom{\#D_{L6}}{\#D_V}\\
  Partidas\ &=\  4\cdot \binom{55}{5} \cdot \binom{50}{5} \cdot \binom{45}{9} \cdot \binom{36}{9} \cdot \binom{27}{9} \cdot \binom{18}{9} \cdot \binom{9}{9}\\
@@ -31,9 +40,9 @@ Considerando $\#D_{L1} = \#D_T - \#D_W$ como o restante dos discos após a prime
  \end{split}
  \end{equation}
 
-Considerando a possibilidade de solucionar uma partida do jogo por segundo, este cálculo levaria mais do que $10^{34}$ anos, como demonstrado na equação \ref{eq_anos_partidas}.
+Como demonstrado na equação \ref{eq:partidas}, a quantidade de partidas distintas é superior a $5\times 10^{41}$. Considerando a possibilidade de solucionar uma partida do jogo por segundo, este resolução levaria mais do que $10^{34}$ anos, como demonstrado na equação \ref{eq:anos_partidas}.
 
- \begin{equation} \label{eq_anos_partidas} \tag{e.q. Tempo de Computação das Partidas}
+ \begin{equation} \label{eq:anos_partidas} \tag{e.q. Tempo de Computação das Partidas}
  \begin{split}
  Anos\ &=\ \dfrac{N_{partidas\ distintas}}{\nicefrac{partida}{segundo}\cdot\nicefrac{segundos}{minuto}\cdot\nicefrac{minutos}{hora}\cdot\nicefrac{horas}{dia}\cdot\nicefrac{dias}{ano}}\\
  Anos\ &=\ \dfrac{560'483'776'167'774'018'942'304'261'616'685'408'000'000}{\nicefrac{1}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{24}{1}\cdot\nicefrac{365}{1}}\\
@@ -42,46 +51,101 @@ Considerando a possibilidade de solucionar uma partida do jogo por segundo, este
  \end{split}
  \end{equation}
 
-\subsection{Número de estados}
+\subsection{Quantidade de estados}
 
-Dado uma partida inicial $\gammaup \in \Gamma$ de \emph{Big Points}, sendo $\Gamma$ o conjunto contendo todas as $5\times 10^{41}$ partidas distintas, foi calculado o número de estados de uma partida. Para calcular o número de estados, é preciso determinar as características que definem um estado do jogo. De acordo com a seção \ref{subsec:regras-do-jogo}, tem-se que essas características são: (a) o estado do tabuleiro; (b) o estado dos peões; (c) o estado da escada; (d) o estado dos discos na mão dos jogadores e; (e) o jogador atual. Como demonstrado na equação \ref{eq_estados}, a quantidade de estados existentes para uma partida, considerando um caso geral, é maior do que $3\times 10^{30}$, levando mais de $9\times 10^{22}$ anos para calcular todos os estados a uma velocidade de $1 \nicefrac{E_{stado}}{S_{egundo}}$.
+Dado uma partida inicial $\gammaup \in \Gamma$ de \emph{Big Points}, sendo $\Gamma$ o conjunto contendo todas as $5\times 10^{41}$ partidas distintas, foi calculado a quantidade de estados de $\gammaup$. Para realizar este cálculo do número de estados, foi preciso determinar as características que definem um estado do jogo. De acordo com a seção \ref{subsec:regras-do-jogo}, tem-se que essas características são: (a) o estado do tabuleiro; (b) o estado dos peões; (c) o estado da escada; (d) o estado dos discos na mão dos jogadores e; (e) o jogador atual.
 
-\begin{equation} \label{eq_estados} \tag{e.q. Caso Geral}
+\subsubsection{Quantidade de Estados do Tabuleiro}
+
+Já conhecendo a ordem de todos os discos no tabuleiro, o estado do tabuleiro foi descrito por uma máscara binária que representa a disponibilidade destes disco, para um peão mover-se para cima ou para ser pego por um jogador. O jogo possui $55$ discos que podem ou não estar disponíveis, portando existem $55^2$ estados diferentes para o tabuleiro.
+
+\subsubsection{Quantidade de Estados dos Peões}
+
+A próxima característica que define o estado de uma partida é o estado dos peões ou, mais precisamente, a posição deles. Um peão pode não estar no tabuleiro ainda (1), pode estar em cima de qualquer um dos $55$ discos (1--56) e pode estar em cima de algum dos cinco degraus da escada (57--61). Como o jogo possue $5$ peões, a quantidade de estados dos peões são Estado$_{[\text{peões}]}=61^5$.
+
+\subsubsection{Quantidade de Estados da Escada}
+
+O terceiro estado importante é o estado da escada. Inicialmente a escada pode estar vazia, e então pode ter um peão de qualquer cor no topo. Para cada peão no topo da escada, é possível ter qualquer outra cor, que não seja aquela já escolhida, na posição anterior à do topo. Seguindo essa lógica, tem-se que a quantidade de estados da escada é um somatório de arranjos como demonstrado na equação \ref{eq:estado_da_escada}.
+
+\begin{equation} \label{eq:estado_da_escada} \tag{e.q. Estado da escada}
 \begin{split}
-Estados\ &=\ 2^{55}\cdot 61^{5}\cdot (10^{5} + 6^{2})\\
-Estados\ &=\ 3'044'074'341'562'580'507'100'339'765'248\\
-Estados\ &\approx 3\times 10^{31}
+	Estado_{[escada]}\ &=\ \displaystyle\sum_{i=0}^{5} A_{5,i}\\
+	Estado_{[escada]}\ &=\ \dfrac{5!}{(5-0)!} + \dfrac{5!}{(5-1)!} + \dfrac{5!}{(5-2)!} + \dfrac{5!}{(5-3)!} + \dfrac{5!}{(5-4)!} + \dfrac{5!}{(5-5)!}\\
+%	Estado_{[escada]}\ &=\ 1 + 5 + 5\cdot4 + 5\cdot4\cdot3 + 5\cdot4\cdot3\cdot2 + 5\cdot4\cdot3\cdot2\cdot1\\
+	Estado_{[escada]}\ &=\ 326
 \end{split}
 \end{equation}
 
-\begin{equation} \label{eq_anos_estados} \tag{e.q. Tempo de Computação dos Estados}
+\subsubsection{Quantidade de Estados dos Discos}
+
+A outra característica é o estado dos discos na mão dos jogadores. Entendendo que a quantidade de discos é sempre a mesma ao longo do jogo e que a única coisa que altera é o local do disco (se está no tabuleiro ou na mão de algum jogador), então a seguinte equação sempre deve ser respeitada: $F+J_1+J_2+J_3+J_4+J_5 = 10$. Nessa simples representação, o $F$ corresponde à quantidade de discos que estão fora da mão dos jogadores, $J_1$ à $J_5$ à quantidade de discos na mão dos jogadores de 1 à 5.
+
+Uma outra abordagem para explicar tal estado é imaginar que cada disco corresponde ao caracter \emph{o} e o símbolo \emph{+} separa a mão dos jogadores e tabuleiro. Logo, é fácil de ver que no estado inicial, todos os discos estão no tabuleiro, sendo representado pelo estado $oooooooooo+++++=10$. Caso o primeiro jogador consiga um disco daquela cor, o estado é alterado para $ooooooooo+o++++=10$. Se, posteriormente, o jogador 4 colete 3 discos e o jogador 5 mais 5, o estado seria $o+o+++ooo+ooooo=10$. O cálculo para descobrir a quantidade de estados para cada disco comum é uma combinação de 15 elementos tomados de 5 a 5, como demonstrado na equação \ref{eq:estado_dos_discos_comuns}, e para cada disco especial é a combinação de 10 elementos tomados de 5 a 5, como demonstrado na equação \ref{eq:estado_dos_discos_especiais}.
+
+\begin{equation} \label{eq:estado_dos_discos_comuns} \tag{e.q. Estado dos discos comuns}
+\begin{split}
+	Estado_{[discos_c]}\ &=\ \binom{15}{5}\\
+	Estado_{[discos_c]}\ &=\ \dfrac{15!}{5!(15-5)!}\\
+%	Estado_{[discos]}\ &=\ 1 + 5 + 5\cdot4 + 5\cdot4\cdot3 + 5\cdot4\cdot3\cdot2 + 5\cdot4\cdot3\cdot2\cdot1\\
+	Estado_{[discos_c]}\ &=\ 3003
+\end{split}
+\end{equation}
+
+\begin{equation} \label{eq:estado_dos_discos_especiais} \tag{e.q. Estado dos discos especiais}
+\begin{split}
+	Estado_{[discos_e]}\ &=\ \binom{10}{5}\\
+	Estado_{[discos_e]}\ &=\ \dfrac{10!}{5!(10-5)!}\\
+%	Estado_{[discos]}\ &=\ 1 + 5 + 5\cdot4 + 5\cdot4\cdot3 + 5\cdot4\cdot3\cdot2 + 5\cdot4\cdot3\cdot2\cdot1\\
+	Estado_{[discos_e]}\ &=\ 252
+\end{split}
+\end{equation}
+
+Ao final, tem-se que a quantidade de estados distintos dos discos é igual ao produto dos estados de cada disco individual, resultando na equação \ref{eq:estado_dos_discos}
+
+\begin{equation} \label{eq:estado_dos_discos} \tag{e.q. Estado dos discos}
+\begin{split}
+	Estado_{[discos]}\ &=\ \binom{15}{5}\cdot\binom{15}{5}\cdot\binom{15}{5}\cdot\binom{15}{5}\cdot\binom{15}{5}\cdot\binom{10}{5}\cdot\binom{10}{5}\\
+	Estado_{[discos]}\ &=\ 3003^5\cdot252^2\\
+%	Estado_{[discos]}\ &=\ 1 + 5 + 5\cdot4 + 5\cdot4\cdot3 + 5\cdot4\cdot3\cdot2 + 5\cdot4\cdot3\cdot2\cdot1\\
+	Estado_{[discos]}\ &=\ 15'508'783'829'111'892'791'472\\
+	Estado_{[discos]}\ &\approx 1\times 10^{22}
+\end{split}
+\end{equation}
+
+\subsubsection{Quantidade de Estados do Jogador}
+
+A quantidade de estados distintos para o jogador atual é simplesmente a quantidade de jogadores, determinando assim a vez do jogador: Estado$_{[jogador]}=5$.
+
+\subsubsection{Quantidade de Estados Total}
+
+Como demonstrado na equação \ref{eq:estados}, a quantidade de estados existentes para uma partida é o produto de todos os estados. Considerando um caso geral, esse número excede $6\times 10^{37}$, levando mais de $2\times 10^{30}$ anos para calcular todos os estados a uma velocidade de $1 \nicefrac{E_{stado}}{S_{egundo}}$.
+
+\begin{equation} \label{eq:estados} \tag{e.q. Caso Geral}
+\begin{split}
+	Estados\ &=\ 55^{2}\cdot61^{5}\cdot326\cdot3003^{5}\cdot252^{2}\cdot5\\
+	Estados\ &=\ 64'586'224'969'618'554'770'829'159'998'863'764'000\\
+	Estados\ &\approx 6\times 10^{37}
+\end{split}
+\end{equation}
+
+\begin{equation} \label{eq:anos_estados} \tag{e.q. Tempo de Computação dos Estados}
 \begin{split}
 Anos\ &=\ \dfrac{N_{estados\ distintos}}{\nicefrac{estado}{segundo}\cdot\nicefrac{segundos}{minuto}\cdot\nicefrac{minutos}{hora}\cdot\nicefrac{horas}{dia}\cdot\nicefrac{dias}{ano}}\\
-Anos\ &=\ \dfrac{3'044'074'341'562'580'507'100'339'765'248}{\nicefrac{1}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{24}{1}\cdot\nicefrac{365}{1}}\\
-Anos\ &=\ 96'526'964'154'064'571'465'728
+Anos\ &=\ \dfrac{64'586'224'969'618'554'770'829'159'998'863'764'000}{\nicefrac{1}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{24}{1}\cdot\nicefrac{365}{1}}\\
+Anos\ &=\ 2'048'015'758'803'226'720'862'434'492'416\\
+Anos\ &\approx 2\times10^{30}
 \end{split}
 \end{equation}
 
-\subsection{Espaço de armazenamento}
-
-A quantidade de memória necessária para armazenar um \emph{estado} do jogo depende das características que descrevem um \emph{estado}. Como dito anteriormente, o jogo pode ter até cinco jogadores, possui um tabuleiro com 55 discos, uma escada com cinco degraus, e cinco peões no qual a posição varia entre 0 e 60. Considerando que o estado inicial do tabuleiro é aleatório mas conhecido desde o começo da partida e que os discos não mudam de posição, é possível representar o tabuleiro com uma máscara binária indicando se o disco está ou não disponível, $\nicefrac{55\ D_{iscos}}{8\ B_{its}}$. A posição de cada peão pode ser representada por um \emph{char}, pois varia apenas entre 0 e 60, sendo que 0 indica que o peão não está no tabuleiro, 1 a 55 indica a posição que o peão está no tabuleiro e 56 a 60 indica a posição na escada. Por fim, para representar a mão de cada jogador, foi utilizado sete \emph{chars}, cada um indicando a quantidade de discos de uma determinada cor, e como são cinco jogadores, tem-se $5\cdot 7$. Todos esses \emph{bytes} são somados como demonstrado na equanção \ref{eq_bytes}, totalizando $47$ bytes na memória por estado da partida.
-
-\begin{equation} \label{eq_bytes} \tag{e.q. Bytes na memória}
-\begin{split}
-Bytes\ &=\ \dfrac{55}{8} + 5 + 5\cdot 7\\
-Bytes\ &=\ 47\ bytes
-\end{split}
-\end{equation}
 
 \subsubsection{Podas}
 
-A quantidade de estados distintos para cada partida foi calculada da seguinte maneira: cada um dos cinco possíveis jogadores pode ter entre zero e cinco discos das cores branco e preta, assim como pode ter entre zero e dez discos das cores restantes; cada peão pode estar em uma posição entre zero e dez (considerando apenas os de sua cor); e, por fim, cada espaço de disco no tabuleiro pode ou não estar ocupado. Partindo destas informações, temos a equação \ref{eq_poda1}.
+A quantidade de estados distintos para cada partida foi calculada da seguinte maneira: cada um dos cinco possíveis jogadores pode ter entre zero e cinco discos das cores branco e preta, assim como pode ter entre zero e dez discos das cores restantes; cada peão pode estar em uma posição entre zero e dez (considerando apenas os de sua cor); e, por fim, cada espaço de disco no tabuleiro pode ou não estar ocupado. Partindo destas informações, temos a equação \ref{eq:poda1}.
 
 A posição dos peões pode ser determinada considerando-se apenas as casas do
-tabuleiro de sua respectiva cor. Com essa poda, o número de estados distintos
-de um jogo é reduzido, mas ainda se encontra na ordem de $10^{21}$.
+tabuleiro de sua respectiva cor. Com essa poda, a quantidade de estados distintos de um jogo é reduzido, mas ainda se encontra na ordem de $10^{21}$.
 
-\begin{equation} \label{eq_poda1} \tag{e.q. Poda por posição}
+\begin{equation} \label{eq:poda1} \tag{e.q. Poda por posição}
 \begin{split}
 Estados\ &=\ 2^{55}\cdot 11\cdot 5\cdot (5\times 10 + 2\cdot 6)\\
 Estados\ &=\ 2^{55}\cdot 11\cdot 5\cdot 72\\
@@ -89,7 +153,7 @@ Estados\ &=\ 142'674'036'195'097'313'280
 \end{split}
 \end{equation}
 
-\begin{equation} \label{eq_anos_estados} \tag{e.q. Tempo de Computação dos Estados}
+\begin{equation} \label{eq:anos_estados} \tag{e.q. Tempo de Computação dos Estados}
 \begin{split}
 Anos\ &=\ \dfrac{N_{estados\ distintos}}{\nicefrac{estado}{segundo}\cdot\nicefrac{segundos}{minuto}\cdot\nicefrac{minutos}{hora}\cdot\nicefrac{horas}{dia}\cdot\nicefrac{dias}{ano}}\\
 Anos\ &=\ \dfrac{142'674'036'195'097'313'280}{\nicefrac{1}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{24}{1}\cdot\nicefrac{365}{1}}\\
