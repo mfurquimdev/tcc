@@ -20,24 +20,38 @@ Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que 
 
 Esta seção introduz os conceitos fundamentais da teoria dos jogos, tais como definição de um jogo não cooperativo, formas de representá-lo e teoremas para encontrar soluções. Para tanto, considere o exemplo do jogo \emph{Renée v Peter} retirado do livro \cite{jones_1980}.
 
-\theoremstyle{definition}
-\newtheorem{ex:renee-v-peter}{Exemplo}
+\begin{ex}\label{ex:renee-v-peter}
+O jogo \emph{Renée v Peter} é jogado com três cartas: Rei ($K$), Dez ($T$) e Dois ($D$). \emph{Renée} escolhe uma carta dentre as três, coloca-a voltada para baixo e, então, \emph{Peter} escolhe \emph{Alta} ou \emph{Baixa}. \emph{Peter} ganha R\$ 3 se acertar (\emph{Alta} $=\ K$ e \emph{Baixa} $=\ D$), mas deve pagar R\$ 2 a \emph{Renée} se errar.
 
-\begin{ex:renee-v-peter}\label{ex:renee-v-peter}
-O jogo \emph{Renée v Peter} é jogado com três cartas: Rei ($K$), Dez ($T$) e Dois ($D$). \emph{Renée} escolhe uma carta dentre as três, coloca-a voltada para baixo e \emph{Peter} escolhe \emph{Alta} ou \emph{Baixa}. \emph{Peter} ganha R\$ 3 de \emph{Renée} se acertar (\emph{Alta} $=\ K$ e \emph{Baixa} $=\ D$), mas deve pagar R\$ 2 se errar.
-
-Caso a carta escolhida por \emph{Renée} seja o $T$, se \emph{Peter} escolheu \emph{baixa}, então \emph{Renée} deve pagar R\$ 2, se \emph{Peter} escolheu \emph{alta}, então \emph{Renée} escolhe uma dentre as duas cartas restantes. Se \emph{Peter} acertar a segunda carta, \emph{Renée} deve pagar R\$ 1, mas ganha R\$ 3 se \emph{Peter} errar.
-\end{ex:renee-v-peter}
+A terceira possibilidade de jogada de \emph{Renée} é escolher o $T$. Neste caso, se \emph{Peter} tiver escolhido \emph{Baixa}, ele ganha R\$ 2, mas se tiver escolhido \emph{alta}, \emph{Renée} deve escolher outra carta (dentre as duas restantes). Se \emph{Peter} acertar a segunda carta, \emph{Renée} deve pagar R\$ 1, mas ganha R\$ 3 se \emph{Peter} errar.
+\end{ex}
 
 \subsection{Definição de Jogo Não Cooperativo}
 \label{subsec:definicao-de-jogo-nao-cooperativo}
 
-Considerando a definição de um jogo como sendo uma atividade interativa e competitiva no qual os jogadores devem obedecer a um determinado conjunto de regras, então um \textbf{jogo não cooperativo} não permite nenhum tipo de acordo entre os jogadores e o ganho de cada jogador é determinado pelo conjunto de regras \cite{jones_1980}.
+Tendo a definição de um jogo como sendo uma atividade interativa e competitiva no qual os jogadores devem obedecer a um determinado conjunto de regras, então um \textbf{jogo não cooperativo} não permite nenhum tipo de acordo entre os jogadores e o ganho de cada jogador é determinado pelo conjunto de regras \cite{jones_1980}.
 
-\subsection{Representação de um Jogo}
-\label{subsec:representacao-de-um-jogo}
+\subsection{Função Utilidade (\emph{payoff})}
+\label{subsec:funcao-utilidade}
 
-Há duas formas de representar um jogo de uma maneira que seja possível analisá-lo em seguida: (a) \textbf{forma extensiva} e; (b) \textbf{forma normal}. A forma extensiva faz uso de uma estrutura de árvore, onde para representar os estados do jogo se faz uso dos nós da árvore, as jogadas possíveis a partir daquele estado são as arestas, e o ganho para o primeiro jogador são as folhas. A figura \ref{fig:renee-v-peter} representa o exemplo \ref{ex:renee-v-peter} na forma extensiva.
+Uma \textbf{função utilidade} para um jogador determina o ganho para aquele jogador ao executar sua estratégia. Uma definição mais matemática é dada por Sartini et al como:
+
+\theoremstyle{definition}
+\newtheorem{def:funcao-utilidade}{Definição}
+
+\begin{def:funcao-utilidade}
+Uma \emph{função utilidade} para o jogador $i$ é uma função real $u_i:\Psi_T \rightarrow \mathbb{R}$ definida no conjunto $\Psi_T$ das jogadas completas. O valor de $u_i$ em cada jogada determina o \emph{payoff} do jogador $i$ para esta jogada. \cite{sartini_IIbienaldasbm}
+\end{def:funcao-utilidade}
+
+\subsection{Jogo de dois jogadores e soma zero}
+\label{subsec:jogo-de-dois-jogadores-e-soma-zero}
+
+Um jogo de dois jogadores e de soma zero significa que a vitória de um jogador implica na derrota do outro. Por convenção, o ganho ao final do jogo é representado pelo ganho do primeiro jogador, normalmente seguindo a seguinte representação: $1$ caso ele ganhe, $-1$ caso ele perca e $0$ caso ele empate. Caso explicado nas regras do jogo, o ganho pode ser calculado pela \textbf{função utilidade}.
+
+\subsection{Forma Extensiva}
+\label{subsec:forma-extensiva}
+
+Uma das formas de representar um jogo, de tal maneira que seja possível analisá-lo em seguida, é a \textbf{forma extensiva} faz uso de uma estrutura de árvore, onde para representar os estados do jogo se faz uso dos nós da árvore, as jogadas possíveis a partir daquele estado são as arestas, e o ganho para o primeiro jogador são as folhas. A figura \ref{fig:renee-v-peter} representa o exemplo \ref{ex:renee-v-peter} na forma extensiva.
 
 \begin{figure}[ht]
 	\centering
@@ -138,25 +152,6 @@ Há duas formas de representar um jogo de uma maneira que seja possível analis�
 	\label{fig:renee-v-peter}
 \end{figure}
 
-A segunda maneira de representar um jogo é a \textbf{forma normal}.
-
-\subsection{Função Utilidade (\emph{payoff})}
-\label{subsec:funcao-utilidade}
-
-Uma \textbf{função utilidade} para um jogador determina o ganho para aquele jogador ao executar sua estratégia. Uma definição mais matemática é dada por Sartini et al como:
-
-\theoremstyle{definition}
-\newtheorem{def:funcao-utilidade}{Definição}
-
-\begin{def:funcao-utilidade}
-Uma \emph{função utilidade} para o jogador $i$ é uma função real $u_i:\Psi_T \rightarrow \mathbb{R}$ definida no conjunto $\Psi_T$ das jogadas completas. O valor de $u_i$ em cada jogada determina o \emph{payoff} do jogador $i$ para esta jogada. \cite{sartini_IIbienaldasbm}
-\end{def:funcao-utilidade}
-
-\subsection{Jogo de dois jogadores e soma zero}
-\label{subsec:jogo-de-dois-jogadores-e-soma-zero}
-
-Um jogo de dois jogadores e de soma zero significa que a vitória de um jogador implica na derrota do outro. Por convenção, o ganho ao final do jogo é representado pelo ganho do primeiro jogador, normalmente seguindo a seguinte representação: $1$ caso ele ganhe, $-1$ caso ele perca e $0$ caso ele empate. Caso explicado nas regras do jogo, o ganho pode ser calculado pela \textbf{função utilidade}.
-
 \subsection{Conjunto Informação}
 \label{subsec:conjunto-informacao}
 
@@ -165,11 +160,29 @@ Um \textbf{conjunto informação}, de acordo com Sartini et al, é um conjunto d
 \subsection{Estratégia Pura}
 \label{subsec:estrategia-pura}
 
-\textbf{Estratégia pura} é um conjunto de escolhas a se fazer para cada momento de decisão possível. Voltando ao exemplo \ref{ex:renee-v-peter}, \emph{Peter} pode escolher \emph{Baixa} em sua primeira jogada, ganhando ganhando duas das vezes e perdendo uma, ou pode escolher \emph{Alta} com uma possibilidade de ter que tomar outra decisão
+\textbf{Estratégia pura} é um conjunto de escolhas a se fazer para cada momento de decisão possível. Voltando ao exemplo \ref{ex:renee-v-peter}, \emph{Peter} pode escolher \emph{Baixa} em sua primeira jogada, ganhando ganhando duas das vezes e perdendo uma, ou pode escolher \emph{Alta} com uma possibilidade de ter que tomar outra decisão. Considerando essas possibilidades, tem-se que as estratégias puras de \emph{Peter} são:
 
-%Neste caso, o jogador $A$ possui três estratégias puras: $AI$ jogar \emph{Pedra}; $AII$ jogar \emph{Papel} e; $AIII$ jogar \emph{Tesoura}. Já o jogador $B$ possui 9 estratégias: $BI$ jogar \emph{Pedra},
+\begin{enumerate}
+	\tightlist
+	\item[$ PI\ -$] Escolher \emph{Alta}; Se \emph{Renée} escolher $T$, escolher \emph{Alta}.
+	\item[$ PII\ -$] Escolher \emph{Alta}; Se \emph{Renée} escolher $T$, escolher \emph{Baixa}.
+	\item[$ PIII\ -$] Escolher \emph{Baixa}.
+\end{enumerate}
 
+Enquanto para \emph{Renée}, suas opções são escolher entre as três cartas, mas se escolher $T$ e tiver que escolher outra carta, deve escolher uma entre as duas restantes. Com isso, tem-se as seguintes estratégias puras de \emph{Renée}:
 
+\begin{enumerate}
+	\tightlist
+	\item[$ RI\ -$] Escolher \emph{K}.
+	\item[$ RII\ -$] Escolher \emph{T}; Se \emph{Peter} escolher \emph{Alta}, escolher \emph{K}.
+	\item[$ RIII\ -$] Escolher \emph{T}; Se \emph{Peter} escolher \emph{Alta}, escolher \emph{D}.
+	\item[$ RIV\ -$] Escolher \emph{D}.
+\end{enumerate}
+
+\subsection{Forma Normal}
+\label{subsec:forma-normal}
+
+Outra maneira de representar um jogo é chamado de \textbf{forma normal}. Nesta forma o jogo é representado por uma matriz, onde na linha tem-se as \textbf{estratégias puras} do primeiro jogador e na coluna, as do segundo jogador. No caso do exemplo \ref{ex:renee-v-peter}, o jogo é representado pela tabela %\ref{}
 
 
 
@@ -183,16 +196,21 @@ Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do j
 
 É dito que uma estratégia é {\bfseries estritamente dominada} para um jogador se esta estratégia gera um ganho maior do que qualquer outra estratégia independente do que o outro jogador fizer. Considera-se que jogadores racionais nunca fazem uso de estratégias estritamente dominadas, pois não há motivos para escolher uma estratégia que sempre será pior em todos os casos. O exemplo do {\bfseries dilema do prisioneiro} demonstra tal conceito.
 
-Formulado por Albert W. Tucker em 1950 \cite{sartini_IIbienaldasbm}, o dilema do prisioneiro é, provavelmente, um dos exemplos mais conhecidos na teoria dos jogos. O propósito de Tucker foi ilustrar a dificuldade de se analisar certos tipos de jogos por razões que ficarão óbvias após o exemplo. Eis a situação: dois suspeitos são presos com suspeita de roubo mas os policiais podem apenas provar que os suspeitos invadiram o local. Precisando da confissão dos criminosos, o policial faz a seguinte proposta
+Formulado por Albert W. Tucker em 1950 \cite{sartini_IIbienaldasbm}, o dilema do prisioneiro é, provavelmente, um dos exemplos mais conhecidos na teoria dos jogos. O propósito de Tucker foi ilustrar a dificuldade de se analisar certos tipos de jogos por razões que ficarão óbvias após o exemplo.
 
+
+\begin{ex}\label{ex:dilema-do-prisioneiro}
+Dois suspeitos são presos com suspeita de roubo mas os policiais podem apenas provar que os suspeitos invadiram o local. Precisando da confissão dos criminosos, o policial faz a seguinte proposta:
 \begin{itemize}
 	\tightlist
 	\item Se nenhum confessar o roubo, o policial vai prendê-los por intrusão.
 	\item Se um confessar e o outro não, o que confessou será liberto e o calado será preso por 12 meses.
 	\item Se os dois confessarem, ambos serão presos por 8 meses.
 \end{itemize}
+Considerando que os dois suspeitos querem minimizar seu tempo na cadeia, eles devem confessar à polícia?
+\end{ex}
 
-Dado essas informações, é possível representá-las no formato {\bfseries matriz de \emph{payoffs}} de acordo com a tabela \ref{tab:dilema-prisioneiro}, onde o ganho do \emph{jogador linha} é representado pelo número à esquerda dentro de uma célula, e o ganho do \emph{jogador coluna} é representado à direita.
+Dado essas informações do exemplo \ref{ex:dilema-do-prisioneiro}, é possível representá-las no formato {\bfseries matriz de \emph{payoffs}} de acordo com a tabela \ref{tab:dilema-prisioneiro}, onde o ganho do \emph{jogador linha} é representado pelo número à esquerda dentro de uma célula, e o ganho do \emph{jogador coluna} é representado à direita.
 
 \begin{table}[ht]
 \centering
@@ -216,8 +234,6 @@ Dado essas informações, é possível representá-las no formato {\bfseries mat
 \caption{Dilema do prisioneiro, fonte: \cite{spaniel_2011}}
 \label{tab:dilema-prisioneiro}
 \end{table}
-
-Considerando que os dois suspeitos querem minimizar seu tempo na cadeia, eles devem confessar à polícia?
 
 Para resolver este jogo é preciso raciocinar como um jogador responderia de acordo com a ação do outro. Supondo que o \emph{jogador coluna} fique \emph{Quieto}, o \emph{jogador linha} pode ficar \emph{Quieto} e ir pra cadeia por 1 mês, sendo representado na tabela \ref{tab:dilema-prisioneiro} pela célula superior esquerda, ou aceitar a proposta do policial e \emph{Confessar} o crime que iriam cometer, sendo representado pela célula inferior esquerda. Como os jogadores querem minimizar seu tempo na prisão, que é representado por um valor negativo, deve-se buscar o maior valor dentre essas duas escolhas, que neste caso é \emph{Confessar} com um ganho de \emph{0}. Observando a outra possibilidade do \emph{jogador coluna}, que seria \emph{Confessar}, o \emph{jogador linha} teria um ganho de \emph{-12} ao ficar \emph{Quieto} e um ganho de \emph{-8} ao \emph{Confessar}. Em ambos os casos, o \emph{jogador linha} terá um melhor ganho ao \emph{Confessar}, e como o jogo é simétrico\footnote{Um jogo é dito simétrico quando as regras são as mesmas para todos os jogadores.} o mesmo raciocínio pode ser feito para o \emph{jogador coluna}.
 

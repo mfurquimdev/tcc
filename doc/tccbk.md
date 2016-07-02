@@ -348,3 +348,84 @@ seguinte exemplo retirado do livro de Willian Spaniel \cite{spaniel_2011}: Uma e
 \end{figure}
 
 Neste caso. a empresa $A$ possui duas estratégias \emph{Ficar de Fora} do mercado e \emph{Entrar}, enquanto a empresa $B$ tem as estratégias \emph{Aceitar} ou entrar em \emph{Guerra}. As duas estratégias dos dois jogadores são estratégias pura pois contém todas as
+
+
+
+
+\textbf{Estratégia pura} é um conjunto de escolhas a se fazer para cada momento de decisão possível. Considere o exemplo do famoso jogo de \emph{pedra, papel e tesoura}, que é um jogo de dois jogadores de soma zero, como demonstrado na figura \ref{fig:jogo-pedra-papel-tesoura}.
+
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}
+	  [
+	    grow                    = down,
+	    level distance          = 3cm,
+	    edge from parent/.style = {draw, -latex},
+	    every node/.style       = {font=\footnotesize},
+	    sloped,
+		level 1/.style			= {sibling distance=4.5cm},
+		level 2/.style			= {sibling distance=2cm}
+		]
+		\node {$\text{Jogador } A$}
+		child {
+			node (B1){$\text{Jogador } B$} {
+				child {
+					node {0}
+					edge from parent node [above] {Pedra}
+				}
+				child {
+					node {-1}
+					edge from parent node [above] {Papel}
+				}
+				child {
+					node {1}
+					edge from parent node [above] {Tesoura}
+				}
+			}
+			edge from parent node [above] {Pedra}
+		}
+		child {
+			node (B2) {$\text{Jogador } B$} {
+				child {
+					node {1}
+					edge from parent node [above] {Pedra}
+				}
+				child {
+					node {0}
+					edge from parent node [above] {Papel}
+				}
+				child {
+					node {-1}
+					edge from parent node [above] {Tesoura}
+				}
+			}
+			edge from parent node [above] {Papel}
+		}
+		child {
+			node (B3) {$\text{Jogador } B$} {
+				child {
+					node {-1}
+					edge from parent node [above] {Pedra}
+				}
+				child {
+					node {1}
+					edge from parent node [above] {Papel}
+				}
+				child {
+					node {0}
+					edge from parent node [above] {Tesoura}
+				}
+			}
+			edge from parent node [above] {Tesoura}
+		};
+    \draw[thick,dotted] ($(B1.north west)+(-0.1,-0.1)$) rectangle ($(B3.south east)+(0,+0.12)$);
+	\end{tikzpicture}
+	\caption{Jogo de pedra, papel e tesoura}
+	\label{fig:jogo-pedra-papel-tesoura}
+\end{figure}
+
+Neste caso, o jogador $A$ possui três estratégias puras: $AI$ jogar \emph{Pedra}; $AII$ jogar \emph{Papel} e; $AIII$ jogar \emph{Tesoura}. Já o jogador $B$ possui 9 estratégias: $BI$ jogar \emph{Pedra},
+
+
+
+Há duas formas de representar um jogo de uma maneira que seja possível analisá-lo em seguida: (a) \textbf{forma extensiva} e; (b) \textbf{forma normal}. 
