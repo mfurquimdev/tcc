@@ -1,11 +1,11 @@
-\chapter[Considerações Finais]{Considerações Finais}
+\chapter[Resultados Parciais]{Resultados Parciais}
 \label{cha:resultados-parciais}
 
 Foi utilizado um \emph{script bash} pra executar o programa e calcular o tempo de cada execução que, juntamente com a saída do programa de estados, permite estimar o tempo de execução para o cálculo dos estados.
 
 \section{Tempo de Execução}
 
-Dado $d\!\in\![2,9]$ discos e $\ p\!\in\![2,5]$ peões, a quantidade distintas de estados [$B$] e o tempo (em segundos) do cálculo está representado nas Tabelas \ref{tab:quantidade-de-estados-e-tempo-com-p-2}, \ref{tab:quantidade-de-estados-e-tempo-com-p-3}, \ref{tab:quantidade-de-estados-e-tempo-com-p-4} e \ref{tab:quantidade-de-estados-e-tempo-com-p-5}.
+Dado $d\!\in\![2,9]$ discos e $\ p\!\in\![2,5]$ peões, a quantidade distintas de estados [$B$] e o tempo (em segundos) do cálculo está representado nas Tabelas \ref{tab:quantidade-de-estados-e-tempo-com-p-2}, \ref{tab:quantidade-de-estados-e-tempo-com-p-3}, \ref{tab:quantidade-de-estados-e-tempo-com-p-4} e \ref{tab:quantidade-de-estados-e-tempo-com-p-5}. Além das tabelas, um gráfico também foi desenhado com as informações (Figura \ref{fig:crescimento-de-estados-de-acordo-com-numero-de-peoes-e-discos}) de crescimento da quantidade de estados de acordo com o número de peões e discos. Analisando as tabelas, o número de estados e, consequentemente, o tempo para calcular todos os estados, cresce rapidamente. Com o auxílio do gráfico, percebe-se que o crescimento é exponencial.
 
 \begin{table}[ht]
 \centering
@@ -94,3 +94,10 @@ Dado $d\!\in\![2,9]$ discos e $\ p\!\in\![2,5]$ peões, a quantidade distintas d
 \caption{Quantidade de Estados e Tempo com P = 5}
 \label{tab:quantidade-de-estados-e-tempo-com-p-5}
 \end{table}
+
+\begin{figure}[ht]
+\centering
+	\includegraphics[keepaspectratio=true,scale=0.35]{figuras/graph_state.png}
+\caption{Crescimento de estados de acordo com número de \emph{Peões} e \emph{Discos}}
+\label{fig:crescimento-de-estados-de-acordo-com-numero-de-peoes-e-discos}
+\end{figure}
