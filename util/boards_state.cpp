@@ -46,24 +46,11 @@ int main(int argc, char* argv[])
 			board.push_back(pawn+48);
 		}
 	}
-
 	add_board(board);
 
 	for (int p = 1; p <= num_pawns; p++) {
 		move(board,p);
 	}
-	/*
-	printf("\n");
-
-	for(auto p: boards) {
-		cout << "Key: " << p.first << "\tValue: " << p.second << endl;
-	}
-
-	for (size_t i = 0; i < counter; i++) {
-		cout << "Key: " << i << "\tValue: " << masks[i] << endl;
-	}
-	printf("\n");
-	*/
 
 	fprintf(stderr,"P: %d\tD: %d\tTotal: %d\n", num_pawns, num_discs, boards.size());
 	printf("%d\n", boards.size());
@@ -76,7 +63,6 @@ int move_pawn(string& board, int pawn)
 	// Move Pawn
 	char c_pawn;
 	char n_char = ' ';
-
 	n_char = (char) pawn+48;
 
 	switch (pawn) {
@@ -160,7 +146,6 @@ void pick_left(string board, int pawn_pos)
 
 void move(string board, int pawn)
 {
-
 	add_board(board);
 	int pawn_pos = move_pawn(board, pawn);
 	if (pawn_pos < 0) {
@@ -170,8 +155,6 @@ void move(string board, int pawn)
 	// Picking discs
 	pick_right(board, pawn_pos);
 	pick_left(board, pawn_pos);
-
-//	printf("%s\n", board.c_str());
 
 	return ;
 }

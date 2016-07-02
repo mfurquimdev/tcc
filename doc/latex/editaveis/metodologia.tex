@@ -52,6 +52,7 @@ Como demonstrado na equação \ref{eq:partidas}, a quantidade de partidas distin
  \end{equation}
 
 \subsection{Quantidade de estados}
+\label{subsec:quantidade-de-estados}
 
 Dado uma partida inicial $\gammaup \in \Gamma$ de \emph{Big Points}, sendo $\Gamma$ o conjunto contendo todas as $5\times 10^{41}$ partidas distintas, foi calculado a quantidade de estados de $\gammaup$. Para realizar este cálculo do número de estados, foi preciso determinar as características que definem um estado do jogo. De acordo com a seção \ref{subsec:regras-do-jogo}, tem-se que essas características são: (a) o estado do tabuleiro; (b) o estado dos peões; (c) o estado da escada; (d) o estado dos discos na mão dos jogadores e; (e) o jogador atual.
 
@@ -137,49 +138,35 @@ Anos\ &\approx 2\times10^{30}
 \end{split}
 \end{equation}
 
+\subsection{Podas}
 
-\subsubsection{Podas}
+Podas são limites impostos à busca na árvore de possibilidades de jogadas. A seguir estão as possíveis podas descobertas para este problema.
 
-A quantidade de estados distintos para cada partida foi calculada da seguinte maneira: cada um dos cinco possíveis jogadores pode ter entre zero e cinco discos das cores branco e preta, assim como pode ter entre zero e dez discos das cores restantes; cada peão pode estar em uma posição entre zero e dez (considerando apenas os de sua cor); e, por fim, cada espaço de disco no tabuleiro pode ou não estar ocupado. Partindo destas informações, temos a equação \ref{eq:poda1}.
+\subsubsection{Poda por Posição do Peão}
 
-A posição dos peões pode ser determinada considerando-se apenas as casas do
-tabuleiro de sua respectiva cor. Com essa poda, a quantidade de estados distintos de um jogo é reduzido, mas ainda se encontra na ordem de $10^{21}$.
+No cálculo da quantidade de estados distintos para a posição dos peões foi levado em consideração que um peão poderia estar em qualquer uma de 61 posições. Na verdade, um peão só pode ficar em cima dos discos de sua própria cor, reduzindo esse número para $1+9+5=11$, sendo que o peão pode estar fora do tabuleiro (1), em cima de algum disco de sua cor (9) e em algum degrau da escada (5). Porém, mesmo com essa poda, o número de estados distintos do jogo, de acordo com a equação \ref{eq:poda1}, é superior a $1\times 10^{34}$, demorando mais do que $3\times10^{26}$ anos para resolver um jogo (equação \ref{eq:anos_poda1}).
 
 \begin{equation} \label{eq:poda1} \tag{e.q. Poda por posição}
 \begin{split}
-Estados\ &=\ 2^{55}\cdot 11\cdot 5\cdot (5\times 10 + 2\cdot 6)\\
-Estados\ &=\ 2^{55}\cdot 11\cdot 5\cdot 72\\
-Estados\ &=\ 142'674'036'195'097'313'280
+	Estados\ &=\ 55^{2}\cdot11^{5}\cdot326\cdot3003^{5}\cdot252^{2}\cdot5\\
+	Estados\ &=\ 12'315'559'641'057'482'993'164'099'882'764'000\\
+	Estados\ &\approx 1\times 10^{34}
 \end{split}
 \end{equation}
 
-\begin{equation} \label{eq:anos_estados} \tag{e.q. Tempo de Computação dos Estados}
+\begin{equation} \label{eq:anos_poda1} \tag{e.q. Tempo de Computação da Poda 1}
 \begin{split}
 Anos\ &=\ \dfrac{N_{estados\ distintos}}{\nicefrac{estado}{segundo}\cdot\nicefrac{segundos}{minuto}\cdot\nicefrac{minutos}{hora}\cdot\nicefrac{horas}{dia}\cdot\nicefrac{dias}{ano}}\\
-Anos\ &=\ \dfrac{142'674'036'195'097'313'280}{\nicefrac{1}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{24}{1}\cdot\nicefrac{365}{1}}\\
-Anos\ &=\ 4'524'164'009'230
+Anos\ &=\ \dfrac{12'315'559'641'057'482'993'164'099'882'764'000}{\nicefrac{1}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{60}{1}\cdot\nicefrac{24}{1}\cdot\nicefrac{365}{1}}\\
+Anos\ &=\ 390'523'834'381'579'220'798'144'512\\
+Anos\ &\approx 3\times10^{26}
 \end{split}
 \end{equation}
 
+\section{Desenvolvimento do Jogo Eletrônico}
 
-\begin{itemize}
-\item
-  O jogo eletrônico está sendo implementado
-\item
-  Foi feito uma análise para descobrir a possibilidade de computar a
-  melhor jogada possível para um ou vários jogos. Nesta análise,
-  levou-se em consideração:
+Foi desenvolvido um programa para calcular a quantidade aproximada de estados distintos de uma partida reduzida do jogo \emph{Big Points}. Dado $d$ discos e $p$ peões, o programa realiza todos os movimentos possíveis no primeiro turno, movendo uma vez com cada peão, além de capturar o disco atrás e à frente do peão. Então, recursivamente, a função de mover e coletar discos é chamada, cobrindo cada possibilidade de jogada.
 
-  \begin{itemize}
-  \tightlist
-  \item
-    A quantidade de memória necessária
-  \item
-    O número de estados existentes
-  \item
-    A complexidade assintótica do algoritmo (pois o número de entrada
-    pro algorítimo é muito grande)
-  \item
-    O tempo de processamento para um determinado número de estados
-  \end{itemize}
-\end{itemize}
+O cálculo da quantidade de estados difere do proposto da seção \ref{subsec:quantidade-de-estados} pois não representa o tabuleiro como uma máscara binária, mas sim como um conjunto de caracteres. O caracter 0 representa que aquele disco naquela posição está indisponível, ou seja, já foi capturado por um jogador. Os caracteres 1,2,3,4 e 5 representam as cores Vermelha, Verde, Azul, Amarela e Violeta, respectivamente, e os caracteres \emph{R}, \emph{G}, \emph{B}, \emph{Y}, \emph{V} representam os peões Vermelho, Verde, Azul, Amarelo e Violeta, respectivamente, percorrendo o tabuleiro até o fim. Não foi levado em consideração os discos na mão dos jogadores, e nem os estados da escada.
+
+\lstinputlisting[language=C, firstline=7,label = {cod:boards-state}, caption = {\textit{Quantidade de Estados Aproximados}} ]{../../util/boards_state.cpp }
