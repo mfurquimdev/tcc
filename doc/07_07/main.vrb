@@ -1,0 +1,12 @@
+\frametitle{Definição de \textit{Game Theory}}
+    A teoria dos jogos é uma teoria matemática criada para se modelar fenômenos que podem ser observados quando dois ou mais \textit{agentes de decisão} interagem entre si.
+\begin{lstlisting}
+    Game = <Players, Strategy, Payoffs>
+\end{lstlisting}
+\begin{equation*}
+\begin{split}
+  P_{layers}\ &=\ \{p_1, p_2,...,p_n\}\\
+  \forall p_i \in P_{layers},&\ \exists s_{ij} \in S_i\\
+  S_{i}\ &=\ \{s_{i1},s_{i2},...,s_{ij}\},
+\end{split}
+\end{equation*}

@@ -9,11 +9,14 @@ Teoria dos jogos é o estudo do comportamento estratégico interdependente\footn
 \section{Histórico da Teoria dos Jogos}
 \label{sec:historico-da-teoria-dos-jogos}
 
-Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}, explicado na Seção \ref{subsec:analise-primitiva-do-jogo-le-her}. No século seguinte, Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política. Mais recentemente, em 1913, Ernst Zermelo publica o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
+Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}.%, explicado na Seção \ref{subsec:analise-primitiva-do-jogo-le-her}
+No século seguinte, Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política. Mais recentemente, em 1913, Ernst Zermelo publica o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
 
 Dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista. Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero\footnote{Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.} com duas pessoas possui uma solução em estratégias mistas. Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
 
-Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que publicou quatro artigos importantes para teoria dos jogos não-cooperativos. Dois destes artigos provando a existência de um equilíbrio de \textbf{estratégias mistas} para jogos não-cooperativos, denominado \textbf{equilíbrio de Nash}. Os conceitos de estratégia mista será explicado na Seção \ref{subsubsec:estrategias-mistas} e equilíbrio de nash na Seção \ref{subsubsec:equilibrio-de-nash}. Nash recebeu o prêmio Nobel em 1994, junto com John Harsanyi e Reinhard Selten, por suas contribuições para a teoria dos jogos \cite[p.~3--4]{sartini_IIbienaldasbm}.
+Outro matemático que contribuiu para a área foi John Forbes Nash Júnior, que publicou quatro artigos importantes para teoria dos jogos não-cooperativos. Dois destes artigos provando a existência de um equilíbrio de \textbf{estratégias mistas} para jogos não-cooperativos, denominado \textbf{equilíbrio de Nash}.
+%Os conceitos de estratégia mista será explicado na Seção \ref{subsubsec:estrategias-mistas} e equilíbrio de nash na Seção \ref{subsubsec:equilibrio-de-nash}.
+Nash recebeu o prêmio Nobel em 1994, junto com John Harsanyi e Reinhard Selten, por suas contribuições para a teoria dos jogos \cite[p.~3--4]{sartini_IIbienaldasbm}.
 
 \section{Conceitos Fundamentais da Teoria dos Jogos}
 \label{sec:conceitos-fundamentais-da-teoria-dos-jogos}
@@ -236,12 +239,14 @@ Uma matriz de \emph{payoff} nada mais é do que a representação em forma norma
 \subsection{Soluções para jogos}
 Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. Há soluções para os jogos que as escolhas dos jogadores são feitas simultaneamente e soluções para os jogos que possuem turnos. Para o primeiro caso, as soluções são encontradas fazendo uso de \textbf{dominância estrita iterada}, teorema \textbf{minimax} ou \textbf{equilíbrio de Nash}, podendo ser com \textbf{estratégias mistas} ou não, enquanto para o segundo caso a solução é encontrada utilizando-se de \textbf{\emph{backward induction}}.
 
+\subsubsection{Backward Induction}
+\textbf{\emph{Backward induction}} nada mais é do que uma busca das melhores jogadas, em cada nó da árvore de possibilidades, começando pelas folhas das árvores.
+
 \subsubsection{Dominância estrita}
 
 É dito que uma estratégia é {\bfseries estritamente dominada} para um jogador se esta estratégia gera um ganho maior do que qualquer outra estratégia independente do que o outro jogador fizer. Considera-se que jogadores racionais nunca fazem uso de estratégias estritamente dominadas, pois não há motivos para escolher uma estratégia que sempre será pior em todos os casos. O exemplo do {\bfseries dilema do prisioneiro} demonstra tal conceito.
 
 Formulado por Albert W. Tucker em 1950 \cite{sartini_IIbienaldasbm}, o dilema do prisioneiro é, provavelmente, um dos exemplos mais conhecidos na teoria dos jogos. O propósito de Tucker foi ilustrar a dificuldade de se analisar certos tipos de jogos por razões que ficarão óbvias após o exemplo.
-
 
 \begin{myex}\label{ex:dilema-do-prisioneiro}
 Dois suspeitos são presos com suspeita de roubo mas os policiais podem apenas provar que os suspeitos invadiram o local. Precisando da confissão dos criminosos, o policial faz a seguinte proposta:
@@ -336,49 +341,49 @@ No final da eliminação iterada de estratégias estritamente dominadas. sobra a
 \label{tab:final-dominancia-estrita-iterada}
 \end{table}
 
-\subsubsection{Estratégias mistas}
+%\subsubsection{Estratégias mistas}
 
-Considere a situação a seguir: Dois caçadores devem decidir o que caçar no dia e levar o equipamento apropriado. Eles sabem que, no local de caça, existem duas lebres, que valem uma unidade de carne cada, e um veado, que vale seis unidades de carne. O veado vale mais carne dividindo para cada um do que a soma das duas lebres, mas é preciso o auxílio do outro caçador para caçar um veado, enquanto as lebres podem ser caçadas sem nenhuma ajuda \cite{spaniel_2011}. Estas informações são condensadas na Tabela \ref{tab:caca-ao-viado}.
+%Considere a situação a seguir: Dois caçadores devem decidir o que caçar no dia e levar o equipamento apropriado. Eles sabem que, no local de caça, existem duas lebres, que valem uma unidade de carne cada, e um veado, que vale seis unidades de carne. O veado vale mais carne dividindo para cada um do que a soma das duas lebres, mas é preciso o auxílio do outro caçador para caçar um veado, enquanto as lebres podem ser caçadas sem nenhuma ajuda \cite{spaniel_2011}. Estas informações são condensadas na Tabela \ref{tab:caca-ao-viado}.
 
-\begin{table}[ht]
-\centering
-\begin{tabular}{|c|c|c|c|}
-	\cline{3-4}
-	\multicolumn{1}{c}{} &  & \multicolumn{2}{c|}{{\bfseries Coluna}}\tabularnewline
-	\cline{3-4}
-	\multicolumn{1}{c}{} &  & {\scshape Veado}\  & {\scshape Lebre}\ \tabularnewline
-	\hline
-	\multirow{2}{*}{\begin{turn}{90}
-	{\bfseries Linha}
-	\end{turn}} & \begin{turn}{90}
-	{\scshape Veado}\
-	\end{turn} & {\Large(3,3)} & {\Large(0,2)}\tabularnewline
-	\cline{2-4}
-	 & \begin{turn}{90}
-	{\scshape Lebre}\
-	\end{turn} & {\Large(2,0)} & {\Large(1,1)}\tabularnewline
-	\hline
-\end{tabular}
-\caption{Caça ao Veado, fonte: \cite{spaniel_2011}}
-\label{tab:caca-ao-viado}
-\end{table}
+%\begin{table}[ht]
+%\centering
+%\begin{tabular}{|c|c|c|c|}
+%	\cline{3-4}
+%	\multicolumn{1}{c}{} &  & \multicolumn{2}{c|}{{\bfseries Coluna}}\tabularnewline
+%	\cline{3-4}
+%	\multicolumn{1}{c}{} &  & {\scshape Veado}\  & {\scshape Lebre}\ \tabularnewline
+%	\hline
+%	\multirow{2}{*}{\begin{turn}{90}
+%	{\bfseries Linha}
+%	\end{turn}} & \begin{turn}{90}
+%	{\scshape Veado}\
+%	\end{turn} & {\Large(3,3)} & {\Large(0,2)}\tabularnewline
+%	\cline{2-4}
+%	 & \begin{turn}{90}
+%	{\scshape Lebre}\
+%	\end{turn} & {\Large(2,0)} & {\Large(1,1)}\tabularnewline
+%	\hline
+%\end{tabular}
+%\caption{Caça ao Veado, fonte: \cite{spaniel_2011}}
+%\label{tab:caca-ao-viado}
+%\end{table}
 
-Pode parecer óbvio que o resultado desse jogo é os dois caçadores escolherem caçar \emph{Veado}, pois o ganho para ambos é maior do que em qualquer outra situação, mas esse não é bem o caso.
+%Pode parecer óbvio que o resultado desse jogo é os dois caçadores escolherem caçar \emph{Veado}, pois o ganho para ambos é maior do que em qualquer outra situação, mas esse não é bem o caso.
 
-\subsubsection{Teorema Minimax}
-\label{subsubsec:teorema-minimax}
+%\subsubsection{Teorema Minimax}
+%\label{subsubsec:teorema-minimax}
+%
+%\subsubsection{Equilíbrio de Nash}
+%\label{subsubsec:equilibrio-de-nash}
+%
+%\subsubsection{Estratégias Mistas}
+%\label{subsubsec:estrategias-mistas}
 
-\subsubsection{Equilíbrio de Nash}
-\label{subsubsec:equilibrio-de-nash}
 
-\subsubsection{Estratégias Mistas}
-\label{subsubsec:estrategias-mistas}
+%\subsection{Análise primitiva do jogo \emph{le Her}}
+%\label{subsec:analise-primitiva-do-jogo-le-her}
 
-
-\subsection{Análise primitiva do jogo \emph{le Her}}
-\label{subsec:analise-primitiva-do-jogo-le-her}
-
-O objetivo do jogo \emph{le Her} é terminar o jogo com a carta mais alta, sendo que o baralho é contado de Ás ($A$) à Rei ($K$). Essa versão reduzida podia ser jogada apenas com dois jogadores, um deles chamado \emph{dealer} e outro \emph{receiver}. O \emph{dealer} embaralha as cartas e distribui uma carta para o \emph{receiver} e uma para si. O \emph{receiver} tem a escolha de manter sua carta ou trocá-la com o \emph{dealer}, e em seguida o \emph{dealer} tem a mesma opção de manter ou de trocar sua carta com uma carta nova do baralho. A única regra que impede a troca é o caso da carta recebida ser um Rei ($K$), neste caso a troca deve ser desfeita e o jogador mantém sua carta original.
+%O objetivo do jogo \emph{le Her} é terminar o jogo com a carta mais alta, sendo que o baralho é contado de Ás ($A$) à Rei ($K$). Essa versão reduzida podia ser jogada apenas com dois jogadores, um deles chamado \emph{dealer} e outro \emph{receiver}. O \emph{dealer} embaralha as cartas e distribui uma carta para o \emph{receiver} e uma para si. O \emph{receiver} tem a escolha de manter sua carta ou trocá-la com o \emph{dealer}, e em seguida o \emph{dealer} tem a mesma opção de manter ou de trocar sua carta com uma carta nova do baralho. A única regra que impede a troca é o caso da carta recebida ser um Rei ($K$), neste caso a troca deve ser desfeita e o jogador mantém sua carta original.
 
 %Vários artigos apontam
 
