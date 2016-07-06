@@ -17,6 +17,7 @@ doc/ref
 *.toc
 doc/latex/tcc.pdf
 *.txt
+*.nav
 
 # PDF files
 .pdf
