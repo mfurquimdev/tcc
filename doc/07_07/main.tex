@@ -12,6 +12,19 @@
 \usepackage{amssymb, amsmath, pxfonts, MnSymbol}
 \usepackage{textcomp}
 
+\usepackage{enumerate}
+\usepackage{amsthm}
+\usepackage{nicefrac}
+\usepackage{tikz}
+\usepackage{textcomp}
+\usepackage{nameref}
+
+\makeatletter
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
+\usetikzlibrary{shapes,snakes}
+\usetikzlibrary{calc}
 
 \lstset{
   language=C,                % choose the language of the code
@@ -48,19 +61,20 @@
 
 \logo{\includegraphics[width=0.8cm]{fga_logo.png}}
 %\useoutertheme{infolines}
-\title{Revisão Sistemática}
+\title{\emph{Big Points}: Uma Análise Baseada na Teoria dos Jogos}
 \author{Mateus Furquim}
 \institute{Engenharia de Software\\ Universidade de Brasília}
-
 
 \begin{document}
 \frame{\titlepage \vspace{-0.5cm}
 }
-\frame
-{
-\frametitle{Agenda}
-\tableofcontents%[pausesection]
-}
+\begin{frame}[allowframebreaks]{Outline}
+	\frametitle{Agenda}
+	\tableofcontents%[pausesection]
+\end{frame}
+
+\include{pesquisa}
+\include{forma_extensa}
 \include{apresentacao}
 
 \end{document}
