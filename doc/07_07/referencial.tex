@@ -1,3 +1,87 @@
+\section{Fundamentação Teórica}
+\subsection{Definição de Teoria dos Jogos}
+\begin{frame}
+\frametitle{Definição de Teoria dos Jogos}
+\begin{block}{}
+	A \textbf{Teoria dos Jogos} é uma área de estudos derivada da matemática que estuda o comportamento de indivíduos sob uma situação de conflito.
+\end{block}
+\begin{itemize}
+	\item Teoria Econômica dos Jogos
+	\item Teoria Combinatória dos Jogos
+	\item Teoria Computacional dos Jogos
+\end{itemize}
+\end{frame}
+
+\subsubsection{Teoria Econômica dos Jogos}
+\begin{frame}
+\frametitle{\subsubsecname}
+\begin{itemize}
+	\item[1921] Émile Borel, reinventou Minimax
+	\item[1944] von Neumann and Morgenstern
+	\item Jogo de Soma Zero
+	\item Jogo Cooperativo e Não Cooperativo
+	\item[1950] John Forbes Nash
+	\item Equilíbrio de Nash (Estratégias Mistas)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Representação}
+\begin{lstlisting}
+    Game = <Jogadores, Strategy, Payoffs>
+\end{lstlisting}
+\pause
+\begin{equation*}
+\begin{split}
+  J\ &=\ \{j_1, j_2,...,j_i\}\\
+  \pause
+  S_{i}\ &=\ \{s_{i1},s_{i2},...,s_{ij}\},\\
+  \pause
+  \forall j_i\!\in\!J&,\ \exists\ s_{ij}\!\in\!S_i\\
+  \pause
+  P_i &: S_{i}\rightarrow\mathbb{R}
+\end{split}
+\end{equation*}
+\end{frame}
+
+\subsubsection{Teoria Combinatória dos Jogos}
+\begin{frame}[fragile]
+\frametitle{\subsubsecname}
+\begin{equation*}
+\begin{split}
+  G\ &=\ \{G^L|G^R\}, \text{Representação de jogo}\\
+  \pause
+  \{\emptyset|\emptyset\}\ &=\ \{|\}, \text{Fim de jogo}\\
+  \pause
+  *\ &=\ \{0|0\}, \text{Estrela, próximo jogador ganha}\\
+  \pause
+  \uparrow\ &=\ \{0|*\}, \text{Left sempre ganha}\\
+  \pause
+  \downarrow\ &=\ \{*|0\}, \text{Right sempre ganha}\\
+\end{split}
+\end{equation*}
+\end{frame}
+
+\subsubsection{Teoria Computacional dos Jogos}
+\begin{frame}[fragile]
+\frametitle{\subsubsecname}
+Engloba jogos que podem ser resolvidos por força bruta ou que podem ser jogados contra uma Inteligência Artificial.
+\begin{itemize}
+	\item Para jogos pequenos é possível percorrer todas as possibilidades
+	\item Para jogos maiores, é necessário uma função que avalie a posição atual
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\subsubsecname}
+Dois jogadores alternam turnos. O estado do nó indica a situação do jogador da vez. Estados possíveis na árvore:
+\begin{itemize}
+	\item[\textcolor{green}{\textbullet}] \emph{Vencedor} ($\exists$ um nó filho \emph{Perdedor})
+	\item[\textcolor{red}{\textbullet}] \emph{Perdedor} (Todos os nós filho são \emph{Vencedores})
+	\item[\textcolor{yellow}{\textbullet}] Empate ($\nexists$ nó filho \emph{Perdedor}, $\exists$ nó filho \emph{Empate})
+\end{itemize}
+\end{frame}
+
 \subsection{Representação e Soluções de Jogos}
 \begin{frame}
 \frametitle{\secname}

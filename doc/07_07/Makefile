@@ -1,5 +1,6 @@
 TARGET=main.tex
-SOURCES=apresentacao.tex forma_extensa.tex pesquisa.tex
+SOURCES=forma_extensa.tex pesquisa.tex introducao.tex jogo.tex  \
+	solucao.tex referencial.tex resultados.tex consideracoes.tex
 
 all:$(TARGET)
 	pdflatex $(TARGET) $(SOURCES)

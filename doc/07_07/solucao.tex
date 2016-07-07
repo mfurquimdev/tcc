@@ -1,0 +1,257 @@
+\subsection*{Estratégia estritamente dominante}
+
+\begin{frame}
+\frametitle{\subsecname}
+
+\end{frame}
+
+
+
+\subsubsection*{Eliminação iterada de estratégias estritamente dominadas}
+\begin{frame}
+\frametitle{\subsubsecname}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\cline{3-5}
+\multicolumn{1}{c}{} &  & \multicolumn{3}{c|}{\textbf{Coluna}}\tabularnewline
+\cline{3-5}
+\multicolumn{1}{c}{} &  & \textsc{Esquerda} & \textsc{Centro} & \textsc{Direita}\tabularnewline
+\hline
+\multirow{3}{*}{\begin{turn}{90}
+\textbf{Linha}
+\end{turn}} & \begin{turn}{90}
+\textsc{Cima}
+\end{turn} & {\Large(13,3)} & {\Large(1,4)} & {\Large(7,3)} \tabularnewline
+\cline{2-5}
+ & \begin{turn}{90}
+\textsc{Meio}
+\end{turn} & {\Large(4,1)} & {\Large(3,3)} & {\Large(6,2)} \tabularnewline
+\cline{2-5}
+ & \begin{turn}{90}
+\textsc{Baixo}
+\end{turn} &  {\Large(-1,9)} & {\Large(2,8)} & {\Large(8,-1)} \tabularnewline
+\hline
+\end{tabular}
+\caption{Exemplo de dominância estrita iterada}
+\label{tab:dominancia-estrita-iterada}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{\subsubsecname}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\cline{3-5}
+\multicolumn{1}{c}{} &  & \multicolumn{3}{c|}{\textbf{Coluna}}\tabularnewline
+\cline{3-5}
+\multicolumn{1}{c}{} &  & \textsc{Esquerda} & \textsc{Centro} & \textsc{Direita}\tabularnewline
+\hline
+\multirow{3}{*}{\begin{turn}{90}
+\textbf{Linha}
+\end{turn}} & \begin{turn}{90}
+\textsc{Cima}
+\end{turn} & {\Large(13,3)} & {\Large(1,\textbf{4})} & {\Large(7,\textbf{3})} \tabularnewline
+\cline{2-5}
+ & \begin{turn}{90}
+\textsc{Meio}
+\end{turn} & {\Large(4,1)} & {\Large(3,\textbf{3})} & {\Large(6,\textbf{2})} \tabularnewline
+\cline{2-5}
+ & \begin{turn}{90}
+\textsc{Baixo}
+\end{turn} &  {\Large(-1,9)} & {\Large(2,\textbf{8})} & {\Large(8,\textbf{-1})} \tabularnewline
+\hline
+\end{tabular}
+\caption{Exemplo de dominância estrita iterada}
+\label{tab:dominancia-estrita-iterada}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{\subsubsecname}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\cline{3-4}
+\multicolumn{1}{c}{} &  & \multicolumn{2}{c|}{\textbf{Coluna}}\tabularnewline
+\cline{3-4}
+\multicolumn{1}{c}{} &  & \textsc{Esquerda} & \textsc{Centro}\tabularnewline
+\hline
+\multirow{3}{*}{\begin{turn}{90}
+\textbf{Linha}
+\end{turn}} & \begin{turn}{90}
+\textsc{Cima}
+\end{turn} & {\Large(13,3)} & {\Large(1,4)} \tabularnewline
+\cline{2-4}
+ & \begin{turn}{90}
+\textsc{Meio}
+\end{turn} & {\Large(4,1)} & {\Large(3,3)} \tabularnewline
+\cline{2-4}
+ & \begin{turn}{90}
+\textsc{Baixo}
+\end{turn} &  {\Large(-1,9)} & {\Large(2,8)} \tabularnewline
+\hline
+\end{tabular}
+\caption{Exemplo de dominância estrita iterada}
+\label{tab:dominancia-estrita-iterada}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{\subsubsecname}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\cline{3-4}
+\multicolumn{1}{c}{} &  & \multicolumn{2}{c|}{\textbf{Coluna}}\tabularnewline
+\cline{3-4}
+\multicolumn{1}{c}{} &  & \textsc{Esquerda} & \textsc{Centro}\tabularnewline
+\hline
+\multirow{3}{*}{\begin{turn}{90}
+\textbf{Linha}
+\end{turn}} & \begin{turn}{90}
+\textsc{Cima}
+\end{turn} & {\Large(13,3)} & {\Large(1,4)} \tabularnewline
+\cline{2-4}
+ & \begin{turn}{90}
+\textsc{Meio}
+\end{turn} & {\Large(\textbf{4},1)} & {\Large(\textbf{3},3)} \tabularnewline
+\cline{2-4}
+ & \begin{turn}{90}
+\textsc{Baixo}
+\end{turn} &  {\Large(\textbf{-1},9)} & {\Large(\textbf{2},8)} \tabularnewline
+\hline
+\end{tabular}
+\caption{Exemplo de dominância estrita iterada}
+\label{tab:dominancia-estrita-iterada}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{\subsubsecname}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\cline{3-4}
+\multicolumn{1}{c}{} &  & \multicolumn{2}{c|}{\textbf{Coluna}}\tabularnewline
+\cline{3-4}
+\multicolumn{1}{c}{} &  & \textsc{Esquerda} & \textsc{Centro}\tabularnewline
+\hline
+\multirow{2}{*}{\begin{turn}{90}
+\textbf{Linha}
+\end{turn}} & \begin{turn}{90}
+\textsc{Cima}
+\end{turn} & {\Large(13,3)} & {\Large(1,4)} \tabularnewline
+\cline{2-4}
+ & \begin{turn}{90}
+\textsc{Meio}
+\end{turn} & {\Large(4,1)} & {\Large(3,3)} \tabularnewline
+\hline
+\end{tabular}
+\caption{Exemplo de dominância estrita iterada}
+\label{tab:dominancia-estrita-iterada}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{\subsubsecname}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\cline{3-4}
+\multicolumn{1}{c}{} &  & \multicolumn{2}{c|}{\textbf{Coluna}}\tabularnewline
+\cline{3-4}
+\multicolumn{1}{c}{} &  & \textsc{Esquerda} & \textsc{Centro}\tabularnewline
+\hline
+\multirow{2}{*}{\begin{turn}{90}
+\textbf{Linha}
+\end{turn}} & \begin{turn}{90}
+\textsc{Cima}
+\end{turn} & {\Large(13,\textbf{3})} & {\Large(1,\textbf{4})} \tabularnewline
+\cline{2-4}
+ & \begin{turn}{90}
+\textsc{Meio}
+\end{turn} & {\Large(4,\textbf{1})} & {\Large(3,\textbf{3})} \tabularnewline
+\hline
+\end{tabular}
+\caption{Exemplo de dominância estrita iterada}
+\label{tab:dominancia-estrita-iterada}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{\subsubsecname}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|}
+\cline{3-3}
+\multicolumn{1}{c}{} &  & \multicolumn{1}{c|}{\textbf{Coluna}}\tabularnewline
+\cline{3-3}
+\multicolumn{1}{c}{} &  &  \textsc{Centro}\tabularnewline
+\hline
+\multirow{2}{*}{\begin{turn}{90}
+\textbf{Linha}
+\end{turn}} & \begin{turn}{90}
+\textsc{Cima}
+\end{turn} & {\Large(1,4)} \tabularnewline
+\cline{2-3}
+ & \begin{turn}{90}
+\textsc{Meio}
+\end{turn} & {\Large(3,3)} \tabularnewline
+\hline
+\end{tabular}
+\caption{Exemplo de dominância estrita iterada}
+\label{tab:dominancia-estrita-iterada}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{\subsubsecname}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|}
+\cline{3-3}
+\multicolumn{1}{c}{} &  & \multicolumn{1}{c|}{\textbf{Coluna}}\tabularnewline
+\cline{3-3}
+\multicolumn{1}{c}{} &  &  \textsc{Centro}\tabularnewline
+\hline
+\multirow{2}{*}{\begin{turn}{90}
+\textbf{Linha}
+\end{turn}} & \begin{turn}{90}
+\textsc{Cima}
+\end{turn} & {\Large(\textbf{1},4)} \tabularnewline
+\cline{2-3}
+ & \begin{turn}{90}
+\textsc{Meio}
+\end{turn} & {\Large(\textbf{3},3)} \tabularnewline
+\hline
+\end{tabular}
+\caption{Exemplo de dominância estrita iterada}
+\label{tab:dominancia-estrita-iterada}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{\subsubsecname}
+\begin{table}[ht]
+\centering
+
+\begin{tabular}{cc|c|}
+\cline{3-3}
+ &  & \textbf{Coluna}\tabularnewline
+\cline{3-3}
+ &  & Centro\tabularnewline
+\hline
+\multicolumn{1}{|c|}{\begin{turn}{90}
+\textbf{Linha}
+\end{turn}} & \begin{turn}{90}
+Meio
+\end{turn} & {\Large(3,3)}\tabularnewline
+\hline
+\end{tabular}
+
+\caption{Exemplo de dominância estrita iterada}
+\label{tab:dominancia-estrita-iterada}
+\end{table}
+\end{frame}

@@ -16,8 +16,15 @@
 \usepackage{amsthm}
 \usepackage{nicefrac}
 \usepackage{tikz}
+\usepackage{multirow}
+\usepackage{rotating}
 \usepackage{textcomp}
 \usepackage{nameref}
+
+\usepackage{fancyvrb}
+\usepackage{color}
+%\usepackage[usenames,dvipsnames]{xcolor}
+
 
 \makeatletter
 \newcommand*{\currentname}{\@currentlabelname}
@@ -50,9 +57,10 @@
 \definecolor{kugreenlyslyslys}{RGB}{214,223,216}
 \setbeamercovered{transparent}
 \mode<presentation>
-\usetheme[numbers,totalnumber,compress,sidebarshades]{PaloAlto}
+\usetheme[numbers,totalnumber,compress,sidebarshades]{Dresden}
 \setbeamertemplate{footline}[frame number]
-
+\beamertemplatenavigationsymbolsempty
+%\hypersetup{pdfpagemode=FullScreen}
   \usecolortheme[named=kugreen]{structure}
   \useinnertheme{circles}
   \usefonttheme[onlymath]{serif}
@@ -73,8 +81,13 @@
 	\tableofcontents%[pausesection]
 \end{frame}
 
+\include{introducao}
 \include{pesquisa}
-\include{forma_extensa}
-\include{apresentacao}
+\include{referencial}
+\include{jogo}
+%\include{forma_extensa}
+%\include{solucao}
+\include{resultados}
+\include{consideracoes}
 
 \end{document}

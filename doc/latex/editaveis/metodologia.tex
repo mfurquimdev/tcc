@@ -58,7 +58,7 @@ Dado uma partida inicial $\gammaup \in \Gamma$ de \emph{Big Points}, sendo $\Gam
 
 \subsubsection{Quantidade de Estados do Tabuleiro}
 
-Já conhecendo a ordem de todos os discos no tabuleiro, o estado do tabuleiro foi descrito por uma máscara binária que representa a disponibilidade destes disco, para um peão mover-se para cima ou para ser pego por um jogador. O jogo possui $55$ discos que podem ou não estar disponíveis, portando existem $55^2$ estados diferentes para o tabuleiro.
+Já conhecendo a ordem de todos os discos no tabuleiro, o estado do tabuleiro foi descrito por uma máscara binária que representa a disponibilidade destes disco, para um peão mover-se para cima ou para ser pego por um jogador. O jogo possui $55$ discos que podem ou não estar disponíveis, portando existem $2^{55}$ estados diferentes para o tabuleiro.
 
 \subsubsection{Quantidade de Estados dos Peões}
 
@@ -123,7 +123,7 @@ Como demonstrado na Equação \ref{eq:estados}, a quantidade de estados existent
 
 \begin{equation} \label{eq:estados} \tag{e.q. Caso Geral}
 \begin{split}
-	Estados\ &=\ 55^{2}\cdot61^{5}\cdot326\cdot3003^{5}\cdot252^{2}\cdot5\\
+	Estados\ &=\ 2^{55}\cdot61^{5}\cdot326\cdot3003^{5}\cdot252^{2}\cdot5\\
 	Estados\ &=\ 64'586'224'969'618'554'770'829'159'998'863'764'000\\
 	Estados\ &\approx 6\times 10^{37}
 \end{split}
@@ -148,7 +148,7 @@ No cálculo da quantidade de estados distintos para a posição dos peões foi l
 
 \begin{equation} \label{eq:poda1} \tag{e.q. Poda por posição}
 \begin{split}
-	Estados\ &=\ 55^{2}\cdot11^{5}\cdot326\cdot3003^{5}\cdot252^{2}\cdot5\\
+	Estados\ &=\ 2^{55}\cdot11^{5}\cdot326\cdot3003^{5}\cdot252^{2}\cdot5\\
 	Estados\ &=\ 12'315'559'641'057'482'993'164'099'882'764'000\\
 	Estados\ &\approx 1\times 10^{34}
 \end{split}
