@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <ncurses.h>
+#include "color.h"
 
 using namespace std;
 
@@ -27,8 +28,11 @@ private:
 
 	void print_color_stair();
 	void print_color_pawn();
-	void print_color_disc();
+	void print_color_board();
 	void print_color_players();
+
+	bool select_option();
+	void move_pawn(Color);
 
 	/* Getters and Setters */
 	void number_players(unsigned short int);
@@ -48,6 +52,8 @@ private:
 	WINDOW* menuwin(void);
 
 	/* Variables */
+	int _highlight;
+	char _choices[4][20];
 	unsigned short int _num_players;
 	unsigned short int _num_pawns;
 	unsigned short int _num_discs;

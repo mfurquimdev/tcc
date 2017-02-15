@@ -67,21 +67,21 @@ pair<int, int> start_ncurses(void)
 		}
 
 		//init_pair(#color_pair, Foreground, Background);
-		init_pair((short int)NcursesColors::FW, COLOR_WHITE  , COLOR_BLACK  );
-		init_pair((short int)NcursesColors::FR, COLOR_RED    , COLOR_BLACK  );
-		init_pair((short int)NcursesColors::FG, COLOR_GREEN  , COLOR_BLACK  );
-		init_pair((short int)NcursesColors::FB, COLOR_BLUE   , COLOR_BLACK  );
-		init_pair((short int)NcursesColors::FY, COLOR_YELLOW , COLOR_BLACK  );
-		init_pair((short int)NcursesColors::FM, COLOR_MAGENTA, COLOR_BLACK  );
-		init_pair((short int)NcursesColors::FC, COLOR_CYAN   , COLOR_BLACK  );
-		init_pair((short int)NcursesColors::BK, COLOR_CYAN   , COLOR_CYAN   );
-		init_pair((short int)NcursesColors::BW, COLOR_WHITE  , COLOR_WHITE  );
-		init_pair((short int)NcursesColors::BR, COLOR_RED    , COLOR_RED    );
-		init_pair((short int)NcursesColors::BG, COLOR_GREEN  , COLOR_GREEN  );
-		init_pair((short int)NcursesColors::BY, COLOR_YELLOW , COLOR_YELLOW );
-		init_pair((short int)NcursesColors::BB, COLOR_BLUE   , COLOR_BLUE   );
-		init_pair((short int)NcursesColors::BM, COLOR_MAGENTA, COLOR_MAGENTA);
-		init_pair((short int)NcursesColors::BC, COLOR_CYAN   , COLOR_CYAN   );
+		init_pair((short int)NcursesColor::FW, COLOR_WHITE  , COLOR_BLACK  );
+		init_pair((short int)NcursesColor::FR, COLOR_RED    , COLOR_BLACK  );
+		init_pair((short int)NcursesColor::FG, COLOR_GREEN  , COLOR_BLACK  );
+		init_pair((short int)NcursesColor::FB, COLOR_BLUE   , COLOR_BLACK  );
+		init_pair((short int)NcursesColor::FY, COLOR_YELLOW , COLOR_BLACK  );
+		init_pair((short int)NcursesColor::FM, COLOR_MAGENTA, COLOR_BLACK  );
+		init_pair((short int)NcursesColor::FC, COLOR_CYAN   , COLOR_BLACK  );
+		init_pair((short int)NcursesColor::BK, COLOR_CYAN   , COLOR_CYAN   );
+		init_pair((short int)NcursesColor::BW, COLOR_WHITE  , COLOR_WHITE  );
+		init_pair((short int)NcursesColor::BR, COLOR_RED    , COLOR_RED    );
+		init_pair((short int)NcursesColor::BG, COLOR_GREEN  , COLOR_GREEN  );
+		init_pair((short int)NcursesColor::BY, COLOR_YELLOW , COLOR_YELLOW );
+		init_pair((short int)NcursesColor::BB, COLOR_BLUE   , COLOR_BLUE   );
+		init_pair((short int)NcursesColor::BM, COLOR_MAGENTA, COLOR_MAGENTA);
+		init_pair((short int)NcursesColor::BC, COLOR_CYAN   , COLOR_CYAN   );
 	}
 	else {
 		printw("Terminal does not support color");

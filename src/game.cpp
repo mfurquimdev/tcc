@@ -3,15 +3,25 @@
 
 #include <ncurses.h>
 #include <cstdio>
+#include <cstring>
+#include <string>
 #include <stdio_ext.h>
 #include <thread>
 #include <chrono>
+#include <algorithm>
+#include <map>
 
 Game::Game(WINDOW* menuwin)
 {
 	fprintf(stderr, "[%p]\tGame()\n", (void*) this);
 
 	this->_menuwin = menuwin;
+	strncpy(this->_choices[0], "Red", 4);
+	strncpy(this->_choices[1], "Green", 6);
+	strncpy(this->_choices[2], "Blue", 5);
+	strncpy(this->_choices[3], "Press q to quit.", 17);
+
+	this->_highlight = 0;
 
 	number_players(2);
 	number_pawns(3);
@@ -52,48 +62,78 @@ Game::print_color_stair()
 }
 
 void
-Game::print_color_disc()
+Game::print_color_board()
 {
+	printw("                                     ");
+
+	bool first = 1;
+
 	string board = this->board();
 	for (unsigned int i = 0; i < board.length(); i++) {
 		unsigned char disc = board.c_str()[i];
 		switch(disc) {
-			case 'R':
-			attron(COLOR_PAIR(NcursesColors::BR));
+			case '1':
+			if (first) {
+				attron(A_BOLD);
+				attron(COLOR_PAIR(NcursesColor::FR));
+				printw("%c", disc);
+				attroff(COLOR_PAIR(NcursesColor::FR));
+				attroff(A_BOLD);
+				first = 0;
+			}
+			else {
+				attron(COLOR_PAIR(NcursesColor::BR));
+				printw("%c", disc);
+				attroff(COLOR_PAIR(NcursesColor::BR));
+			}
+			break;
+
+			case '2':
+			attron(COLOR_PAIR(NcursesColor::BG));
 			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColors::BR));
+			attroff(COLOR_PAIR(NcursesColor::BG));
+			break;
+
+			case '3':
+			attron(COLOR_PAIR(NcursesColor::BB));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(NcursesColor::BB));
+			break;
+
+			case '4':
+			attron(COLOR_PAIR(NcursesColor::BW));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(NcursesColor::BW));
+			break;
+
+			case '5':
+			attron(COLOR_PAIR(NcursesColor::BK));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(NcursesColor::BK));
+			break;
+
+			case 'R':
+			attron(COLOR_PAIR(NcursesColor::FR));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(NcursesColor::FR));
 			break;
 
 			case 'G':
-			attron(COLOR_PAIR(NcursesColors::BG));
+			attron(COLOR_PAIR(NcursesColor::FG));
 			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColors::BG));
+			attroff(COLOR_PAIR(NcursesColor::FG));
 			break;
 
 			case 'B':
-			attron(COLOR_PAIR(NcursesColors::BB));
+			attron(COLOR_PAIR(NcursesColor::FB));
 			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColors::BB));
+			attroff(COLOR_PAIR(NcursesColor::FB));
 			break;
-
-			case 'W':
-			attron(COLOR_PAIR(NcursesColors::BW));
-			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColors::BW));
-			break;
-
-			case 'K':
-			attron(COLOR_PAIR(NcursesColors::BK));
-			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColors::BK));
-			break;
-
-			case ' ':
-			printw(" ");
 
 			default:
 			break;
 		}
+		printw(" ");
 	}
 
 	return ;
@@ -103,17 +143,17 @@ void
 Game::print_color_pawn()
 {
 	printw("                                     ");
-	attron(COLOR_PAIR(NcursesColors::FR));
+	attron(COLOR_PAIR(NcursesColor::FR));
 	printw("R ");
-	attroff(COLOR_PAIR(NcursesColors::FR));
+	attroff(COLOR_PAIR(NcursesColor::FR));
 
-	attron(COLOR_PAIR(NcursesColors::FG));
+	attron(COLOR_PAIR(NcursesColor::FG));
 	printw("G ");
-	attroff(COLOR_PAIR(NcursesColors::FG));
+	attroff(COLOR_PAIR(NcursesColor::FG));
 
-	attron(COLOR_PAIR(NcursesColors::FB));
+	attron(COLOR_PAIR(NcursesColor::FB));
 	printw("B ");
-	attroff(COLOR_PAIR(NcursesColors::FB));
+	attroff(COLOR_PAIR(NcursesColor::FB));
 
 	return ;
 }
@@ -122,16 +162,16 @@ void
 Game::print_color_players()
 {
 	printw("                                     ");
-	attron(COLOR_PAIR(NcursesColors::FY));
+	attron(COLOR_PAIR(NcursesColor::FY));
 	printw("P1: ");
-	attroff(COLOR_PAIR(NcursesColors::FY));
+	attroff(COLOR_PAIR(NcursesColor::FY));
 	printw("\n");
 	printw("\n");
 
 	printw("                                     ");
-	attron(COLOR_PAIR(NcursesColors::FM));
+	attron(COLOR_PAIR(NcursesColor::FM));
 	printw("P2: ");
-	attroff(COLOR_PAIR(NcursesColors::FM));
+	attroff(COLOR_PAIR(NcursesColor::FM));
 	printw("\n");
 
 	return ;
@@ -142,18 +182,79 @@ Game::draw() {
 	move(10,0);
 	print_color_players();
 	print_color_stair();
-	print_color_pawn();
-	print_color_disc();
+//	print_color_pawn();
+	print_color_board();
 	printw("\n");
 	refresh();
 
-	mvwprintw(menuwin(), 1, 1, "R");
-	mvwprintw(menuwin(), 2, 1, "G");
-	mvwprintw(menuwin(), 3, 1, "B");
-	mvwprintw(menuwin(), 4, 1, "Press q to quit.");
+	for (int i = 0; i < 4; ++i) {
+		if (i == this->_highlight) {
+			wattron(menuwin(), A_REVERSE);
+		}
+		mvwprintw(menuwin(), i+1, 1, this->_choices[i]);
+		wattroff(menuwin(), A_REVERSE);
+	}
 	wrefresh(menuwin());
 
 	return ;
+}
+
+void
+Game::move_pawn(Color color)
+{
+	int pos = -1;
+	switch (color) {
+		case Color::R:
+		pos = board().find_first_of('1');
+		break;
+
+		case Color::G:
+		pos = board().find_first_of('2');
+		break;
+
+		case Color::B:
+		pos = board().find_first_of('3');
+		break;
+
+		default:
+		break;
+	}
+
+	move(0,0);
+	printw("%d", pos);
+
+	return ;
+}
+
+bool
+Game::select_option()
+{
+	bool quit = 0;
+
+	// Action depends on the highlight
+	switch (this->_highlight) {
+
+		case 0:
+		move_pawn(Color::R);
+		break;
+
+		case 1:
+		move_pawn(Color::G);
+		break;
+
+		case 2:
+		move_pawn(Color::B);
+		break;
+
+		case 3:
+		quit = 1;
+		break;
+
+		default:
+		break;
+	}
+
+	return quit;
 }
 
 void
@@ -166,14 +267,37 @@ Game::loop(void)
 	while (!quit) {
 		draw();
 
-		int c = getch();
+		int c = wgetch(menuwin());
 		switch (c) {
+			// Press q to quit
 			case 'q':
-				quit = 1;
-				break;
+			quit = 1;
+			break;
+
+			// Move up on the menu
+			case KEY_UP:
+			this->_highlight--;
+			if (this->_highlight < 0) {
+				this->_highlight = 0;
+			}
+			break;
+
+			// Move down on the menu
+			case KEY_DOWN:
+			this->_highlight++;
+			if (this->_highlight > 3) {
+				this->_highlight = 3;
+			}
+			break;
+
+			// Press enter to choose action on menu
+			case 10:
+			quit = select_option();
+			break;
+
 
 			default:
-				break;
+			break;
 		}
 	}
 }
@@ -201,7 +325,7 @@ void
 Game::init_board(void)
 {
 	fprintf(stderr, "init_board(void)\n");
-	this->_board = "R B K G G B B W G G R W K R G B R R B";
+	this->_board = "RGB1352233422145123113";
 //	printw("%s", this->_board.c_str());
 	return ;
 }

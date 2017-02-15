@@ -1,7 +1,7 @@
 #ifndef COLOR_H
 #define COLOR_H
 
-enum class Colors : short int
+enum class Color : short int
 {
 	R = 0,
 	G = 1,
@@ -10,7 +10,7 @@ enum class Colors : short int
 	P = 4
 };
 
-enum class NcursesColors : short int
+enum class NcursesColor : short int
 {
 	FW = 1,
 	FR = 2,
