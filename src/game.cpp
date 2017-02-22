@@ -66,26 +66,22 @@ Game::print_color_board()
 {
 	printw("                                     ");
 
-	bool first = 1;
-
 	string board = this->board();
 	for (unsigned int i = 0; i < board.length(); i++) {
 		unsigned char disc = board.c_str()[i];
 		switch(disc) {
 			case '1':
-			if (first) {
-				attron(A_BOLD);
-				attron(COLOR_PAIR(NcursesColor::FR));
-				printw("%c", disc);
-				attroff(COLOR_PAIR(NcursesColor::FR));
-				attroff(A_BOLD);
-				first = 0;
-			}
-			else {
-				attron(COLOR_PAIR(NcursesColor::BR));
-				printw("%c", disc);
-				attroff(COLOR_PAIR(NcursesColor::BR));
-			}
+			// if (first) {
+			// 	attron(A_BOLD);
+			// 	attron(COLOR_PAIR(NcursesColor::FR));
+			// 	printw("%c", disc);
+			// 	attroff(COLOR_PAIR(NcursesColor::FR));
+			// 	attroff(A_BOLD);
+			// 	first = 0;
+			// }
+			attron(COLOR_PAIR(NcursesColor::BR));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(NcursesColor::BR));
 			break;
 
 			case '2':
@@ -113,21 +109,33 @@ Game::print_color_board()
 			break;
 
 			case 'R':
+			if (this->_highlight == 0) {
+				attron(A_BOLD);
+			}
 			attron(COLOR_PAIR(NcursesColor::FR));
 			printw("%c", disc);
 			attroff(COLOR_PAIR(NcursesColor::FR));
+			attroff(A_BOLD);
 			break;
 
 			case 'G':
+			if (this->_highlight == 1) {
+				attron(A_BOLD);
+			}
 			attron(COLOR_PAIR(NcursesColor::FG));
 			printw("%c", disc);
 			attroff(COLOR_PAIR(NcursesColor::FG));
+			attroff(A_BOLD);
 			break;
 
 			case 'B':
+			if (this->_highlight == 2) {
+				attron(A_BOLD);
+			}
 			attron(COLOR_PAIR(NcursesColor::FB));
 			printw("%c", disc);
 			attroff(COLOR_PAIR(NcursesColor::FB));
+			attroff(A_BOLD);
 			break;
 
 			default:
@@ -139,25 +147,25 @@ Game::print_color_board()
 	return ;
 }
 
-void
-Game::print_color_pawn()
-{
-	printw("                                     ");
-	attron(COLOR_PAIR(NcursesColor::FR));
-	printw("R ");
-	attroff(COLOR_PAIR(NcursesColor::FR));
-
-	attron(COLOR_PAIR(NcursesColor::FG));
-	printw("G ");
-	attroff(COLOR_PAIR(NcursesColor::FG));
-
-	attron(COLOR_PAIR(NcursesColor::FB));
-	printw("B ");
-	attroff(COLOR_PAIR(NcursesColor::FB));
-
-	return ;
-}
-
+// void
+// Game::print_color_pawn()
+// {
+// 	printw("                                     ");
+// 	attron(COLOR_PAIR(NcursesColor::FR));
+// 	printw("R ");
+// 	attroff(COLOR_PAIR(NcursesColor::FR));
+//
+// 	attron(COLOR_PAIR(NcursesColor::FG));
+// 	printw("G ");
+// 	attroff(COLOR_PAIR(NcursesColor::FG));
+//
+// 	attron(COLOR_PAIR(NcursesColor::FB));
+// 	printw("B ");
+// 	attroff(COLOR_PAIR(NcursesColor::FB));
+//
+// 	return ;
+// }
+//
 void
 Game::print_color_players()
 {
@@ -202,18 +210,66 @@ Game::draw() {
 void
 Game::move_pawn(Color color)
 {
-	int pos = -1;
+	int d = 3;
+	int disc_pos = -1;
+	int pawn_pos = -1;
 	switch (color) {
 		case Color::R:
-		pos = board().find_first_of('1');
+		pawn_pos = board().find_first_of('R');
+		move(d++,0);
+		printw("pawn_pos: %d", pawn_pos);
+		refresh();
+		if (pawn_pos != string::npos) {
+			disc_pos = board().find_first_of('1', pawn_pos);
+			move(d++,0);
+			printw("disc_pos: %d", disc_pos);
+			refresh();
+		}
+
+		// Pawn suppose to move out of board range
+		if (disc_pos == string::npos) {
+			move(d++,0);
+			printw("Out of range");
+			refresh();
+		}
+		else {
+			this->_board.at(disc_pos) = 'R';
+		}
+
+		if (pawn_pos != string::npos) {
+			if (pawn_pos < number_pawns()) {
+				this->_board.at(pawn_pos) = ' ';
+			}
+			else {
+				this->_board.at(pawn_pos) = '1';
+			}
+		}
 		break;
 
 		case Color::G:
-		pos = board().find_first_of('2');
+		pawn_pos = board().find_first_of('G');
+		disc_pos = board().find_first_of('2', pawn_pos);
+
+		if (pawn_pos < number_pawns()) {
+			this->_board.at(pawn_pos) = ' ';
+		}
+		else {
+			this->_board.at(pawn_pos) = '2';
+		}
+		this->_board.at(disc_pos) = 'G';
 		break;
 
 		case Color::B:
-		pos = board().find_first_of('3');
+		pawn_pos = board().find_first_of('B');
+		disc_pos = board().find_first_of('3', pawn_pos);
+
+		if (pawn_pos < number_pawns()) {
+			this->_board.at(pawn_pos) = ' ';
+		}
+		else {
+			this->_board.at(pawn_pos) = '3';
+		}
+		this->_board.at(disc_pos) = 'B';
 		break;
 
 		default:
@@ -221,7 +277,8 @@ Game::move_pawn(Color color)
 	}
 
 	move(0,0);
-	printw("%d", pos);
+	printw("Pawn: %d\nDisc: %d", pawn_pos, disc_pos);
+
 
 	return ;
 }
@@ -294,7 +351,6 @@ Game::loop(void)
 			case 10:
 			quit = select_option();
 			break;
-
 
 			default:
 			break;
