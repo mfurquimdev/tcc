@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <ncurses.h>
-#include "color.h"
+#include "registering_enum.h"
 
 using namespace std;
 

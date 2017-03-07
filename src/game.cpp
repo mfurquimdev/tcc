@@ -1,6 +1,4 @@
 #include "game.h"
-#include "color.h"
-
 #include <ncurses.h>
 #include <cstdio>
 #include <cstring>
@@ -73,48 +71,48 @@ Game::print_color_board()
 			case '1':
 			// if (first) {
 			// 	attron(A_BOLD);
-			// 	attron(COLOR_PAIR(NcursesColor::FR));
+			// 	attron(COLOR_PAIR(Color::Foreground_Red));
 			// 	printw("%c", disc);
-			// 	attroff(COLOR_PAIR(NcursesColor::FR));
+			// 	attroff(COLOR_PAIR(Color::Foreground_Red));
 			// 	attroff(A_BOLD);
 			// 	first = 0;
 			// }
-			attron(COLOR_PAIR(NcursesColor::BR));
+			attron(COLOR_PAIR(Color::Background_Red));
 			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColor::BR));
+			attroff(COLOR_PAIR(Color::Background_Red));
 			break;
 
 			case '2':
-			attron(COLOR_PAIR(NcursesColor::BG));
+			attron(COLOR_PAIR(Color::Background_Green));
 			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColor::BG));
+			attroff(COLOR_PAIR(Color::Background_Green));
 			break;
 
 			case '3':
-			attron(COLOR_PAIR(NcursesColor::BB));
+			attron(COLOR_PAIR(Color::Background_Blue));
 			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColor::BB));
+			attroff(COLOR_PAIR(Color::Background_Blue));
 			break;
 
 			case '4':
-			attron(COLOR_PAIR(NcursesColor::BW));
+			attron(COLOR_PAIR(Color::Background_White));
 			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColor::BW));
+			attroff(COLOR_PAIR(Color::Background_White));
 			break;
 
 			case '5':
-			attron(COLOR_PAIR(NcursesColor::BK));
+			attron(COLOR_PAIR(Color::Background_Black));
 			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColor::BK));
+			attroff(COLOR_PAIR(Color::Background_Black));
 			break;
 
 			case 'R':
 			if (this->_highlight == 0) {
 				attron(A_BOLD);
 			}
-			attron(COLOR_PAIR(NcursesColor::FR));
+			attron(COLOR_PAIR(Color::Foreground_Red));
 			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColor::FR));
+			attroff(COLOR_PAIR(Color::Foreground_Red));
 			attroff(A_BOLD);
 			break;
 
@@ -122,9 +120,9 @@ Game::print_color_board()
 			if (this->_highlight == 1) {
 				attron(A_BOLD);
 			}
-			attron(COLOR_PAIR(NcursesColor::FG));
+			attron(COLOR_PAIR(Color::Foreground_Green));
 			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColor::FG));
+			attroff(COLOR_PAIR(Color::Foreground_Green));
 			attroff(A_BOLD);
 			break;
 
@@ -132,9 +130,9 @@ Game::print_color_board()
 			if (this->_highlight == 2) {
 				attron(A_BOLD);
 			}
-			attron(COLOR_PAIR(NcursesColor::FB));
+			attron(COLOR_PAIR(Color::Foreground_Blue));
 			printw("%c", disc);
-			attroff(COLOR_PAIR(NcursesColor::FB));
+			attroff(COLOR_PAIR(Color::Foreground_Blue));
 			attroff(A_BOLD);
 			break;
 
@@ -151,17 +149,17 @@ Game::print_color_board()
 // Game::print_color_pawn()
 // {
 // 	printw("                                     ");
-// 	attron(COLOR_PAIR(NcursesColor::FR));
+// 	attron(COLOR_PAIR(Color::Foreground_Red));
 // 	printw("R ");
-// 	attroff(COLOR_PAIR(NcursesColor::FR));
+// 	attroff(COLOR_PAIR(Color::Foreground_Red));
 //
-// 	attron(COLOR_PAIR(NcursesColor::FG));
+// 	attron(COLOR_PAIR(Color::Foreground_Green));
 // 	printw("G ");
-// 	attroff(COLOR_PAIR(NcursesColor::FG));
+// 	attroff(COLOR_PAIR(Color::Foreground_Green));
 //
-// 	attron(COLOR_PAIR(NcursesColor::FB));
+// 	attron(COLOR_PAIR(Color::Foreground_Blue));
 // 	printw("B ");
-// 	attroff(COLOR_PAIR(NcursesColor::FB));
+// 	attroff(COLOR_PAIR(Color::Foreground_Blue));
 //
 // 	return ;
 // }
@@ -170,16 +168,16 @@ void
 Game::print_color_players()
 {
 	printw("                                     ");
-	attron(COLOR_PAIR(NcursesColor::FY));
+	attron(COLOR_PAIR(Color::Foreground_Yellow));
 	printw("P1: ");
-	attroff(COLOR_PAIR(NcursesColor::FY));
+	attroff(COLOR_PAIR(Color::Foreground_Yellow));
 	printw("\n");
 	printw("\n");
 
 	printw("                                     ");
-	attron(COLOR_PAIR(NcursesColor::FM));
+	attron(COLOR_PAIR(Color::Foreground_Purple));
 	printw("P2: ");
-	attroff(COLOR_PAIR(NcursesColor::FM));
+	attroff(COLOR_PAIR(Color::Foreground_Purple));
 	printw("\n");
 
 	return ;
@@ -214,12 +212,12 @@ Game::move_pawn(Color color)
 	int disc_pos = -1;
 	int pawn_pos = -1;
 	switch (color) {
-		case Color::R:
+		case Color::Red:
 		pawn_pos = board().find_first_of('R');
 		move(d++,0);
 		printw("pawn_pos: %d", pawn_pos);
 		refresh();
-		if (pawn_pos != string::npos) {
+		if (pawn_pos != (int) string::npos) {
 			disc_pos = board().find_first_of('1', pawn_pos);
 			move(d++,0);
 			printw("disc_pos: %d", disc_pos);
@@ -227,7 +225,7 @@ Game::move_pawn(Color color)
 		}
 
 		// Pawn suppose to move out of board range
-		if (disc_pos == string::npos) {
+		if (disc_pos == (int) string::npos) {
 			move(d++,0);
 			printw("Out of range");
 			refresh();
@@ -236,7 +234,7 @@ Game::move_pawn(Color color)
 			this->_board.at(disc_pos) = 'R';
 		}
 
-		if (pawn_pos != string::npos) {
+		if (pawn_pos != (int) string::npos) {
 			if (pawn_pos < number_pawns()) {
 				this->_board.at(pawn_pos) = ' ';
 			}
@@ -246,7 +244,7 @@ Game::move_pawn(Color color)
 		}
 		break;
 
-		case Color::G:
+		case Color::Green:
 		pawn_pos = board().find_first_of('G');
 		disc_pos = board().find_first_of('2', pawn_pos);
 
@@ -259,7 +257,7 @@ Game::move_pawn(Color color)
 		this->_board.at(disc_pos) = 'G';
 		break;
 
-		case Color::B:
+		case Color::Blue:
 		pawn_pos = board().find_first_of('B');
 		disc_pos = board().find_first_of('3', pawn_pos);
 
@@ -292,15 +290,15 @@ Game::select_option()
 	switch (this->_highlight) {
 
 		case 0:
-		move_pawn(Color::R);
+		move_pawn(Color::Red);
 		break;
 
 		case 1:
-		move_pawn(Color::G);
+		move_pawn(Color::Green);
 		break;
 
 		case 2:
-		move_pawn(Color::B);
+		move_pawn(Color::Blue);
 		break;
 
 		case 3:

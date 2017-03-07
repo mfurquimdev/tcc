@@ -1,8 +1,9 @@
+#include "registering_enum.h"
 #include "game.h"
-#include "color.h"
 
 #include <cstdlib>
 #include <ncurses.h>
+#include <iostream>
 
 using namespace std;
 
@@ -67,21 +68,20 @@ pair<int, int> start_ncurses(void)
 		}
 
 		//init_pair(#color_pair, Foreground, Background);
-		init_pair((short int)NcursesColor::FW, COLOR_WHITE  , COLOR_BLACK  );
-		init_pair((short int)NcursesColor::FR, COLOR_RED    , COLOR_BLACK  );
-		init_pair((short int)NcursesColor::FG, COLOR_GREEN  , COLOR_BLACK  );
-		init_pair((short int)NcursesColor::FB, COLOR_BLUE   , COLOR_BLACK  );
-		init_pair((short int)NcursesColor::FY, COLOR_YELLOW , COLOR_BLACK  );
-		init_pair((short int)NcursesColor::FM, COLOR_MAGENTA, COLOR_BLACK  );
-		init_pair((short int)NcursesColor::FC, COLOR_CYAN   , COLOR_BLACK  );
-		init_pair((short int)NcursesColor::BK, COLOR_CYAN   , COLOR_CYAN   );
-		init_pair((short int)NcursesColor::BW, COLOR_WHITE  , COLOR_WHITE  );
-		init_pair((short int)NcursesColor::BR, COLOR_RED    , COLOR_RED    );
-		init_pair((short int)NcursesColor::BG, COLOR_GREEN  , COLOR_GREEN  );
-		init_pair((short int)NcursesColor::BY, COLOR_YELLOW , COLOR_YELLOW );
-		init_pair((short int)NcursesColor::BB, COLOR_BLUE   , COLOR_BLUE   );
-		init_pair((short int)NcursesColor::BM, COLOR_MAGENTA, COLOR_MAGENTA);
-		init_pair((short int)NcursesColor::BC, COLOR_CYAN   , COLOR_CYAN   );
+		init_pair(Color::Foreground_White,  COLOR_WHITE  , COLOR_BLACK  );
+		init_pair(Color::Foreground_Red,    COLOR_RED    , COLOR_BLACK  );
+		init_pair(Color::Foreground_Green,  COLOR_GREEN  , COLOR_BLACK  );
+		init_pair(Color::Foreground_Blue,   COLOR_BLUE   , COLOR_BLACK  );
+		init_pair(Color::Foreground_Yellow, COLOR_YELLOW , COLOR_BLACK  );
+		init_pair(Color::Foreground_Purple, COLOR_MAGENTA, COLOR_BLACK  );
+		init_pair(Color::Foreground_Black,  COLOR_CYAN   , COLOR_BLACK  );
+		init_pair(Color::Background_Black,  COLOR_CYAN   , COLOR_CYAN   );
+		init_pair(Color::Background_White,  COLOR_WHITE  , COLOR_WHITE  );
+		init_pair(Color::Background_Red,    COLOR_RED    , COLOR_RED    );
+		init_pair(Color::Background_Green,  COLOR_GREEN  , COLOR_GREEN  );
+		init_pair(Color::Background_Blue,   COLOR_BLUE   , COLOR_BLUE   );
+		init_pair(Color::Background_Yellow, COLOR_YELLOW , COLOR_YELLOW );
+		init_pair(Color::Background_Purple, COLOR_MAGENTA, COLOR_MAGENTA);
 	}
 	else {
 		printw("Terminal does not support color");
