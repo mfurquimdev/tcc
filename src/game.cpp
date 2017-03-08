@@ -68,6 +68,12 @@ Game::print_color_board()
 	for (unsigned int i = 0; i < board.length(); i++) {
 		unsigned char disc = board.c_str()[i];
 		switch(disc) {
+			case '0':
+			attron(A_INVIS);
+			printw("%c", disc);
+			attroff(A_INVIS);
+			break;
+
 			case '1':
 			// if (first) {
 			// 	attron(A_BOLD);
@@ -136,6 +142,26 @@ Game::print_color_board()
 			attroff(A_BOLD);
 			break;
 
+			case 'Y':
+			if (this->_highlight == 3) {
+				attron(A_BOLD);
+			}
+			attron(COLOR_PAIR(Color::Foreground_Yellow));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Foreground_Yellow));
+			attroff(A_BOLD);
+			break;
+
+			case 'P':
+			if (this->_highlight == 4) {
+				attron(A_BOLD);
+			}
+			attron(COLOR_PAIR(Color::Foreground_Purple));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Foreground_Purple));
+			attroff(A_BOLD);
+			break;
+
 			default:
 			break;
 		}
@@ -168,16 +194,16 @@ void
 Game::print_color_players()
 {
 	printw("                                     ");
-	attron(COLOR_PAIR(Color::Foreground_Yellow));
+	attron(COLOR_PAIR(Color::Foreground_White));
 	printw("P1: ");
-	attroff(COLOR_PAIR(Color::Foreground_Yellow));
+	attroff(COLOR_PAIR(Color::Foreground_White));
 	printw("\n");
 	printw("\n");
 
 	printw("                                     ");
-	attron(COLOR_PAIR(Color::Foreground_Purple));
+	attron(COLOR_PAIR(Color::Foreground_White));
 	printw("P2: ");
-	attroff(COLOR_PAIR(Color::Foreground_Purple));
+	attroff(COLOR_PAIR(Color::Foreground_White));
 	printw("\n");
 
 	return ;
@@ -211,72 +237,68 @@ Game::move_pawn(Color color)
 	int d = 3;
 	int disc_pos = -1;
 	int pawn_pos = -1;
+	char char_pawn = ' ';
+	char char_disc = '0';
+	
 	switch (color) {
 		case Color::Red:
-		pawn_pos = board().find_first_of('R');
-		move(d++,0);
-		printw("pawn_pos: %d", pawn_pos);
-		refresh();
-		if (pawn_pos != (int) string::npos) {
-			disc_pos = board().find_first_of('1', pawn_pos);
-			move(d++,0);
-			printw("disc_pos: %d", disc_pos);
-			refresh();
-		}
-
-		// Pawn suppose to move out of board range
-		if (disc_pos == (int) string::npos) {
-			move(d++,0);
-			printw("Out of range");
-			refresh();
-		}
-		else {
-			this->_board.at(disc_pos) = 'R';
-		}
-
-		if (pawn_pos != (int) string::npos) {
-			if (pawn_pos < number_pawns()) {
-				this->_board.at(pawn_pos) = ' ';
-			}
-			else {
-				this->_board.at(pawn_pos) = '1';
-			}
-		}
+		char_pawn = 'R';
+		char_disc = '1';
 		break;
 
 		case Color::Green:
-		pawn_pos = board().find_first_of('G');
-		disc_pos = board().find_first_of('2', pawn_pos);
-
-		if (pawn_pos < number_pawns()) {
-			this->_board.at(pawn_pos) = ' ';
-		}
-		else {
-			this->_board.at(pawn_pos) = '2';
-		}
-		this->_board.at(disc_pos) = 'G';
+		char_pawn = 'G';
+		char_disc = '2';
 		break;
 
 		case Color::Blue:
-		pawn_pos = board().find_first_of('B');
-		disc_pos = board().find_first_of('3', pawn_pos);
+		char_pawn = 'B';
+		char_disc = '3';
+		break;
 
-		if (pawn_pos < number_pawns()) {
-			this->_board.at(pawn_pos) = ' ';
-		}
-		else {
-			this->_board.at(pawn_pos) = '3';
-		}
-		this->_board.at(disc_pos) = 'B';
+		case Color::Yellow:
+		char_pawn = 'Y';
+		char_disc = '4';
+		break;
+
+		case Color::Purple:
+		char_pawn = 'P';
+		char_disc = '5';
 		break;
 
 		default:
+		char_pawn = ' ';
+		char_disc = '0';
 		break;
+	}
+	
+	// The color is correct
+	if (char_pawn != ' ' && char_disc != '0') {
+	
+		// Locate pawn position and next disc position
+		pawn_pos = board().find_first_of(char_pawn);
+		if (pawn_pos != (int) string::npos) {
+			disc_pos = board().find_first_of(char_disc, pawn_pos);
+		}
+		
+		// Pawn not trying to move out of board range
+		if (disc_pos != (int) string::npos) {
+			this->_board.at(disc_pos) = char_pawn;
+		}
+			
+		// There is always a disc underneath a pawn (except the first movement)
+		if (pawn_pos != (int) string::npos) {
+			if (pawn_pos < number_pawns()) {
+				this->_board.at(pawn_pos) = '0';
+			}
+			else {
+				this->_board.at(pawn_pos) = char_disc;
+			}
+		}
 	}
 
 	move(0,0);
 	printw("Pawn: %d\nDisc: %d", pawn_pos, disc_pos);
-
 
 	return ;
 }
