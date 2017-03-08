@@ -3,7 +3,7 @@
 
 #include <cstdlib>
 #include <ncurses.h>
-#include <iostream>
+#include <unistd.h>
 
 using namespace std;
 
@@ -12,10 +12,27 @@ void end_ncurses(void);
 
 int main(int argc, char* argv[])
 {
+	int num_discs = 5;
+	int num_pawns = 3;
+
+	// Parse parameters
+	int c;
+	while ((c = getopt(argc, argv, "d:p:")) != -1) {
+		switch (c) {
+			case 'd':
+			if (optarg) num_discs = atoi(optarg);
+			break;
+
+			case 'p':
+			if (optarg) num_pawns = atoi(optarg);
+			break;
+		}
+	}
+
 	pair<int, int> screen_size;
 	screen_size = start_ncurses();
 
-	WINDOW* menuwin = newwin(6, screen_size.second-12, screen_size.first-8, 5);
+	WINDOW* menuwin = newwin(num_pawns+3, screen_size.second-12, screen_size.first-8, 5);
 	box(menuwin, 0, 0);
 	refresh();
 	wrefresh(menuwin);
