@@ -77,6 +77,9 @@ all: dirs
 #	@echo Printing game...
 #	@cat output.out
 
+test:
+	$(CC) src/test.cpp src/menu.cpp $(CFLAGS) $(INC) $(LFLAGS)
+
 dirs:
 	@mkdir -vp $(OBJ_DIR) $(MAP_DIR) $(BIN_DIR)
 

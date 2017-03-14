@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 	keypad(menuwin, true);
 
 	Game* game = NULL;
-	game = new Game(menuwin);
+	game = new Game(menuwin, screen_size);
 
 	if (game == NULL) {
 		printw("Could not start game.");

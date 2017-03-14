@@ -1,4 +1,5 @@
 #include "game.h"
+#include "menu.h"
 #include <ncurses.h>
 #include <cstdio>
 #include <cstring>
@@ -9,22 +10,30 @@
 #include <algorithm>
 #include <map>
 
-Game::Game(WINDOW* menuwin)
+Game::Game(WINDOW* menuwin, pair<int, int> screen_size)
 {
 	fprintf(stderr, "[%p]\tGame()\n", (void*) this);
-
-	this->_menuwin = menuwin;
-	strncpy(this->_choices[0], "Red", 4);
-	strncpy(this->_choices[1], "Green", 6);
-	strncpy(this->_choices[2], "Blue", 5);
-	strncpy(this->_choices[3], "Press q to quit.", 17);
-
-	this->_highlight = 0;
 
 	number_players(2);
 	number_pawns(3);
 	number_discs(5);
 	number_special_discs(2);
+
+	this->_screen_size = screen_size;
+
+	char** pawn_choices = NULL;
+	pawn_choices = (char**) malloc(sizeof(char*)*number_pawns());
+	if (pawn_choices != NULL) {
+		for (int i = 0; i < number_pawns(); ++i) {
+			strcpy(pawn_choices[i], ColorName[i]);
+		}
+	}
+
+	const char* disc_choices[2] = {"Pick left", "Pick right"};
+
+	this->_pawnwin = new Menu(12, screen_size.first-5, number_pawns(), screen_size.second-12, (const char**) pawn_choices, number_pawns());
+	this->_discwin = new Menu(12, screen_size.first-5, 2, screen_size.second-12, disc_choices, 2);
+
 
 	init_players_disc();
 	init_board();
@@ -67,6 +76,11 @@ Game::print_color_board()
 	string board = this->board();
 	for (unsigned int i = 0; i < board.length(); i++) {
 		unsigned char disc = board.c_str()[i];
+
+		if (this->_reachable == (int) i) {
+			attron(A_BOLD);
+		}
+
 		switch(disc) {
 			case '0':
 			attron(A_INVIS);
@@ -165,31 +179,13 @@ Game::print_color_board()
 			default:
 			break;
 		}
+		attroff(A_BOLD);
 		printw(" ");
 	}
 
 	return ;
 }
 
-// void
-// Game::print_color_pawn()
-// {
-// 	printw("                                     ");
-// 	attron(COLOR_PAIR(Color::Foreground_Red));
-// 	printw("R ");
-// 	attroff(COLOR_PAIR(Color::Foreground_Red));
-//
-// 	attron(COLOR_PAIR(Color::Foreground_Green));
-// 	printw("G ");
-// 	attroff(COLOR_PAIR(Color::Foreground_Green));
-//
-// 	attron(COLOR_PAIR(Color::Foreground_Blue));
-// 	printw("B ");
-// 	attroff(COLOR_PAIR(Color::Foreground_Blue));
-//
-// 	return ;
-// }
-//
 void
 Game::print_color_players()
 {
@@ -210,6 +206,27 @@ Game::print_color_players()
 }
 
 void
+Game::print_menu()
+{
+	if (this->_pawn_turn == 0) {
+		// Print menu
+		for (int i = 0; i < 4; ++i) {
+			if (i == this->_highlight) {
+				wattron(pawnwin()->window(), A_REVERSE);
+			}
+			mvwprintw(pawnwin()->window(), i+1, 1, this->_choices[i]);
+			wattroff(pawnwin()->window(), A_REVERSE);
+		}
+		wrefresh(pawnwin()->window());
+	}
+	else {
+
+	}
+
+	return ;
+}
+
+void
 Game::draw() {
 	move(10,0);
 	print_color_players();
@@ -219,27 +236,19 @@ Game::draw() {
 	printw("\n");
 	refresh();
 
-	for (int i = 0; i < 4; ++i) {
-		if (i == this->_highlight) {
-			wattron(menuwin(), A_REVERSE);
-		}
-		mvwprintw(menuwin(), i+1, 1, this->_choices[i]);
-		wattroff(menuwin(), A_REVERSE);
-	}
-	wrefresh(menuwin());
+	print_menu();
 
 	return ;
 }
 
-void
+int
 Game::move_pawn(Color color)
 {
-	int d = 3;
 	int disc_pos = -1;
 	int pawn_pos = -1;
 	char char_pawn = ' ';
 	char char_disc = '0';
-	
+
 	switch (color) {
 		case Color::Red:
 		char_pawn = 'R';
@@ -271,21 +280,21 @@ Game::move_pawn(Color color)
 		char_disc = '0';
 		break;
 	}
-	
+
 	// The color is correct
 	if (char_pawn != ' ' && char_disc != '0') {
-	
+
 		// Locate pawn position and next disc position
 		pawn_pos = board().find_first_of(char_pawn);
 		if (pawn_pos != (int) string::npos) {
 			disc_pos = board().find_first_of(char_disc, pawn_pos);
 		}
-		
+
 		// Pawn not trying to move out of board range
 		if (disc_pos != (int) string::npos) {
 			this->_board.at(disc_pos) = char_pawn;
 		}
-			
+
 		// There is always a disc underneath a pawn (except the first movement)
 		if (pawn_pos != (int) string::npos) {
 			if (pawn_pos < number_pawns()) {
@@ -300,7 +309,37 @@ Game::move_pawn(Color color)
 	move(0,0);
 	printw("Pawn: %d\nDisc: %d", pawn_pos, disc_pos);
 
-	return ;
+	return pawn_pos;
+}
+
+bool
+Game::pick_right(int pawn_pos)
+{
+	bool success = true;
+	int position = this->_board.find_first_not_of("RGBYP0", pawn_pos);
+	if (position == (int) string::npos) {
+		success = false;
+	}
+	else {
+		this->_board.at(position) = '0';
+	}
+
+	return success;
+}
+
+bool
+Game::pick_left(int pawn_pos)
+{
+	bool success = true;
+	int position = this->_board.find_last_not_of("RGBYP0", pawn_pos);
+	if (position == (int) string::npos) {
+		success = false;
+	}
+	else {
+		this->_board.at(position) = '0';
+	}
+
+	return success;
 }
 
 bool
@@ -344,7 +383,10 @@ Game::loop(void)
 	while (!quit) {
 		draw();
 
-		int c = wgetch(menuwin());
+		int c = 0;
+		if (this->_pawn_turn == 0) {
+			c = wgetch(pawnwin()->window());
+		}
 		switch (c) {
 			// Press q to quit
 			case 'q':
@@ -478,8 +520,14 @@ Game::board(void)
 	return this->_board;
 }
 
-WINDOW*
-Game::menuwin(void)
+Menu*
+Game::discwin(void)
 {
-	return this->_menuwin;
+	return this->_discwin;
+}
+
+Menu*
+Game::pawnwin(void)
+{
+	return this->_pawnwin;
 }
