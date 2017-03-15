@@ -28,13 +28,61 @@ Game::Game(pair<int, int> screen_size)
 	const char* disc_choices[2] = {"Pick left", "Pick right"};
 	this->_discmenu = new Menu(6, screen_size.second-12, screen_size.first-12, 2+2, disc_choices, 2);
 
+	init_players();
 	init_players_disc();
 	init_board();
 }
 
 Game::~Game()
 {
-	fprintf(stderr, "[%p]\tGame destructor\n", (void*) this);
+	fprintf(stderr, "[%p]\tgame destructor\n", (void*) this);
+
+	if (this->_pawnmenu != NULL) {
+		delete(this->_pawnmenu);
+		this->_pawnmenu = NULL;
+	}
+	if (this->_discmenu != NULL) {
+		delete(this->_discmenu);
+		this->_discmenu = NULL;
+	}
+
+	fprintf(stderr, "destroy players\n");
+	if (this->_players != NULL) {
+		fprintf(stderr, "players not null\n");
+		for (int i = 0; i < number_players(); i++) {
+			fprintf(stderr, "destroy player[%d]\n", i);
+			if (this->_players[i] != NULL) {
+				fprintf(stderr, "destroy player[%d] not null\n", i);
+				delete(this->_players[i]);
+				this->_players[i] = NULL;
+			}
+			else {
+				fprintf(stderr, "destroy player[%d] null\n", i);
+			}
+		}
+		fprintf(stderr, "free player\n");
+		free(this->_players);
+		this->_players = NULL;
+	}
+	fprintf(stderr, "[%p]\tend game destructor\n", (void*) this);
+}
+
+void
+Game::init_players()
+{
+	fprintf(stderr, "init players\n");
+	this->_players = NULL;
+	this->_players = (Player**) malloc(sizeof(Player*)*number_players());
+	if (this->_players != NULL) {
+		fprintf(stderr, "players malloced\n");
+		for (int i = 0; i < number_players(); i++) {
+			this->_players[i] = new Player();
+			fprintf(stderr, "[%p] players[%d]\n", (void*) this->_players[i], i);
+		}
+	}
+	else {
+		fprintf(stderr, "[%p] players variable is null\n", (void*) this->_players);
+	}
 }
 
 void
@@ -289,7 +337,7 @@ Game::move_pawn(Color color)
 			}
 			else {
 				this->_board.at(pawn_pos) = char_disc;
-				//player(char_disc);
+				player(char_disc);
 			}
 		}
 	}
@@ -300,11 +348,12 @@ Game::move_pawn(Color color)
 
 	return pawn_pos;
 }
-/*
+
 void
 Game::player(char pawn)
 {
-	switch (this->_player) {
+/*
+	switch (this->_players) {
 		case 0:
 
 		break;
@@ -324,8 +373,9 @@ Game::player(char pawn)
 		default:
 		break;
 	}
+	*/
 }
-*/
+
 void
 Game::pick_right()
 {

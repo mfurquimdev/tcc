@@ -6,6 +6,7 @@
 #include <ncurses.h>
 #include "registering_enum.h"
 #include "menu.h"
+#include "player.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ private:
 
 	void init_players_disc(void);
 	void init_board(void);
+	void init_players(void);
 
 	void print_color_stair();
 	void print_color_pawn();
@@ -73,6 +75,7 @@ private:
 	Menu* _pawnmenu;
 	Menu* _discmenu;
 	pair<int, int> _screen_size;
+	Player** _players;
 };
 
 #endif
