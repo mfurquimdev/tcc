@@ -32,16 +32,8 @@ int main(int argc, char* argv[])
 	pair<int, int> screen_size;
 	screen_size = start_ncurses();
 
-	WINDOW* menuwin = newwin(num_pawns+3, screen_size.second-12, screen_size.first-8, 5);
-	box(menuwin, 0, 0);
-	refresh();
-	wrefresh(menuwin);
-
-	// Using arrow keys
-	keypad(menuwin, true);
-
 	Game* game = NULL;
-	game = new Game(menuwin, screen_size);
+	game = new Game(screen_size);
 
 	if (game == NULL) {
 		printw("Could not start game.");
@@ -105,7 +97,7 @@ pair<int, int> start_ncurses(void)
 		getch();
 	}
 
-	return make_pair(yMax, xMax);
+	return make_pair(xMax, yMax);
 }
 
 void end_ncurses()

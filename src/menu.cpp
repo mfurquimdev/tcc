@@ -11,8 +11,30 @@ Menu::Menu(int x, int y, int columns, int lines, const char** char_choices, int 
 	window_size(columns,lines);
 	window(position(), window_size());
 	choices(char_choices, num_choices);
-	keypad(this->_window, true);
-	box(this->_window, 0, 0);
+	keypad(window(), true);
+}
+
+void
+Menu::draw()
+{
+	fprintf(stderr, "draw\n");
+	WINDOW* window = this->window();
+	const char** choices = this->choices();
+	int num_choices = this->num_choices();
+	int highlight = this->highlight();
+
+	box(window, 0, 0);
+	for (int i = 0; i < num_choices; ++i) {
+		if (i == highlight) {
+			wattron(window, A_REVERSE);
+		}
+		mvwprintw(window, i+1, 1, choices[i]);
+		wattroff(window, A_REVERSE);
+	}
+	wrefresh(window);
+
+
+	return ;
 }
 
 int
@@ -20,32 +42,24 @@ Menu::wait_choice()
 {
 	fprintf(stderr, "wait_choice\n");
 	int c = 0;
-	c = wgetch(this->_window);
+	c = wgetch(window());
 	switch (c) {
-		// Press q to quit
-		case 'q':
-		c = 0xFFFF;
-		break;
-
 		// Move up on the menu
 		case KEY_UP:
-		// this->_highlight--;
-		// if (this->_highlight < 0) {
-		// 	this->_highlight = 0;
-		// }
+		highlight(-1);
 		break;
 
 		// Move down on the menu
 		case KEY_DOWN:
-		// this->_highlight++;
-		// if (this->_highlight > 3) {
-		// 	this->_highlight = 3;
-		// }
+		highlight(1);
+		break;
+
+		// Press q to quit
+		case 'q':
 		break;
 
 		// Press enter to choose action on menu
 		case 10:
-		// quit = select_option();
 		break;
 
 		default:
@@ -77,7 +91,7 @@ void
 Menu::update()
 {
 	fprintf(stderr, "update\n");
-	wrefresh(this->_window);
+	wrefresh(window());
 
 	return ;
 }
@@ -87,6 +101,13 @@ Menu::choices(void)
 {
 	fprintf(stderr, "get choices\n");
 	return (const char**) this->_choices;
+}
+
+int
+Menu::num_choices(void)
+{
+	fprintf(stderr, "get num_choices\n");
+	return this->_num_choices;
 }
 
 void
@@ -102,7 +123,7 @@ Menu::window(pair<int, int> position, pair<int, int> window_size)
 WINDOW*
 Menu::window(void)
 {
-	fprintf(stderr, "getupdate\n");
+	fprintf(stderr, "get window\n");
 	return this->_window;
 }
 
@@ -134,4 +155,24 @@ Menu::position(void)
 {
 	fprintf(stderr, "get position\n");
 	return this->_position;
+}
+
+int
+Menu::highlight(void)
+{
+	return this->_highlight;
+}
+
+void
+Menu::highlight(int increment)
+{
+	int num_choices = this->num_choices();
+	this->_highlight += increment;
+	if (this->_highlight > num_choices-1) {
+		this->_highlight = num_choices-1;
+	}
+	else if (this->_highlight < 0) {
+		this->_highlight = 0;
+	}
+	return ;
 }

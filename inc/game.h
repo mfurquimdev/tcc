@@ -12,7 +12,7 @@ using namespace std;
 class Game
 {
 public:
-	Game(WINDOW*, pair<int, int>);
+	Game(pair<int, int>);
 	~Game();
 
 	void loop(void);
@@ -33,11 +33,13 @@ private:
 	void print_color_players();
 	void print_menu();
 
-	bool select_option();
+	void select_option();
 	int move_pawn(Color);
 
-	bool pick_right(int);
-	bool pick_left(int);
+	void pick_right();
+	void pick_left();
+
+	void player(char);
 
 	/* Getters and Setters */
 	void number_players(unsigned short int);
@@ -58,18 +60,18 @@ private:
 	Menu* pawnwin(void);
 
 	/* Variables */
+	bool _picked;
+	int _pawn_pos;
 	int _pawn_turn;
 	int _reachable;
-	int _highlight;
-	char _choices[4][20];
 	unsigned short int _num_players;
 	unsigned short int _num_pawns;
 	unsigned short int _num_discs;
 	unsigned short int _num_special_discs;
 	vector<string> _players_disc;
 	string _board;
-	Menu* _pawnwin;
-	Menu* _discwin;
+	Menu* _pawnmenu;
+	Menu* _discmenu;
 	pair<int, int> _screen_size;
 };
 

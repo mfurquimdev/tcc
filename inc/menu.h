@@ -13,11 +13,14 @@ public:
 	Menu(int, int, int, int, const char**, int);
 	~Menu();
 
-	WINDOW* window(void);
-	void update();
+	void draw();
 	int wait_choice();
+	int highlight(void);
 
 private:
+	void update();
+	WINDOW* window(void);
+
 	void position(int, int);
 	pair<int, int> position(void);
 
@@ -28,6 +31,10 @@ private:
 
 	void choices(const char**, int);
 	const char** choices(void);
+
+	int num_choices(void);
+
+	void highlight(int);
 
 	int _highlight;
 	char** _choices;
