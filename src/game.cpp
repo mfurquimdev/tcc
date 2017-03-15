@@ -289,7 +289,7 @@ Game::move_pawn(Color color)
 			}
 			else {
 				this->_board.at(pawn_pos) = char_disc;
-				player(char_disc);
+				//player(char_disc);
 			}
 		}
 	}
@@ -300,7 +300,32 @@ Game::move_pawn(Color color)
 
 	return pawn_pos;
 }
+/*
+void
+Game::player(char pawn)
+{
+	switch (this->_player) {
+		case 0:
 
+		break;
+
+		case 1:
+		break;
+
+		case 2:
+		break;
+
+		case 3:
+		break;
+
+		case 4:
+		break;
+
+		default:
+		break;
+	}
+}
+*/
 void
 Game::pick_right()
 {
