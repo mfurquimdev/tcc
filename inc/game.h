@@ -1,49 +1,78 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "player.h"
-#include "board.h"
-
 #include <vector>
+#include <string>
+#include <ncurses.h>
+#include "registering_enum.h"
+#include "menu.h"
+
+using namespace std;
 
 class Game
 {
 public:
-    Game(unsigned short int, unsigned short int, unsigned short int);
-    ~Game();
+	Game(pair<int, int>);
+	~Game();
 
-    void loop(void);
+	void loop(void);
 
 private:
 
-    /* Functions */
-    void draw(unsigned short int);
-    unsigned short int choose_pawn(unsigned short int);
-    unsigned short int choose_disc(unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator);
+	/* Functions */
+	void draw();
+	unsigned short int choose_pawn(unsigned short int);
+	unsigned short int choose_disc(unsigned short int);
 
-    void init_players(void);
-    void init_board(void);
+	void init_players_disc(void);
+	void init_board(void);
 
-    /* Getters and Setters */
-    void number_players(unsigned short int);
-    unsigned short int number_players(void);
+	void print_color_stair();
+	void print_color_pawn();
+	void print_color_board();
+	void print_color_players();
+	void print_menu();
 
-    void number_pawns(unsigned short int);
-    unsigned short int number_pawns(void);
+	void select_option();
+	int move_pawn(Color);
 
-    void number_discs(unsigned short int);
-    unsigned short int number_discs(void);
+	void pick_right();
+	void pick_left();
 
-    std::vector<Player*> players(void);
+	void player(char);
 
-    Board* board(void);
+	/* Getters and Setters */
+	void number_players(unsigned short int);
+	unsigned short int number_players(void);
 
-    /* Variables */
-    unsigned short int _num_players;
-    unsigned short int _num_pawns;
-    unsigned short int _num_discs;
-    std::vector<Player*> _players;
-    Board* _board;
+	void number_pawns(unsigned short int);
+	unsigned short int number_pawns(void);
+
+	void number_discs(unsigned short int);
+	unsigned short int number_discs(void);
+
+	void number_special_discs(unsigned short int);
+	unsigned short int number_special_discs(void);
+
+	vector<string> players_disc(void);
+	string board(void);
+	Menu* discwin(void);
+	Menu* pawnwin(void);
+
+	/* Variables */
+	bool _picked;
+	int _pawn_pos;
+	int _pawn_turn;
+	int _reachable;
+	unsigned short int _num_players;
+	unsigned short int _num_pawns;
+	unsigned short int _num_discs;
+	unsigned short int _num_special_discs;
+	vector<string> _players_disc;
+	string _board;
+	Menu* _pawnmenu;
+	Menu* _discmenu;
+	pair<int, int> _screen_size;
 };
 
 #endif

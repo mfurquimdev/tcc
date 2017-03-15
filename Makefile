@@ -11,7 +11,6 @@
 # ├── bin
 # ├── doc
 # ├── inc
-# ├── main.c
 # ├── Makefile
 # ├── map
 # ├── obj
@@ -54,24 +53,20 @@ INC = -I$(INC_DIR)
 #-------------------------------------------------------------------------------
 CC=g++
 CFLAGS= -Wall -Wextra -pedantic -ansi -g -std=c++11
-LIB=
+LFLAGS= -lncurses
 
 TARGET=$(BIN_DIR)/$(NAME)
 
 .PHONY: clean
 
 all: dirs
-	@clear
-	@clear
-	@$(MAKE) clean
-
 	@echo
 	@echo Compiling...
 	$(MAKE) $(TARGET)
 
-	@echo
-	@echo Executing...
-	@./bin/big_points 2> debug.err
+#	@echo
+#	@echo Executing...
+#	@./bin/big_points 2> debug.err
 #	@cat input.in | ./bin/big_points 2> debug.err
 #
 #	@echo
@@ -81,6 +76,9 @@ all: dirs
 #	@echo
 #	@echo Printing game...
 #	@cat output.out
+
+test:
+	$(CC) src/test.cpp src/menu.cpp $(CFLAGS) $(INC) $(LFLAGS)
 
 dirs:
 	@mkdir -vp $(OBJ_DIR) $(MAP_DIR) $(BIN_DIR)
@@ -93,7 +91,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 $(TARGET): $(OBJ)
 	@echo
 	@echo Linking.. $@
-	$(CC) -o $@ $(OBJ) $(LIB)
+	$(CC) -o $@ $(OBJ) $(LIB) $(LFLAGS)
 
 
 map: $(MAP_DIR)/%.funcmap

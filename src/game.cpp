@@ -1,197 +1,505 @@
 #include "game.h"
-
+#include "menu.h"
+#include <ncurses.h>
 #include <cstdio>
+#include <cstring>
+#include <string>
 #include <stdio_ext.h>
 #include <thread>
 #include <chrono>
+#include <algorithm>
+#include <map>
 
-Game::Game(unsigned short int num_players,
-            unsigned short int num_pawns,
-            unsigned short int num_discs)
+Game::Game(pair<int, int> screen_size)
 {
-    fprintf(stderr, "[%p]\tGame(%d,%d,%2d)\n",
-        (void*) this,
-        (int) num_players,
-        (int) num_pawns,
-        (int) num_discs);
+	fprintf(stderr, "[%p]\tGame()\n", (void*) this);
 
-    number_players(num_players);
-    number_pawns(num_pawns);
-    number_discs(num_discs);
-    init_players();
-    init_board();
+	number_players(2);
+	number_pawns(3);
+	number_discs(5);
+	number_special_discs(2);
+
+	this->_pawn_turn = 1;
+	this->_picked = false;
+	this->_screen_size = screen_size;
+
+	this->_pawnmenu = new Menu(6, screen_size.second-12, screen_size.first-12, number_pawns()+2, ColorName, number_pawns());
+
+	const char* disc_choices[2] = {"Pick left", "Pick right"};
+	this->_discmenu = new Menu(6, screen_size.second-12, screen_size.first-12, 2+2, disc_choices, 2);
+
+	init_players_disc();
+	init_board();
 }
 
 Game::~Game()
 {
-    fprintf(stderr, "\n[%p]\tGame destructor\n", (void*) this);
-
-    for (auto player: players()) {
-        delete(player);
-    }
-
-    delete(board());
+	fprintf(stderr, "[%p]\tGame destructor\n", (void*) this);
 }
 
-/**
- * Public functions
- */
+void
+Game::print_color_stair()
+{
+	printw("                                     ");
+	printw("                                            ");
+	printw("    .");
+	printw("_");
+	printw(".\n");
+
+	printw("                                     ");
+	printw("                                            ");
+	printw("  .");
+	printw("_");
+	printw("| |\n");
+
+	printw("                                     ");
+	printw("                                            ");
+	printw(".");
+	printw("_");
+	printw("|   |\n");
+
+	return ;
+}
+
+void
+Game::print_color_board()
+{
+	printw("                                     ");
+
+	string board = this->board();
+	for (unsigned int i = 0; i < board.length(); i++) {
+		unsigned char disc = board.c_str()[i];
+
+		switch(disc) {
+			case '0':
+			attron(A_INVIS);
+			printw("%c", disc);
+			attroff(A_INVIS);
+			break;
+
+			case '1':
+			// if (first) {
+			// 	attron(A_BOLD);
+			// 	attron(COLOR_PAIR(Color::Foreground_Red));
+			// 	printw("%c", disc);
+			// 	attroff(COLOR_PAIR(Color::Foreground_Red));
+			// 	attroff(A_BOLD);
+			// 	first = 0;
+			// }
+			attron(COLOR_PAIR(Color::Background_Red));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Red));
+			break;
+
+			case '2':
+			attron(COLOR_PAIR(Color::Background_Green));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Green));
+			break;
+
+			case '3':
+			attron(COLOR_PAIR(Color::Background_Blue));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Blue));
+			break;
+
+			case '4':
+			attron(COLOR_PAIR(Color::Background_White));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_White));
+			break;
+
+			case '5':
+			attron(COLOR_PAIR(Color::Background_Black));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Black));
+			break;
+
+			case 'R':
+			if (this->_pawnmenu->highlight() == Color::Red) {
+				attron(A_BOLD);
+			}
+			attron(COLOR_PAIR(Color::Foreground_Red));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Foreground_Red));
+			attroff(A_BOLD);
+			break;
+
+			case 'G':
+			if (this->_pawnmenu->highlight() == Color::Green) {
+				attron(A_BOLD);
+			}
+			attron(COLOR_PAIR(Color::Foreground_Green));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Foreground_Green));
+			attroff(A_BOLD);
+			break;
+
+			case 'B':
+			if (this->_pawnmenu->highlight() == Color::Blue) {
+				attron(A_BOLD);
+			}
+			attron(COLOR_PAIR(Color::Foreground_Blue));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Foreground_Blue));
+			attroff(A_BOLD);
+			break;
+
+			case 'Y':
+			if (this->_pawnmenu->highlight() == Color::Yellow) {
+				attron(A_BOLD);
+			}
+			attron(COLOR_PAIR(Color::Foreground_Yellow));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Foreground_Yellow));
+			attroff(A_BOLD);
+			break;
+
+			case 'P':
+			if (this->_pawnmenu->highlight() == Color::Purple) {
+				attron(A_BOLD);
+			}
+			attron(COLOR_PAIR(Color::Foreground_Purple));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Foreground_Purple));
+			attroff(A_BOLD);
+			break;
+
+			default:
+			break;
+		}
+		attroff(A_BOLD);
+		printw(" ");
+	}
+
+	return ;
+}
+
+void
+Game::print_color_players()
+{
+	printw("                                     ");
+	attron(COLOR_PAIR(Color::Foreground_White));
+	printw("P1: ");
+	attroff(COLOR_PAIR(Color::Foreground_White));
+	printw("\n");
+	printw("\n");
+
+	printw("                                     ");
+	attron(COLOR_PAIR(Color::Foreground_White));
+	printw("P2: ");
+	attroff(COLOR_PAIR(Color::Foreground_White));
+	printw("\n");
+
+	return ;
+}
+
+void
+Game::print_menu()
+{
+	if (this->_pawn_turn == 1) {
+		this->_pawnmenu->draw();
+	}
+	else {
+		this->_discmenu->draw();
+	}
+
+	return ;
+}
+
+void
+Game::draw() {
+	clear();
+	move(10,0);
+	print_color_players();
+	print_color_stair();
+//	print_color_pawn();
+	print_color_board();
+	printw("\n");
+	refresh();
+
+	print_menu();
+
+	return ;
+}
+
+int
+Game::move_pawn(Color color)
+{
+	int disc_pos = -1;
+	int pawn_pos = -1;
+	char char_pawn = ' ';
+	char char_disc = '0';
+
+	switch (color) {
+		case Color::Red:
+		char_pawn = 'R';
+		char_disc = '1';
+		break;
+
+		case Color::Green:
+		char_pawn = 'G';
+		char_disc = '2';
+		break;
+
+		case Color::Blue:
+		char_pawn = 'B';
+		char_disc = '3';
+		break;
+
+		case Color::Yellow:
+		char_pawn = 'Y';
+		char_disc = '4';
+		break;
+
+		case Color::Purple:
+		char_pawn = 'P';
+		char_disc = '5';
+		break;
+
+		default:
+		char_pawn = ' ';
+		char_disc = '0';
+		break;
+	}
+
+	// The color is correct
+	if (char_pawn != ' ' && char_disc != '0') {
+
+		// Locate pawn position and next disc position
+		pawn_pos = board().find_first_of(char_pawn);
+		if (pawn_pos != (int) string::npos) {
+			disc_pos = board().find_first_of(char_disc, pawn_pos);
+		}
+
+		// Pawn not trying to move out of board range
+		if (disc_pos != (int) string::npos) {
+			this->_board.at(disc_pos) = char_pawn;
+		}
+		// Move to stair
+		else {
+
+		}
+
+
+		// There is always a disc underneath a pawn (except the first movement)
+		if (pawn_pos != (int) string::npos) {
+			if (pawn_pos < number_pawns()) {
+				this->_board.at(pawn_pos) = '0';
+			}
+			else {
+				this->_board.at(pawn_pos) = char_disc;
+				//player(char_disc);
+			}
+		}
+	}
+
+	move(0,0);
+	fprintf(stderr,"Pawn: %d\tDisc: %d\n", pawn_pos, disc_pos);
+	this->_pawn_pos = disc_pos;
+
+	return pawn_pos;
+}
+/*
+void
+Game::player(char pawn)
+{
+	switch (this->_player) {
+		case 0:
+
+		break;
+
+		case 1:
+		break;
+
+		case 2:
+		break;
+
+		case 3:
+		break;
+
+		case 4:
+		break;
+
+		default:
+		break;
+	}
+}
+*/
+void
+Game::pick_right()
+{
+	fprintf(stderr, "pick_right\n");
+	bool success = true;
+	int position = this->_board.find_first_not_of("RGBYP0", this->_pawn_pos);
+	if (position == (int) string::npos) {
+		success = false;
+	}
+	else {
+		this->_board.at(position) = '0';
+	}
+
+	fprintf(stderr, "disc_position\t%d\n", position);
+	fprintf(stderr, "success\t%d\n", success);
+	this->_picked = success;
+	return ;
+}
+
+void
+Game::pick_left()
+{
+	fprintf(stderr, "pick_left\n");
+	bool success = true;
+	int position = this->_board.find_last_not_of("RGBYP0", this->_pawn_pos);
+	if (position == (int) string::npos) {
+		success = false;
+	}
+	else {
+		this->_board.at(position) = '0';
+	}
+
+	fprintf(stderr, "pawn_position\t%d\n", this->_pawn_pos);
+	fprintf(stderr, "disc_position\t%d\n", position);
+	fprintf(stderr, "success\t%d\n", success);
+	this->_picked = success;
+	return ;
+}
+
+void
+Game::select_option()
+{
+	// Choose pawn to move
+	if (this->_pawn_turn == 1) {
+		fprintf(stderr, "Choose pawn\n");
+		// Action depends on the highlight
+		switch (this->_pawnmenu->highlight()) {
+			case 0:
+			move_pawn(Color::Red);
+			break;
+
+			case 1:
+			move_pawn(Color::Green);
+			break;
+
+			case 2:
+			move_pawn(Color::Blue);
+			break;
+
+			case 3:
+			move_pawn(Color::Yellow);
+			break;
+
+			case 4:
+			move_pawn(Color::Purple);
+			break;
+
+			default:
+			break;
+		}
+	}
+	else {
+		fprintf(stderr, "Choose disc\n");
+		// Action depends on the highlight
+		switch (this->_discmenu->highlight()) {
+			case 0:
+			pick_left();
+			break;
+
+			case 1:
+			pick_right();
+			break;
+
+			default:
+			break;
+		}
+	}
+
+	return ;
+}
 
 void
 Game::loop(void)
 {
-    fprintf(stderr, "Game loop(void)\n");
-    unsigned short int quit = 0;
-    unsigned long long int turn = 0;
+	fprintf(stderr, "Game loop(void)\n");
 
-    while (!quit) {
-        for (unsigned short int id_player = 0;
-                id_player < number_players();
-                id_player++)
-        {
-            fprintf(stderr, "\nturn %llu\tid_player %hu\n",
-                turn, id_player);
+	bool quit = 0;
 
-            unsigned short int chosen_pawn;
-            chosen_pawn = choose_pawn(id_player);
-            if (chosen_pawn == 128) {
-                quit = 1;
-                break;
-            }
-            std::vector<std::pair<Disc*, Pawn*> >::iterator pawn_index;
-            pawn_index = board()->move_pawn(chosen_pawn);
+	while (!quit) {
+		draw();
 
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		int c = 0;
+		// Choose pawn to move
+		if (this->_pawn_turn == 1) {
+			c = this->_pawnmenu->wait_choice();
+			fprintf(stderr, "Option\t%d\n", c);
+			switch (c) {
+				// Press q to quit
+				case 'q':
+				quit = 1;
+				break;
 
-            if (pawn_index != board()->printable_board().end()) {
-                unsigned short int chosen_disc;
-                chosen_disc = choose_disc(id_player, pawn_index);
-                if (chosen_disc == 128) {
-                    quit = 1;
-                    break;
-                }
+				// Press enter to choose action on menu
+				case 10:
+				select_option();
+				this->_pawn_turn = 0;
+				break;
 
-                Disc* disc_picked = NULL;
-                disc_picked = board()->pick_disc(chosen_disc);
-                players().at(id_player)->gather_disc(disc_picked);
+				default:
+				break;
+			}
+		}
+		// Choose disc to pick
+		else {
+			c = this->_discmenu->wait_choice();
+			fprintf(stderr, "Option\t%d\n", c);
+			switch (c) {
+				// Press q to quit
+				case 'q':
+				quit = 1;
+				break;
 
-                std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            }
-            else {
-                // Pick disc at stair's side
-            }
+				// Press enter to choose action on menu
+				case 10:
+				select_option();
+				break;
 
-            turn++;
-        }
-    }
-
-    return ;
-}
-
-/**
- * Private functions
- */
-
-unsigned short int
-Game::choose_pawn(unsigned short int id_player)
-{
-    fprintf(stderr, "\tchoose_pawn(void)\n");
-    unsigned short int chosen_pawn;
-
-    do {
-        printf("Player %d\tQual peao desejas mover?\n", id_player+1);
-        draw(id_player);
-        scanf("%hu", &chosen_pawn);
-        fprintf(stderr, "chosen_pawn [%hu]\n", chosen_pawn);
-    } while (chosen_pawn != 128 && board()->invalid_move(chosen_pawn));
-
-    return chosen_pawn;
-}
-
-unsigned short int
-Game::choose_disc(unsigned short int id_player, std::vector<std::pair<Disc*, Pawn*> >::iterator pawn_index)
-{
-    fprintf(stderr, "\tchoose_disc(%hu)\n", (unsigned short int) id_player);
-    unsigned short int chosen_disc;
-
-    std::pair<std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator>, std::pair<unsigned short int, std::vector<std::pair<Disc*, Pawn*> >::iterator> > neighbors;
-
-    neighbors = board()->find_neighbors(pawn_index);
-
-    do {
-        if (neighbors.first.first > number_discs()) {
-            printf("Player %d\tPegando único disco possível.\n\t1 - Disc %hu\n", id_player+1, neighbors.second.first);
-            draw(id_player);
-            chosen_disc = 1;
-        }
-        else if (neighbors.second.first > number_discs()) {
-            printf("Player %d\tPegando único disco possível.\n\t0 - Disc %hu\n", id_player+1, neighbors.first.first);
-            draw(id_player);
-            chosen_disc = 0;
-        }
-        else if (neighbors.second.first < number_discs()) {
-            printf("Player %d\tQual disco desejas pegar?\n\t0 - Disc %hu\n\t1 - Disc %hu\n", id_player+1, neighbors.first.first, neighbors.second.first);
-            draw(id_player);
-            scanf("%hu", &chosen_disc);
-        }
-    } while(chosen_disc != 0 && chosen_disc != 1);
-
-    unsigned short int number_disc;
-    if (chosen_disc == 0) {
-        number_disc = neighbors.first.first;
-    }
-    else {
-        number_disc = neighbors.second.first;
-    }
-
-    fprintf(stderr, "chosen_disc [%hu]\n", chosen_disc);
-
-    return number_disc;
+				default:
+				break;
+			}
+			if (this->_picked == true) {
+				this->_pawn_turn = 1;
+				this->_picked = false;
+			}
+		}
+	}
 }
 
 void
-Game::draw(unsigned short int current_player)
+Game::init_players_disc(void)
 {
-    fprintf(stderr, "\tdraw(%d)\n", (int) current_player);
+	fprintf(stderr, "init_players_disc(void)\n");
+	this->_players_disc.clear();
+	for (int n_pawns = 0; n_pawns < number_pawns(); n_pawns++) {
+		string discs = "";
+		for (int n_discs = 0; n_discs < number_discs(); n_discs++) {
+			discs.push_back('+');
+		}
+		for (int n_players = 0; n_players < number_players(); n_players++) {
+			discs.push_back('|');
+		}
+		this->_players_disc.push_back(discs);
+	}
 
-    for (auto player: players()) {
-        player->draw();
-    }
-
-    printf("\n");
-
-    board()->draw();
-
-    for (size_t i = 0; i < 20; i++)
-        printf("\n");
-
-    return ;
-}
-
-void
-Game::init_players(void)
-{
-    fprintf(stderr, "\tinit_players(void)\n");
-
-    for (unsigned short int player_id = 0;
-            player_id < number_players();
-            player_id++)
-    {
-        Player* new_player = new Player(player_id);
-        this->_players.push_back(new_player);
-    }
-
-    return ;
+	return ;
 }
 
 void
 Game::init_board(void)
 {
-    fprintf(stderr, "\tinit_board(void)\n");
-
-    this->_board = new Board(number_discs(), number_pawns());
-
-    return ;
+	fprintf(stderr, "init_board(void)\n");
+	this->_board = "RGB1352233422145123113";
+//	printw("%s", this->_board.c_str());
+	return ;
 }
 
 /**
@@ -201,56 +509,79 @@ Game::init_board(void)
 void
 Game::number_players(unsigned short int num_players)
 {
-    fprintf(stderr, "\tnumber_players(%d)\n", (int) num_players);
-    this->_num_players = num_players;
-
-    return ;
+	fprintf(stderr, "number_players(%d)\n", (int) num_players);
+	this->_num_players = num_players;
+	return ;
 }
 
 unsigned short int
 Game::number_players(void)
 {
-    return this->_num_players;
+	return this->_num_players;
 }
 
 void
 Game::number_pawns(unsigned short int num_pawns)
 {
-    fprintf(stderr, "\tnumber_pawns(%d)\n", (int) num_pawns);
-    this->_num_pawns = num_pawns;
-
-    return ;
+	fprintf(stderr, "number_pawns(%d)\n", (int) num_pawns);
+	this->_num_pawns = num_pawns;
+	return ;
 }
 
 unsigned short int
 Game::number_pawns(void)
 {
-    return this->_num_pawns;
+	return this->_num_pawns;
 }
 
 void
 Game::number_discs(unsigned short int num_discs)
 {
-    fprintf(stderr, "\tnumber_discs(%d)\n", (int) num_discs);
-    this->_num_discs = num_discs;
-
-    return ;
+	fprintf(stderr, "number_discs(%d)\n", (int) num_discs);
+	this->_num_discs = num_discs;
+	return ;
 }
 
 unsigned short int
 Game::number_discs(void)
 {
-    return this->_num_discs;
+	return this->_num_discs;
 }
 
-std::vector<Player*>
-Game::players(void)
+void
+Game::number_special_discs(unsigned short int num_special_discs)
 {
-    return this->_players;
+	fprintf(stderr, "number_special_discs(%d)\n", (int) num_special_discs);
+	this->_num_special_discs = num_special_discs;
+	return ;
 }
 
-Board*
+unsigned short int
+Game::number_special_discs(void)
+{
+	return this->_num_discs;
+}
+
+vector<string>
+Game::players_disc(void)
+{
+	return this->_players_disc;
+}
+
+string
 Game::board(void)
 {
-    return this->_board;
+	return this->_board;
+}
+
+Menu*
+Game::discwin(void)
+{
+	return this->_discmenu;
+}
+
+Menu*
+Game::pawnwin(void)
+{
+	return this->_pawnmenu;
 }
