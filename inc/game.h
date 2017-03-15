@@ -41,7 +41,7 @@ private:
 	void pick_right();
 	void pick_left();
 
-	void player(char);
+	void player(const char*);
 
 	/* Getters and Setters */
 	void number_players(unsigned short int);
@@ -76,6 +76,7 @@ private:
 	Menu* _discmenu;
 	pair<int, int> _screen_size;
 	Player** _players;
+	int _player_turn;
 };
 
 #endif
