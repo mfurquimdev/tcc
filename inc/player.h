@@ -14,10 +14,14 @@ public:
 
 	void discs(const char*);
 	string discs(void);
+	unsigned short int score(const char*, int, unsigned short int);
+	int appearance(char);
+	bool has_black();
 
 private:
 	string _discs;
 	int _score;
+	int _diff_colors;
 };
 
 #endif
