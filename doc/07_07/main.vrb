@@ -1,8 +1,0 @@
-\frametitle{\secname}
-Os cálculos da quantidade de estados do jogo e os cálculos dos estados do tabuleiro fornecem um limite superior e inferior à estimativa.
-	\begin{itemize}
-		\item Não é possível resolver todo o jogo
-		\item Resolver uma versão simplificada
-		\item Encontrar \emph{Winning Move}
-		\item Encontrar heurística para melhores jogadas
-	\end{itemize}
