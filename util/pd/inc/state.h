@@ -5,7 +5,8 @@
 
 using namespace std;
 
-struct State{
+struct State
+{
 	short estado_tabuleiro;
 	vector<short> peao;
 	vector<short> escada;

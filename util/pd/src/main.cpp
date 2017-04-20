@@ -3,7 +3,7 @@
 #include <iostream>
 #include "state.h"
 // #include "util.h"
-// #include "game.h"
+#include "game.h"
 
 using ll = long long;
 using namespace std;
@@ -16,6 +16,19 @@ int main()
 	short num_cores = 3;
 	short num_discos = 3;
 	short num_jogadores = 2;
+
+	cout << "Big Points" << endl;
+
+	cout << endl;
+
+	struct Game game(num_discos, num_cores, num_jogadores);
+
+	cout << "#Discos: " << game.num_discos << endl;
+	cout << "#Cores: " << game.num_cores << endl;
+	cout << "#Jogadores: " << game.num_jogadores << endl;
+	cout << "Board: " << game.board << endl;
+
+	cout << endl;
 
 	struct State state(num_discos, num_cores, num_jogadores);
 
@@ -50,8 +63,6 @@ int main()
 	cout << "Atual: " << state.jogador_atual << endl;
 
 	cout << endl;
-
-	// struct Game game(num_discos, num_cores, num_jogadores);
 
    	//ofstream ofsStair("stair.txt", ofstream::out);
    	//ofsStair << "Stair_states {" << endl;
