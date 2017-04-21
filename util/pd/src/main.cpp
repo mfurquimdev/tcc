@@ -1,4 +1,4 @@
-// #include "encode.h"
+#include "encode.h"
 // #include "dp.h"
 #include <iostream>
 #include "state.h"
@@ -63,6 +63,11 @@ int main()
 	cout << "Atual: " << state.jogador_atual << endl;
 
 	cout << endl;
+
+
+
+	decode(encode(state, game), state, game);
+
 
    	//ofstream ofsStair("stair.txt", ofstream::out);
    	//ofsStair << "Stair_states {" << endl;
