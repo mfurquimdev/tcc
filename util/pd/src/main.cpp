@@ -1,9 +1,9 @@
-#include "encode.h"
 // #include "dp.h"
 #include <iostream>
 #include "state.h"
 // #include "util.h"
 #include "game.h"
+#include "encode.h"
 
 using ll = long long;
 using namespace std;
@@ -64,9 +64,9 @@ int main()
 
 	cout << endl;
 
-
-
 	decode(encode(state, game), state, game);
+
+	// decode(encode(state, game), state, game);
 
 
    	//ofstream ofsStair("stair.txt", ofstream::out);

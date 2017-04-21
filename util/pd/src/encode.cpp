@@ -1,5 +1,4 @@
 #include "encode.h"
-#include <ostream>
 #include <fstream>
 #include <sstream>
 
