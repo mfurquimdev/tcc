@@ -3,6 +3,6 @@
 
 #include "util.h"
 
-int dp(struct Game&, struct State&);
+short dp(struct Game&, struct State&);
 
 #endif

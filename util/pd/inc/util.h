@@ -7,8 +7,8 @@
 
 void step_in(struct State&, int);
 void update_board(struct Game&, struct State&);
-void pick_right(struct Game&, struct State&, int);
-void pick_left(struct Game&, struct State&, int);
+short pick_right(struct Game&, struct State&, int);
+short pick_left(struct Game&, struct State&, int);
 void normalize_tabuleiro(struct State&);
 void move_pawn(struct Game&, struct State&, int);
 bool is_pawns_stair(struct Game&, struct State&);

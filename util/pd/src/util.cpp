@@ -3,6 +3,7 @@
 #include <bitset>
 #include "dp.h"
 #include "game.h"
+#include <iostream>
 
 void step_in(struct State& state, int pawn)
 {
@@ -29,10 +30,12 @@ void update_board(struct Game& game, struct State& state)
 	return ;
 }
 
-void pick_right(struct Game& game, struct State& state, int pawn)
+short pick_right(struct Game& game, struct State& state, int pawn)
 {
+	short max_score = 0;
+
 	short pawn_pos = state.peao[pawn]-1;
-	short pawn_index = pawn+1;
+	short pawn_index = pawn;
 
 	short disc_pos_right = -1;
 	char pick_right = -1;
@@ -41,11 +44,13 @@ void pick_right(struct Game& game, struct State& state, int pawn)
 
 		// Does not pick right
 		if (disc_pos_right >= (short) game.board.size()) {
+			cout << "Does not pick left" << endl;
 			break;
 		}
 
 		// Trying to pick 0
 		if (game.board[disc_pos_right] == '0') {
+			cout << "Trying to pick 0" << endl;
 			continue;
 		}
 
@@ -57,6 +62,7 @@ void pick_right(struct Game& game, struct State& state, int pawn)
 
 		// Add it to the player's hand
 		state.jogadores[state.jogador_atual][pick_right-'0'-1]++;
+		cout << "Jogador " << state.jogador_atual << ": " << state.jogadores[state.jogador_atual][pick_right-'0'-1] << endl;
 
 		// Store the player who's playing
 		short prev_player = state.jogador_atual;
@@ -67,8 +73,11 @@ void pick_right(struct Game& game, struct State& state, int pawn)
 		// Encode game state and hash it
 		ll ll_st = encode(state, game);
 
+		// Get max score from this node's child
+		max_score = dp(game, state);
+
 		// Store max score from this node's child
-		game.dp_states[ll_st] = dp(game, state);
+		game.dp_states[ll_st] = max_score;
 
 		// Recover player who's playing
 		state.jogador_atual = prev_player;
@@ -81,13 +90,15 @@ void pick_right(struct Game& game, struct State& state, int pawn)
 		break;
 	}
 
-	return ;
+	return max_score;
 }
 
-void pick_left(struct Game& game, struct State& state, int pawn)
+short pick_left(struct Game& game, struct State& state, int pawn)
 {
+	short max_score = 0;
+
 	int pawn_pos = state.peao[pawn]-1;
-	int pawn_index = pawn+1;
+	int pawn_index = pawn;
 
 	int disc_pos_left = -1;
 	char pick_left = -1;
@@ -96,11 +107,13 @@ void pick_left(struct Game& game, struct State& state, int pawn)
 
 		// Does not pick left
 		if (disc_pos_left < 0) {
+			cout << "Does not pick left" << endl;
 			break;
 		}
 
 		// Trying to pick 0
 		if (game.board[disc_pos_left] == '0') {
+			cout << "Trying to pick 0" << endl;
 			continue;
 		}
 
@@ -112,6 +125,7 @@ void pick_left(struct Game& game, struct State& state, int pawn)
 
 		// Add it to the player's hand
 		state.jogadores[state.jogador_atual][pick_left-'0'-1]++;
+		cout << "Jogador " << state.jogador_atual << ": " << state.jogadores[state.jogador_atual][pick_left-'0'-1] << endl;
 
 		// Store the player who's playing
 		short prev_player = state.jogador_atual;
@@ -122,8 +136,11 @@ void pick_left(struct Game& game, struct State& state, int pawn)
 		// Encode game state and hash it
 		ll ll_st = encode(state, game);
 
+		// Get max score from this node's child
+		max_score = dp(game, state);
+
 		// Store max score from this node's child
-		game.dp_states[ll_st] = dp(game ,state);
+		game.dp_states[ll_st] = max_score;
 
 		// Recover player who's playing
 		state.jogador_atual = prev_player;
@@ -136,7 +153,7 @@ void pick_left(struct Game& game, struct State& state, int pawn)
 		break;
 	}
 
-	return ;
+	return max_score;
 }
 
 void normalize_tabuleiro(struct State& state)
@@ -156,14 +173,15 @@ void move_pawn(struct Game& game, struct State& state, int pawn)
 		if (state.peao[pawn] > game.num_cores) {
 			break;
 		}
-	} while (game.board[game.color_index[pawn+1][state.peao[pawn]-1]] == '0');
+	} while (game.board[game.color_index[pawn][state.peao[pawn]-1]] == '0');
 
 	if (state.peao[pawn] > game.num_cores) {
+		step_in(state, pawn);
 		return;
 	}
 
 	for (int i = 0; i < game.num_cores; i++) {
-		int pawn = i+1;
+		int pawn = i;
 		if (state.peao[i] && state.peao[i] < game.num_discos + 1) {
 			int pawn_pos = state.peao[i]-1;
 			game.board[game.color_index[pawn][pawn_pos]] = '0';
@@ -189,11 +207,16 @@ bool is_pawns_stair(struct Game& game, struct State& state)
 
 vector<short> calculate_score(struct Game& game, struct State& state)
 {
+	cout << "Calculating Scores" << endl;
+
 	vector<short> score(game.num_jogadores, 0);
 	for (int j = 0; j < game.num_jogadores; j++) {
+		cout << "Player " << j << endl;
 		for (int disc = 0; disc < game.num_cores; disc++) {
+			cout << disc << " -> " << state.jogadores[j][disc] << " * " << game.num_cores - state.escada[disc] << endl;;
 			score[j] += state.jogadores[j][disc]*(game.num_cores - state.escada[disc]);
 		}
+		cout << endl;
 	}
 
 	return score;

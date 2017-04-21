@@ -76,12 +76,43 @@ int main()
    	dp(game, state);
    	end = clock();
 
-   	cout << "MAP (" << game.dp_states.size() << ")"  << endl;
+	cout << "Tabuleiro: " << state.estado_tabuleiro << endl;
+
+	cout << "Peões: (";
+	for (short c = 0; c < num_cores; c++) {
+		if (c) cout <<",";
+		cout << state.peao[c];
+	}
+	cout << ")" << endl;
+
+	cout << "Escada: (";
+	for (short c = 0; c < num_cores; c++) {
+		if (c) cout <<",";
+		cout << state.escada[c];
+	}
+	cout << ")" << endl;
+
+	cout << "Jogadores: [";
+	for (short j = 0; j < num_jogadores; j++) {
+		if (j) cout << ", ";
+		cout << j << ":(";
+		for (short c = 0; c < num_cores; c++) {
+			if (c) cout << ",";
+			cout << state.jogadores[j][c];
+		}
+		cout << ")";
+	}
+	cout << "]" << endl;
+
+	cout << "Atual: " << state.jogador_atual << endl;
+
+	cout << endl;
+
+
+   	cout << "MAP (" << game.dp_states.size() << ") in " << (((float)(end - start))/CLOCKS_PER_SEC) << " seconds."<< endl;
    	for (auto s: game.dp_states) {
    		cout << s.first << " -> " << s.second << endl;
    	}
-
-   	cout << game.dp_states.size() << " " << (((float)(end - start))/CLOCKS_PER_SEC) << endl;
 
    	return 0;
 }
