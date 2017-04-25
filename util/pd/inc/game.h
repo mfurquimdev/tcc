@@ -5,6 +5,7 @@
 #include <string>
 #include <algorithm>
 #include <map>
+#include <iostream>
 
 using ll = long long;
 using namespace std;
@@ -19,9 +20,6 @@ struct Game
 	map<short,string> ids;
 	vector<vector<short> > color_index;
 
-	// Max score from states
-	map<ll,int> dp_states;
-
 	Game(short ndiscos, short ncores, short njogadores)
 	{
 		num_cores = ncores;
@@ -31,7 +29,7 @@ struct Game
 		board = random_game(num_discos, num_cores);
 		color_index = calculate_color_index(board, num_cores);
 		generate_stair_states(masks, ids, num_cores);
-		dp_states.clear();
+		// dp_states.clear();
 	};
 
 	vector<vector<short> > calculate_color_index(const string& board, const short& num_cores)
@@ -57,12 +55,12 @@ struct Game
 
 		for (short c = 0; c < num_cores; c++) {
 			for (short d = 0; d < num_discos; d++) {
-				board[c*num_discos+d] = '1' + c;
+				board[d*(num_discos+1)+c] = '1' + c;
 			}
 		}
 
-		srand(time(NULL));
-		random_shuffle(board.begin(), board.end());
+		// srand(time(NULL));
+		// random_shuffle(board.begin(), board.end());
 
 		return board;
 	};
@@ -97,6 +95,28 @@ struct Game
 		return ;
 	};
 
+	friend ostream& operator<<(ostream& out, const struct Game& game)
+	{
+		out << endl;
+		out << "Game" << endl;
+		out << "#Discos: " << game.num_discos << endl;
+		out << "#Cores: " << game.num_cores << endl;
+		out << "#Jogadores: " << game.num_jogadores << endl;
+		out << "Board: " << game.board << endl;
+		out << "Index {" << endl;
+		for (short c = 0; c < game.num_cores; c++) {
+			out << "  " << c+1 << ":(";
+			for (short d = 0; d < game.num_discos; d++) {
+				if (d) out << ",";
+				out << game.color_index[c][d];
+			}
+			out << ")" << endl;
+		}
+		out << "}" << endl;
+
+		cout << endl;
+		return out;
+	};
 };
 
 #endif

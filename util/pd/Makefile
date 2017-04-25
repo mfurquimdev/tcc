@@ -65,6 +65,6 @@ $(TARGET): $(OBJ)
 
 clean:
 	@echo Cleaning...
-	rm -rvf *~ $(OBJ_DIR) $(TARGET) 
+	rm -rvf *~ *.err $(OBJ_DIR) $(TARGET) 
 
 .PRECIOUS: %.o
