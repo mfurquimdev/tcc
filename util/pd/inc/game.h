@@ -29,7 +29,6 @@ struct Game
 		board = random_game(num_discos, num_cores);
 		color_index = calculate_color_index(board, num_cores);
 		generate_stair_states(masks, ids, num_cores);
-		// dp_states.clear();
 	};
 
 	vector<vector<short> > calculate_color_index(const string& board, const short& num_cores)
@@ -55,7 +54,7 @@ struct Game
 
 		for (short c = 0; c < num_cores; c++) {
 			for (short d = 0; d < num_discos; d++) {
-				board[d*(num_discos+1)+c] = '1' + c;
+				board[d*num_discos+c] = '1' + c;
 			}
 		}
 

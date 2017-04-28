@@ -12,6 +12,11 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 {
 	short max_score = 0;
 
+	cout << turn << endl;
+	update_board(game, state);
+	print_game(cout, game, state);
+	cout << endl;
+
 	short player = turn.current_player;
 	short pawn = turn.pawn_to_move;
 	bool pick_right = turn.pick_right;
@@ -40,12 +45,14 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 	// Step in the stair
 	if (!in_range) {
 		if (!state.escada[pawn]) {
+			cout << "Stepping in the stair" << endl;
 			state.escada[pawn] = max_of_array(state.escada)+1;
 			state.jogadores[player][pawn]++;
 			state.jogador_atual = (player+1)%game.num_jogadores;
 			game.board[game.color_index[pawn][state.peao[pawn]-2]] = '1' + pawn;
 		}
 		else {
+			cout << "Already on the stair" << endl;
 			max_score = max_of_array(calculate_score(game, state));
 			return max_score;
 		}
@@ -80,6 +87,7 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 
 				// Does not pick right (out of board)
 				if (disc_pos >= (short) game.board.size()) {
+					cout << "Does not pick right" << endl;
 					max_score = max_of_array(calculate_score(game, state));
 					return max_score;
 					break;
@@ -91,6 +99,7 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 
 				// Does not pick left (out of board)
 				if (disc_pos < 0) {
+					cout << "Does not pick left" << endl;
 					max_score = max_of_array(calculate_score(game, state));
 					return max_score;
 					break;
@@ -125,14 +134,17 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 		}
 	} // end if (in_range)
 
+	// update_board(game, state);
 	update_board(game, state);
+	print_game(cout, game, state);
+	cout << endl;
 
 	max_score = dp(dp_states, game, state);
 
 	return max_score;
 }
 
-short dp(map<ll,int>& dp_states, struct Game& game, struct State& state)
+short dp(map<ll,int>& dp_states, struct Game game, struct State state)
 {
 	short max_score = 0;
 
@@ -167,6 +179,7 @@ short dp(map<ll,int>& dp_states, struct Game& game, struct State& state)
 		struct Turn right(state.jogador_atual, pawn, true);
 		struct Turn left(state.jogador_atual, pawn, false);
 
+		// DP após jogadas
 		max_score = max(
 			play(dp_states, game, state, right),
 			play(dp_states, game, state, left));
@@ -234,8 +247,8 @@ short max_of_array(const vector<short>& scores)
 
 void print_game(ostream& out, struct Game& game, struct State& state)
 {
-	bitset<6> bit_st_tabuleiro(state.estado_tabuleiro);
-	out << endl << "    " << bit_st_tabuleiro << endl;
+	// bitset<6> bit_st_tabuleiro(state.estado_tabuleiro);
+	// out << endl << "    " << bit_st_tabuleiro << endl;
 	out << state.jogador_atual+1 << " - ";
 	out << game.board << "  (";
 	for (short c = 0; c < game.num_cores; c++) {
@@ -251,8 +264,6 @@ void print_game(ostream& out, struct Game& game, struct State& state)
 			out << state.jogadores[j][c];
 		}
 	}
-
-	out << endl;
 
 	return;
 }

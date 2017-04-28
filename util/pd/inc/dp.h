@@ -6,7 +6,7 @@
 #include "turn.h"
 #include <string>
 
-short dp(map<ll,int>&, struct Game&, struct State&);
+short dp(map<ll,int>&, struct Game, struct State);
 short play(map<ll,int>&, struct Game, struct State, struct Turn);
 
 bool is_pawns_stair(struct Game&, struct State&);
