@@ -8,6 +8,7 @@
 
 using ll = long long;
 using namespace std;
+using ii = pair<int, int>;
 
 int main(int argc, char* argv[])
 {
@@ -45,7 +46,7 @@ int main(int argc, char* argv[])
 	// decode(encode(state, game), state, game);
 
 	// Max score from states
-	map<ll,int> dp_states;
+	map<ll,ii> dp_states;
 
 	clock_t start, end;
 	start = clock();
@@ -60,7 +61,7 @@ int main(int argc, char* argv[])
 		decode(s.first, state, game);
 		update_board(game, state);
 		print_game(cout, game, state);
-		cout << "  = " << s.second << endl;
+		cout << "  = (" << s.second.first << "," << s.second.second << ")" << endl;
 	}
 
 	return 0;

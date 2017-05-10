@@ -1,5 +1,6 @@
 #include <bitset>
 #include <iostream>
+#include <vector>
 
 #include "encode.h"
 #include "dp.h"
@@ -7,16 +8,15 @@
 #include "turn.h"
 
 using namespace std;
+using ii = pair<int, int>;
+using game_res = pair<bool, ii>;
 
-short play(map<ll,int>& dp_states, struct Game game, struct State state, struct Turn turn)
+game_res play(map<ll,ii>& dp_states, struct Game game, struct State state, struct Turn turn)
 {
-	short max_score = 0;
-
 	ll st = encode(state, game);
 	auto it = dp_states.find(st);
 	if (it != dp_states.end()) {
-		max_score = dp_states[st];
-		return max_score;
+		return game_res(true, dp_states[st]);
 	}
 
 	cout << turn << endl;
@@ -32,8 +32,7 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 	// Cannot move pawn, it's already on the stair
 	if (state.escada[pawn]) {
 		cout << "Can't move. Pawn already on the stair" << endl;
-		max_score = max_of_array(calculate_score(game, state));
-		return max_score;
+		return game_res(false, ii(-1,-1));
 	}
 
 	// Remove discs from game.board according to state.tabuleiro
@@ -73,8 +72,6 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 	}
 	// Replacing disc under pawn's previous position
 	short pawn_pos = state.peao[pawn]-1;
-	cout << "pawn_pos: " << pawn_pos << endl;
-	cout << "prev_pos: " << prev_pos << endl;
 	if (pawn_pos > 0 && prev_pos > 0) {
 		game.board[game.color_index[pawn][prev_pos-1]] = '1' + pawn;
 	}
@@ -96,9 +93,7 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 				// Does not pick right (out of board)
 				if (disc_pos >= (short) game.board.size()) {
 					cout << "Does not pick right" << endl;
-					max_score = max_of_array(calculate_score(game, state));
-					return max_score;
-					break;
+					return game_res(false, ii(-1,-1));
 				}
 			}
 			// Pick left
@@ -108,9 +103,7 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 				// Does not pick left (out of board)
 				if (disc_pos < 0) {
 					cout << "Does not pick left" << endl;
-					max_score = max_of_array(calculate_score(game, state));
-					return max_score;
-					break;
+					return game_res(false, ii(-1,-1));
 				}
 			}
 
@@ -146,56 +139,113 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 	print_game(cout, game, state);
 	cout << endl;
 
-	max_score = dp(dp_states, game, state);
+	auto max_score = dp(dp_states, game, state);
+	cout << "====state" << st << " : (" << max_score.first << "," << max_score.second << ")" << endl;
 
-	return max_score;
+	return game_res(true, max_score);
 }
 
-short dp(map<ll,int>& dp_states, struct Game game, struct State state)
+ii dp(map<ll,ii>& dp_states, struct Game game, struct State state)
 {
-	short max_score = 0;
-
 	// If all pawns are in the stair
 	if (is_pawns_stair(game, state)) {
-		// Calculate the max score
-		max_score = max_of_array(calculate_score(game, state));
-
-		ll st = encode(state, game);
-		auto it = dp_states.find(st);
-		if (it != dp_states.end()) {
-			short score = dp_states[st];
-			if (max_score < score) {
-				max_score = score;
-			}
-			else {
-				dp_states[st] = max_score;
-			}
-		}
-
-		return max_score;
+		return calculate_score(game, state);
 	}
 
 	ll st = encode(state, game);
 	auto it = dp_states.find(st);
 	if (it != dp_states.end()) {
-		max_score = dp_states[st];
-		return max_score;
+		return dp_states[st];
 	}
 
+	vector<ii> results;
 	for (short pawn = 0; pawn < game.num_cores; pawn++) {
 		struct Turn right(state.jogador_atual, pawn, true);
 		struct Turn left(state.jogador_atual, pawn, false);
 
 		// DP após jogadas
-		max_score = max(
-			play(dp_states, game, state, left),
-			play(dp_states, game, state, right));
+		game_res result = play(dp_states, game, state, left);
+		if (result.first) {
+			results.push_back(result.second);
+		}
 
+		result = play(dp_states, game, state, right);
+		if (result.first) {
+			results.push_back(result.second);
+		}
 	}
 
-	dp_states[st] = max_score;
+	auto p1_order = [](const ii& a, const ii& b){
+		if (a.first > a.second) {
+			if (b.first > b.second) {
+				return a.first > b.first ? true : false;
+			}
+			else {
+				return true;
+			}
+		}
+		else if (a.first == a.second) {
+			if (b.first > b.second) {
+				return false;
+			}
+			else if (b.first == b.second) {
+				return a.first > b.first ? true : false;
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			if (b.first >= b.second) {
+				return false;
+			}
+			else {
+				return a.second < b.second ? true : false;
+			}
+		}
+	};
 
-	return max_score;
+	auto p2_order = [](const ii& a, const ii& b){
+		if (a.second > a.first) {
+			if (b.second > b.first) {
+				return a.second > b.second ? true : false;
+			}
+			else {
+				return true;
+			}
+		}
+		else if (a.second == a.first) {
+			if (b.second > b.first) {
+				return false;
+			}
+			else if (b.second == b.first) {
+				return a.second > b.second ? true : false;
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			if (b.second >= b.first) {
+				return false;
+			}
+			else {
+				return a.first < b.first ? true : false;
+			}
+		}
+	};
+
+
+	if (!state.jogador_atual) {
+		sort(results.begin(), results.end(), p1_order);
+	}
+	else {
+		sort(results.begin(), results.end(), p2_order);
+	}
+
+	dp_states[st] = results.size() == 0 ? ii(-1, -1) : results.front();
+
+	return dp_states[st];
 }
 
 void update_board(struct Game& game, struct State& state)
@@ -227,7 +277,7 @@ bool is_pawns_stair(struct Game& game, struct State& state)
 	return pawns_stair;
 }
 
-vector<short> calculate_score(struct Game& game, struct State& state)
+ii calculate_score(struct Game& game, struct State& state)
 {
 	vector<short> score(game.num_jogadores, 0);
 	for (int j = 0; j < game.num_jogadores; j++) {
@@ -238,7 +288,7 @@ vector<short> calculate_score(struct Game& game, struct State& state)
 		}
 	}
 
-	return score;
+	return ii(score[0],score[1]);
 }
 
 short max_of_array(const vector<short>& scores)
@@ -254,8 +304,8 @@ short max_of_array(const vector<short>& scores)
 
 void print_game(ostream& out, struct Game game, struct State& state)
 {
-	bitset<4> bit_st_tabuleiro(state.estado_tabuleiro);
-	out << "    " << bit_st_tabuleiro << endl;
+	// bitset<4> bit_st_tabuleiro(state.estado_tabuleiro);
+	// out << "    " << bit_st_tabuleiro << endl;
 	out << state.jogador_atual+1 << " - ";
 	if (state.peao[0] && state.peao[0] <= game.num_discos) {
 		game.board[game.color_index[0][state.peao[0]-1]] = 'R';
