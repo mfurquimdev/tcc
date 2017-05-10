@@ -11,27 +11,27 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	short num_cores = 3;
-	short num_discos = 3;
+	short num_cores = 2;
+	short num_discos = 2;
 	short num_jogadores = 2;
 
-    // Parse parameters
-    int c;
-    while ((c = getopt(argc, argv, "d:c:j:")) != -1) {
-        switch (c) {
-            case 'd':
-            if (optarg) num_discos = (short) *optarg - '0';
-            break;
+	// Parse parameters
+	int c;
+	while ((c = getopt(argc, argv, "d:c:j:")) != -1) {
+		switch (c) {
+			case 'd':
+			if (optarg) num_discos = (short) *optarg - '0';
+			break;
 
 			case 'c':
-            if (optarg) num_cores = (short) *optarg - '0';
-            break;
+			if (optarg) num_cores = (short) *optarg - '0';
+			break;
 
 			case 'j':
-            if (optarg) num_jogadores = (short) *optarg - '0';
-            break;
-        }
-    }
+			if (optarg) num_jogadores = (short) *optarg - '0';
+			break;
+		}
+	}
 
 
 	// cout << "Big Points" << endl;

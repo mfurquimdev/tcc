@@ -12,6 +12,13 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 {
 	short max_score = 0;
 
+	ll st = encode(state, game);
+	auto it = dp_states.find(st);
+	if (it != dp_states.end()) {
+		max_score = dp_states[st];
+		return max_score;
+	}
+
 	cout << turn << endl;
 	update_board(game, state);
 	print_game(cout, game, state);
@@ -20,8 +27,11 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 	short player = turn.current_player;
 	short pawn = turn.pawn_to_move;
 	bool pick_right = turn.pick_right;
+	short prev_pos = state.peao[pawn];
 
+	// Cannot move pawn, it's already on the stair
 	if (state.escada[pawn]) {
+		cout << "Can't move. Pawn already on the stair" << endl;
 		max_score = max_of_array(calculate_score(game, state));
 		return max_score;
 	}
@@ -49,26 +59,24 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 			state.escada[pawn] = max_of_array(state.escada)+1;
 			state.jogadores[player][pawn]++;
 			state.jogador_atual = (player+1)%game.num_jogadores;
-			game.board[game.color_index[pawn][state.peao[pawn]-2]] = '1' + pawn;
-		}
-		else {
-			cout << "Already on the stair" << endl;
-			max_score = max_of_array(calculate_score(game, state));
-			return max_score;
 		}
 	}
 	// Move pawn in board
 	else {
 		for (int pawn = 0; pawn < game.num_cores; pawn++) {
 			if (state.peao[pawn] && state.peao[pawn] < game.num_discos + 1) {
-				int pawn_pos = state.peao[pawn]-1;
+				// Replacing next disc under pawn's current position
+				short pawn_pos = state.peao[pawn]-1;
 				game.board[game.color_index[pawn][pawn_pos]] = '0';
-
-				if (pawn_pos > 0) {
-					game.board[game.color_index[pawn][pawn_pos-1]] = '1' + pawn;
-				}
 			}
 		}
+	}
+	// Replacing disc under pawn's previous position
+	short pawn_pos = state.peao[pawn]-1;
+	cout << "pawn_pos: " << pawn_pos << endl;
+	cout << "prev_pos: " << prev_pos << endl;
+	if (pawn_pos > 0 && prev_pos > 0) {
+		game.board[game.color_index[pawn][prev_pos-1]] = '1' + pawn;
 	}
 
 	// Remove disc from game.board according to state.peao
@@ -132,9 +140,8 @@ short play(map<ll,int>& dp_states, struct Game game, struct State state, struct 
 			// Calculate next player
 			state.jogador_atual = (state.jogador_atual+1)%game.num_jogadores;
 		}
-	} // end if (in_range)
+	} // end "Pick a disc if the pawn has moved within the range of the board"
 
-	// update_board(game, state);
 	update_board(game, state);
 	print_game(cout, game, state);
 	cout << endl;
@@ -181,8 +188,8 @@ short dp(map<ll,int>& dp_states, struct Game game, struct State state)
 
 		// DP após jogadas
 		max_score = max(
-			play(dp_states, game, state, right),
-			play(dp_states, game, state, left));
+			play(dp_states, game, state, left),
+			play(dp_states, game, state, right));
 
 	}
 
@@ -245,11 +252,17 @@ short max_of_array(const vector<short>& scores)
 	return highest;
 }
 
-void print_game(ostream& out, struct Game& game, struct State& state)
+void print_game(ostream& out, struct Game game, struct State& state)
 {
-	// bitset<6> bit_st_tabuleiro(state.estado_tabuleiro);
-	// out << endl << "    " << bit_st_tabuleiro << endl;
+	bitset<4> bit_st_tabuleiro(state.estado_tabuleiro);
+	out << "    " << bit_st_tabuleiro << endl;
 	out << state.jogador_atual+1 << " - ";
+	if (state.peao[0] && state.peao[0] <= game.num_discos) {
+		game.board[game.color_index[0][state.peao[0]-1]] = 'R';
+	}
+	if (state.peao[1] && state.peao[1] <= game.num_discos) {
+		game.board[game.color_index[1][state.peao[1]-1]] = 'G';
+	}
 	out << game.board << "  (";
 	for (short c = 0; c < game.num_cores; c++) {
 		if (c) out << ",";
