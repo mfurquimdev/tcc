@@ -38,7 +38,7 @@ INC = -I$(INC_DIR)
 # Compilador, flags e bibliotecas
 #-------------------------------------------------------------------------------
 CC=g++
-CFLAGS= -Wall -Wextra -pedantic -ansi -g -std=c++11 -Ofast --param max-inline-recursive-depth=16 
+CFLAGS= -Wall -Wextra -pedantic -ansi -std=c++11 -Ofast --param max-inline-recursive-depth=16 
 LFLAGS= -lm
 
 TARGET=$(BIN_DIR)/$(NAME)

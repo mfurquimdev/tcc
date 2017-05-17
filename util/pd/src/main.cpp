@@ -46,9 +46,10 @@ int main(int argc, char* argv[])
 		cboard[i] = (i%num_cores) + '1';
 	}
 	cboard[num_discos*num_cores] = '\0';
-
 	string board(cboard);
+	free(cboard);
 	sort(board.begin(),board.end());
+	bool doesPlayer2Win = false;
 	do
 	{
 		struct Game game(num_discos, num_cores, num_jogadores, board);
@@ -58,11 +59,16 @@ int main(int argc, char* argv[])
 		start = clock();
 		max_score = dp(dp_states, game, state);
 		end = clock();
-		cout << game.board << ": (" << max_score.first << "," << max_score.second << ") -> [" << dp_states.size() << "] states in " << (((float)(end - start))/CLOCKS_PER_SEC) << " seconds." << endl;
-
+		doesPlayer2Win = max_score.first < max_score.second;
+		cout << (doesPlayer2Win ? "2 " : "1 ") << game.board << ": (" << max_score.first << "," << max_score.second << ") -> [" << dp_states.size() << "] states in " << (((float)(end - start))/CLOCKS_PER_SEC) << " seconds." << endl;
+		// if (doesPlayer2Win) {
+		// 	break;
+		// }
 	} while(next_permutation(board.begin(),board.end()));
 
-	free(cboard);
+	// if (doesPlayer2Win) {
+	// 	cout << endl << "Player 2 won" << endl;
+	// }
 
 	return 0;
 }
