@@ -20,13 +20,13 @@ struct Game
 	map<short,string> ids;
 	vector<vector<short> > color_index;
 
-	Game(short ndiscos, short ncores, short njogadores)
+	Game(short ndiscos, short ncores, short njogadores, string nboard)
 	{
 		num_cores = ncores;
 		num_discos = ndiscos;
 		num_jogadores = njogadores;
-
-		board = random_game(num_discos, num_cores);
+		board = nboard;
+		// board = random_game(num_discos, num_cores);
 		color_index = calculate_color_index(board, num_cores);
 		generate_stair_states(masks, ids, num_cores);
 	};
@@ -51,15 +51,11 @@ struct Game
 	string random_game(const short& num_discos, const short& num_cores)
 	{
 		string board(num_cores*num_discos, '0');
-		board[0] = '1';
-		board[1] = '2';
-		board[2] = '2'; 
-		board[3] = '1';
-		// for (short c = 0; c < num_cores; c++) {
-		// 	for (short d = 0; d < num_discos; d++) {
-		// 		board[d*num_discos+c] = '1' + c;
-		// 	}
-		// }
+		for (short c = 0; c < num_cores; c++) {
+			for (short d = 0; d < num_discos; d++) {
+				board[d*num_discos+c] = '1' + c;
+			}
+		}
 
 		// srand(time(NULL));
 		// random_shuffle(board.begin(), board.end());

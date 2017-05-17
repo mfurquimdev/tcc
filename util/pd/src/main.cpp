@@ -34,35 +34,35 @@ int main(int argc, char* argv[])
 		}
 	}
 
-
-	// cout << "Big Points" << endl;
-
-	struct Game game(num_discos, num_cores, num_jogadores);
-	cout << game;
-
-	struct State state(num_discos, num_cores, num_jogadores);
-	// cout << state << endl;
-
-	// decode(encode(state, game), state, game);
-
 	// Max score from states
 	map<ll,ii> dp_states;
-
 	clock_t start, end;
-	start = clock();
-	dp(dp_states, game, state);
-	end = clock();
+	ii max_score;
 
-	cout << dp_states.size() << ":" << (((float)(end - start))/CLOCKS_PER_SEC) << endl;
-	cout << "MAP (" << dp_states.size() << ") in " << (((float)(end - start))/CLOCKS_PER_SEC) << " seconds."<< endl;
-	int i = 0;
-	for (auto s: dp_states) {
-		cout << "[" << i++ << "]\t";
-		decode(s.first, state, game);
-		update_board(game, state);
-		print_game(cout, game, state);
-		cout << "  = (" << s.second.first << "," << s.second.second << ")" << endl;
+	char* cboard = NULL;
+	cboard = (char*) malloc(sizeof(char)*(num_discos*num_cores+1));
+	for (int i = 0; i < num_cores*num_discos; i++) {
+		// cout << (i%(num_cores)) + '1' << endl;
+		cboard[i] = (i%num_cores) + '1';
 	}
+	cboard[num_discos*num_cores] = '\0';
+
+	string board(cboard);
+	sort(board.begin(),board.end());
+	do
+	{
+		struct Game game(num_discos, num_cores, num_jogadores, board);
+		struct State state(num_discos, num_cores, num_jogadores);
+
+		dp_states.clear();
+		start = clock();
+		max_score = dp(dp_states, game, state);
+		end = clock();
+		cout << game.board << ": (" << max_score.first << "," << max_score.second << ") -> [" << dp_states.size() << "] states in " << (((float)(end - start))/CLOCKS_PER_SEC) << " seconds." << endl;
+
+	} while(next_permutation(board.begin(),board.end()));
+
+	free(cboard);
 
 	return 0;
 }

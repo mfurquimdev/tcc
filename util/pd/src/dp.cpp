@@ -19,10 +19,10 @@ game_res play(map<ll,ii>& dp_states, struct Game game, struct State state, struc
 		return game_res(true, dp_states[st]);
 	}
 
-	cout << turn << endl;
+	// cout << turn << endl;
 	update_board(game, state);
-	print_game(cout, game, state);
-	cout << endl;
+	// print_game(cout, game, state);
+	// cout << endl;
 
 	short player = turn.current_player;
 	short pawn = turn.pawn_to_move;
@@ -31,7 +31,7 @@ game_res play(map<ll,ii>& dp_states, struct Game game, struct State state, struc
 
 	// Cannot move pawn, it's already on the stair
 	if (state.escada[pawn]) {
-		cout << "Can't move. Pawn already on the stair" << endl;
+		// cout << "Can't move. Pawn already on the stair" << endl;
 		return game_res(false, ii(-1,-1));
 	}
 
@@ -54,7 +54,7 @@ game_res play(map<ll,ii>& dp_states, struct Game game, struct State state, struc
 	// Step in the stair
 	if (!in_range) {
 		if (!state.escada[pawn]) {
-			cout << "Stepping in the stair" << endl;
+			// cout << "Stepping in the stair" << endl;
 			state.escada[pawn] = max_of_array(state.escada)+1;
 			state.jogadores[player][pawn]++;
 			state.jogador_atual = (player+1)%game.num_jogadores;
@@ -92,7 +92,7 @@ game_res play(map<ll,ii>& dp_states, struct Game game, struct State state, struc
 
 				// Does not pick right (out of board)
 				if (disc_pos >= (short) game.board.size()) {
-					cout << "Does not pick right" << endl;
+					// cout << "Does not pick right" << endl;
 					return game_res(false, ii(-1,-1));
 				}
 			}
@@ -102,7 +102,7 @@ game_res play(map<ll,ii>& dp_states, struct Game game, struct State state, struc
 
 				// Does not pick left (out of board)
 				if (disc_pos < 0) {
-					cout << "Does not pick left" << endl;
+					// cout << "Does not pick left" << endl;
 					return game_res(false, ii(-1,-1));
 				}
 			}
@@ -136,11 +136,11 @@ game_res play(map<ll,ii>& dp_states, struct Game game, struct State state, struc
 	} // end "Pick a disc if the pawn has moved within the range of the board"
 
 	update_board(game, state);
-	print_game(cout, game, state);
-	cout << endl;
+	// print_game(cout, game, state);
+	// cout << endl;
 
 	auto max_score = dp(dp_states, game, state);
-	cout << "====state" << st << " : (" << max_score.first << "," << max_score.second << ")" << endl;
+	// cout << "====state" << st << " : (" << max_score.first << "," << max_score.second << ")" << endl;
 
 	return game_res(true, max_score);
 }
