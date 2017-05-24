@@ -4,9 +4,8 @@
 #include "dp.h"
 #include "state.h"
 #include "game.h"
-#include "encode.h"
 
-using ll = long long;
+using ll = unsigned long long;
 using namespace std;
 using ii = pair<int, int>;
 
@@ -34,41 +33,57 @@ int main(int argc, char* argv[])
 		}
 	}
 
+	if (num_discos > 5) {
+		cout << "Essa versão suporta no máximo 5 discos!" << endl;
+	}
+
+	if (num_discos < 2) {
+		cout << "A quantidade mínima de discos é 2!" << endl;
+	}
+
+	if (num_cores > 5) {
+		cout << "A quantidade máxima de cores é 5!" << endl;
+	}
+	
+	if (num_cores < 2) {
+		cout << "A quantidade mínima de cores é 2!" << endl;
+	}
+
+	if (num_jogadores != 2) {
+		cout << "Essa versão suporta apenas dois jogadores!" << endl;
+	}
+	
+	if (num_discos < 2 or num_discos > 5 
+		or num_cores < 2 or num_cores > 5
+		or num_jogadores != 2)
+	{
+		return(1);
+	}
+
 	// Max score from states
-	map<ll,ii> dp_states;
+	map<struct State, ii> dp_states;
 	clock_t start, end;
-	ii max_score;
 
 	char* cboard = NULL;
 	cboard = (char*) malloc(sizeof(char)*(num_discos*num_cores+1));
 	for (int i = 0; i < num_cores*num_discos; i++) {
-		// cout << (i%(num_cores)) + '1' << endl;
 		cboard[i] = (i%num_cores) + '1';
 	}
 	cboard[num_discos*num_cores] = '\0';
 	string board(cboard);
 	free(cboard);
 	sort(board.begin(),board.end());
-	bool doesPlayer2Win = false;
 	do
 	{
 		struct Game game(num_discos, num_cores, num_jogadores, board);
-		struct State state(num_discos, num_cores, num_jogadores);
+		struct State state;
 
 		dp_states.clear();
 		start = clock();
-		max_score = dp(dp_states, game, state);
+		auto max_score = dp(dp_states, game, state);
 		end = clock();
-		doesPlayer2Win = max_score.first < max_score.second;
-		cout << (doesPlayer2Win ? "2 " : "1 ") << game.board << ": (" << max_score.first << "," << max_score.second << ") -> [" << dp_states.size() << "] states in " << (((float)(end - start))/CLOCKS_PER_SEC) << " seconds." << endl;
-		// if (doesPlayer2Win) {
-		// 	break;
-		// }
+		cout << (max_score.first < max_score.second ? "2 " : "1 ") << game.board << ": (" << max_score.first << "," << max_score.second << ") -> [" << dp_states.size() << "] states in " << (((float)(end - start))/CLOCKS_PER_SEC) << " seconds." << endl;
 	} while(next_permutation(board.begin(),board.end()));
-
-	// if (doesPlayer2Win) {
-	// 	cout << endl << "Player 2 won" << endl;
-	// }
 
 	return 0;
 }

@@ -7,7 +7,7 @@
 #include <map>
 #include <iostream>
 
-using ll = long long;
+using ll = unsigned long long;
 using namespace std;
 
 struct Game

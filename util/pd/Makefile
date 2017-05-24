@@ -63,6 +63,9 @@ $(TARGET): $(OBJ)
 	@echo Linking $@
 	$(CC) -o $@ $(OBJ) $(LIB) $(LFLAGS)
 
+test:
+	$(CC) tmp.cpp -o tmp.out $(CFLAGS) $(INC)
+
 clean:
 	@echo Cleaning...
 	rm -rvf *~ *.err $(OBJ_DIR) $(TARGET) 

@@ -9,13 +9,12 @@
 using ii = pair<int, int>;
 using game_res = pair<bool, ii>;
 
-ii dp(map<ll,ii>&, struct Game, struct State);
-game_res play(map<ll,ii>&, struct Game, struct State, struct Turn);
+ii dp(map<struct State, ii>&, struct Game, struct State);
+game_res play(map<struct State, ii>&, struct Game, struct State, struct Turn);
 
 bool is_pawns_stair(struct Game&, struct State&);
-short max_of_array(const vector<short>&);
+short max_in_escada(struct Game&, struct State&);
 void print_game(ostream& out, struct Game, struct State&);
-void update_board(struct Game&, struct State&);
 ii calculate_score(struct Game&, struct State&);
 
 #endif
