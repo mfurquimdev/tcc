@@ -73,6 +73,8 @@ int main(int argc, char* argv[])
 	string board(cboard);
 	free(cboard);
 	sort(board.begin(),board.end());
+	clock_t total_start, total_end;
+	total_start = clock();
 	do
 	{
 		struct Game game(num_discos, num_cores, num_jogadores, board);
@@ -82,8 +84,11 @@ int main(int argc, char* argv[])
 		start = clock();
 		auto max_score = dp(dp_states, game, state);
 		end = clock();
-		cout << (max_score.first < max_score.second ? "2 " : "1 ") << game.board << ": (" << max_score.first << "," << max_score.second << ") -> [" << dp_states.size() << "] states in " << (((float)(end - start))/CLOCKS_PER_SEC) << " seconds." << endl;
+		cout << game.board << "," << max_score.first << ";" << max_score.second << "," << dp_states.size() << "," << (((float)(end - start))/CLOCKS_PER_SEC) << endl;
 	} while(next_permutation(board.begin(),board.end()));
+	total_end = clock();
+	
+	cerr << (((float)(total_end - total_start))/CLOCKS_PER_SEC) << endl;
 
 	return 0;
 }
