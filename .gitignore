@@ -1,12 +1,14 @@
 # Binary files
 bin
 prog
-*.pdf
 
 # Generated Tex Files
 doc/tex/tmp.tex
 doc/tex/tcc.tex
 doc/ref
+doc/latex/*.pdf
+doc/tex/*.pdf
+*.pdf
 *.aux
 *.bbl
 *.blg
@@ -16,7 +18,6 @@ doc/ref
 *.log
 *.lot
 *.toc
-doc/latex/tcc.pdf
 *.txt
 *.nav
 
