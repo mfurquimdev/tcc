@@ -1,0 +1,3 @@
+Checar antes de mandar mover.
+Se não tiver peça para pegar à esquerda, não faça essa jogada.
+se não tiver como fazer jogada, calcule e retorne.

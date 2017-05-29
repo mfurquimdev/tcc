@@ -6,12 +6,37 @@ using namespace std;
 
 Menu::Menu(int x, int y, int columns, int lines, const char** char_choices, int num_choices)
 {
-	fprintf(stderr, "constructor\n");
+	fprintf(stderr, "[%p] menu constructor\n", (void*) this);
 	position(x,y);
 	window_size(columns,lines);
 	window(position(), window_size());
 	choices(char_choices, num_choices);
 	keypad(window(), true);
+}
+
+Menu::~Menu()
+{
+	fprintf(stderr, "[%p] menu destructor\n", (void*) this);
+	int num_choices = this->num_choices();
+	if (this->_choices != NULL) {
+		for (int i = 0; i < num_choices; i++) {
+			fprintf(stderr, "%i\n", i);
+			if (this->_choices[i] != NULL) {
+				free(this->_choices[i]);
+				this->_choices[i] = NULL;
+			}
+		}
+		fprintf(stderr, "free_choices\n");
+		free(this->_choices);
+		this->_choices = NULL;
+	}
+
+	if (this->_window != NULL) {
+		fprintf(stderr, "del_win\n");
+		delwin(this->_window);
+		this->_window = NULL;
+	}
+	fprintf(stderr, "[%p] end menu destructor\n");
 }
 
 void

@@ -1,6 +1,7 @@
 # Binary files
 bin
 prog
+*.pdf
 
 # Generated Tex Files
 doc/tex/tmp.tex

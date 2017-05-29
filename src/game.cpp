@@ -1,5 +1,6 @@
 #include "game.h"
 #include "menu.h"
+#include "player.h"
 #include <ncurses.h>
 #include <cstdio>
 #include <cstring>
@@ -19,6 +20,7 @@ Game::Game(pair<int, int> screen_size)
 	number_discs(5);
 	number_special_discs(2);
 
+	this->_player_turn = 0;
 	this->_pawn_turn = 1;
 	this->_picked = false;
 	this->_screen_size = screen_size;
@@ -28,35 +30,159 @@ Game::Game(pair<int, int> screen_size)
 	const char* disc_choices[2] = {"Pick left", "Pick right"};
 	this->_discmenu = new Menu(6, screen_size.second-12, screen_size.first-12, 2+2, disc_choices, 2);
 
+	const char* black_choices[2] = {"Use black disc", "Don't use black disc"};
+	this->_blackmenu = new Menu(6, screen_size.second-12, screen_size.first-12, 2+2, black_choices, 2);
+
+	init_stair();
+
+	init_players();
 	init_players_disc();
 	init_board();
 }
 
 Game::~Game()
 {
-	fprintf(stderr, "[%p]\tGame destructor\n", (void*) this);
+	fprintf(stderr, "[%p]\tgame destructor\n", (void*) this);
+
+	if (this->_pawnmenu != NULL) {
+		fprintf(stderr, "[%p]\tpawnmenu\n", (void*) this->_pawnmenu);
+		delete(this->_pawnmenu);
+		this->_pawnmenu = NULL;
+	}
+	
+	if (this->_discmenu != NULL) {
+		fprintf(stderr, "[%p]\tdiscmenu\n", (void*) this->_discmenu);
+		delete(this->_discmenu);
+		this->_discmenu = NULL;
+	}
+	
+	if (this->_blackmenu != NULL) {
+		fprintf(stderr, "[%p]\tblackmenu\n", (void*) this->_blackmenu);
+		delete(this->_blackmenu);
+		this->_blackmenu = NULL;
+	}
+
+	fprintf(stderr, "destroy players\n");
+	if (this->_players != NULL) {
+		fprintf(stderr, "players not null\n");
+		for (int i = 0; i < number_players(); i++) {
+			fprintf(stderr, "destroy player[%d]\n", i);
+			if (this->_players[i] != NULL) {
+				fprintf(stderr, "destroy player[%d] not null\n", i);
+				delete(this->_players[i]);
+				this->_players[i] = NULL;
+			}
+			else {
+				fprintf(stderr, "destroy player[%d] null\n", i);
+			}
+		}
+		fprintf(stderr, "free player\n");
+		free(this->_players);
+		this->_players = NULL;
+	}
+	fprintf(stderr, "[%p]\tend game destructor\n", (void*) this);
+}
+
+void
+Game::init_stair()
+{
+	this->_stair_pos = 0;
+	this->_skip_pick_disc = 0;
+	int num_pawns = number_pawns();
+	this->_stair = (char*) malloc(sizeof(char)*num_pawns+1);
+	if (this->_stair != NULL) {
+		for (size_t i = 0; i < num_pawns; i++) {
+			this->_stair[i] = '_';
+		}
+		this->_stair[num_pawns] = '\0';
+	}
+	return ;
+}
+
+void
+Game::init_players()
+{
+	fprintf(stderr, "init players\n");
+	this->_players = NULL;
+	this->_players = (Player**) malloc(sizeof(Player*)*number_players());
+	if (this->_players != NULL) {
+		fprintf(stderr, "players malloced\n");
+		for (int i = 0; i < number_players(); i++) {
+			this->_players[i] = new Player();
+			fprintf(stderr, "[%p] players[%d]\n", (void*) this->_players[i], i);
+		}
+	}
+	else {
+		fprintf(stderr, "[%p] players variable is null\n", (void*) this->_players);
+	}
+}
+
+void
+Game::pawn_stair(int pawn_position)
+{
+	char pawn = this->_stair[pawn_position];
+	switch(pawn) {
+		case 'R':
+		attron(COLOR_PAIR(Color::Foreground_Red));
+		printw("%c", pawn);
+		attroff(COLOR_PAIR(Color::Foreground_Red));
+		break;
+
+		case 'G':
+		attron(COLOR_PAIR(Color::Foreground_Green));
+		printw("%c", pawn);
+		attroff(COLOR_PAIR(Color::Foreground_Green));
+		break;
+
+		case 'B':
+		attron(COLOR_PAIR(Color::Foreground_Blue));
+		printw("%c", pawn);
+		attroff(COLOR_PAIR(Color::Foreground_Blue));
+		break;
+
+		case 'Y':
+		attron(COLOR_PAIR(Color::Foreground_Yellow));
+		printw("%c", pawn);
+		attroff(COLOR_PAIR(Color::Foreground_Yellow));
+		break;
+
+		case 'P':
+		attron(COLOR_PAIR(Color::Foreground_Purple));
+		printw("%c", pawn);
+		attroff(COLOR_PAIR(Color::Foreground_Purple));
+		break;
+
+		default:
+		printw("%c", pawn);
+		break;
+	}
+
+	return ;
 }
 
 void
 Game::print_color_stair()
 {
-	printw("                                     ");
-	printw("                                            ");
-	printw("    .");
-	printw("_");
-	printw(".\n");
-
-	printw("                                     ");
-	printw("                                            ");
-	printw("  .");
-	printw("_");
-	printw("| |\n");
-
-	printw("                                     ");
-	printw("                                            ");
-	printw(".");
-	printw("_");
-	printw("|   |\n");
+	int num_pawns = number_pawns();
+	for (int i = 0; i < number_pawns(); i++) {
+		printw("                                                                                 ");
+		for (int j = 0; j < (num_pawns-i-1)*2; j++) {
+			printw(" ");
+		}
+		printw(".");
+		pawn_stair(i);
+		if (i == 0) {
+			printw(".");
+		}
+		else {
+			printw("|");
+			for (int j = 0; j < (2*i-1); j++) {
+				printw(" ");
+			}
+			printw("|");
+		}
+		printw("\n");
+	}
 
 	return ;
 }
@@ -104,12 +230,24 @@ Game::print_color_board()
 			break;
 
 			case '4':
+			attron(COLOR_PAIR(Color::Background_Yellow));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Yellow));
+			break;
+
+			case '5':
+			attron(COLOR_PAIR(Color::Background_Purple));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Purple));
+			break;
+
+			case '6':
 			attron(COLOR_PAIR(Color::Background_White));
 			printw("%c", disc);
 			attroff(COLOR_PAIR(Color::Background_White));
 			break;
 
-			case '5':
+			case '7':
 			attron(COLOR_PAIR(Color::Background_Black));
 			printw("%c", disc);
 			attroff(COLOR_PAIR(Color::Background_Black));
@@ -178,17 +316,201 @@ Game::print_color_board()
 void
 Game::print_color_players()
 {
+	string player_discs;
 	printw("                                     ");
 	attron(COLOR_PAIR(Color::Foreground_White));
+	printw("(%d) ", calculate_score(0));
+	if (this->_player_turn == 0 ) {
+		attron(A_BOLD);
+		if (this->_pawn_turn == 1) {
+			switch (this->_pawnmenu->highlight()) {
+				case 0:
+				attron(COLOR_PAIR(Color::Foreground_Red));
+				break;
+
+				case 1:
+				attron(COLOR_PAIR(Color::Foreground_Green));
+				break;
+
+				case 2:
+				attron(COLOR_PAIR(Color::Foreground_Blue));
+				break;
+
+				case 3:
+				attron(COLOR_PAIR(Color::Foreground_Yellow));
+				break;
+
+				case 4:
+				attron(COLOR_PAIR(Color::Foreground_Purple));
+				break;
+
+				default:
+				break;
+			}
+		}
+	}
 	printw("P1: ");
+	attroff(COLOR_PAIR(Color::Foreground_Red));
+	attroff(COLOR_PAIR(Color::Foreground_Green));
+	attroff(COLOR_PAIR(Color::Foreground_Blue));
+	attroff(COLOR_PAIR(Color::Foreground_Yellow));
+	attroff(COLOR_PAIR(Color::Foreground_Purple));
+	attroff(A_BOLD);
 	attroff(COLOR_PAIR(Color::Foreground_White));
+
+	player_discs = this->_players[0]->discs();
+	for (unsigned int i = 0; i < player_discs.length(); i++) {
+		unsigned char disc = player_discs.c_str()[i];
+
+		switch(disc) {
+			case '0':
+			attron(A_INVIS);
+			printw("%c", disc);
+			attroff(A_INVIS);
+			break;
+
+			case '1':
+			// if (first) {
+			// 	attron(A_BOLD);
+			// 	attron(COLOR_PAIR(Color::Foreground_Red));
+			// 	printw("%c", disc);
+			// 	attroff(COLOR_PAIR(Color::Foreground_Red));
+			// 	attroff(A_BOLD);
+			// 	first = 0;
+			// }
+			attron(COLOR_PAIR(Color::Background_Red));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Red));
+			break;
+
+			case '2':
+			attron(COLOR_PAIR(Color::Background_Green));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Green));
+			break;
+
+			case '3':
+			attron(COLOR_PAIR(Color::Background_Blue));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Blue));
+			break;
+
+			case '6':
+			attron(COLOR_PAIR(Color::Background_White));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_White));
+			break;
+
+			case '7':
+			attron(COLOR_PAIR(Color::Background_Black));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Black));
+			break;
+
+			default:
+			break;
+		}
+		printw(" ");
+	}
+
 	printw("\n");
 	printw("\n");
 
 	printw("                                     ");
 	attron(COLOR_PAIR(Color::Foreground_White));
+	printw("(%d) ", calculate_score(1));
+	if (this->_player_turn == 1 ) {
+		attron(A_BOLD);
+		if (this->_pawn_turn == 1) {
+			switch (this->_pawnmenu->highlight()) {
+				case 0:
+				attron(COLOR_PAIR(Color::Foreground_Red));
+				break;
+
+				case 1:
+				attron(COLOR_PAIR(Color::Foreground_Green));
+				break;
+
+				case 2:
+				attron(COLOR_PAIR(Color::Foreground_Blue));
+				break;
+
+				case 3:
+				attron(COLOR_PAIR(Color::Foreground_Yellow));
+				break;
+
+				case 4:
+				attron(COLOR_PAIR(Color::Foreground_Purple));
+				break;
+
+				default:
+				break;
+			}
+		}
+	}
 	printw("P2: ");
+	attroff(COLOR_PAIR(Color::Foreground_Red));
+	attroff(COLOR_PAIR(Color::Foreground_Green));
+	attroff(COLOR_PAIR(Color::Foreground_Blue));
+	attroff(COLOR_PAIR(Color::Foreground_Yellow));
+	attroff(COLOR_PAIR(Color::Foreground_Purple));
+	attroff(A_BOLD);
 	attroff(COLOR_PAIR(Color::Foreground_White));
+	player_discs = this->_players[1]->discs();
+	for (unsigned int i = 0; i < player_discs.length(); i++) {
+		unsigned char disc = player_discs.c_str()[i];
+
+		switch(disc) {
+			case '0':
+			attron(A_INVIS);
+			printw("%c", disc);
+			attroff(A_INVIS);
+			break;
+
+			case '1':
+			// if (first) {
+			// 	attron(A_BOLD);
+			// 	attron(COLOR_PAIR(Color::Foreground_Red));
+			// 	printw("%c", disc);
+			// 	attroff(COLOR_PAIR(Color::Foreground_Red));
+			// 	attroff(A_BOLD);
+			// 	first = 0;
+			// }
+			attron(COLOR_PAIR(Color::Background_Red));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Red));
+			break;
+
+			case '2':
+			attron(COLOR_PAIR(Color::Background_Green));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Green));
+			break;
+
+			case '3':
+			attron(COLOR_PAIR(Color::Background_Blue));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Blue));
+			break;
+
+			case '6':
+			attron(COLOR_PAIR(Color::Background_White));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_White));
+			break;
+
+			case '7':
+			attron(COLOR_PAIR(Color::Background_Black));
+			printw("%c", disc);
+			attroff(COLOR_PAIR(Color::Background_Black));
+			break;
+
+			default:
+			break;
+		}
+		printw(" ");
+	}
+
 	printw("\n");
 
 	return ;
@@ -222,6 +544,57 @@ Game::draw() {
 
 	return ;
 }
+
+void
+Game::climb_stair(Color color)
+{
+	char char_pawn = ' ';
+	char char_disc = '0';
+
+	switch (color) {
+		case Color::Red:
+		char_pawn = 'R';
+		char_disc = '1';
+		break;
+
+		case Color::Green:
+		char_pawn = 'G';
+		char_disc = '2';
+		break;
+
+		case Color::Blue:
+		char_pawn = 'B';
+		char_disc = '3';
+		break;
+
+		case Color::Yellow:
+		char_pawn = 'Y';
+		char_disc = '4';
+		break;
+
+		case Color::Purple:
+		char_pawn = 'P';
+		char_disc = '5';
+		break;
+
+		default:
+		char_pawn = ' ';
+		char_disc = '0';
+		break;
+	}
+
+	if (strchr(this->_stair, char_pawn) == NULL) {
+		this->_stair[this->_stair_pos] = char_pawn;
+		this->_stair_pos++;
+		player((const char*) &char_disc);
+		this->_picked = 0;
+		this->_player_turn++;
+		this->_player_turn %= number_players();
+	}
+
+	return ;
+}
+
 
 int
 Game::move_pawn(Color color)
@@ -275,10 +648,12 @@ Game::move_pawn(Color color)
 		// Pawn not trying to move out of board range
 		if (disc_pos != (int) string::npos) {
 			this->_board.at(disc_pos) = char_pawn;
+			this->_skip_pick_disc = 0;
 		}
 		// Move to stair
 		else {
-
+			climb_stair(color);
+			this->_skip_pick_disc = 1;
 		}
 
 
@@ -289,7 +664,6 @@ Game::move_pawn(Color color)
 			}
 			else {
 				this->_board.at(pawn_pos) = char_disc;
-				//player(char_disc);
 			}
 		}
 	}
@@ -300,32 +674,15 @@ Game::move_pawn(Color color)
 
 	return pawn_pos;
 }
-/*
+
 void
-Game::player(char pawn)
+Game::player(const char* disc)
 {
-	switch (this->_player) {
-		case 0:
-
-		break;
-
-		case 1:
-		break;
-
-		case 2:
-		break;
-
-		case 3:
-		break;
-
-		case 4:
-		break;
-
-		default:
-		break;
-	}
+	fprintf(stderr, "player(%c)\n", disc[0]);
+	this->_players[this->_player_turn]->discs(disc);
+	return ;
 }
-*/
+
 void
 Game::pick_right()
 {
@@ -336,6 +693,7 @@ Game::pick_right()
 		success = false;
 	}
 	else {
+		player((const char*) &this->_board.at(position));
 		this->_board.at(position) = '0';
 	}
 
@@ -355,6 +713,7 @@ Game::pick_left()
 		success = false;
 	}
 	else {
+		player((const char*) &this->_board.at(position));
 		this->_board.at(position) = '0';
 	}
 
@@ -398,19 +757,21 @@ Game::select_option()
 		}
 	}
 	else {
-		fprintf(stderr, "Choose disc\n");
-		// Action depends on the highlight
-		switch (this->_discmenu->highlight()) {
-			case 0:
-			pick_left();
-			break;
+		if (this->_skip_pick_disc == 0) {
+			fprintf(stderr, "Choose disc\n");
+			// Action depends on the highlight
+			switch (this->_discmenu->highlight()) {
+				case 0:
+				pick_left();
+				break;
 
-			case 1:
-			pick_right();
-			break;
+				case 1:
+				pick_right();
+				break;
 
-			default:
-			break;
+				default:
+				break;
+			}
 		}
 	}
 
@@ -426,53 +787,90 @@ Game::loop(void)
 
 	while (!quit) {
 		draw();
-
-		int c = 0;
-		// Choose pawn to move
-		if (this->_pawn_turn == 1) {
-			c = this->_pawnmenu->wait_choice();
-			fprintf(stderr, "Option\t%d\n", c);
-			switch (c) {
-				// Press q to quit
-				case 'q':
-				quit = 1;
-				break;
-
-				// Press enter to choose action on menu
-				case 10:
-				select_option();
-				this->_pawn_turn = 0;
-				break;
-
-				default:
-				break;
-			}
+		if (this->_stair_pos == number_pawns()) {
+			quit = 1;
+			break;
 		}
-		// Choose disc to pick
 		else {
-			c = this->_discmenu->wait_choice();
-			fprintf(stderr, "Option\t%d\n", c);
-			switch (c) {
-				// Press q to quit
-				case 'q':
-				quit = 1;
-				break;
+			int c = 0;
+			// Choose pawn to move
+			if (this->_pawn_turn == 1) {
+				c = this->_pawnmenu->wait_choice();
+				fprintf(stderr, "Option\t%d\n", c);
+				switch (c) {
+					// Press q to quit
+					case 'q':
+					quit = 1;
+					break;
 
-				// Press enter to choose action on menu
-				case 10:
-				select_option();
-				break;
+					// Press enter to choose action on menu
+					case 10:
+					select_option();
+					if (this->_skip_pick_disc == 1) {
+						this->_pawn_turn = 1;
+					}
+					else {
+						this->_pawn_turn = 0;
+					}
+					break;
 
-				default:
-				break;
+					default:
+					break;
+				}
 			}
-			if (this->_picked == true) {
-				this->_pawn_turn = 1;
-				this->_picked = false;
+			// Choose disc to pick
+			else {
+				c = this->_discmenu->wait_choice();
+				fprintf(stderr, "Option\t%d\n", c);
+				switch (c) {
+					// Press q to quit
+					case 'q':
+					quit = 1;
+					break;
+
+					// Press enter to choose action on menu
+					case 10:
+					select_option();
+					break;
+
+					default:
+					break;
+				}
+				if (this->_picked == true) {
+					this->_pawn_turn = 1;
+					this->_picked = false;
+					if (this->_players[this->_player_turn]->has_black() == true) {
+						this->_pawn_turn = 3;
+					}
+					this->_player_turn++;
+					this->_player_turn %= number_players();
+				}
 			}
 		}
 	}
+
+	move(8,37);
+	if (calculate_score(0) > calculate_score(1)) {
+		printw("Player 1 wins!");
+	}
+	else if (calculate_score(0) < calculate_score(1)) {
+		printw("Player 2 wins!");
+	}
+	else {
+		printw("Player 1 and Player 2 draws!");
+	}
+
+	getch();
+
+	return ;
 }
+
+int
+Game::calculate_score(int player_id)
+{
+	return this->_players[player_id]->score((const char*) this->_stair, this->_stair_pos, number_pawns());
+}
+
 
 void
 Game::init_players_disc(void)
@@ -497,7 +895,7 @@ void
 Game::init_board(void)
 {
 	fprintf(stderr, "init_board(void)\n");
-	this->_board = "RGB1352233422145123113";
+	this->_board = "RGB1372233622167123113";
 //	printw("%s", this->_board.c_str());
 	return ;
 }
