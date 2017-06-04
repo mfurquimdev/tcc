@@ -26,34 +26,35 @@ Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram �
 
 ## Regras do Big Points
 
-\begin{figure}[htb]
-	\centering
-    \includegraphics[scale=0.9]{img/front}
-    \caption{Caixa do jogo \textbf{Big Points}}
-    \label{fig:content}
-\end{figure}
-
-_Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar peças que pode ser jogado de dois a cinco jogadores. São cinco peões de cores distintas, que podem ser usadas por qualquer jogador, para percorrer um caminho de discos coloridos até chegar ao pódio. Durante o percurso, os jogadores coletam alguns destes discos e sua pontuação final é determinada a partir da ordem de chegada dos peões ao pódio e a quantidade de discos adquiridos daquela cor. Ganha o jogador com a maior pontuação.
+_Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar peças que pode ser jogado de dois a cinco jogadores. São cinco peões de cores distintas, que podem ser usadas por qualquer jogador, para percorrer um caminho de discos coloridos até chegar à escada. Durante o percurso, os jogadores coletam alguns destes discos e sua pontuação final é determinada a partir da ordem de chegada dos peões ao pódio e a quantidade de discos adquiridos daquela cor. Ganha o jogador com a maior pontuação.
 
 \begin{figure}[htb]
 	\centering
-    \includegraphics[scale=0.2]{img/content}
-    \caption{Conteúdo do jogo \textbf{Big Points}}
-    \label{fig:content}
+	\includegraphics[width=0.7\textwidth]{img/front}
+	\caption{Caixa do jogo \textbf{Big Points}}
+	\label{fig:front}
 \end{figure}
 
-O jogo é composto por cinco peões, um de cada uma das seguintes cores, denominadas **cores comuns**: vermelha, verde, azul, amarela e violeta. Para cada cor de peão, tem-se dez discos (totalizando cinquenta discos) denominados **discos comuns**, e cinco discos das cores branca e preta (totalizando dez discos) denominados **discos especiais**. Por fim, há um pódio (ou escada) com um lugar para cada peão. O pódio determinará a pontuação equivalente a cada disco da cor do peão, de maneira que o peão que ocupar o espaço mais alto no pódio (o primeiro a subir) fará sua cor valer quatro[^pawn_score], o segundo peão, três pontos e assim por diante, até o último valer zero pontos.
+O jogo é composto por cinco peões, como demonstrado na figura \ref{fig:front}, um de cada uma das seguintes cores, denominadas **cores comuns**: vermelha, verde, azul, amarela e violeta. Para cada cor de peão, tem-se dez discos, como mostrado na figura \ref{fig:content}, (totalizando cinquenta discos) denominados **discos comuns**, e cinco discos das cores branca e preta (totalizando dez discos) denominados **discos especiais**. Por fim, há um pódio (ou escada) com um lugar para cada peão. A escada determinará a pontuação equivalente a cada disco da cor do peão, de maneira que o peão que ocupar o espaço mais alto no pódio (o primeiro a subir) fará sua cor valer quatro[^pawn_score], o segundo peão, três pontos e assim por diante, até o último valer zero pontos.
 
 [^pawn_score]: No caso de um jogo com menos de cinco peões, a seguinte fórmula se aplica: $Score = N_{c}-P_{pos}$, onde $Score$ é a pontuação daquela determinada cor, $N_{c}$ é o número de discos comuns e $P_{pos}$ é a posição do peão no pódio.
 
-\begin{figure}[htb]
-	\centering
-    \includegraphics[scale=1]{img/setup}
-    \caption{Preparação do jogo \textbf{Big Points}}
-    \label{fig:setup}
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+    	\includegraphics[width=\textwidth]{img/content}
+    	\caption{Conteúdo do jogo \textbf{Big Points}}
+    	\label{fig:content}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.48\textwidth}
+    	\includegraphics[width=\textwidth]{img/setup}
+    	\caption{Preparação do jogo \textbf{Big Points}}
+    	\label{fig:setup}
+    \end{subfigure}
+    \caption{Organização do jogo \textbf{Big Points}}\label{fig:organization}
 \end{figure}
 
-A preparação do jogo ocorre em algumas etapas envolvendo a posição dos peões, a aleatoriedade do tabuleiro e alguns discos ao lado da escada. A primeira coisa é retirar um disco de cada cor comum e posicioná-los ao lado da escada, estes serão os discos coletados pelo jogador que subir o peão da sua cor para a escada. Em seguida, deve-se embaralhar todos os 55 discos restantes[^discs_left] e formar uma fila até a escada, estes são os discos possíveis de serem coletados e onde os peões andam até chegar na escada. Por último, é preciso posicionar os peões no começo da fila de discos, de forma que fique oposto à escada.
+No final da preparação, o jogo ficará parecido com as peças na figura \ref{fig:setup}. A preparação do jogo ocorre em algumas etapas envolvendo a posição dos peões, a aleatoriedade do tabuleiro e alguns discos ao lado da escada. A primeira coisa é retirar um disco de cada cor comum e posicioná-los ao lado da escada, estes serão os discos coletados pelo jogador que subir o peão da sua cor para a escada. Em seguida, deve-se embaralhar todos os 55 discos restantes[^discs_left] e formar uma fila até a escada, estes são os discos possíveis de serem coletados e onde os peões andam até chegar na escada. Por último, é preciso posicionar os peões no começo da fila de discos, de forma que fique oposto à escada.
 
 [^discs_left]: 9 discos de cada uma das 5 cores comuns mais 5 discos de cada uma das 2 cores especiais resultando em $(n_{dc}-1) \cdot n_{cc} + n_{de} \cdot n_{ce} = (10-1) \cdot 5 + 5 \cdot 2 = 55\ discos$, onde $n_{dc}$ é o número de discos comuns, $n_{cc}$ é o número de cores comuns, $n_{de}$ é o número de discos especiais, e $n_{ce}$ é o número de cores especiais.
 
