@@ -31,8 +31,10 @@ struct State
 	};
 
 	// RAII (Resource Aquisition is Initialization
-	State(int mtabuleiro = (1<<20)-1, int mpeao = 0, int mescada = 0, int mjogadores = 0, int matual = 0)
-		: _tabuleiro(mtabuleiro), _peao(mpeao), _escada(mescada), _jogadores(mjogadores), _atual(matual)
+	State(int mtabuleiro = (1<<20)-1, int mpeao = 0, int mescada = 0,
+		int mjogadores = 0, int matual = 0)	: _tabuleiro(mtabuleiro),
+		_peao(mpeao), _escada(mescada),	_jogadores(mjogadores),
+		_atual(matual)
 	{
 	}
 

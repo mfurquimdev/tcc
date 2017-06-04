@@ -7,7 +7,6 @@ doc/tex/tmp.tex
 doc/tex/tcc.tex
 doc/ref
 doc/latex/*.pdf
-doc/tex/*.pdf
 *.pdf
 *.aux
 *.bbl
