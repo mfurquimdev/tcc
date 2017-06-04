@@ -12,8 +12,7 @@ TEX_FILE =    $(addsuffix .tex, $(basename $(TARGET)))
 AUX_FILE =    $(addsuffix .aux, $(basename $(TARGET)))
 
 CC=pandoc
-FLAGS= --from=markdown --to=latex --indented-code-classes=numberLines --highlight-style=zenburn --parse-raw --smart --normalize --listings --ascii --atx-headers --number-sections --base-header-level=1
-
+FLAGS= --filter pandoc-eqnos --filter pandoc-tablenos --from=markdown --to=latex --indented-code-classes=numberLines --highlight-style=zenburn --parse-raw --smart --normalize --listings --ascii --atx-headers --number-sections --base-header-level=1
 #FLAGS= --from=markdown_github --to=latex --toc --indented-code-classes=numberLines --highlight-style=zenburn --toc-depth=4 --smart --normalize --chapters --listings -T $(TARGET) --ascii --atx-headers
 
 .PHONY: all clean tex pdf
