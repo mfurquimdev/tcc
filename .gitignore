@@ -5,9 +5,8 @@ prog
 # Generated Tex Files
 doc/tex/tmp.tex
 doc/tex/tcc.tex
+doc/tex/tcc.pdf
 doc/ref
-doc/latex/*.pdf
-*.pdf
 *.aux
 *.bbl
 *.blg
@@ -21,7 +20,6 @@ doc/latex/*.pdf
 *.nav
 
 # PDF files
-.pdf
 
 # Object files
 obj

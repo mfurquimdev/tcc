@@ -2,7 +2,7 @@
 
 # Introdução
 
-Cada _nó_ é um _estado_.
+ada _nó_ é um _estado_.
 _Pódio_ e _escada_ querem dizer mesma coisa.
 
 # Fundamentação Teórica
