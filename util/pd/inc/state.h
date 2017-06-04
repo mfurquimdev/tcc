@@ -37,22 +37,59 @@ struct State
 	}
 
 	// Read and set individual variables
-	int tabuleiro (int pos) const { return (_tabuleiro & (1<<pos))>>pos; }
-	void settabuleiro (int pos, int available) { _tabuleiro = (_tabuleiro & ~(1<<pos)) | ((available&1)<<pos); }
+	int tabuleiro (int pos) const {
+		return (_tabuleiro & (1<<pos))>>pos;
+	}
+	
+	void settabuleiro (int pos, int available) {
+		_tabuleiro = (_tabuleiro & ~(1<<pos)) | ((available&1)<<pos);
+	}
 
-	int peao (int cor) const { return (_peao & (7<<(3*cor)))>>(3*cor); }
-	void setpeao (int cor, int pos) { _peao = (_peao&~(7<<(3*cor)))|((pos&7)<<(3*cor)); }
-	void movepeao (int cor) { setpeao(cor,peao(cor)+1); }
 
-	int escada (int cor) const { return (_escada & (7<<(3*cor)))>>(3*cor); }
-	void setescada (int cor, int pos) { _escada = (_escada&~(7<<(3*cor)))|((pos&7)<<(3*cor)); }
+	int peao (int cor) const {
+		return (_peao & (7<<(3*cor)))>>(3*cor);
+	}
+	
+	void setpeao (int cor, int pos) {
+		_peao = (_peao&~(7<<(3*cor)))|((pos&7)<<(3*cor));
+	}
+	
+	void movepeao (int cor) {
+		setpeao(cor,peao(cor)+1);
+	}
 
-	int jogador (int jogador, int cor) const { return ((_jogadores>>(15*jogador)) & (7<<(3*cor)))>>(3*cor);	}
-	void setjogador (int jogador, int cor, int qtd) { _jogadores = (_jogadores & ~(7<<(3*cor + 15*jogador) )) | ((qtd & 7) << (3*cor + 15*jogador)); }
-	void updatejogador (int player, int cor) { setjogador(player, cor, jogador(player, cor)+1); }
 
-	int atual () const { return _atual; }
-	void updateatual () { _atual ^= 1; }
+	int escada (int cor) const {
+		return (_escada & (7<<(3*cor)))>>(3*cor);
+	}
+	
+	void setescada (int cor, int pos) {
+		_escada = (_escada&~(7<<(3*cor)))|((pos&7)<<(3*cor));
+	}
+
+	
+	int jogador (int jogador, int cor) const {
+		return ((_jogadores>>(15*jogador)) & (7<<(3*cor)))>>(3*cor);
+	}
+	
+	void setjogador (int jogador, int cor, int qtd) {
+		_jogadores = (_jogadores & ~(7<<(3*cor + 15*jogador) ))
+			| ((qtd & 7) << (3*cor + 15*jogador));
+	}
+	
+	void updatejogador (int player, int cor) {
+		setjogador(player, cor, jogador(player, cor)+1);
+	}
+
+	
+	int atual () const {
+		return _atual;
+	}
+	
+	void updateatual () {
+		_atual ^= 1;
+	}
+
 
 	// Operator to use it in _ap
 	bool operator<(const struct State& s) const {
