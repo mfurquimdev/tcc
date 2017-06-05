@@ -17,9 +17,9 @@ Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo 
 
 Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e **estratégia mista**[^mixed_strategy]. Em 1928, John von Neumann demonstrou que todo jogo finito[^finite_game] de **soma zero**[^zero_sum] com duas pessoas possui uma solução em estratégias mistas. Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
 
-[^mixed_strategy]: Estratégia mista é um conjunto de estratégias puras associadas a uma distribuição de probabilidade\cite{figueiredo_conceitos}.
+[^mixed_strategy]: Estratégia mista é um conjunto de estratégias puras associadas a uma distribuição de probabilidade \cite{figueiredo_conceitos}.
 
-[^finite_game]: Jogos finitos são aqueles onde cada participante se depara com um conjunto finito de escolhas, ou seja, eles escolhem suas estratégias dentro de um conjunto finito de alternativas\cite{figueiredo_conceitos}.
+[^finite_game]: Jogos finitos são aqueles onde cada participante se depara com um conjunto finito de escolhas, ou seja, eles escolhem suas estratégias dentro de um conjunto finito de alternativas \cite{figueiredo_conceitos}.
 
 [^zero_sum]: Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.
 
@@ -179,17 +179,23 @@ A estrutura possui um construtor que atribui valores às variáveis através de 
 
 ## Programação dinâmica
 
+Devido ao imenso número de jogadas possíveis ao longo do do jogo, decidiu-se utilizar a programação dinâmica para 
 - Duas funções para melhor entendimento da DP e regras do jogo
-- Explicação da DP e da função Play (função para realizar as jogadas)
 
+### Função \textbf{dp}
+
+### Função \textbf{play}
+
+
+- Explicação da DP e da função Play (função para realizar as jogadas)
 ## Scrum
 
 O _framework_ _scrum_ é ideal para o desenvolvimento de projetos complexos no qual a produtividade e a criatividade são essenciais para a entrega de um produto de alto valor. Inicialmente, tal método de organização e gerenciamento do projeto foi aplicado para o desenvolvimento do sistema em questão \cite{the_scrum_guide}. O _kanban_ do \href{https://waffle.io/mfurquim/tcc}{waffle.io} foi utilizado para registrar tarefas devido à sua integração com as _issues_ do github. Reuniões com o orientador foram realizadas para discutir aspectos técnicos do jogo, como as estruturas de dados a serem utilizadas para reduzir os dados armazenados, e alguns métodos importantes para agilizar o processamento.
 
 Porém, ao longo do tempo, o esforço para manter a rastreabilidade das tarefas tornou-se muito alto em relação à complexidade do projeto, e ao tamanho da equipe. As tarefas passaram a ser _branchs_ locais com nomes significativos, representando a funcionalidade a ser desenvolvida. Após a conclusão da tarefa, testes simples e manuais foram aplicados para então unir à _branch_ mestre[^git_merge]. Por fim, para trabalhar em outra _branch_, foi sempre necessário atualizá-la em relação à mestre[^git_rebase].
 
-[^git_merge]: `$ git merge`
-[^git_rebase]: `$ git rebase`
+[^git_merge]: \texttt{\$ git merge}
+[^git_rebase]: \texttt{\$ git rebase <from-branch> <to-branch>}
 
 
 
