@@ -97,7 +97,7 @@ e por fim, a variável \texttt{\_atual} que representa o jogador que fará a jog
 [^tabuleiro]: Cinco cores e quatro discos ou quatro cores e cinco discos.
 [^cor_peao]: As cores de peão seguem a ordem RGBYP, onde $\textbf{R}ed = 0$, $\textbf{G}reen = 1$, $\textbf{B}lue = 2$, $\textbf{Y}ellow = 3$, e $\textbf{P}urple = 4$.
 
-\lstinputlisting[language=C++, firstnumber=10, linerange={10-31}]{../../util/pd/inc/state.h}
+\lstinputlisting[language=C++, firstnumber=10, linerange={10-31}]{../../pd/inc/state.h}
 
 O cálculo para determinar os _bits_ necessários para armazenar as informações de cada variável foi realizado da seguinte forma:
 
@@ -166,11 +166,11 @@ A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demons
 
 A estrutura possui um construtor que atribui valores às variáveis através de RAII[^RAII], dessa forma não se faz necessário nenhuma extra implementação. Todas as variáveis possuem um valor padrão, verdadeiro para qualquer tamanho de tabuleiro $t_i$, onde $4 \leqslant t_i \leqslant 20$.
 
-\lstinputlisting[language=C++, firstnumber=34, linerange={34-39}]{../../util/pd/inc/state.h}
+\lstinputlisting[language=C++, firstnumber=34, linerange={34-39}]{../../pd/inc/state.h}
 
 [^RAII]: _Resource Aquisition Is Initialization_ é uma técnica de programação que vincula o ciclo de vida do recurso ao da estrutura \cite{cppreferenceraii}.
 
-\lstinputlisting[language=C++, firstnumber=42, linerange={42-48}]{../../util/pd/inc/state.h}
+\lstinputlisting[language=C++, firstnumber=42, linerange={42-48}]{../../pd/inc/state.h}
 
 ### Comparador
 
