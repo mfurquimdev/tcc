@@ -2,6 +2,7 @@
 
 all:
 	$(MAKE) -C tex all
+	convert tcc.pdf -append tcc%d.png
 
 tex:
 	$(MAKE) -C tex tex
