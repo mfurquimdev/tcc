@@ -57,28 +57,12 @@ LFLAGS= -lncurses
 
 TARGET=$(BIN_DIR)/$(NAME)
 
-.PHONY: clean
+.PHONY: all dirs clean
 
 all: dirs
 	@echo
 	@echo Compiling...
 	$(MAKE) $(TARGET)
-
-#	@echo
-#	@echo Executing...
-#	@./bin/big_points 2> debug.err
-#	@cat input.in | ./bin/big_points 2> debug.err
-#
-#	@echo
-#	@echo Debugging...
-#	@cat debug.err
-#
-#	@echo
-#	@echo Printing game...
-#	@cat output.out
-
-test:
-	$(CC) src/test.cpp src/menu.cpp $(CFLAGS) $(INC) $(LFLAGS)
 
 dirs:
 	@mkdir -vp $(OBJ_DIR) $(MAP_DIR) $(BIN_DIR)
@@ -93,16 +77,8 @@ $(TARGET): $(OBJ)
 	@echo Linking.. $@
 	$(CC) -o $@ $(OBJ) $(LIB) $(LFLAGS)
 
-
-map: $(MAP_DIR)/%.funcmap
-	@echo
-	@echo Mapping.. $@
-
-$(MAP_DIR)/%.funcmap: $(OBJ_DIR)/%.o
-	objdump -d $^ > $@
-
 clean:
 	@echo Cleaning...
-	@rm -rvf *~ $(OBJ_DIR)/*.o $(MAP_DIR)/*.funcmap $(BIN_DIR)/*
+	@rm -rvf *~ $(OBJ_DIR) $(MAP_DIR) $(BIN_DIR)
 
 .PRECIOUS: %.o

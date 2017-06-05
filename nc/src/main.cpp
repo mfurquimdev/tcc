@@ -5,6 +5,8 @@
 #include <ncurses.h>
 #include <unistd.h>
 
+#define DEBUG 0
+
 using namespace std;
 
 pair<int,int> start_ncurses(void);
@@ -37,7 +39,7 @@ int main(int argc, char* argv[])
 
 	if (game == NULL) {
 		printw("Could not start game.");
-		fprintf(stderr, "[%p] game variable is null.", (void*) game);
+		 if(DEBUG) fprintf(stderr, "[%p] game variable is null.", (void*) game);
 	}
 	else {
 		game->loop();

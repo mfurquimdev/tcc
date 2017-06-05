@@ -1,15 +1,17 @@
 #include "player.h"
 #include <cstdio>
 
+#define DEBUG 0
+
 Player::Player()
 {
-	fprintf(stderr, "[%p] player constructor\n", (void*) this);
+	 if(DEBUG) fprintf(stderr, "[%p] player constructor\n", (void*) this);
 	this->_diff_colors = 0;
 }
 
 Player::~Player()
 {
-	fprintf(stderr, "[%p] player destructor\n", (void*) this);
+	 if(DEBUG) fprintf(stderr, "[%p] player destructor\n", (void*) this);
 }
 
 void
@@ -75,7 +77,7 @@ Player::appearance(char pawn)
 		pch = strchr(pch+1,char_disc);
 	}
 
-	fprintf(stderr, "%c was found %d times in %s\n", char_disc, times, this->_discs.c_str());
+	 if(DEBUG) fprintf(stderr, "%c was found %d times in %s\n", char_disc, times, this->_discs.c_str());
 
 	return times;
 }
@@ -83,40 +85,36 @@ Player::appearance(char pawn)
 unsigned short int
 Player::score(const char* stair, int stair_position, unsigned short int number_pawns)
 {
-	fprintf(stderr, "score(%s, %d, %d)\n", stair, stair_position, number_pawns);
-	fprintf(stderr, "diff colors = %d\n", this->_diff_colors);
+	 if(DEBUG) fprintf(stderr, "score(%s, %d, %d)\n", stair, stair_position, number_pawns);
+	 if(DEBUG) fprintf(stderr, "diff colors = %d\n", this->_diff_colors);
 	unsigned short int score = 0;
 	this->_diff_colors = 0;
 
 	for (int i = 0; i < stair_position; i++) {
-		fprintf(stderr, "%d\n", i);
+		 if(DEBUG) fprintf(stderr, "%d\n", i);
 		score += (number_pawns-i-1)*this->appearance(stair[i]);
 	}
 
-	fprintf(stderr, "Looking for discs, except white (6)\n");
+	 if(DEBUG) fprintf(stderr, "Looking for discs, except white (6)\n");
 	char * pch;
-
-	for (size_t i = 0; i < count; i++) {
-		/* code */
-	}
 	pch = strchr((char*) this->_discs.c_str(), '7');
 	if (pch != NULL) {
-		fprintf(stderr, "Black found\n");
+		 if(DEBUG) fprintf(stderr, "Black found\n");
 		this->_diff_colors++;
 	}
 
-	for (auto char_disc: this->_discs.c_str()) {
+	for (auto char_disc: this->_discs) {
 		if (this->appearance(char_disc) > 0 && char_disc != '6') {
 			this->_diff_colors++;
 		}
 	}
 
-	fprintf(stderr, "diff colors = %d\n", this->_diff_colors);
+	 if(DEBUG) fprintf(stderr, "diff colors = %d\n", this->_diff_colors);
 
 	score += this->_diff_colors*this->appearance('W');
-	fprintf(stderr, "diff colors = %d\n", this->_diff_colors);
+	 if(DEBUG) fprintf(stderr, "diff colors = %d\n", this->_diff_colors);
 
-	fprintf(stderr, "score = %d\n", score);
+	 if(DEBUG) fprintf(stderr, "score = %d\n", score);
 
 	return score;
 }
