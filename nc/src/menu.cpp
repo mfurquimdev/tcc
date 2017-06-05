@@ -2,11 +2,13 @@
 #include <cstring>
 #include <ncurses.h>
 
+#define DEBUG 0
+
 using namespace std;
 
 Menu::Menu(int x, int y, int columns, int lines, const char** char_choices, int num_choices)
 {
-	fprintf(stderr, "[%p] menu constructor\n", (void*) this);
+	 if(DEBUG) fprintf(stderr, "[%p] menu constructor\n", (void*) this);
 	position(x,y);
 	window_size(columns,lines);
 	window(position(), window_size());
@@ -16,33 +18,33 @@ Menu::Menu(int x, int y, int columns, int lines, const char** char_choices, int 
 
 Menu::~Menu()
 {
-	fprintf(stderr, "[%p] menu destructor\n", (void*) this);
+	 if(DEBUG) fprintf(stderr, "[%p] menu destructor\n", (void*) this);
 	int num_choices = this->num_choices();
 	if (this->_choices != NULL) {
 		for (int i = 0; i < num_choices; i++) {
-			fprintf(stderr, "%i\n", i);
+			 if(DEBUG) fprintf(stderr, "%i\n", i);
 			if (this->_choices[i] != NULL) {
 				free(this->_choices[i]);
 				this->_choices[i] = NULL;
 			}
 		}
-		fprintf(stderr, "free_choices\n");
+		 if(DEBUG) fprintf(stderr, "free_choices\n");
 		free(this->_choices);
 		this->_choices = NULL;
 	}
 
 	if (this->_window != NULL) {
-		fprintf(stderr, "del_win\n");
+		 if(DEBUG) fprintf(stderr, "del_win\n");
 		delwin(this->_window);
 		this->_window = NULL;
 	}
-	fprintf(stderr, "[%p] end menu destructor\n");
+	 if(DEBUG) fprintf(stderr, "[%p] end menu destructor\n");
 }
 
 void
 Menu::draw()
 {
-	fprintf(stderr, "draw\n");
+	 if(DEBUG) fprintf(stderr, "draw\n");
 	WINDOW* window = this->window();
 	const char** choices = this->choices();
 	int num_choices = this->num_choices();
@@ -65,7 +67,7 @@ Menu::draw()
 int
 Menu::wait_choice()
 {
-	fprintf(stderr, "wait_choice\n");
+	 if(DEBUG) fprintf(stderr, "wait_choice\n");
 	int c = 0;
 	c = wgetch(window());
 	switch (c) {
@@ -98,16 +100,16 @@ Menu::wait_choice()
 void
 Menu::choices(const char** char_choices, int num_choices)
 {
-	fprintf(stderr, "set choices\n");
+	 if(DEBUG) fprintf(stderr, "set choices\n");
 	this->_num_choices = num_choices;
 	this->_choices = NULL;
 	this->_choices = (char**) malloc (sizeof(char)*num_choices);
-	fprintf(stderr, "[%p]%u\n", (void*) this->_choices, sizeof(char_choices));
+	 if(DEBUG) fprintf(stderr, "[%p]%u\n", (void*) this->_choices, sizeof(char_choices));
 	for (int i = 0; i < num_choices; ++i) {
-		fprintf(stderr, "%s[%d]", char_choices[i], strlen(char_choices[i]));
+		 if(DEBUG) fprintf(stderr, "%s[%d]", char_choices[i], strlen(char_choices[i]));
 		this->_choices[i] = (char*) malloc(sizeof(char)*strlen(char_choices[i]));
 		strncpy(this->_choices[i], char_choices[i], strlen(char_choices[i]));
-		fprintf(stderr, "\t%s\n", this->_choices[i]);
+		 if(DEBUG) fprintf(stderr, "\t%s\n", this->_choices[i]);
 	}
 	return ;
 }
@@ -115,7 +117,7 @@ Menu::choices(const char** char_choices, int num_choices)
 void
 Menu::update()
 {
-	fprintf(stderr, "update\n");
+	 if(DEBUG) fprintf(stderr, "update\n");
 	wrefresh(window());
 
 	return ;
@@ -124,23 +126,23 @@ Menu::update()
 const char**
 Menu::choices(void)
 {
-	fprintf(stderr, "get choices\n");
+	 if(DEBUG) fprintf(stderr, "get choices\n");
 	return (const char**) this->_choices;
 }
 
 int
 Menu::num_choices(void)
 {
-	fprintf(stderr, "get num_choices\n");
+	 if(DEBUG) fprintf(stderr, "get num_choices\n");
 	return this->_num_choices;
 }
 
 void
 Menu::window(pair<int, int> position, pair<int, int> window_size)
 {
-	fprintf(stderr, "set window\n");
-	fprintf(stderr, "(x,y)\t(%d,%d)\n", position.first, position.second);
-	fprintf(stderr, "(w,h)\t(%d,%d)\n", window_size.first, window_size.second);
+	 if(DEBUG) fprintf(stderr, "set window\n");
+	 if(DEBUG) fprintf(stderr, "(x,y)\t(%d,%d)\n", position.first, position.second);
+	 if(DEBUG) fprintf(stderr, "(w,h)\t(%d,%d)\n", window_size.first, window_size.second);
 	this->_window = newwin(window_size.second, window_size.first, position.second, position.first);
 	return ;
 }
@@ -148,14 +150,14 @@ Menu::window(pair<int, int> position, pair<int, int> window_size)
 WINDOW*
 Menu::window(void)
 {
-	fprintf(stderr, "get window\n");
+	 if(DEBUG) fprintf(stderr, "get window\n");
 	return this->_window;
 }
 
 void
 Menu::window_size(int columns, int lines)
 {
-	fprintf(stderr, "set window_size\n");
+	 if(DEBUG) fprintf(stderr, "set window_size\n");
 	this->_window_size = make_pair(columns, lines);
 	return ;
 }
@@ -163,14 +165,14 @@ Menu::window_size(int columns, int lines)
 pair<int, int>
 Menu::window_size(void)
 {
-	fprintf(stderr, "get window_size\n");
+	 if(DEBUG) fprintf(stderr, "get window_size\n");
 	return this->_window_size;
 }
 
 void
 Menu::position(int x, int y)
 {
-	fprintf(stderr, "set position\n");
+	 if(DEBUG) fprintf(stderr, "set position\n");
 	this->_position = make_pair(x, y);
 	return ;
 }
@@ -178,7 +180,7 @@ Menu::position(int x, int y)
 pair<int, int>
 Menu::position(void)
 {
-	fprintf(stderr, "get position\n");
+	 if(DEBUG) fprintf(stderr, "get position\n");
 	return this->_position;
 }
 
