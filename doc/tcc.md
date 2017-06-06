@@ -1,14 +1,11 @@
 \chapter{Introdução}
 
-# Sobre o que é o trabalho?
+Este trabalho propôs realizar uma análise em cima de um jogo de tabuleiro já existente chamado \textit{Big Points}. Fazendo uso de conceitos da teoria dos jogos, foi escrito um programa utilizando programação dinâmica para exaurir todas as possibilidades de jogos e de jogadas de um número reduzido de peças no jogo. Os resultados finais corroboram com a ideia de que o jogo é desbalanceado, dando ao primeiro jogador uma maior chance de vencer o jogo.
 
-# Relevância e contribuição
-
-# Problema e solução proposta (sucinta)
-
-# Estrutura do trabalho
+A estrutura do trabalho foi dividida em quatro capítulos, sendo o primeiro esta introdução. O capítulo \ref{ch:fundamentacao_teorica}, de fundamentação teórica, conta um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo. Em seguida, tem-se o capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto, até sua conclusão. Por último, o capítulo \ref{ch:trabalhos_futuros} onde são citados alguns possíveis trabalhos futuros em cima do trabalho atual.
 
 \chapter{Fundamentação Teórica}
+\label{ch:fundamentacao_teorica}
 
 Teoria dos jogos é o estudo do comportamento estratégico interdependente[^interdependent_strategy], não apenas o estudo de como vencer ou perder em um jogo, apesar de às vezes esses dois fatos coincidirem. Isso faz com que o escopo seja mais abranjente, desde comportamentos no qual as duas pessoas devem cooperar para ganhar, ou as duas tentam se ajudar para ganharem independente ou, por fim, comportamento de duas pessoas que tentam vencer individualmente \cite{spaniel_2011}.
 
@@ -80,6 +77,7 @@ A pontuação do jogo é dependente da ordem de chegada dos peões na escada e d
 
 
 \chapter{Metodologia}
+\label{ch:metodologia}
 
 # Scrum
 
@@ -223,7 +221,7 @@ A estrutura possui um construtor que atribui valores às variáveis através de 
 
 \lstinputlisting[language=C++, firstnumber=42, linerange={42-48}]{../../pd/inc/state.h}
 
-# Comparador
+## Comparador
 
 
 
@@ -254,5 +252,6 @@ Devido ao imenso número de jogadas possíveis ao longo do do jogo, decidiu-se u
 Foi escrito os estados e suas transições em _post-it_s para garantir que a _DP_ foi feita corretamente. Os estados
 
 \chapter{Conclusão}
+\label{ch:trabalhos_futuros}
 
 # Trabalhos futuros

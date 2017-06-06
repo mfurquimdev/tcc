@@ -12,18 +12,17 @@ struct State
 	// Cinco cores, quatro discos
 	struct {
 		// 5 cores * 4 discos (1bit pra cada)
-		// 4 cores * 5 discos (1bit pra cada)
 		ll _tabuleiro :20;
 		
 		// 0..5 posições possíveis (3bits) * 5 peões
 		ll _peao :15;
 
-		// 0..6 posições (3bits) * 5 peões
+		// 0..5 posições (3bits) * 5 peões
 		ll _escada :15;
 	};
 
 	struct {
-		// 0..6 discos (3bits) * 5 cores * 2 jogadores
+		// 0..5 discos (3bits) * 5 cores * 2 jogadores
 		ll _jogadores :30;
 		
 		// Jogador 1 ou Jogador 2
