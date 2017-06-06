@@ -1,17 +1,20 @@
-\chapter{Trabalho de Conclusão de Curso}
+\chapter{Introdução}
 
-# Introdução
+# Sobre o que é o trabalho?
 
-ada _nó_ é um _estado_.
-_Pódio_ e _escada_ querem dizer mesma coisa.
+# Relevância e contribuição
 
-# Fundamentação Teórica
+# Problema e solução proposta (sucinta)
+
+# Estrutura do trabalho
+
+\chapter{Fundamentação Teórica}
 
 Teoria dos jogos é o estudo do comportamento estratégico interdependente[^interdependent_strategy], não apenas o estudo de como vencer ou perder em um jogo, apesar de às vezes esses dois fatos coincidirem. Isso faz com que o escopo seja mais abranjente, desde comportamentos no qual as duas pessoas devem cooperar para ganhar, ou as duas tentam se ajudar para ganharem independente ou, por fim, comportamento de duas pessoas que tentam vencer individualmente \cite{spaniel_2011}.
 
 [^interdependent_strategy]: Estratégia interdependente significa que as ações de uma pessoa interfere no resultado da outra, e vice-versa.
 
-## Histórico da Teoria dos Jogos
+# Histórico da Teoria dos Jogos
 
 Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}. No século seguinte, o matemático e filósofo Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política. Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
 
@@ -23,8 +26,9 @@ Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram �
 
 [^zero_sum]: Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.
 
+# Conceitos Relevantes
 
-## Regras do Big Points
+# Regras do Big Points
 
 _Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar peças que pode ser jogado de dois a cinco jogadores. São cinco peões de cores distintas, que podem ser usadas por qualquer jogador, para percorrer um caminho de discos coloridos até chegar à escada. Durante o percurso, os jogadores coletam alguns destes discos e sua pontuação final é determinada a partir da ordem de chegada dos peões ao pódio e a quantidade de discos adquiridos daquela cor. Ganha o jogador com a maior pontuação.
 
@@ -75,13 +79,60 @@ A pontuação do jogo é dependente da ordem de chegada dos peões na escada e d
 \end{equation}
 
 
-# Metodologia
+\chapter{Metodologia}
 
-## Estrutura de dados
+# Scrum
+
+O _framework_ _scrum_ é ideal para o desenvolvimento de projetos complexos no qual a produtividade e a criatividade são essenciais para a entrega de um produto de alto valor. Inicialmente, tal método de organização e gerenciamento do projeto foi aplicado para o desenvolvimento do sistema em questão \cite{the_scrum_guide}. O _kanban_ do \href{https://waffle.io/mfurquim/tcc}{waffle.io} foi utilizado para registrar tarefas devido à sua integração com as _issues_ do github. Reuniões com o orientador foram realizadas para discutir aspectos técnicos do jogo, como as estruturas de dados a serem utilizadas para reduzir os dados armazenados, e alguns métodos importantes para agilizar o processamento.
+
+Porém, ao longo do tempo, o esforço para manter a rastreabilidade das tarefas tornou-se muito alto em relação à complexidade do projeto, e ao tamanho da equipe. As tarefas passaram a ser _branchs_ locais com nomes significativos, representando a funcionalidade a ser desenvolvida. Após a conclusão da tarefa, testes simples e manuais foram aplicados para então unir à _branch_ mestre[^git_merge]. Por fim, para trabalhar em outra _branch_, foi sempre necessário atualizá-la em relação à mestre[^git_rebase].
+
+[^git_merge]: \texttt{\$ git merge}
+[^git_rebase]: \texttt{\$ git rebase <from-branch> <to-branch>}
+
+# Análise do jogo \textit{Big Points}
+
+Para analizar o jogo _Big Points_, é preciso realizar todas as jogadas de todos os jogos possíveis. Cada jogador, na sua vez, deve escolher uma jogada na qual lhe garanta a vitória, se houver mais de uma, escolha a que tiver a maior pontuação. Caso não tenha uma jogada para vencer, o jogador deve minimizar a pontuação do adversário. Após fazer isso para um jogo inicial, os resultados são escritos em um arquivo _csv_ para análise. Esse procedimento é repetidos para _cada_ organização possível do tabuleiro inicial.
+
+Exaurir todas as possibilidades de jogadas é um trabalho computacional imenso e cresce exponencialmente de acordo com o tamanho do jogo. Para um jogo pequeno com apenas dois discos e duas cores comuns (sem especiais) as jogadas possíveis são: mover o peão vermelho e pegar o disco da direita, ou da esquerda; e mover o peão verde e pegar o disco da direita ou da esquerda. Isso gera uma árvore onde cada nó possui quatro filhos e a altura média dessa árvore é quatro, totalizando uma quantidade de estados de aproximadamente $\sum_{h=0}^{4}4^{h} \approx 341$. Ao final do cálculo deste jogo reduzido, temos que o número de estados distintos varia entre 17 e 25, dependendo do estado inicial do tabuleiro. Devido a este grande número de estados repetidos, escrever o algoritmo fazendo uso de programação dinâmica economizou bastante tempo e processamento.
+
+O jogo seria um jogo balanceado se ambos os jogadores ganharem aproximadamente metade das vezes. Se existem seis jogos diferentes (combinação de duas cores com dois discos cada), o jogo é considerado balanceado se cada jogador ganhar três jogos. Neste caso, temos os jogos $j_i \in \{1122, 1212, 1221, 2112, 2121, 2211\}$, e para cada $j_i$ temos a pontuação máxima e a quantidade de estados distintos, como demonstrado na tabela +@tbl:1.
+
+ **Jogo** | **Pontuação** | **#Estados**
+:--------:|:-------------:|:------------:
+  1122    |     (2,1)     |      17
+  1212    |     (2,0)     |      25
+  1221    |     (2,1)     |      25
+  2112    |     (2,1)     |      25
+  2121    |     (2,1)     |      25
+  2211    |     (2,0)     |      17
+
+Table: Pontuação utilizando Minimax. {#tbl:1}
+
+Em todos as possíveis combinações de tabuleiros iniciais, o primeiro jogador sempre ganha com dois pontos enquanto o segundo jogador consegue fazer no máximo um ponto, na maioria das vezes. Isso torna o jogo desequilibrado.
+
+## Quantidade de partidas
+
+\begin{equation}
+	\label{eq:partidas}
+	\tag{e.q. Quantidades de Partidas Distintas}
+	\begin{split}
+		Partidas\ &=\  (\#J-1) \cdot \binom{\#D_T}{\#D_W} \cdot \binom{\#D_{L1}}{\#D_K} \cdot \binom{\#D_{L2}}{\#D_R} \cdot \binom{\#D_{L3}}{\#D_G} \cdot \binom{\#D_{L4}}{\#D_B} \cdot \binom{\#D_{L5}}{\#D_Y} \cdot \binom{\#D_{L6}}{\#D_V}\\
+		Partidas\ &=\  4\cdot \binom{55}{5} \cdot \binom{50}{5} \cdot \binom{45}{9} \cdot \binom{36}{9} \cdot \binom{27}{9} \cdot \binom{18}{9} \cdot \binom{9}{9}\\
+		Partidas\ &=\ 560'483'776'167'774'018'942'304'261'616'685'408'000'000\\
+		Partidas\ &\approx 5\times 10^{41}
+	\end{split}
+\end{equation}
+
+# Estrutura de dados
 
 Devido à enorme quantidade de estados de um jogo reduzido de _Big Points_, foi implementado duas funções para codificar e decodificar a _struct State_ para um _long long int_, de forme que ocupe apenas 64 _bits_ na memória. Após testar nos limites da capacidade da variável, percebeu-se um erro quando executado com quatro cores e cinco discos, o que levou à implementação por _bit fields_.
 
-### Bit Fields
+## Estado do jogo
+
+Para escrever a programação dinâmica capaz de
+
+## Bit fields
 
 Dentro da estrutura \texttt{State} foi declarado duas estruturas anônimas[^anonymous_struct] utilizando _bit fields_. As duas estruturas servem para garantir a utilização correta dos _bits_ quando as variáveis chegarem próximo ao limite da sua capacidade. Essas estruturas possuem variáveis do tipo \texttt{unsigned long long int}, que ocupa  64 _bits_. Após a declaração da variável, é declarado a quantidade de _bits_ que será utilizado para ela, de modo que \texttt{ll \_tabuleiro :20} ocupe apenas 20 _bits_ da variável \texttt{unsigned long long int}, \texttt{ll \_peao :15} ocupe 15 _bits_, e assim por diante de forma que não ultrapsse os 64 _bits_ da variável. Como o comportamento do armazenamento é desconhecido quando a variável é ultrapassada, e para garantir consistência no armazenamento, foi utilizado duas _structs_ com, no máximo, uma variável \texttt{unsigned long long int} (64 _bits_).
 
@@ -162,7 +213,7 @@ A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demons
 	\end{split}
 \end{equation}
 
-### Funções de Acesso
+## Funções de acesso
 
 A estrutura possui um construtor que atribui valores às variáveis através de RAII[^RAII], dessa forma não se faz necessário nenhuma extra implementação. Todas as variáveis possuem um valor padrão, verdadeiro para qualquer tamanho de tabuleiro $t_i$, onde $4 \leqslant t_i \leqslant 20$.
 
@@ -172,82 +223,12 @@ A estrutura possui um construtor que atribui valores às variáveis através de 
 
 \lstinputlisting[language=C++, firstnumber=42, linerange={42-48}]{../../pd/inc/state.h}
 
-### Comparador
+# Comparador
 
 
 
 
-## Programação dinâmica
-
-Devido ao imenso número de jogadas possíveis ao longo do do jogo, decidiu-se utilizar a programação dinâmica para 
-- Duas funções para melhor entendimento da DP e regras do jogo
-
-### Função \textbf{dp}
-
-### Função \textbf{play}
-
-
-- Explicação da DP e da função Play (função para realizar as jogadas)
-## Scrum
-
-O _framework_ _scrum_ é ideal para o desenvolvimento de projetos complexos no qual a produtividade e a criatividade são essenciais para a entrega de um produto de alto valor. Inicialmente, tal método de organização e gerenciamento do projeto foi aplicado para o desenvolvimento do sistema em questão \cite{the_scrum_guide}. O _kanban_ do \href{https://waffle.io/mfurquim/tcc}{waffle.io} foi utilizado para registrar tarefas devido à sua integração com as _issues_ do github. Reuniões com o orientador foram realizadas para discutir aspectos técnicos do jogo, como as estruturas de dados a serem utilizadas para reduzir os dados armazenados, e alguns métodos importantes para agilizar o processamento.
-
-Porém, ao longo do tempo, o esforço para manter a rastreabilidade das tarefas tornou-se muito alto em relação à complexidade do projeto, e ao tamanho da equipe. As tarefas passaram a ser _branchs_ locais com nomes significativos, representando a funcionalidade a ser desenvolvida. Após a conclusão da tarefa, testes simples e manuais foram aplicados para então unir à _branch_ mestre[^git_merge]. Por fim, para trabalhar em outra _branch_, foi sempre necessário atualizá-la em relação à mestre[^git_rebase].
-
-[^git_merge]: \texttt{\$ git merge}
-[^git_rebase]: \texttt{\$ git rebase <from-branch> <to-branch>}
-
-
-
-
-
-Quantidade de partidas
-
-\begin{equation}
-	\label{eq:partidas}
-	\tag{e.q. Quantidades de Partidas Distintas}
-	\begin{split}
-		Partidas\ &=\  (\#J-1) \cdot \binom{\#D_T}{\#D_W} \cdot \binom{\#D_{L1}}{\#D_K} \cdot \binom{\#D_{L2}}{\#D_R} \cdot \binom{\#D_{L3}}{\#D_G} \cdot \binom{\#D_{L4}}{\#D_B} \cdot \binom{\#D_{L5}}{\#D_Y} \cdot \binom{\#D_{L6}}{\#D_V}\\
-		Partidas\ &=\  4\cdot \binom{55}{5} \cdot \binom{50}{5} \cdot \binom{45}{9} \cdot \binom{36}{9} \cdot \binom{27}{9} \cdot \binom{18}{9} \cdot \binom{9}{9}\\
-		Partidas\ &=\ 560'483'776'167'774'018'942'304'261'616'685'408'000'000\\
-		Partidas\ &\approx 5\times 10^{41}
-	\end{split}
-\end{equation}
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Análise do jogo
-
-Para analizar o jogo _Big Points_, é preciso realizar todas as jogadas de todos os jogos possíveis. Cada jogador, na sua vez, deve escolher uma jogada na qual lhe garanta a vitória, se houver mais de uma, escolha a que tiver a maior pontuação. Caso não tenha uma jogada para vencer, o jogador deve minimizar a pontuação do adversário. Após fazer isso para um jogo inicial, os resultados são escritos em um arquivo _csv_ para análise. Esse procedimento é repetidos para _cada_ organização possível do tabuleiro inicial.
-
-Exaurir todas as possibilidades de jogadas é um trabalho computacional imenso e cresce exponencialmente de acordo com o tamanho do jogo. Para um jogo pequeno com apenas dois discos e duas cores comuns (sem especiais) as jogadas possíveis são: mover o peão vermelho e pegar o disco da direita, ou da esquerda; e mover o peão verde e pegar o disco da direita ou da esquerda. Isso gera uma árvore onde cada nó possui quatro filhos e a altura média dessa árvore é quatro, totalizando uma quantidade de estados de aproximadamente $\sum_{h=0}^{4}4^{h} \approx 341$. Ao final do cálculo deste jogo reduzido, temos que o número de estados distintos varia entre 17 e 25, dependendo do estado inicial do tabuleiro. Devido a este grande número de estados repetidos, escrever o algoritmo fazendo uso de programação dinâmica economizou bastante tempo e processamento.
-
-O jogo seria um jogo balanceado se ambos os jogadores ganharem aproximadamente metade das vezes. Se existem seis jogos diferentes (combinação de duas cores com dois discos cada), o jogo é considerado balanceado se cada jogador ganhar três jogos. Neste caso, temos os jogos $j_i \in \{1122, 1212, 1221, 2112, 2121, 2211\}$, e para cada $j_i$ temos a pontuação máxima e a quantidade de estados distintos, como demonstrado na tabela +@tbl:1.
-
- **Jogo** | **Pontuação** | **#Estados**
-:--------:|:-------------:|:------------:
-  1122    |     (2,1)     |      17
-  1212    |     (2,0)     |      25
-  1221    |     (2,1)     |      25
-  2112    |     (2,1)     |      25
-  2121    |     (2,1)     |      25
-  2211    |     (2,0)     |      17
-
-Table: Pontuação utilizando Minimax. {#tbl:1}
-
-Em todos as possíveis combinações de tabuleiros iniciais, o primeiro jogador sempre ganha com dois pontos enquanto o segundo jogador consegue fazer no máximo um ponto, na maioria das vezes. Isso torna o jogo desequilibrado.
-
-## Programação Dinâmica
+# Programação dinâmica
 
 Programação dinâmica é um método para a construção de algoritmos no qual há uma memorização de cada estado distinto para evitar recálculo, caso este estado apareça novamente. A memorização dos estados do jogo _Big Points_ foi feita em uma _hash_, com a chave sendo o estado do jogo e o valor armazenado, a pontuação máxima dos dois jogadores a partir daquele nó.
 
@@ -258,12 +239,20 @@ Para analizar o jogo, é preciso exaurir todas as jogadas possíveis a partir de
 utilizando programação dinâmica[^dynamic_programing]
 onde os estados são armazenados em uma _hash_, temos que o número de estados distintos varia entre 17 e 25.
 
+Devido ao imenso número de jogadas possíveis ao longo do do jogo, decidiu-se utilizar a programação dinâmica para 
+- Duas funções para melhor entendimento da DP e regras do jogo
+
+## Função \textbf{dp}
+
+## Função \textbf{play}
 
 
-### Estado do jogo
+- Explicação da DP e da função Play (função para realizar as jogadas)
 
-Para escrever a programação dinâmica capaz de
-
-### Verificação dos estados
+# Verificação dos estados
 
 Foi escrito os estados e suas transições em _post-it_s para garantir que a _DP_ foi feita corretamente. Os estados
+
+\chapter{Conclusão}
+
+# Trabalhos futuros
