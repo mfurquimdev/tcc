@@ -1,9 +1,17 @@
+<!--
+Capítulo 1 - Introdução
+-->
 \chapter{Introdução}
+\label{ch:introducao}
 
 Este trabalho propôs realizar uma análise em cima de um jogo de tabuleiro já existente chamado \textit{Big Points}. Fazendo uso de conceitos da teoria dos jogos, foi escrito um programa utilizando programação dinâmica para exaurir todas as possibilidades de jogos e de jogadas de um número reduzido de peças no jogo. Os resultados finais corroboram com a ideia de que o jogo é desbalanceado, dando ao primeiro jogador uma maior chance de vencer o jogo.
 
-A estrutura do trabalho foi dividida em quatro capítulos, sendo o primeiro esta introdução. O capítulo \ref{ch:fundamentacao_teorica}, de fundamentação teórica, conta um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo. Em seguida, tem-se o capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto, até sua conclusão. Por último, o capítulo \ref{ch:trabalhos_futuros} onde são citados alguns possíveis trabalhos futuros em cima do trabalho atual.
+A estrutura do trabalho foi dividida em cinco capítulos, sendo que o primeiro é esta introdução. O capítulo seguinte, de fundamentação teórica, relata um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo. Em seguida, tem-se o capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto, até sua conclusão, e no capítulo \ref{ch:resultados} os resultados da análise são mostrados. Por último, o capítulo \ref{ch:conclusao} onde é feita a conclusão do trabalho e são citados alguns possíveis trabalhos futuros em cima do trabalho atual.
 
+
+<!--
+Capítulo 2 - Fundamentação Teórica
+-->
 \chapter{Fundamentação Teórica}
 \label{ch:fundamentacao_teorica}
 
@@ -15,7 +23,7 @@ Teoria dos jogos é o estudo do comportamento estratégico interdependente[^inte
 
 Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}. No século seguinte, o matemático e filósofo Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política. Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
 
-Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e **estratégia mista**[^mixed_strategy]. Em 1928, John von Neumann demonstrou que todo jogo finito[^finite_game] de **soma zero**[^zero_sum] com duas pessoas possui uma solução em estratégias mistas. Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
+Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista[^mixed_strategy]. Em 1928, John von Neumann demonstrou que todo jogo finito[^finite_game] de soma zero[^zero_sum] com duas pessoas possui uma solução em estratégias mistas. Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
 
 [^mixed_strategy]: Estratégia mista é um conjunto de estratégias puras associadas a uma distribuição de probabilidade \cite{figueiredo_conceitos}.
 
@@ -24,6 +32,15 @@ Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram �
 [^zero_sum]: Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.
 
 # Conceitos Relevantes
+
+Alguns ceonceitos fundamentais para o entendimento da análise realizada em cima do jogo \textit{Big Points} são \textit{zero-sum game} e \textit{minimax}.
+
+Como o jogo não possui nenhum elemento dependente da sorte, não serão usados estratégias mistas. O \textit{winning move} não foi analizado devido à complexidade da implementação da análise atual.
+
+## Minimax
+
+
+## Programação dinâmica
 
 # Regras do Big Points
 
@@ -76,6 +93,9 @@ A pontuação do jogo é dependente da ordem de chegada dos peões na escada e d
 \end{equation}
 
 
+<!--
+Capítulo 3 - Metodologia
+-->
 \chapter{Metodologia}
 \label{ch:metodologia}
 
@@ -190,7 +210,7 @@ A equação \ref{eq:bitsescada} possui as variáveis $n_p$ e $n_c$ com $n_p, n_c
 [^chegada_escada]: O primeiro peão $p_i$ a chegar na escada é indicado com $escada(p_i) = 1$.
 
 \begin{equation}
-	\label{eq:bitsjogadores}
+	label{eq:bitsjogadores}
 	\tag{e.q. \emph{bits} de \_jogadores}
 	\begin{split}
 		\texttt{\_jogadores} &= \lceil \log_2(n_d+1) \rceil \cdot n_c \cdot n_j\\
@@ -251,7 +271,20 @@ Devido ao imenso número de jogadas possíveis ao longo do do jogo, decidiu-se u
 
 Foi escrito os estados e suas transições em _post-it_s para garantir que a _DP_ foi feita corretamente. Os estados
 
+
+<!--
+Capítulo 4 - Resultados
+-->
+\chapter{Resultados}
+\label{ch:resultados}
+
+# Trabalhos futuros
+
+
+<!--
+Capítulo 5 - Conclusão
+-->
 \chapter{Conclusão}
-\label{ch:trabalhos_futuros}
+\label{ch:conclusao}
 
 # Trabalhos futuros
