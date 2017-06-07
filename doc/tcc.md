@@ -15,6 +15,52 @@ Capítulo 2 - Fundamentação Teórica
 \chapter{Fundamentação Teórica}
 \label{ch:fundamentacao_teorica}
 
+# O que é?
+
+A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que
+estuda a escolha de decisões ótimas sob condições de conflito. Os elementos
+básicos de um jogo são: o conjunto de **jogadores**, onde cada jogador possui um
+conjunto de **estratégias**. A partir das escolhas de estratégias de cada
+jogador, temos uma **situação** ou **perfil**.
+
+Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_**, ou **ganho**, para cada situação do jogo. Quando essa informação é inserida na matriz da **forma normal**, tem-se uma **matriz de _payoff_**. Em outras palavras, matriz de ganho é a representação matricial dos _payoffs_ dos jogadores, onde as estratégia de um jogador estão representadas por cada linha e as de seu oponente estão representadas pelas colunas.
+
+## Soluções de um jogo
+\label{subsec:solucoes-de-um-jogo}
+Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. Dois métodos importantes para encontrar a solução de um estado do jogo são **Dominância** e **equilíbrio de Nash**.
+
+É dito que uma determinada estratégia é uma **estratégia dominante** quando esta é a única estratégia restante após aplicar a técnica de **dominância estrita iterada**. O encontro das estratégias dos jogadores é chamado de **equilíbrio de estratégia dominante**.
+
+**Dominância estrita iterada** nada mais é do que um processo onde se eliminam as estratégias que são estritamente dominadas.
+Obs.: faltou explicar o que é uma estratégia dominada.
+
+**Solução estratégica** ou **Equilíbrio de Nash** é um conjunto de estratégias para cada jogador onde cada um deles não tem incentivo de mudar sua estratégia se os demais jogadores não o fizerem.
+
+**Zero-sum game**: a vitória de um jogador implica na derrota do outro.
+No Big Points, o jogador com maior pontuação vence. Pode-se dar pontuação 1 caso o jogador em questão é o vencedor, e -1 para o jogador que perdeu. Caso haja mais de um jogador com a maior pontuação do jogo, é dado 0 para o payoff dos dois jogadores.
+
+Outra maneira, mais refinada, de demonstrar a vitória e derrota entre os jogadores é calcular a difereça da pontuação entre eles. O jogador com a maior pontuação mantém sua pontuação, e o restante tem sua pontuação subtraída daquela maior pontuação do jogo (dando um resultado negativo).
+
+Backward Induction
+- As long as every player take turns you can start at the end of the game and make your way to the begin.
+- One strategy for every decision node
+
+Game Theory
+the study of strategic interaction among rational decision makers
+players: people playing the game; each player has a set of strategies
+strategies: what they will do, how they'll respond
+payoffs: result of the interaction of strategies
+
+strategy is a set with what decision you will make for every decision making situation in the game
+
+each players is chosen an strategy,
+these strategies interact,
+and the game plays out to its conclusion.
+
+rationality and common knowledge
+
+
+
 Teoria dos jogos é o estudo do comportamento estratégico interdependente[^interdependent_strategy], não apenas o estudo de como vencer ou perder em um jogo, apesar de às vezes esses dois fatos coincidirem. Isso faz com que o escopo seja mais abranjente, desde comportamentos no qual as duas pessoas devem cooperar para ganhar, ou as duas tentam se ajudar para ganharem independente ou, por fim, comportamento de duas pessoas que tentam vencer individualmente \cite{spaniel_2011}.
 
 [^interdependent_strategy]: Estratégia interdependente significa que as ações de uma pessoa interfere no resultado da outra, e vice-versa.
@@ -48,7 +94,7 @@ _Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar 
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.7\textwidth]{img/front}
+	\includegraphics[width=0.75\textwidth]{img/front}
 	\caption{Caixa do jogo \textbf{Big Points}}
 	\label{fig:front}
 \end{figure}
@@ -105,7 +151,7 @@ O _framework_ _scrum_ é ideal para o desenvolvimento de projetos complexos no q
 
 Porém, ao longo do tempo, o esforço para manter a rastreabilidade das tarefas tornou-se muito alto em relação à complexidade do projeto, e ao tamanho da equipe. As tarefas passaram a ser _branchs_ locais com nomes significativos, representando a funcionalidade a ser desenvolvida. Após a conclusão da tarefa, testes simples e manuais foram aplicados para então unir à _branch_ mestre[^git_merge]. Por fim, para trabalhar em outra _branch_, foi sempre necessário atualizá-la em relação à mestre[^git_rebase].
 
-[^git_merge]: \texttt{\$ git merge}
+[^git_merge]: \texttt{\$ git checkout <to-branch>; git merge <from-branch>}
 [^git_rebase]: \texttt{\$ git rebase <from-branch> <to-branch>}
 
 # Análise do jogo \textit{Big Points}
@@ -163,8 +209,8 @@ A estrutura \texttt{State} possui cinco variáveis:
 \texttt{\_jogadores}, possui informações sobre os discos coletados dos dois jogadores;
 e por fim, a variável \texttt{\_atual} que representa o jogador que fará a jogada. 
 
-[^tabuleiro]: Cinco cores e quatro discos ou quatro cores e cinco discos.
-[^cor_peao]: As cores de peão seguem a ordem RGBYP, onde $\textbf{R}ed = 0$, $\textbf{G}reen = 1$, $\textbf{B}lue = 2$, $\textbf{Y}ellow = 3$, e $\textbf{P}urple = 4$.
+[^tabuleiro]: Cinco cores e quatro discos.
+[^cor_peao]: As cores de peão seguem a ordem RGBYP começando do $0$, onde $\textbf{R}ed = 0$, $\textbf{G}reen = 1$, $\textbf{B}lue = 2$, $\textbf{Y}ellow = 3$, e $\textbf{P}urple = 4$.
 
 \lstinputlisting[language=C++, firstnumber=10, linerange={10-31}]{../../pd/inc/state.h}
 
@@ -175,20 +221,20 @@ O cálculo para determinar os _bits_ necessários para armazenar as informaçõe
 	\tag{e.q. \emph{bits} de \_tabuleiro}
 	\begin{split}
 		\texttt{\_tabuleiro} &= n_c \cdot n_d\\
-		\texttt{\_tabuleiro} &= \max(4 \cdot 5,\ 5 \cdot 4)\\
+		\texttt{\_tabuleiro} &= 5 \cdot 4\\
 		\texttt{\_tabuleiro} &= 20\ \emph{bits}
 	\end{split}
 \end{equation}
 
-Na equação \ref{eq:bitstabuleiro}, $n_c$ e $n_d$ são o número de cores e o número de discos do jogo, respectivamente. Seus valores são, no máximo, $n_c = 4$ quando $n_d = 5$ e $n_c = 5$ quando $n_d = 4$.
+Na equação \ref{eq:bitstabuleiro}, $n_c$ e $n_d$ são o número de cores e o número de discos do jogo, respectivamente. Seus valores são, no máximo $n_c = 5$ e $n_d = 4$.
 
 \begin{equation}
 	\label{eq:bitspeao}
 	\tag{e.q. \emph{bits} de \_peao}
 	\begin{split}
 		\texttt{\_peao} &= \lceil \log_2(n_d+1) \rceil \cdot n_p\\
-		\texttt{\_peao} &= \max\left(\lceil \log_2(4 + 1) \rceil \cdot 5,\ \lceil \log_2(5 + 1)\rceil \cdot 4 \right)\\
-		\texttt{\_peao} &= \max\left(3 \cdot 5,\ 3 \cdot 4 \right)\\
+		\texttt{\_peao} &= \lceil \log_2(5 + 1)\rceil \cdot 4\\
+		\texttt{\_peao} &= 3 \cdot 4\\
 		\texttt{\_peao} &= 15\ \emph{bits}
 	\end{split}
 \end{equation}
@@ -199,7 +245,7 @@ Na segunda equação, \ref{eq:bitspeao}, o valor de $n_d$ é o número de discos
 	\label{eq:bitsescada}
 	\tag{e.q. \emph{bits} de \_escada}
 	\begin{split}
-		\texttt{\_escada} &= \lceil \log_2(n_c+1) \rceil\cdot n_p\\
+		\texttt{\_escada} &= \lceil \log_2(n_p+1) \rceil\cdot n_p\\
 		\texttt{\_escada} &= \lceil \log_2(6) \rceil \cdot 5\\
 		\texttt{\_escada} &= 15\ \emph{bits}
 	\end{split}
@@ -210,12 +256,12 @@ A equação \ref{eq:bitsescada} possui as variáveis $n_p$ e $n_c$ com $n_p, n_c
 [^chegada_escada]: O primeiro peão $p_i$ a chegar na escada é indicado com $escada(p_i) = 1$.
 
 \begin{equation}
-	label{eq:bitsjogadores}
+	\label{eq:bitsjogadores}
 	\tag{e.q. \emph{bits} de \_jogadores}
 	\begin{split}
 		\texttt{\_jogadores} &= \lceil \log_2(n_d+1) \rceil \cdot n_c \cdot n_j\\
-		\texttt{\_jogadores} &= \max(\lceil \log_2(5+1) \rceil \cdot 4 \cdot 2,\ \lceil \log_2(4+1) \rceil \cdot 5 \cdot 2)\\
-		\texttt{\_jogadores} &= \max(3 \cdot 4 \cdot 2,\ 3 \cdot 5 \cdot 2)\\
+		\texttt{\_jogadores} &= \lceil \log_2(4+1) \rceil \cdot 5 \cdot 2\\
+		\texttt{\_jogadores} &= 3 \cdot 5 \cdot 2\\
 		\texttt{\_jogadores} &= 30\ \emph{bits}
 	\end{split}
 \end{equation}
@@ -260,10 +306,17 @@ onde os estados são armazenados em uma _hash_, temos que o número de estados d
 Devido ao imenso número de jogadas possíveis ao longo do do jogo, decidiu-se utilizar a programação dinâmica para 
 - Duas funções para melhor entendimento da DP e regras do jogo
 
-## Função \textbf{dp}
+## Função \texttt{dp}
 
-## Função \textbf{play}
+A função \texttt{dp} possui os casos base para retornar a função, 
 
+\lstinputlisting[language=C++]{../../pd/src/dp.cpp}
+
+
+## Função \texttt{play}
+
+
+\lstinputlisting[language=C++]{../../pd/src/dp.cpp}
 
 - Explicação da DP e da função Play (função para realizar as jogadas)
 
