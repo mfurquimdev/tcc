@@ -4,9 +4,11 @@ Capítulo 1 - Introdução
 \chapter{Introdução}
 \label{ch:introducao}
 
-Este trabalho propôs realizar uma análise em cima de um jogo de tabuleiro já existente chamado \textit{Big Points}. Fazendo uso de conceitos da teoria dos jogos, foi escrito um programa utilizando programação dinâmica para exaurir todas as possibilidades de jogos e de jogadas de um número reduzido de peças no jogo. Os resultados finais corroboram com a ideia de que o jogo é desbalanceado, dando ao primeiro jogador uma maior chance de vencer o jogo.
+A proposta deste trabalho é realizar uma análise em cima de um jogo de tabuleiro, já existente, chamado \textit{Big Points}. Fazendo uso de conceitos da teoria dos jogos e programação dinâmica, foi escrito um programa para exaurir todas as possibilidades de jogadas, e de todas as condições iniciais distintas, de uma quantidade reduzida de peças do jogo. Os resultados finais corroboram com a ideia de que o jogo é desbalanceado[^jogo_balanceado], dando ao primeiro jogador uma maior chance de vencer o jogo.
 
-A estrutura do trabalho foi dividida em cinco capítulos, sendo que o primeiro é esta introdução. O capítulo seguinte, de fundamentação teórica, relata um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo. Em seguida, tem-se o capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto, até sua conclusão, e no capítulo \ref{ch:resultados} os resultados da análise são mostrados. Por último, o capítulo \ref{ch:conclusao} onde é feita a conclusão do trabalho e são citados alguns possíveis trabalhos futuros em cima do trabalho atual.
+[^jogo_balanceado]: É dito um jogo balanceado aquele que a chance dos jogadores de ganhar é a mesma.
+
+A estrutura do trabalho foi dividida em cinco capítulos, sendo o primeiro esta introdução. O capítulo seguinte, de fundamentação teórica, relata um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo. Em seguida, tem-se o capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto até sua conclusão, e no capítulo \ref{ch:resultados} os resultados desta análise são discutidos. Por último, o capítulo \ref{ch:conclusao} onde é feita a conclusão do trabalho e são citados alguns possíveis trabalhos futuros em cima do trabalho atual.
 
 
 <!--
@@ -15,19 +17,24 @@ Capítulo 2 - Fundamentação Teórica
 \chapter{Fundamentação Teórica}
 \label{ch:fundamentacao_teorica}
 
-# O que é?
+Para um bom entendimento das análises realizadas no jogo \textit{Big Points} é preciso ter um conhecimento básico sobre teoria dos jogos e programação dinÂmica. Na 
 
-A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que
-estuda a escolha de decisões ótimas sob condições de conflito. Os elementos
-básicos de um jogo são: o conjunto de **jogadores**, onde cada jogador possui um
-conjunto de **estratégias**. A partir das escolhas de estratégias de cada
-jogador, temos uma **situação** ou **perfil**.
+\ref{teoria-dos-jogos}
+\ref{soluuxe7uxf5es-de-um-jogo}
+\ref{histuxf3rico-da-teoria-dos-jogos}
+\ref{conceitos-relevantes}
+\ref{minimax}
+\ref{programauxe7uxe3o-dinuxe2mica}
+\ref{regras-do-big-points}
+
+# Teoria dos Jogos
+
+A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas sob condições de conflito. Os elementos básicos de um jogo são: o conjunto de **jogadores**, onde cada jogador possui um conjunto de **estratégias**. A partir das escolhas de estratégias de cada jogador, temos uma **situação** ou **perfil**.
 
 Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_**, ou **ganho**, para cada situação do jogo. Quando essa informação é inserida na matriz da **forma normal**, tem-se uma **matriz de _payoff_**. Em outras palavras, matriz de ganho é a representação matricial dos _payoffs_ dos jogadores, onde as estratégia de um jogador estão representadas por cada linha e as de seu oponente estão representadas pelas colunas.
 
 ## Soluções de um jogo
-\label{subsec:solucoes-de-um-jogo}
-Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. Dois métodos importantes para encontrar a solução de um estado do jogo são **Dominância** e **equilíbrio de Nash**.
+Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. Dois métodos importantes para encontrar a solução de um estado do jogo são **dominância** e **equilíbrio de Nash**.
 
 É dito que uma determinada estratégia é uma **estratégia dominante** quando esta é a única estratégia restante após aplicar a técnica de **dominância estrita iterada**. O encontro das estratégias dos jogadores é chamado de **equilíbrio de estratégia dominante**.
 
@@ -145,7 +152,7 @@ Capítulo 3 - Metodologia
 \chapter{Metodologia}
 \label{ch:metodologia}
 
-# Scrum
+# \textit{Scrum}
 
 O _framework_ _scrum_ é ideal para o desenvolvimento de projetos complexos no qual a produtividade e a criatividade são essenciais para a entrega de um produto de alto valor. Inicialmente, tal método de organização e gerenciamento do projeto foi aplicado para o desenvolvimento do sistema em questão \cite{the_scrum_guide}. O _kanban_ do \href{https://waffle.io/mfurquim/tcc}{waffle.io} foi utilizado para registrar tarefas devido à sua integração com as _issues_ do github. Reuniões com o orientador foram realizadas para discutir aspectos técnicos do jogo, como as estruturas de dados a serem utilizadas para reduzir os dados armazenados, e alguns métodos importantes para agilizar o processamento.
 
@@ -156,7 +163,7 @@ Porém, ao longo do tempo, o esforço para manter a rastreabilidade das tarefas 
 
 # Análise do jogo \textit{Big Points}
 
-Para analizar o jogo _Big Points_, é preciso realizar todas as jogadas de todos os jogos possíveis. Cada jogador, na sua vez, deve escolher uma jogada na qual lhe garanta a vitória, se houver mais de uma, escolha a que tiver a maior pontuação. Caso não tenha uma jogada para vencer, o jogador deve minimizar a pontuação do adversário. Após fazer isso para um jogo inicial, os resultados são escritos em um arquivo _csv_ para análise. Esse procedimento é repetidos para _cada_ organização possível do tabuleiro inicial.
+Para analizar o jogo _Big Points_, é preciso realizar todas as jogadas de todos os jogos possíveis. Cada jogador, na sua vez, deve escolher uma jogada na qual lhe garanta a vitória, se houver mais de uma, escolha a que tiver a maior pontuação. Caso não tenha uma jogada para vencer, o jogador deve minimizar a pontuação do adversário. Após fazer isso para um jogo inicial, os resultados são escritos em um arquivo _csv_ para análise. Esse procedimento é repetido para _cada_ organização possível do tabuleiro inicial.
 
 Exaurir todas as possibilidades de jogadas é um trabalho computacional imenso e cresce exponencialmente de acordo com o tamanho do jogo. Para um jogo pequeno com apenas dois discos e duas cores comuns (sem especiais) as jogadas possíveis são: mover o peão vermelho e pegar o disco da direita, ou da esquerda; e mover o peão verde e pegar o disco da direita ou da esquerda. Isso gera uma árvore onde cada nó possui quatro filhos e a altura média dessa árvore é quatro, totalizando uma quantidade de estados de aproximadamente $\sum_{h=0}^{4}4^{h} \approx 341$. Ao final do cálculo deste jogo reduzido, temos que o número de estados distintos varia entre 17 e 25, dependendo do estado inicial do tabuleiro. Devido a este grande número de estados repetidos, escrever o algoritmo fazendo uso de programação dinâmica economizou bastante tempo e processamento.
 
