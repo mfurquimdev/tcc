@@ -1,24 +1,35 @@
+<!--
+Capítulo 1 - Introdução
+-->
 \chapter{Introdução}
+\label{ch:introducao}
 
-# Sobre o que é o trabalho?
+Imagine que um grupo de pessoas concordam em obedecer certas regras e agir de forma individual, ou em grupos menores, sem violar as regras especificadas. No final, suas ações em como um todo levará a uma certa situação chamada **resultado**. Os membros deste grupo são chamados de **jogadores** e as regras que eles concordaram a obedecer constitui um **jogo**. A área da teoria dos jogos engloba estes conceitos para que seja possível realizar suas análises.
 
-# Relevância e contribuição
+A proposta deste trabalho foi realizar uma análise de um jogo de tabuleiro, já existente, chamado \textit{Big Points}. Utilizando-se de conceitos da teoria dos jogos e programação dinâmica, foi escrito um programa para exaurir todas as possibilidades de jogadas, e de todas as condições iniciais distintas, de uma quantidade reduzida de peças do jogo. Os resultados finais sugerem a possibilidade do jogo ser desbalanceado[^jogo_balanceado], dando ao primeiro jogador uma maior chance de vencer o jogo.
 
-# Problema e solução proposta (sucinta)
+[^jogo_balanceado]: É dito um jogo balanceado aquele que a chance dos jogadores de ganhar é a mesma.
 
-# Estrutura do trabalho
+A motivação que levou à realização deste trabalho foi identificar uma heurística na qual tem-se uma maior chance de ganhar. Dessa forma, seria possível programar uma IA[^ia] com diferentes dificuldades para jogar contra o jogador. No entanto, devido à complexidade estimada do trabalho, seu objetivo principal foi encontrar o _winning move_[^winning_move] para que dê insumo a trabalhos futuros, como a implementação desta IA. 
 
+[^ia]: Inteligência Artificial.
+[^winning_move]: _Winning move_ é aquele movimento que um jogador faz que lhe garante à vitória, independente das jogadas restantes dos outros jogadores. 
+
+A estrutura do trabalho foi dividida em cinco capítulos, sendo o primeiro esta introdução. O capítulo seguinte (\ref{ch:fundamentacao_teorica}), Fundamentação Teórica, relata um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo. Em seguida, tem-se o capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto até sua conclusão, e no capítulo \ref{ch:resultados} os resultados desta análise são discutidos. Por último, o capítulo \ref{ch:conclusao} onde é feita as considerações finais do trabalho e são citados alguns possíveis trabalhos futuros em cima do trabalho atual.
+
+<!--
+Capítulo 2 - Fundamentação Teórica
+-->
 \chapter{Fundamentação Teórica}
+\label{ch:fundamentacao_teorica}
 
-Teoria dos jogos é o estudo do comportamento estratégico interdependente[^interdependent_strategy], não apenas o estudo de como vencer ou perder em um jogo, apesar de às vezes esses dois fatos coincidirem. Isso faz com que o escopo seja mais abranjente, desde comportamentos no qual as duas pessoas devem cooperar para ganhar, ou as duas tentam se ajudar para ganharem independente ou, por fim, comportamento de duas pessoas que tentam vencer individualmente \cite{spaniel_2011}.
-
-[^interdependent_strategy]: Estratégia interdependente significa que as ações de uma pessoa interfere no resultado da outra, e vice-versa.
+Para um bom entendimento das análises realizadas no jogo \textit{Big Points} é preciso ter um conhecimento básico sobre teoria dos jogos e programação dinâmica. A primeira seção deste capítulo conta brevemente sobre a história da teoria dos jogos, com alguns nomes icônicos para esta área. A seção \ref{teoria-dos-jogos} explica um pouco sobre os conceitos da teoria dos jogos, mas apenas o necessário para este trabalho. Em seguida, tem-se a seção \ref{soluuxe7uxf5es-de-um-jogo} que explica alguns métodos de solucionar um jogo. Na seção \ref{programauxe7uxe3o-dinuxe2mica}, os conceitos sobre programação são explicados e, por fim, na seção \ref{regras-do-big-points} as regras do jogo \textit{Big Points} são explicadas.
 
 # Histórico da Teoria dos Jogos
 
 Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}. No século seguinte, o matemático e filósofo Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política. Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
 
-Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e **estratégia mista**[^mixed_strategy]. Em 1928, John von Neumann demonstrou que todo jogo finito[^finite_game] de **soma zero**[^zero_sum] com duas pessoas possui uma solução em estratégias mistas. Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
+Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista[^mixed_strategy]. Em 1928, John von Neumann demonstrou que todo jogo finito[^finite_game] de soma zero[^zero_sum] com duas pessoas possui uma solução em estratégias mistas. Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
 
 [^mixed_strategy]: Estratégia mista é um conjunto de estratégias puras associadas a uma distribuição de probabilidade \cite{figueiredo_conceitos}.
 
@@ -26,7 +37,77 @@ Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram �
 
 [^zero_sum]: Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.
 
+# Teoria dos Jogos
+
+A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas[^optimal_decision] sob condições de conflito[^conflict_condition]. Os elementos básicos de um jogo são o conjunto de **jogadores**, onde cada jogador possui um conjunto de **estratégias** e, a partir das escolhas de estratégias de cada jogador, temos uma **situação** ou **perfil**. Para cada perfil do jogo, tem-se um resultado no final do jogo. Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_**, ou **ganho**, para cada situação do jogo.
+
+Quando essa informação é inserida em uma matriz, tem-se uma **matriz de _payoff_**. Em outras palavras, matriz de ganho é a representação matricial dos _payoffs_ dos jogadores, onde as estratégia de um jogador estão representadas por cada linha e as de seu oponente estão representadas pelas colunas como mostra a tabela +@tbl:21. Além disso o ganho dos jogadores é representado como uma tupla (ou par) de valores, sendo que o primeiro é o ganho do primeiro jogador e o segundo valor, o do segundo jogador. 
+
+[^optimal_decision]: É considerado que os jogadores são seres racionais e que possuem conhecimento completo das regras do jogo. Às vezes o jogador também possui informação completa sobre o estado atual e do histórico de jogadas do jogo.
+
+[^conflict_condition]: Condições de conflito são aquelas no qual dois ou mais jogadores possuem o mesmo objetivo.
+
+  $P_2$ \\ $P_1$ | $E_{11}$ | $E_{12}$
+:---------------:|:--------:|:--------:
+     $E_{21}$    |  (1,0)   |  (2,3)
+     $E_{22}$    |  (3,4)   |  (0,2)
+
+Table: Matriz de ganho. {#tbl:21}
+
+Dessa forma, o primeiro jogador, que é representado por $P_1$, possui as estratégias $E_{11}$ e $E_{12}$. Semelhante ao primeiro jogador, tem-se o segundo jogador sendo representado por $P_2$ e com as estratégias $E_{21}$ e $E_{22}$. Os valores que se encontram na interseção da estratégia de $P_1$ e $P_2$ são os ganhos dos dois jogadores, dessa forma se as estratégias escolhidas forem $E_{12}$ e $E_{21}$, o primeiro jogador teria perdido com $3$ pontos e o segundo jogador venceria com $4$ pontos.
+
+De uma forma matemática mais genérica, tem-se o jogador $j \in {1,2}$
+
+## Soluções de um jogo
+
+Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. Dois métodos importantes para encontrar a solução de um estado do jogo são **dominância** e **equilíbrio de Nash**.
+
+É dito que uma determinada estratégia é uma **estratégia dominante** quando esta é a única estratégia restante após aplicar a técnica de **dominância estrita iterada**. O encontro das estratégias dos jogadores é chamado de **equilíbrio de estratégia dominante**.
+
+**Dominância estrita iterada** nada mais é do que um processo onde se eliminam as estratégias que são estritamente dominadas.
+Obs.: faltou explicar o que é uma estratégia dominada.
+
+**Solução estratégica** ou **Equilíbrio de Nash** é um conjunto de estratégias para cada jogador onde cada um deles não tem incentivo de mudar sua estratégia se os demais jogadores não o fizerem.
+
+**Zero-sum game**: a vitória de um jogador implica na derrota do outro.
+No Big Points, o jogador com maior pontuação vence. Pode-se dar pontuação 1 caso o jogador em questão é o vencedor, e -1 para o jogador que perdeu. Caso haja mais de um jogador com a maior pontuação do jogo, é dado 0 para o payoff dos dois jogadores.
+
+Outra maneira, mais refinada, de demonstrar a vitória e derrota entre os jogadores é calcular a difereça da pontuação entre eles. O jogador com a maior pontuação mantém sua pontuação, e o restante tem sua pontuação subtraída daquela maior pontuação do jogo (dando um resultado negativo).
+
+Backward Induction
+- As long as every player take turns you can start at the end of the game and make your way to the begin.
+- One strategy for every decision node
+
+Game Theory
+the study of strategic interaction among rational decision makers
+players: people playing the game; each player has a set of strategies
+strategies: what they will do, how they'll respond
+payoffs: result of the interaction of strategies
+
+strategy is a set with what decision you will make for every decision making situation in the game
+
+each players is chosen an strategy,
+these strategies interact,
+and the game plays out to its conclusion.
+
+rationality and common knowledge
+
+
+
+Teoria dos jogos é o estudo do comportamento estratégico interdependente[^interdependent_strategy], não apenas o estudo de como vencer ou perder em um jogo, apesar de às vezes esses dois fatos coincidirem. Isso faz com que o escopo seja mais abranjente, desde comportamentos no qual as duas pessoas devem cooperar para ganhar, ou as duas tentam se ajudar para ganharem independente ou, por fim, comportamento de duas pessoas que tentam vencer individualmente \cite{spaniel_2011}.
+
+[^interdependent_strategy]: Estratégia interdependente significa que as ações de uma pessoa interfere no resultado da outra, e vice-versa.
+
 # Conceitos Relevantes
+
+Alguns ceonceitos fundamentais para o entendimento da análise realizada em cima do jogo \textit{Big Points} são \textit{zero-sum game} e \textit{minimax}.
+
+Como o jogo não possui nenhum elemento dependente da sorte, não serão usados estratégias mistas. O \textit{winning move} não foi analizado devido à complexidade da implementação da análise atual.
+
+## Minimax
+
+
+## Programação dinâmica
 
 # Regras do Big Points
 
@@ -34,7 +115,7 @@ _Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar 
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.7\textwidth]{img/front}
+	\includegraphics[width=0.75\textwidth]{img/front}
 	\caption{Caixa do jogo \textbf{Big Points}}
 	\label{fig:front}
 \end{figure}
@@ -79,20 +160,24 @@ A pontuação do jogo é dependente da ordem de chegada dos peões na escada e d
 \end{equation}
 
 
+<!--
+Capítulo 3 - Metodologia
+-->
 \chapter{Metodologia}
+\label{ch:metodologia}
 
-# Scrum
+# \textit{Scrum}
 
 O _framework_ _scrum_ é ideal para o desenvolvimento de projetos complexos no qual a produtividade e a criatividade são essenciais para a entrega de um produto de alto valor. Inicialmente, tal método de organização e gerenciamento do projeto foi aplicado para o desenvolvimento do sistema em questão \cite{the_scrum_guide}. O _kanban_ do \href{https://waffle.io/mfurquim/tcc}{waffle.io} foi utilizado para registrar tarefas devido à sua integração com as _issues_ do github. Reuniões com o orientador foram realizadas para discutir aspectos técnicos do jogo, como as estruturas de dados a serem utilizadas para reduzir os dados armazenados, e alguns métodos importantes para agilizar o processamento.
 
 Porém, ao longo do tempo, o esforço para manter a rastreabilidade das tarefas tornou-se muito alto em relação à complexidade do projeto, e ao tamanho da equipe. As tarefas passaram a ser _branchs_ locais com nomes significativos, representando a funcionalidade a ser desenvolvida. Após a conclusão da tarefa, testes simples e manuais foram aplicados para então unir à _branch_ mestre[^git_merge]. Por fim, para trabalhar em outra _branch_, foi sempre necessário atualizá-la em relação à mestre[^git_rebase].
 
-[^git_merge]: \texttt{\$ git merge}
+[^git_merge]: \texttt{\$ git checkout <to-branch>; git merge <from-branch>}
 [^git_rebase]: \texttt{\$ git rebase <from-branch> <to-branch>}
 
 # Análise do jogo \textit{Big Points}
 
-Para analizar o jogo _Big Points_, é preciso realizar todas as jogadas de todos os jogos possíveis. Cada jogador, na sua vez, deve escolher uma jogada na qual lhe garanta a vitória, se houver mais de uma, escolha a que tiver a maior pontuação. Caso não tenha uma jogada para vencer, o jogador deve minimizar a pontuação do adversário. Após fazer isso para um jogo inicial, os resultados são escritos em um arquivo _csv_ para análise. Esse procedimento é repetidos para _cada_ organização possível do tabuleiro inicial.
+Para analizar o jogo _Big Points_, é preciso realizar todas as jogadas de todos os jogos possíveis. Cada jogador, na sua vez, deve escolher uma jogada na qual lhe garanta a vitória, se houver mais de uma, escolha a que tiver a maior pontuação. Caso não tenha uma jogada para vencer, o jogador deve minimizar a pontuação do adversário. Após fazer isso para um jogo inicial, os resultados são escritos em um arquivo _csv_ para análise. Esse procedimento é repetido para _cada_ organização possível do tabuleiro inicial.
 
 Exaurir todas as possibilidades de jogadas é um trabalho computacional imenso e cresce exponencialmente de acordo com o tamanho do jogo. Para um jogo pequeno com apenas dois discos e duas cores comuns (sem especiais) as jogadas possíveis são: mover o peão vermelho e pegar o disco da direita, ou da esquerda; e mover o peão verde e pegar o disco da direita ou da esquerda. Isso gera uma árvore onde cada nó possui quatro filhos e a altura média dessa árvore é quatro, totalizando uma quantidade de estados de aproximadamente $\sum_{h=0}^{4}4^{h} \approx 341$. Ao final do cálculo deste jogo reduzido, temos que o número de estados distintos varia entre 17 e 25, dependendo do estado inicial do tabuleiro. Devido a este grande número de estados repetidos, escrever o algoritmo fazendo uso de programação dinâmica economizou bastante tempo e processamento.
 
@@ -145,8 +230,8 @@ A estrutura \texttt{State} possui cinco variáveis:
 \texttt{\_jogadores}, possui informações sobre os discos coletados dos dois jogadores;
 e por fim, a variável \texttt{\_atual} que representa o jogador que fará a jogada. 
 
-[^tabuleiro]: Cinco cores e quatro discos ou quatro cores e cinco discos.
-[^cor_peao]: As cores de peão seguem a ordem RGBYP, onde $\textbf{R}ed = 0$, $\textbf{G}reen = 1$, $\textbf{B}lue = 2$, $\textbf{Y}ellow = 3$, e $\textbf{P}urple = 4$.
+[^tabuleiro]: Cinco cores e quatro discos.
+[^cor_peao]: As cores de peão seguem a ordem RGBYP começando do $0$, onde $\textbf{R}ed = 0$, $\textbf{G}reen = 1$, $\textbf{B}lue = 2$, $\textbf{Y}ellow = 3$, e $\textbf{P}urple = 4$.
 
 \lstinputlisting[language=C++, firstnumber=10, linerange={10-31}]{../../pd/inc/state.h}
 
@@ -157,20 +242,20 @@ O cálculo para determinar os _bits_ necessários para armazenar as informaçõe
 	\tag{e.q. \emph{bits} de \_tabuleiro}
 	\begin{split}
 		\texttt{\_tabuleiro} &= n_c \cdot n_d\\
-		\texttt{\_tabuleiro} &= \max(4 \cdot 5,\ 5 \cdot 4)\\
+		\texttt{\_tabuleiro} &= 5 \cdot 4\\
 		\texttt{\_tabuleiro} &= 20\ \emph{bits}
 	\end{split}
 \end{equation}
 
-Na equação \ref{eq:bitstabuleiro}, $n_c$ e $n_d$ são o número de cores e o número de discos do jogo, respectivamente. Seus valores são, no máximo, $n_c = 4$ quando $n_d = 5$ e $n_c = 5$ quando $n_d = 4$.
+Na equação \ref{eq:bitstabuleiro}, $n_c$ e $n_d$ são o número de cores e o número de discos do jogo, respectivamente. Seus valores são, no máximo $n_c = 5$ e $n_d = 4$.
 
 \begin{equation}
 	\label{eq:bitspeao}
 	\tag{e.q. \emph{bits} de \_peao}
 	\begin{split}
 		\texttt{\_peao} &= \lceil \log_2(n_d+1) \rceil \cdot n_p\\
-		\texttt{\_peao} &= \max\left(\lceil \log_2(4 + 1) \rceil \cdot 5,\ \lceil \log_2(5 + 1)\rceil \cdot 4 \right)\\
-		\texttt{\_peao} &= \max\left(3 \cdot 5,\ 3 \cdot 4 \right)\\
+		\texttt{\_peao} &= \lceil \log_2(5 + 1)\rceil \cdot 4\\
+		\texttt{\_peao} &= 3 \cdot 4\\
 		\texttt{\_peao} &= 15\ \emph{bits}
 	\end{split}
 \end{equation}
@@ -181,7 +266,7 @@ Na segunda equação, \ref{eq:bitspeao}, o valor de $n_d$ é o número de discos
 	\label{eq:bitsescada}
 	\tag{e.q. \emph{bits} de \_escada}
 	\begin{split}
-		\texttt{\_escada} &= \lceil \log_2(n_c+1) \rceil\cdot n_p\\
+		\texttt{\_escada} &= \lceil \log_2(n_p+1) \rceil\cdot n_p\\
 		\texttt{\_escada} &= \lceil \log_2(6) \rceil \cdot 5\\
 		\texttt{\_escada} &= 15\ \emph{bits}
 	\end{split}
@@ -196,8 +281,8 @@ A equação \ref{eq:bitsescada} possui as variáveis $n_p$ e $n_c$ com $n_p, n_c
 	\tag{e.q. \emph{bits} de \_jogadores}
 	\begin{split}
 		\texttt{\_jogadores} &= \lceil \log_2(n_d+1) \rceil \cdot n_c \cdot n_j\\
-		\texttt{\_jogadores} &= \max(\lceil \log_2(5+1) \rceil \cdot 4 \cdot 2,\ \lceil \log_2(4+1) \rceil \cdot 5 \cdot 2)\\
-		\texttt{\_jogadores} &= \max(3 \cdot 4 \cdot 2,\ 3 \cdot 5 \cdot 2)\\
+		\texttt{\_jogadores} &= \lceil \log_2(4+1) \rceil \cdot 5 \cdot 2\\
+		\texttt{\_jogadores} &= 3 \cdot 5 \cdot 2\\
 		\texttt{\_jogadores} &= 30\ \emph{bits}
 	\end{split}
 \end{equation}
@@ -223,7 +308,7 @@ A estrutura possui um construtor que atribui valores às variáveis através de 
 
 \lstinputlisting[language=C++, firstnumber=42, linerange={42-48}]{../../pd/inc/state.h}
 
-# Comparador
+## Comparador
 
 
 
@@ -242,10 +327,17 @@ onde os estados são armazenados em uma _hash_, temos que o número de estados d
 Devido ao imenso número de jogadas possíveis ao longo do do jogo, decidiu-se utilizar a programação dinâmica para 
 - Duas funções para melhor entendimento da DP e regras do jogo
 
-## Função \textbf{dp}
+## Função \texttt{dp}
 
-## Função \textbf{play}
+A função \texttt{dp} possui os casos base para retornar a função, 
 
+\lstinputlisting[language=C++]{../../pd/src/dp.cpp}
+
+
+## Função \texttt{play}
+
+
+\lstinputlisting[language=C++]{../../pd/src/dp.cpp}
 
 - Explicação da DP e da função Play (função para realizar as jogadas)
 
@@ -253,6 +345,34 @@ Devido ao imenso número de jogadas possíveis ao longo do do jogo, decidiu-se u
 
 Foi escrito os estados e suas transições em _post-it_s para garantir que a _DP_ foi feita corretamente. Os estados
 
-\chapter{Conclusão}
+
+<!--
+Capítulo 4 - Resultados
+-->
+\chapter{Resultados}
+\label{ch:resultados}
 
 # Trabalhos futuros
+
+
+<!--
+Capítulo 5 - Conclusão
+-->
+\chapter{Conclusão}
+\label{ch:conclusao}
+
+# Trabalhos futuros
+
+<!--
+Algorithms for games
+G.M. Adelson-Velsky
+V.L. Arlazarov
+M.V. Donskoy
+
+
+Lembrando a definição recursiva de uma árvore. Os elementos de uma árvore são _nós_ e _arestas_. Um nó incidente na aresta é chamado de _começo_ e o outro _final_.
+A árvore pode ser: a) um único nó, ou b) possui um nó adicional e uma aresta começando por um nó já existente e terminando em um novo nó.
+Se o nó antigo é representado por $A$ e o novo nó por $B$, a aresta saindo de $A$ para $B$ é representado por $(A,B)$ ou $B$
+-->
+
+
