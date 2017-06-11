@@ -4,12 +4,18 @@ Capítulo 1 - Introdução
 \chapter{Introdução}
 \label{ch:introducao}
 
-A proposta deste trabalho é realizar uma análise em cima de um jogo de tabuleiro, já existente, chamado \textit{Big Points}. Fazendo uso de conceitos da teoria dos jogos e programação dinâmica, foi escrito um programa para exaurir todas as possibilidades de jogadas, e de todas as condições iniciais distintas, de uma quantidade reduzida de peças do jogo. Os resultados finais corroboram com a ideia de que o jogo é desbalanceado[^jogo_balanceado], dando ao primeiro jogador uma maior chance de vencer o jogo.
+Imagine que um grupo de pessoas concordam em obedecer certas regras e agir de forma individual, ou em grupos menores, sem violar as regras especificadas. No final, suas ações em como um todo levará a uma certa situação chamada **resultado**. Os membros deste grupo são chamados de **jogadores** e as regras que eles concordaram a obedecer constitui um **jogo**. A área da teoria dos jogos engloba estes conceitos para que seja possível realizar suas análises.
+
+A proposta deste trabalho foi realizar uma análise de um jogo de tabuleiro, já existente, chamado \textit{Big Points}. Utilizando-se de conceitos da teoria dos jogos e programação dinâmica, foi escrito um programa para exaurir todas as possibilidades de jogadas, e de todas as condições iniciais distintas, de uma quantidade reduzida de peças do jogo. Os resultados finais sugerem a possibilidade do jogo ser desbalanceado[^jogo_balanceado], dando ao primeiro jogador uma maior chance de vencer o jogo.
 
 [^jogo_balanceado]: É dito um jogo balanceado aquele que a chance dos jogadores de ganhar é a mesma.
 
-A estrutura do trabalho foi dividida em cinco capítulos, sendo o primeiro esta introdução. O capítulo seguinte, de fundamentação teórica, relata um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo. Em seguida, tem-se o capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto até sua conclusão, e no capítulo \ref{ch:resultados} os resultados desta análise são discutidos. Por último, o capítulo \ref{ch:conclusao} onde é feita a conclusão do trabalho e são citados alguns possíveis trabalhos futuros em cima do trabalho atual.
+A motivação que levou à realização deste trabalho foi identificar uma heurística na qual tem-se uma maior chance de ganhar. Dessa forma, seria possível programar uma IA[^ia] com diferentes dificuldades para jogar contra o jogador. No entanto, devido à complexidade estimada do trabalho, seu objetivo principal foi encontrar o _winning move_[^winning_move] para que dê insumo a trabalhos futuros, como a implementação desta IA. 
 
+[^ia]: Inteligência Artificial.
+[^winning_move]: _Winning move_ é aquele movimento que um jogador faz que lhe garante à vitória, independente das jogadas restantes dos outros jogadores. 
+
+A estrutura do trabalho foi dividida em cinco capítulos, sendo o primeiro esta introdução. O capítulo seguinte (\ref{ch:fundamentacao_teorica}), Fundamentação Teórica, relata um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo. Em seguida, tem-se o capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto até sua conclusão, e no capítulo \ref{ch:resultados} os resultados desta análise são discutidos. Por último, o capítulo \ref{ch:conclusao} onde é feita as considerações finais do trabalho e são citados alguns possíveis trabalhos futuros em cima do trabalho atual.
 
 <!--
 Capítulo 2 - Fundamentação Teórica
@@ -17,23 +23,43 @@ Capítulo 2 - Fundamentação Teórica
 \chapter{Fundamentação Teórica}
 \label{ch:fundamentacao_teorica}
 
-Para um bom entendimento das análises realizadas no jogo \textit{Big Points} é preciso ter um conhecimento básico sobre teoria dos jogos e programação dinÂmica. Na 
+Para um bom entendimento das análises realizadas no jogo \textit{Big Points} é preciso ter um conhecimento básico sobre teoria dos jogos e programação dinâmica. A primeira seção deste capítulo conta brevemente sobre a história da teoria dos jogos, com alguns nomes icônicos para esta área. A seção \ref{teoria-dos-jogos} explica um pouco sobre os conceitos da teoria dos jogos, mas apenas o necessário para este trabalho. Em seguida, tem-se a seção \ref{soluuxe7uxf5es-de-um-jogo} que explica alguns métodos de solucionar um jogo. Na seção \ref{programauxe7uxe3o-dinuxe2mica}, os conceitos sobre programação são explicados e, por fim, na seção \ref{regras-do-big-points} as regras do jogo \textit{Big Points} são explicadas.
 
-\ref{teoria-dos-jogos}
-\ref{soluuxe7uxf5es-de-um-jogo}
-\ref{histuxf3rico-da-teoria-dos-jogos}
-\ref{conceitos-relevantes}
-\ref{minimax}
-\ref{programauxe7uxe3o-dinuxe2mica}
-\ref{regras-do-big-points}
+# Histórico da Teoria dos Jogos
+
+Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}. No século seguinte, o matemático e filósofo Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política. Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
+
+Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista[^mixed_strategy]. Em 1928, John von Neumann demonstrou que todo jogo finito[^finite_game] de soma zero[^zero_sum] com duas pessoas possui uma solução em estratégias mistas. Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
+
+[^mixed_strategy]: Estratégia mista é um conjunto de estratégias puras associadas a uma distribuição de probabilidade \cite{figueiredo_conceitos}.
+
+[^finite_game]: Jogos finitos são aqueles onde cada participante se depara com um conjunto finito de escolhas, ou seja, eles escolhem suas estratégias dentro de um conjunto finito de alternativas \cite{figueiredo_conceitos}.
+
+[^zero_sum]: Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.
 
 # Teoria dos Jogos
 
-A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas sob condições de conflito. Os elementos básicos de um jogo são: o conjunto de **jogadores**, onde cada jogador possui um conjunto de **estratégias**. A partir das escolhas de estratégias de cada jogador, temos uma **situação** ou **perfil**.
+A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas[^optimal_decision] sob condições de conflito[^conflict_condition]. Os elementos básicos de um jogo são o conjunto de **jogadores**, onde cada jogador possui um conjunto de **estratégias** e, a partir das escolhas de estratégias de cada jogador, temos uma **situação** ou **perfil**. Para cada perfil do jogo, tem-se um resultado no final do jogo. Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_**, ou **ganho**, para cada situação do jogo.
 
-Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_**, ou **ganho**, para cada situação do jogo. Quando essa informação é inserida na matriz da **forma normal**, tem-se uma **matriz de _payoff_**. Em outras palavras, matriz de ganho é a representação matricial dos _payoffs_ dos jogadores, onde as estratégia de um jogador estão representadas por cada linha e as de seu oponente estão representadas pelas colunas.
+Quando essa informação é inserida em uma matriz, tem-se uma **matriz de _payoff_**. Em outras palavras, matriz de ganho é a representação matricial dos _payoffs_ dos jogadores, onde as estratégia de um jogador estão representadas por cada linha e as de seu oponente estão representadas pelas colunas como mostra a tabela +@tbl:21. Além disso o ganho dos jogadores é representado como uma tupla (ou par) de valores, sendo que o primeiro é o ganho do primeiro jogador e o segundo valor, o do segundo jogador. 
+
+[^optimal_decision]: É considerado que os jogadores são seres racionais e que possuem conhecimento completo das regras do jogo. Às vezes o jogador também possui informação completa sobre o estado atual e do histórico de jogadas do jogo.
+
+[^conflict_condition]: Condições de conflito são aquelas no qual dois ou mais jogadores possuem o mesmo objetivo.
+
+  $P_2$ \\ $P_1$ | $E_{11}$ | $E_{12}$
+:---------------:|:--------:|:--------:
+     $E_{21}$    |  (1,0)   |  (2,3)
+     $E_{22}$    |  (3,4)   |  (0,2)
+
+Table: Matriz de ganho. {#tbl:21}
+
+Dessa forma, o primeiro jogador, que é representado por $P_1$, possui as estratégias $E_{11}$ e $E_{12}$. Semelhante ao primeiro jogador, tem-se o segundo jogador sendo representado por $P_2$ e com as estratégias $E_{21}$ e $E_{22}$. Os valores que se encontram na interseção da estratégia de $P_1$ e $P_2$ são os ganhos dos dois jogadores, dessa forma se as estratégias escolhidas forem $E_{12}$ e $E_{21}$, o primeiro jogador teria perdido com $3$ pontos e o segundo jogador venceria com $4$ pontos.
+
+De uma forma matemática mais genérica, tem-se o jogador $j \in {1,2}$
 
 ## Soluções de um jogo
+
 Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. Dois métodos importantes para encontrar a solução de um estado do jogo são **dominância** e **equilíbrio de Nash**.
 
 É dito que uma determinada estratégia é uma **estratégia dominante** quando esta é a única estratégia restante após aplicar a técnica de **dominância estrita iterada**. O encontro das estratégias dos jogadores é chamado de **equilíbrio de estratégia dominante**.
@@ -71,18 +97,6 @@ rationality and common knowledge
 Teoria dos jogos é o estudo do comportamento estratégico interdependente[^interdependent_strategy], não apenas o estudo de como vencer ou perder em um jogo, apesar de às vezes esses dois fatos coincidirem. Isso faz com que o escopo seja mais abranjente, desde comportamentos no qual as duas pessoas devem cooperar para ganhar, ou as duas tentam se ajudar para ganharem independente ou, por fim, comportamento de duas pessoas que tentam vencer individualmente \cite{spaniel_2011}.
 
 [^interdependent_strategy]: Estratégia interdependente significa que as ações de uma pessoa interfere no resultado da outra, e vice-versa.
-
-# Histórico da Teoria dos Jogos
-
-Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}. No século seguinte, o matemático e filósofo Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política. Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
-
-Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista[^mixed_strategy]. Em 1928, John von Neumann demonstrou que todo jogo finito[^finite_game] de soma zero[^zero_sum] com duas pessoas possui uma solução em estratégias mistas. Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
-
-[^mixed_strategy]: Estratégia mista é um conjunto de estratégias puras associadas a uma distribuição de probabilidade \cite{figueiredo_conceitos}.
-
-[^finite_game]: Jogos finitos são aqueles onde cada participante se depara com um conjunto finito de escolhas, ou seja, eles escolhem suas estratégias dentro de um conjunto finito de alternativas \cite{figueiredo_conceitos}.
-
-[^zero_sum]: Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.
 
 # Conceitos Relevantes
 
@@ -348,3 +362,17 @@ Capítulo 5 - Conclusão
 \label{ch:conclusao}
 
 # Trabalhos futuros
+
+<!--
+Algorithms for games
+G.M. Adelson-Velsky
+V.L. Arlazarov
+M.V. Donskoy
+
+
+Lembrando a definição recursiva de uma árvore. Os elementos de uma árvore são _nós_ e _arestas_. Um nó incidente na aresta é chamado de _começo_ e o outro _final_.
+A árvore pode ser: a) um único nó, ou b) possui um nó adicional e uma aresta começando por um nó já existente e terminando em um novo nó.
+Se o nó antigo é representado por $A$ e o novo nó por $B$, a aresta saindo de $A$ para $B$ é representado por $(A,B)$ ou $B$
+-->
+
+
