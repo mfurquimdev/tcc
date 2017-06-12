@@ -4,18 +4,27 @@ Capítulo 1 - Introdução
 \chapter{Introdução}
 \label{ch:introducao}
 
-Imagine que um grupo de pessoas concordam em obedecer certas regras e agir de forma individual, ou em grupos menores, sem violar as regras especificadas. No final, suas ações em como um todo levará a uma certa situação chamada **resultado**. Os membros deste grupo são chamados de **jogadores** e as regras que eles concordaram a obedecer constitui um **jogo**. A área da teoria dos jogos engloba estes conceitos para que seja possível realizar suas análises.
+Imagine que um grupo de pessoas concordam em obedecer certas regras e agir de forma individual, ou em grupos menores, sem violar as regras especificadas.
+No final, suas ações como um todo levará a uma certa situação chamada **resultado**.
+Os membros deste grupo são chamados de **jogadores** e as regras que eles concordaram em obedecer constitui um **jogo**.
+Estes conceitos são pequenos exemplos utilizados em análises baseadas na **teoria dos jogos**.
 
-A proposta deste trabalho foi realizar uma análise de um jogo de tabuleiro, já existente, chamado \textit{Big Points}. Utilizando-se de conceitos da teoria dos jogos e programação dinâmica, foi escrito um programa para exaurir todas as possibilidades de jogadas, e de todas as condições iniciais distintas, de uma quantidade reduzida de peças do jogo. Os resultados finais sugerem a possibilidade do jogo ser desbalanceado[^jogo_balanceado], dando ao primeiro jogador uma maior chance de vencer o jogo.
+A proposta deste trabalho foi realizar uma destas análise em um jogo de tabuleiro chamado _Big Points_.
+A motivação que levou à realização deste trabalho foi identificar uma heurística na qual tem-se uma maior chance de ganhar uma partida.
+Dessa forma, seria possível a implementação de uma I.A. com diferentes dificuldades para jogar contra uma pessoa.
+Dito isso, o objetivo principal deste trabalho foi analisar várias partidas distintas de uma versão reduzida do jogo.
+
+[^jogo_solucao]: Solucionar um jogo é percorrer todas as sua possibilidades de movimento e seus resultados.
+
+Uma análise possível para solucionar[^jogo_solucao] o jogo é utilizar o teorema _minimax_[^minimax], onde cada jogador tenta aumentar sua pontuação e diminuir a pontuação do oponente.
+Os resultados obtidos ao final dessa análise computacional baseadas no teorema _minimax_ sugere a possibilidade do jogo completo ser desbalanceado[^jogo_balanceado], dando ao primeiro jogador uma maior chance de vencer o jogo.
 
 [^jogo_balanceado]: É dito um jogo balanceado aquele que a chance dos jogadores de ganhar é a mesma.
 
-A motivação que levou à realização deste trabalho foi identificar uma heurística na qual tem-se uma maior chance de ganhar. Dessa forma, seria possível programar uma IA[^ia] com diferentes dificuldades para jogar contra o jogador. No entanto, devido à complexidade estimada do trabalho, seu objetivo principal foi encontrar o _winning move_[^winning_move] para que dê insumo a trabalhos futuros, como a implementação desta IA. 
-
-[^ia]: Inteligência Artificial.
-[^winning_move]: _Winning move_ é aquele movimento que um jogador faz que lhe garante à vitória, independente das jogadas restantes dos outros jogadores. 
-
-A estrutura do trabalho foi dividida em cinco capítulos, sendo o primeiro esta introdução. O capítulo seguinte (\ref{ch:fundamentacao_teorica}), Fundamentação Teórica, relata um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo. Em seguida, tem-se o capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto até sua conclusão, e no capítulo \ref{ch:resultados} os resultados desta análise são discutidos. Por último, o capítulo \ref{ch:conclusao} onde é feita as considerações finais do trabalho e são citados alguns possíveis trabalhos futuros em cima do trabalho atual.
+A estrutura do trabalho foi dividida em cinco capítulos, sendo o primeiro esta introdução.
+O capítulo seguinte (\ref{ch:fundamentacao_teorica}), Fundamentação Teórica, relata um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo.
+Em seguida, tem-se o capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto até sua conclusão, e no capítulo \ref{ch:resultados} os resultados desta análise são discutidos.
+Por último, o capítulo \ref{ch:conclusao} onde são feitas as considerações finais do trabalho e são citados alguns possíveis trabalhos futuros em cima do trabalho atual.
 
 <!--
 Capítulo 2 - Fundamentação Teórica
@@ -23,13 +32,21 @@ Capítulo 2 - Fundamentação Teórica
 \chapter{Fundamentação Teórica}
 \label{ch:fundamentacao_teorica}
 
-Para um bom entendimento das análises realizadas no jogo \textit{Big Points} é preciso ter um conhecimento básico sobre teoria dos jogos e programação dinâmica. A primeira seção deste capítulo conta brevemente sobre a história da teoria dos jogos, com alguns nomes icônicos para esta área. A seção \ref{teoria-dos-jogos} explica um pouco sobre os conceitos da teoria dos jogos, mas apenas o necessário para este trabalho. Em seguida, tem-se a seção \ref{soluuxe7uxf5es-de-um-jogo} que explica alguns métodos de solucionar um jogo. Na seção \ref{programauxe7uxe3o-dinuxe2mica}, os conceitos sobre programação são explicados e, por fim, na seção \ref{regras-do-big-points} as regras do jogo \textit{Big Points} são explicadas.
+Para um bom entendimento da análise realizada no jogo _Big Points_ é preciso ter um conhecimento básico sobre teoria dos jogos e programação dinâmica.
+A primeira seção deste capítulo conta brevemente sobre a história da teoria dos jogos, com alguns nomes icônicos para esta área.
+A seção \ref{teoria-dos-jogos} explica um pouco sobre os conceitos da teoria dos jogos, mas apenas o necessário para este trabalho.
+Na seção \ref{programauxe7uxe3o-dinuxe2mica}, são explicados os conceitos sobre programação dinâmica e, na última seção (\ref{regras-do-big-points}), as regras do jogo \textit{Big Points} são explicadas.
 
 # Histórico da Teoria dos Jogos
 
-Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}. No século seguinte, o matemático e filósofo Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política. Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
+Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}.
+No século seguinte, o matemático e filósofo Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política.
+Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
 
-Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann. Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista[^mixed_strategy]. Em 1928, John von Neumann demonstrou que todo jogo finito[^finite_game] de soma zero[^zero_sum] com duas pessoas possui uma solução em estratégias mistas. Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
+Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann.
+Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista.
+Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero com duas pessoas possui uma solução em estratégias mistas.
+Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
 
 [^mixed_strategy]: Estratégia mista é um conjunto de estratégias puras associadas a uma distribuição de probabilidade \cite{figueiredo_conceitos}.
 
@@ -39,9 +56,14 @@ Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram �
 
 # Teoria dos Jogos
 
-A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas[^optimal_decision] sob condições de conflito[^conflict_condition]. Os elementos básicos de um jogo são o conjunto de **jogadores**, onde cada jogador possui um conjunto de **estratégias** e, a partir das escolhas de estratégias de cada jogador, temos uma **situação** ou **perfil**. Para cada perfil do jogo, tem-se um resultado no final do jogo. Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_**, ou **ganho**, para cada situação do jogo.
+A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas[^optimal_decision] sob condições de conflito[^conflict_condition].
+Os elementos básicos de um jogo são o conjunto de **jogadores**, onde cada jogador possui um conjunto de **estratégias** e, a partir das escolhas de estratégias de cada jogador, temos uma **situação** ou **perfil**.
+Para cada perfil do jogo, tem-se um resultado no final do jogo.
+Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_**, ou **ganho**, para cada situação do jogo.
 
-Quando essa informação é inserida em uma matriz, tem-se uma **matriz de _payoff_**. Em outras palavras, matriz de ganho é a representação matricial dos _payoffs_ dos jogadores, onde as estratégia de um jogador estão representadas por cada linha e as de seu oponente estão representadas pelas colunas como mostra a tabela +@tbl:21. Além disso o ganho dos jogadores é representado como uma tupla (ou par) de valores, sendo que o primeiro é o ganho do primeiro jogador e o segundo valor, o do segundo jogador. 
+Quando essa informação é inserida em uma matriz, tem-se uma **matriz de _payoff_**.
+Em outras palavras, matriz de ganho é a representação matricial dos _payoffs_ dos jogadores, onde as estratégia de um jogador estão representadas por cada linha e as de seu oponente estão representadas pelas colunas como mostra a tabela +@tbl:21.
+Além disso o ganho dos jogadores é representado como uma tupla (ou par) de valores, sendo que o primeiro é o ganho do primeiro jogador e o segundo valor, o do segundo jogador. 
 
 [^optimal_decision]: É considerado que os jogadores são seres racionais e que possuem conhecimento completo das regras do jogo. Às vezes o jogador também possui informação completa sobre o estado atual e do histórico de jogadas do jogo.
 
@@ -54,15 +76,28 @@ Quando essa informação é inserida em uma matriz, tem-se uma **matriz de _payo
 
 Table: Matriz de ganho. {#tbl:21}
 
-Dessa forma, o primeiro jogador, que é representado por $P_1$, possui as estratégias $E_{11}$ e $E_{12}$. Semelhante ao primeiro jogador, tem-se o segundo jogador sendo representado por $P_2$ e com as estratégias $E_{21}$ e $E_{22}$. Os valores que se encontram na interseção da estratégia de $P_1$ e $P_2$ são os ganhos dos dois jogadores, dessa forma se as estratégias escolhidas forem $E_{12}$ e $E_{21}$, o primeiro jogador teria perdido com $3$ pontos e o segundo jogador venceria com $4$ pontos.
+Dessa forma, o primeiro jogador, que é representado por $P_1$, possui as estratégias $E_{11}$ e $E_{12}$.
+Semelhante ao primeiro jogador, tem-se o segundo jogador sendo representado por $P_2$ e com as estratégias $E_{21}$ e $E_{22}$.
+Os valores que se encontram na interseção da estratégia de $P_1$ e $P_2$ são os ganhos dos dois jogadores, dessa forma se as estratégias escolhidas forem $E_{12}$ e $E_{21}$, o primeiro jogador teria perdido com $3$ pontos e o segundo jogador venceria com $4$ pontos.
 
-De uma forma matemática mais genérica, tem-se o jogador $j \in {1,2}$
+De uma forma matemática mais genérica, tem-se o jogador $i \in \{1,2\}$ onde sua estratégia é representada por $\sigma_i \forall \sigma \in S_i$. 
+
+
+## Minimax
+
+Como o jogo não possui nenhum elemento dependente da sorte, não serão usados estratégias mistas. O \textit{winning move} não foi analizado devido à complexidade da implementação da análise atual.
+
+e as estratégias $\sigma$ e $\tau$ para o primeiro e segundo jogador, respectivamente.
+para cada jogador, as estratégias $e \in \{1,2,\cdots,n\}$.
+Com isso, cada estratégia pode ser representada por $E_{je}$.
+Para determinar a pontuação dos jogadores, temos uma função ultilidade $u(E_{1e},E_{2e})$ tal que retorne uma tupla $(a,b)$ onde $a$ representa o ganho do jogador $1$ e $b$ representa o ganho do jogador $2$.
 
 ## Soluções de um jogo
 
 Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. Dois métodos importantes para encontrar a solução de um estado do jogo são **dominância** e **equilíbrio de Nash**.
 
-É dito que uma determinada estratégia é uma **estratégia dominante** quando esta é a única estratégia restante após aplicar a técnica de **dominância estrita iterada**. O encontro das estratégias dos jogadores é chamado de **equilíbrio de estratégia dominante**.
+É dito que uma determinada estratégia é uma **estratégia dominante** quando esta é a única estratégia restante após aplicar a técnica de **dominância estrita iterada**.
+O encontro das estratégias dos jogadores é chamado de **equilíbrio de estratégia dominante**.
 
 **Dominância estrita iterada** nada mais é do que um processo onde se eliminam as estratégias que são estritamente dominadas.
 Obs.: faltou explicar o que é uma estratégia dominada.
@@ -98,16 +133,11 @@ Teoria dos jogos é o estudo do comportamento estratégico interdependente[^inte
 
 [^interdependent_strategy]: Estratégia interdependente significa que as ações de uma pessoa interfere no resultado da outra, e vice-versa.
 
-# Conceitos Relevantes
+# Programação dinâmica
 
-Alguns ceonceitos fundamentais para o entendimento da análise realizada em cima do jogo \textit{Big Points} são \textit{zero-sum game} e \textit{minimax}.
+MIMIMIPROGRAM A SODIAMSDOUAHSDOIUG ADIFHGSDKJFHGSD FJGSkfdjgHSDfas
+asdasd
 
-Como o jogo não possui nenhum elemento dependente da sorte, não serão usados estratégias mistas. O \textit{winning move} não foi analizado devido à complexidade da implementação da análise atual.
-
-## Minimax
-
-
-## Programação dinâmica
 
 # Regras do Big Points
 
@@ -151,11 +181,11 @@ A pontuação do jogo é dependente da ordem de chegada dos peões na escada e d
 
 \begin{equation}
 	\label{eq:expontuacao}
-	\tag{e.q. Exemplo de pontuação}
+	\tag{eq. Exemplo de pontuação}
 	\begin{split}
-		Pontuacao &= n_r \cdot (n_c - p_r) + n_g \cdot (n_c - p_g) + n_b \cdot (n_c - p_b)\\
-		Pontuacao &= 2 \cdot (3 - 3) + 1 \cdot (3 - 2) + 3 \cdot (3 - 1)\\
-		Pontuacao &= 7
+		P &= n_r \cdot (n_c - p_r) + n_g \cdot (n_c - p_g) + n_b \cdot (n_c - p_b)\\
+		P &= 2 \cdot (3 - 3) + 1 \cdot (3 - 2) + 3 \cdot (3 - 1)\\
+		P &= 7
 	\end{split}
 \end{equation}
 
@@ -166,9 +196,14 @@ Capítulo 3 - Metodologia
 \chapter{Metodologia}
 \label{ch:metodologia}
 
-# \textit{Scrum}
+# \textit{Fluxo de Trabalho}
 
-O _framework_ _scrum_ é ideal para o desenvolvimento de projetos complexos no qual a produtividade e a criatividade são essenciais para a entrega de um produto de alto valor. Inicialmente, tal método de organização e gerenciamento do projeto foi aplicado para o desenvolvimento do sistema em questão \cite{the_scrum_guide}. O _kanban_ do \href{https://waffle.io/mfurquim/tcc}{waffle.io} foi utilizado para registrar tarefas devido à sua integração com as _issues_ do github. Reuniões com o orientador foram realizadas para discutir aspectos técnicos do jogo, como as estruturas de dados a serem utilizadas para reduzir os dados armazenados, e alguns métodos importantes para agilizar o processamento.
+O _framework_ _scrum_ é ideal para o desenvolvimento de projetos complexos no qual a produtividade e a criatividade são essenciais para a entrega de um produto de alto valor \cite{the_scrum_guide}.
+Inicialmente, tal método de organização e gerenciamento do projeto foi aplicado para o desenvolvimento do sistema em questão.
+O _kanban_ do \href{https://waffle.io/mfurquim/tcc}{waffle.io}[^waffleio] foi utilizado para registrar tarefas devido à sua integração com as _issues_ do github.
+Reuniões com o orientador foram realizadas para discutir aspectos técnicos do jogo, como as estruturas de dados a serem utilizadas para reduzir os dados armazenados, e alguns métodos importantes para agilizar o processamento.
+
+[^waffleio]:https://waffle.io/mfurquim/tcc
 
 Porém, ao longo do tempo, o esforço para manter a rastreabilidade das tarefas tornou-se muito alto em relação à complexidade do projeto, e ao tamanho da equipe. As tarefas passaram a ser _branchs_ locais com nomes significativos, representando a funcionalidade a ser desenvolvida. Após a conclusão da tarefa, testes simples e manuais foram aplicados para então unir à _branch_ mestre[^git_merge]. Por fim, para trabalhar em outra _branch_, foi sempre necessário atualizá-la em relação à mestre[^git_rebase].
 
@@ -200,7 +235,7 @@ Em todos as possíveis combinações de tabuleiros iniciais, o primeiro jogador 
 
 \begin{equation}
 	\label{eq:partidas}
-	\tag{e.q. Quantidades de Partidas Distintas}
+	\tag{eq. Quantidades de Partidas Distintas}
 	\begin{split}
 		Partidas\ &=\  (\#J-1) \cdot \binom{\#D_T}{\#D_W} \cdot \binom{\#D_{L1}}{\#D_K} \cdot \binom{\#D_{L2}}{\#D_R} \cdot \binom{\#D_{L3}}{\#D_G} \cdot \binom{\#D_{L4}}{\#D_B} \cdot \binom{\#D_{L5}}{\#D_Y} \cdot \binom{\#D_{L6}}{\#D_V}\\
 		Partidas\ &=\  4\cdot \binom{55}{5} \cdot \binom{50}{5} \cdot \binom{45}{9} \cdot \binom{36}{9} \cdot \binom{27}{9} \cdot \binom{18}{9} \cdot \binom{9}{9}\\
@@ -239,7 +274,7 @@ O cálculo para determinar os _bits_ necessários para armazenar as informaçõe
 
 \begin{equation}
 	\label{eq:bitstabuleiro}
-	\tag{e.q. \emph{bits} de \_tabuleiro}
+	\tag{eq. \emph{bits} de \_tabuleiro}
 	\begin{split}
 		\texttt{\_tabuleiro} &= n_c \cdot n_d\\
 		\texttt{\_tabuleiro} &= 5 \cdot 4\\
@@ -251,7 +286,7 @@ Na equação \ref{eq:bitstabuleiro}, $n_c$ e $n_d$ são o número de cores e o n
 
 \begin{equation}
 	\label{eq:bitspeao}
-	\tag{e.q. \emph{bits} de \_peao}
+	\tag{eq. \emph{bits} de \_peao}
 	\begin{split}
 		\texttt{\_peao} &= \lceil \log_2(n_d+1) \rceil \cdot n_p\\
 		\texttt{\_peao} &= \lceil \log_2(5 + 1)\rceil \cdot 4\\
@@ -264,7 +299,7 @@ Na segunda equação, \ref{eq:bitspeao}, o valor de $n_d$ é o número de discos
 
 \begin{equation}
 	\label{eq:bitsescada}
-	\tag{e.q. \emph{bits} de \_escada}
+	\tag{eq. \emph{bits} de \_escada}
 	\begin{split}
 		\texttt{\_escada} &= \lceil \log_2(n_p+1) \rceil\cdot n_p\\
 		\texttt{\_escada} &= \lceil \log_2(6) \rceil \cdot 5\\
@@ -278,7 +313,7 @@ A equação \ref{eq:bitsescada} possui as variáveis $n_p$ e $n_c$ com $n_p, n_c
 
 \begin{equation}
 	\label{eq:bitsjogadores}
-	\tag{e.q. \emph{bits} de \_jogadores}
+	\tag{eq. \emph{bits} de \_jogadores}
 	\begin{split}
 		\texttt{\_jogadores} &= \lceil \log_2(n_d+1) \rceil \cdot n_c \cdot n_j\\
 		\texttt{\_jogadores} &= \lceil \log_2(4+1) \rceil \cdot 5 \cdot 2\\
@@ -291,7 +326,7 @@ A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demons
 
 \begin{equation}
 	\label{eq:bitsatual}
-	\tag{e.q. \emph{bits} de \_atual}
+	\tag{eq. \emph{bits} de \_atual}
 	\begin{split}
 		\texttt{\_atual} &= \lceil \log_2(2) \rceil\\
 		\texttt{\_atual} &= 1\ \emph{bit}
@@ -331,19 +366,18 @@ Devido ao imenso número de jogadas possíveis ao longo do do jogo, decidiu-se u
 
 A função \texttt{dp} possui os casos base para retornar a função, 
 
-\lstinputlisting[language=C++]{../../pd/src/dp.cpp}
+\lstinputlisting[language=C++, firstnumber=1, linerange={1-5}]{../../pd/src/dp.cpp}
 
 
 ## Função \texttt{play}
 
-
-\lstinputlisting[language=C++]{../../pd/src/dp.cpp}
+\lstinputlisting[language=C++, firstnumber=1, linerange={1-5}]{../../pd/src/dp.cpp}
 
 - Explicação da DP e da função Play (função para realizar as jogadas)
 
 # Verificação dos estados
 
-Foi escrito os estados e suas transições em _post-it_s para garantir que a _DP_ foi feita corretamente. Os estados
+Foi escrito os estados e suas transições em \textit{post-it}s para garantir que a _DP_ foi feita corretamente. Os estados
 
 
 <!--
@@ -352,16 +386,22 @@ Capítulo 4 - Resultados
 \chapter{Resultados}
 \label{ch:resultados}
 
-# Trabalhos futuros
+# Análise Estatística
+
+Estimar quantidade de Jogos que o jogador 1 consegue ganhar, empatar e perder.
+
+o jogo é desbalanceado.
 
 
 <!--
-Capítulo 5 - Conclusão
+Capítulo 5 - Considerações Finais
 -->
-\chapter{Conclusão}
+\chapter{Considerações Finais}
 \label{ch:conclusao}
 
 # Trabalhos futuros
+
+Desenvolvimento de uma I.A. para competir contra um jogador humano.
 
 <!--
 Algorithms for games
