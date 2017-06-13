@@ -92,7 +92,7 @@ struct State
 	}
 
 
-	// Operator to use it in _ap
+	// Operator to use it in map
 	bool operator<(const struct State& s) const {
 		if (_tabuleiro != s._tabuleiro) return _tabuleiro < s._tabuleiro;
 		if (_peao != s._peao) return _peao < s._peao;

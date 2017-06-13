@@ -14,10 +14,10 @@ A motivação que levou à realização deste trabalho foi identificar uma heur�
 Dessa forma, seria possível a implementação de uma I.A. com diferentes dificuldades para jogar contra uma pessoa.
 Dito isso, o objetivo principal deste trabalho foi analisar várias partidas distintas de uma versão reduzida do jogo.
 
-[^jogo_solucao]: Solucionar um jogo é percorrer todas as sua possibilidades de movimento e seus resultados.
-
-Uma análise possível para solucionar[^jogo_solucao] o jogo é utilizar o teorema _minimax_[^minimax], onde cada jogador tenta aumentar sua pontuação e diminuir a pontuação do oponente.
+Uma análise possível para solucionar[^jogo_solucao] o jogo é utilizar o teorema _minimax_, onde cada jogador tenta aumentar sua pontuação e diminuir a pontuação do oponente.
 Os resultados obtidos ao final dessa análise computacional baseadas no teorema _minimax_ sugere a possibilidade do jogo completo ser desbalanceado[^jogo_balanceado], dando ao primeiro jogador uma maior chance de vencer o jogo.
+
+[^jogo_solucao]: Solucionar um jogo é percorrer todas as sua possibilidades de movimento e seus resultados.
 
 [^jogo_balanceado]: É dito um jogo balanceado aquele que a chance dos jogadores de ganhar é a mesma.
 
@@ -39,22 +39,35 @@ Na seção \ref{programauxe7uxe3o-dinuxe2mica}, são explicados os conceitos sob
 
 # Histórico da Teoria dos Jogos
 
-Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite[p.~2]{Prague_severalmilestones}.
-No século seguinte, o matemático e filósofo Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política.
-Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos \cite[p.~2]{sartini_IIbienaldasbm}.
+Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite{Prague_severalmilestones}.
+No século seguinte, o matemático e filósofo Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política\footciteref{cournot_1838}.
+Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos\footciteref{zermelo_1913} \cite{sartini_IIbienaldasbm}.
 
 Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann.
-Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos \cite[p.~2]{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista.
-Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero com duas pessoas possui uma solução em estratégias mistas.
-Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \cite[p.~2--3]{sartini_IIbienaldasbm}.
+Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos\footciteref{borel_1921}\footciteref{borel_1924}\footciteref{borel_1927} \cite{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista.
+Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero com duas pessoas possui uma solução em estratégias mistas\footciteref{neumann_1928}.
+Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada\footciteref{neumann_1944} \cite{sartini_IIbienaldasbm}.
 
-[^mixed_strategy]: Estratégia mista é um conjunto de estratégias puras associadas a uma distribuição de probabilidade \cite{figueiredo_conceitos}.
+Em 1982, Elwyn Berlekamp, John Conway e Richard Guy publicaram um livro em dois volumes\footciteref{elwyn_1982} que se tornou uma referência na área da teoria dos jogos combinatorial \cite{eyawtkagtbwata_2003}. Este livro explica os conceitos fundamentais para a teoria dos jogos combinatorial e raliza análises em vários jogos. O foco deste livro são hance .
 
-[^finite_game]: Jogos finitos são aqueles onde cada participante se depara com um conjunto finito de escolhas, ou seja, eles escolhem suas estratégias dentro de um conjunto finito de alternativas \cite{figueiredo_conceitos}.
 
-[^zero_sum]: Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.
 
 # Teoria dos Jogos
+
+A partir das regras de um jogo é possível abstrair de várias maneiras. A **forma extensiva** de um jogo elimina as informações de como jogá-lo e passa a ser representado pelos movimentos possíveis e como o estado do jogo é alterado \cite{jones_1980}. Um dos jogos mais simples Considere o jogo _Nim_ \cite{eyawtkagtbwata_2003}
+
+
+A área de teoria dos jogos combinatorial analisa os jogos de uma perspectiva um pouco diferente. É considerado que dois jogadores alternam os movimentos em um jogo que não possui elementos de chance (rolagem de dados, saque de cartas, etc.) e que ambos jogadores possuem informação completa. É dito que os jogadores possuem informação completa se eles tiverem conhecimento de tudo o que está acontecendo no jogo a todo momento \cite{eyawtkagtbwata_2013}. Ao chegar na vez de algum jogador e ele não tiver nenhum movimento válido para realizar, então aquele jogador é considerado perdedor. Considerando os jogadores _esquerda_ e _direita_, podemos representar suas jogadas da maneira descrita em \ref{eq:tjc_representacao_jogadas}, onde o jogador _esquerda_ possui as jogadas $\{a,b,c,\ldots\}$ e o jogador _direita_, as jogadas $\{f,g,h,\ldots\}$.
+
+\begin{equation}
+	\label{eq:tjc_representacao_jogadas}
+	\tag{eq. T.C.J. Representação das Jogadas}
+	\begin{split}
+		\{a,b,c,\ldots \vert f,g,h,\ldots\}
+	\end{split}
+\end{equation}
+
+
 
 A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas[^optimal_decision] sob condições de conflito[^conflict_condition].
 Os elementos básicos de um jogo são o conjunto de **jogadores**, onde cada jogador possui um conjunto de **estratégias** e, a partir das escolhas de estratégias de cada jogador, temos uma **situação** ou **perfil**.
@@ -81,6 +94,12 @@ Semelhante ao primeiro jogador, tem-se o segundo jogador sendo representado por 
 Os valores que se encontram na interseção da estratégia de $P_1$ e $P_2$ são os ganhos dos dois jogadores, dessa forma se as estratégias escolhidas forem $E_{12}$ e $E_{21}$, o primeiro jogador teria perdido com $3$ pontos e o segundo jogador venceria com $4$ pontos.
 
 De uma forma matemática mais genérica, tem-se o jogador $i \in \{1,2\}$ onde sua estratégia é representada por $\sigma_i \forall \sigma \in S_i$. 
+
+[^mixed_strategy]: Estratégia mista é um conjunto de estratégias puras associadas a uma distribuição de probabilidade \cite{figueiredo_conceitos}.
+
+[^finite_game]: Jogos finitos são aqueles onde cada participante se depara com um conjunto finito de escolhas, ou seja, eles escolhem suas estratégias dentro de um conjunto finito de alternativas \cite{figueiredo_conceitos}.
+
+[^zero_sum]: Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.
 
 
 ## Minimax
@@ -268,9 +287,11 @@ e por fim, a variável \texttt{\_atual} que representa o jogador que fará a jog
 [^tabuleiro]: Cinco cores e quatro discos.
 [^cor_peao]: As cores de peão seguem a ordem RGBYP começando do $0$, onde $\textbf{R}ed = 0$, $\textbf{G}reen = 1$, $\textbf{B}lue = 2$, $\textbf{Y}ellow = 3$, e $\textbf{P}urple = 4$.
 
-\lstinputlisting[language=C++, firstnumber=10, linerange={10-31}]{../../pd/inc/state.h}
+\lstinputlisting[language=C++, firstnumber=10, linerange={10-31}, caption=Definição da estrutura \texttt{State}]{../../pd/inc/state.h}
 
-O cálculo para determinar os _bits_ necessários para armazenar as informações de cada variável foi realizado da seguinte forma:
+O cálculo para determinar os _bits_ necessários para armazenar as informações de cada variável foi realizado será explicado nas subseções seguintes.
+
+### Cálculo de bits do atributo \texttt{tabuleiro}
 
 \begin{equation}
 	\label{eq:bitstabuleiro}
@@ -284,6 +305,8 @@ O cálculo para determinar os _bits_ necessários para armazenar as informaçõe
 
 Na equação \ref{eq:bitstabuleiro}, $n_c$ e $n_d$ são o número de cores e o número de discos do jogo, respectivamente. Seus valores são, no máximo $n_c = 5$ e $n_d = 4$.
 
+### Cálculo de bits do atributo \texttt{peao}
+
 \begin{equation}
 	\label{eq:bitspeao}
 	\tag{eq. \emph{bits} de \_peao}
@@ -296,6 +319,8 @@ Na equação \ref{eq:bitstabuleiro}, $n_c$ e $n_d$ são o número de cores e o n
 \end{equation}
 
 Na segunda equação, \ref{eq:bitspeao}, o valor de $n_d$ é o número de discos e $n_p$ é o número de peões do jogo, que por sua vez é igual a $n_c$ (número de cores comuns). Cada peão pode estar: fora do tabuleiro, com $peao(p_i) = 0$; em cima de um disco da sua cor, com $peao(p_i) \in \{1, 2,..., n_d\}$ ; e na escada, com $peao(p_i) = n_d+1$.
+
+### Cálculo de bits do atributo \texttt{escada}
 
 \begin{equation}
 	\label{eq:bitsescada}
@@ -311,6 +336,8 @@ A equação \ref{eq:bitsescada} possui as variáveis $n_p$ e $n_c$ com $n_p, n_c
 
 [^chegada_escada]: O primeiro peão $p_i$ a chegar na escada é indicado com $escada(p_i) = 1$.
 
+### Cálculo de bits do atributo \texttt{jogadores}
+
 \begin{equation}
 	\label{eq:bitsjogadores}
 	\tag{eq. \emph{bits} de \_jogadores}
@@ -324,6 +351,8 @@ A equação \ref{eq:bitsescada} possui as variáveis $n_p$ e $n_c$ com $n_p, n_c
 
 A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demonstrado na equação \label{eq:bitjogadores}. As variáveis utilizadas nessa equação são: $n_d$, o número de discos $n_d \in \{1, 2, 3, 4, 5\}$; $n_c$, o número de cores $n_c \in \{1, 2, 3, 4, 5\}$; e $n_j$, o número de jogadores $n_j = 2$. A informação armazenada na mão dos jogadores, para cada disco, vai até o número máximo de discos mais um, pois o jogador pode pegar todos os discos no tabuleiro e o disco adquirido ao mover o peão para a escada. Para armazenar o número seis, são necessários $\lceil \log_2(6) \rceil = 3 \emph{bits}$
 
+### Cálculo de bits do atributo \texttt{atual}
+
 \begin{equation}
 	\label{eq:bitsatual}
 	\tag{eq. \emph{bits} de \_atual}
@@ -333,20 +362,32 @@ A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demons
 	\end{split}
 \end{equation}
 
-## Funções de acesso
+## Funções de acesso da estrutura \texttt{State}
 
 A estrutura possui um construtor que atribui valores às variáveis através de RAII[^RAII], dessa forma não se faz necessário nenhuma extra implementação. Todas as variáveis possuem um valor padrão, verdadeiro para qualquer tamanho de tabuleiro $t_i$, onde $4 \leqslant t_i \leqslant 20$.
 
-\lstinputlisting[language=C++, firstnumber=34, linerange={34-39}]{../../pd/inc/state.h}
+\lstinputlisting[language=C++, firstnumber=33, linerange={33-39}, caption=Construtor da estrutura \texttt{State}]{../../pd/inc/state.h}
 
 [^RAII]: _Resource Aquisition Is Initialization_ é uma técnica de programação que vincula o ciclo de vida do recurso ao da estrutura \cite{cppreferenceraii}.
 
-\lstinputlisting[language=C++, firstnumber=42, linerange={42-48}]{../../pd/inc/state.h}
+### Atributo \texttt{tabuleiro}
+\lstinputlisting[language=C++, firstnumber=41, linerange={41-47}, caption=Funções de acesso ao atributo \texttt{tabuleiro}]{../../pd/inc/state.h}
 
-## Comparador
+### Atributo \texttt{peao}
+\lstinputlisting[language=C++, firstnumber=50, linerange={50-60}, caption=Funções de acesso ao atributo \texttt{peão}]{../../pd/inc/state.h}
 
+### Atributo \texttt{escada}
+\lstinputlisting[language=C++, firstnumber=63, linerange={63-69}, caption=Funções de acesso ao atributo \texttt{escada}]{../../pd/inc/state.h}
 
+### Atributo \texttt{jogador}
+\lstinputlisting[language=C++, firstnumber=72, linerange={72-83}, caption=Funções de acesso ao atributo \texttt{jogador}]{../../pd/inc/state.h}
 
+### Atributo \texttt{atual}
+\lstinputlisting[language=C++, firstnumber=86, linerange={86-92}, caption=Funções de acesso ao atributo \texttt{atual}]{../../pd/inc/state.h}
+
+## Comparador da estrutura \texttt{State}
+
+\lstinputlisting[language=C++, firstnumber=95, linerange={95-102}, caption=Comparado da estrutura \texttt{State}]{../../pd/inc/state.h}
 
 # Programação dinâmica
 
@@ -366,12 +407,12 @@ Devido ao imenso número de jogadas possíveis ao longo do do jogo, decidiu-se u
 
 A função \texttt{dp} possui os casos base para retornar a função, 
 
-\lstinputlisting[language=C++, firstnumber=1, linerange={1-5}]{../../pd/src/dp.cpp}
+\lstinputlisting[language=C++, firstnumber=1, linerange={1-5}, caption=Construtor da estrutura \texttt{State}]{../../pd/src/dp.cpp}
 
 
 ## Função \texttt{play}
 
-\lstinputlisting[language=C++, firstnumber=1, linerange={1-5}]{../../pd/src/dp.cpp}
+\lstinputlisting[language=C++, firstnumber=1, linerange={1-5}, caption=Construtor da estrutura \texttt{State}]{../../pd/src/dp.cpp}
 
 - Explicação da DP e da função Play (função para realizar as jogadas)
 
