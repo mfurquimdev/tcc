@@ -11,7 +11,7 @@ Estes conceitos são pequenos exemplos utilizados em análises baseadas na **teo
 
 A proposta deste trabalho foi realizar uma destas análise em um jogo de tabuleiro chamado _Big Points_.
 A motivação que levou à realização deste trabalho foi identificar uma heurística na qual tem-se uma maior chance de ganhar uma partida.
-Dessa forma, seria possível a implementação de uma I.A. com diferentes dificuldades para jogar contra uma pessoa.
+Dessa forma, seria possível a implementação de uma inteligência artificial (I.A.) com diferentes dificuldades para jogar contra uma pessoa.
 Dito isso, o objetivo principal deste trabalho foi analisar várias partidas distintas de uma versão reduzida do jogo.
 
 Uma análise possível para solucionar[^jogo_solucao] o jogo é utilizar o teorema _minimax_, onde cada jogador tenta aumentar sua pontuação e diminuir a pontuação do oponente.
@@ -41,23 +41,61 @@ Na seção \ref{programauxe7uxe3o-dinuxe2mica}, são explicados os conceitos sob
 
 Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite{Prague_severalmilestones}.
 No século seguinte, o matemático e filósofo Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política\footciteref{cournot_1838}.
-Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos\footciteref{zermelo_1913} \cite{sartini_IIbienaldasbm}.
 
+Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos\footciteref{zermelo_1913} \cite{sartini_IIbienaldasbm}.
 Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann.
 Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos\footciteref{borel_1921}\footciteref{borel_1924}\footciteref{borel_1927} \cite{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista.
-Em 1928, John von Neumann demonstrou que todo jogo finito de soma zero com duas pessoas possui uma solução em estratégias mistas\footciteref{neumann_1928}.
+
+Em 1928, John von Neumann provou o teorema _minimax_, no qual há sempre uma solução racional para um conflito bem definido entre dois indivíduos cujos interesses são completamente opostos\footciteref{neumann_1928} \cite{alecsandra_2006}.
 Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada\footciteref{neumann_1944} \cite{sartini_IIbienaldasbm}.
+Além destas contribuições, John von Neumann ainda escreveu trabalhos com grande impacto na área da computação, incluindo a arquitetura de computadores, princípios de programação, e análise de algoritmos \cite{miyazawa_2010}.
 
-Em 1982, Elwyn Berlekamp, John Conway e Richard Guy publicaram um livro em dois volumes\footciteref{elwyn_1982} que se tornou uma referência na área da teoria dos jogos combinatorial \cite{eyawtkagtbwata_2003}. Este livro explica os conceitos fundamentais para a teoria dos jogos combinatorial e raliza análises em vários jogos. O foco deste livro são hance .
+Em 1982, Elwyn Berlekamp, John Conway e Richard Guy publicaram um livro em dois volumes\footciteref{elwyn_1982} que se tornou uma referência na área da teoria dos jogos combinatorial \cite{eyawtkagtbwata_2003} por explicar os conceitos fundamentais para a teoria dos jogos combinatorial. 
 
+<!--
+No fim da década de 1960, a análise formal de algorítmos foi popularizado pelo trabalho de Don Knuth. Na década seguinte, Cook e Levin resolveram alguns problemas em relação a algoritmos da classe NP[^np].
 
+[^np]: _Nondeterministic polynomial time_
+-->
 
 # Teoria dos Jogos
 
-A partir das regras de um jogo é possível abstrair de várias maneiras. A **forma extensiva** de um jogo elimina as informações de como jogá-lo e passa a ser representado pelos movimentos possíveis e como o estado do jogo é alterado \cite{jones_1980}. Um dos jogos mais simples Considere o jogo _Nim_ \cite{eyawtkagtbwata_2003}
+O campo da teoria dos jogos divide-se em três áreas: 1) Teoria Econômica dos Jogos (T.E.J.), que normalmente analisa movimentos simultâneos de dois ou mais jogadores; 2) Teoria Combinatória dos Jogos (T.C.J.), no qual os jogadores fazem movimentos alternadamente, e não faz uso de elementos de sorte, diferente da T.E.J. que também trata desse fenômeno; e 3) Teoria da Computação dos Jogos
+
+É possível abstrair um jogo de várias maneiras para facilitar sua análise. A **forma extensiva** de um jogo elimina as informações de como jogá-lo e passa a ser representado pelos movimentos possíveis e como o estado do jogo é alterado \cite{jones_1980}. Um dos jogos mais simples Considere o jogo _Nim_ \cite{eyawtkagtbwata_2003}
+
+## Movimentos Simultâneos
+
+Em jogos com movimentos simultâneos, os jogadores devem escolher o que fazer ao mesmo tempo ou, o que leva à mesma situação, as escolhas de cada jogador é escondida de seu oponente. Em qualquer um dos dois casos, o jogador deve escolher sua jogada levando em consideração a possível jogada do outro \cite{aguidetogametheory_2005}.
+
+## Soma Zero 
+
+São jogos de puro conflito, no qual apenas um jogador pode vencer o jogo. Em outras palavras, a vitória de um jogador implica na derrota do outro.
+
+## Minimax
+
+O teorema minimax provado por John von Neumann é a peça principal da maior parte do trabalho matemático em economia e em atividades onde os atos das decisões são racionais.
+
+Segundo o teorema minimax, há sempre uma solução racional para um conflito entre dois indivíduos cujos interesses são completamente opostos, ou seja, o que é ganho por um lado é perdido pelo outro. Esse é um exemplo da chamada situação soma zero, uma vez que os ganhos dos dois jogadores somam zero.
+
+A combinação de estratégias, na qual o máximo dos mínimos é igual ao mínimo dos máximos, chama-se de ponto de equilíbrio do jogo, pois ao escolherem essas estratégias, os jogadores garantem para si um ganho mínimo independente do que o adversário venha a escolher.
+
+Trabalhando com estratégias puras, utilizamos o critério maximin para definir os valores máximo e mínimo do jogo.
+
+Em um jogo de dois jogadores com soma zero é racional para cada jogador escolher a estratégia que maximiza seu ganho mínimo ou que minimize o ganho máximo do adversário, conforme figura 1.
+
+Agora, considerando o uso de estratégias mistas, ou seja, aumentando as possibilidades de escolha, podemos usar o mesmo critério para definir os novos valores máximo e mínimo.
+
+Por exemplo, dois jogadores, na disputa por par ou ímpar, cada um com duas alternativas de escolha. O ganho será representado por 1 e perda por -1. O jogador par obterá ganho se ambos fizerem a mesma escolha, e neste cas ípar 
 
 
-A área de teoria dos jogos combinatorial analisa os jogos de uma perspectiva um pouco diferente. É considerado que dois jogadores alternam os movimentos em um jogo que não possui elementos de chance (rolagem de dados, saque de cartas, etc.) e que ambos jogadores possuem informação completa. É dito que os jogadores possuem informação completa se eles tiverem conhecimento de tudo o que está acontecendo no jogo a todo momento \cite{eyawtkagtbwata_2013}. Ao chegar na vez de algum jogador e ele não tiver nenhum movimento válido para realizar, então aquele jogador é considerado perdedor. Considerando os jogadores _esquerda_ e _direita_, podemos representar suas jogadas da maneira descrita em \ref{eq:tjc_representacao_jogadas}, onde o jogador _esquerda_ possui as jogadas $\{a,b,c,\ldots\}$ e o jogador _direita_, as jogadas $\{f,g,h,\ldots\}$.
+
+
+
+
+
+
+A área de teoria combinatória dos jogos analisa os jogos de uma perspectiva um pouco diferente. É considerado que dois jogadores alternam os movimentos em um jogo que não possui elementos de chance (rolagem de dados, saque de cartas, etc.) e que ambos jogadores possuem informação completa. É dito que os jogadores possuem informação completa se eles tiverem conhecimento de tudo o que está acontecendo no jogo a todo momento \cite{eyawtkagtbwata_2013}. Ao chegar na vez de algum jogador e ele não tiver nenhum movimento válido para realizar, então aquele jogador é considerado perdedor. Considerando os jogadores _esquerda_ e _direita_, podemos representar suas jogadas da maneira descrita em \ref{eq:tjc_representacao_jogadas}, onde o jogador _esquerda_ possui as jogadas $\{a,b,c,\ldots\}$ e o jogador _direita_, as jogadas $\{f,g,h,\ldots\}$.
 
 \begin{equation}
 	\label{eq:tjc_representacao_jogadas}
