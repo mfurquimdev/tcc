@@ -1,0 +1,39 @@
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+\renewcommand*{\lstlistlistingname}{Lista de códigos}
+\renewcommand{\backref}{}
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+\providecommand{\tightlist}{%
+	  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\lstset{%
+language=C++,           %linguagem
+numbers=left,           %posição dos números
+stepnumber=1,           %frequencia de aparição dos números
+numbersep=5pt,
+%numberstyle=\zebra{gray!15}{white!35},
+%basewidth={0.6em,0.45em},
+%fontadjust=true,
+%mathescape=true,
+tabsize=4,
+commentstyle=\color{blue},
+literate={á}{{\'a}}1 {à}{{\`a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {É}{{\'E}}1 {ê}{{\^e}}1 {õ}{{\~o}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ç}{{\c c}}1 {³}{{$^3$}}1 {Ω}{{$\Omega$}}1
+%breaklines=true,
+%showstringspaces=false,
+%stringstyle=\color{cyan},
+%basicstyle=\small\ttfamily
+}
+\usetikzlibrary{shapes,snakes}
+\usetikzlibrary{calc}
+
+\theoremstyle{definition}
+\newtheorem{myex}{Exemplo}
+\newtheorem{mydef}{Definição}

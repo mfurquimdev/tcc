@@ -7,15 +7,29 @@
 #-------------------------------------------------------------------------------
 
 TARGET = tcc.pdf
-PDF_FILE = main.pdf
 MKD_FILE = ../$(addsuffix .md,  $(basename $(TARGET)))
 TEX_FILE =    $(addsuffix .tex, $(basename $(TARGET)))
-AUX_FILE =    $(addsuffix .aux, $(basename $(PDF_FILE)))
-MAIN_TEX_FILE = $(addsuffix .tex, $(basename $(PDF_FILE)))
+AUX_FILE =    $(addsuffix .aux, $(basename $(TARGET)))
+
+BIBTEX = bibtex
+LATEX  = pdflatex
+
+FIXOS_DIR = fixos
+FIXOS_FILES = ${wildcard $(FIXOS_DIR)/*.tex}
+
+EDITAVEIS_DIR = editaveis
+EDITAVEIS_FILES = ${wildcard $(EDITAVEIS_DIR)/*.tex}
+
+MAIN_FILE = main.tex
+DVI_FILE  = $(addsuffix .dvi, $(basename $(MAIN_FILE)))
+AUX_FILE  = $(addsuffix .aux, $(basename $(MAIN_FILE)))
+PS_FILE   = $(addsuffix .ps,  $(basename $(MAIN_FILE)))
+PDF_FILE  = $(addsuffix .pdf, $(basename $(MAIN_FILE)))
+
+SOURCES = $(TEX_FILE) $(FIXOS_FILES) $(EDITAVEIS_FILES)
 
 CC=pandoc
 FLAGS= --filter pandoc-eqnos --filter pandoc-tablenos --from=markdown --to=latex --indented-code-classes=numberLines --highlight-style=zenburn --parse-raw --smart --normalize --listings --ascii --atx-headers --number-sections --base-header-level=1
-#FLAGS= --from=markdown_github --to=latex --toc --indented-code-classes=numberLines --highlight-style=zenburn --toc-depth=4 --smart --normalize --chapters --listings -T $(TARGET) --ascii --atx-headers
 
 .PHONY: all clean tex pdf
 
@@ -23,20 +37,16 @@ all:
 	@make tex
 	@make pdf
 
-#$(TARGET): $(MKD_FILE)
-#	@echo [$@] Making... $(TARGET)
-#	$(CC) $(FLAGS) --output=$@ $<
-
 tex:
-	iconv -t utf-8 $(MKD_FILE) | $(CC) $(FLAGS) --output=$(TEX_FILE)
+	@iconv -t utf-8 $(MKD_FILE) | $(CC) $(FLAGS) --output=$(TEX_FILE)
 
-pdf:
-	pdflatex main.tex bibliografia.bib
-	bibtex main.aux
-	pdflatex main.tex
-	pdflatex main.tex
-	cp $(PDF_FILE) ../$(TARGET)
-	rm -vf *.brf *.idx *.lof *.lot *.toc *.bbl *.blg *.log *.aux *.dvi
+pdf: $(SOURCES) bibliografia.bib
+	$(LATEX)  $(MAIN_FILE) $(SOURCES)
+	$(BIBTEX) $(AUX_FILE)
+	$(LATEX)  $(MAIN_FILE) $(SOURCES)
+	$(LATEX)  $(MAIN_FILE) $(SOURCES)
+	@cp -v $(PDF_FILE) ../$(TARGET)
+	@rm -vf *.brf *.lol *.idx *.lof *.lot *.toc *.bbl *.blg *.log *.aux *.dvi
 
 clean:
-	rm -vf *.brf *.idx *.lof *.lot *.toc *.bbl *.blg *.log *.aux *.dvi tmp.tex $(TEX_FILE) $(TARGET) ../$(TARGET)
+	@rm -vf *.brf *.lol *.idx *.lof *.lot *.toc *.bbl *.blg *.log *.aux *.dvi tmp.tex $(TEX_FILE) $(PDF_FILE) ../$(TARGET)

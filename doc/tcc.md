@@ -42,7 +42,7 @@ Na seção \ref{programauxe7uxe3o-dinuxe2mica}, são explicados os conceitos sob
 Pode-se dizer que a análise de jogos é praticada desde o séculco XVIII tendo como evidência uma carta escrita por James Waldegrave ao analisar uma versão curta de um jogo de baralho chamado \emph{le Her} \cite{Prague_severalmilestones}.
 No século seguinte, o matemático e filósofo Augustin Cournot fez uso da teoria dos jogos para estudos relacionados à política\footciteref{cournot_1838}.
 
-Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos\footciteref{zermelo_1913} \cite{sartini_IIbienaldasbm}.
+Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos \apud{zermelo_1913}{sartini_IIbienaldasbm}.
 Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann.
 Nas décadas de 1920 e 1930, Emile Borel publicou quatro artigos sobre jogos estratégicos\footciteref{borel_1921}\footciteref{borel_1924}\footciteref{borel_1927} \cite{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista.
 
@@ -64,13 +64,13 @@ O campo da teoria dos jogos divide-se em três áreas: 1) Teoria Econômica dos 
 
 É possível abstrair um jogo de várias maneiras para facilitar sua análise. A **forma extensiva** de um jogo elimina as informações de como jogá-lo e passa a ser representado pelos movimentos possíveis e como o estado do jogo é alterado \cite{jones_1980}. Um dos jogos mais simples Considere o jogo _Nim_ \cite{eyawtkagtbwata_2003}
 
-## Movimentos Simultâneos
+\begin{mydef}
+Em jogos com **movimentos simultâneos**, os jogadores devem escolher o que fazer ao mesmo tempo ou, o que leva à mesma situação, as escolhas de cada jogador é escondida de seu oponente. Em qualquer um dos dois casos, o jogador deve escolher sua jogada levando em consideração a possível jogada do outro \cite{aguidetogametheory_2005}.
+\end{mydef}
 
-Em jogos com movimentos simultâneos, os jogadores devem escolher o que fazer ao mesmo tempo ou, o que leva à mesma situação, as escolhas de cada jogador é escondida de seu oponente. Em qualquer um dos dois casos, o jogador deve escolher sua jogada levando em consideração a possível jogada do outro \cite{aguidetogametheory_2005}.
-
-## Soma Zero 
-
-São jogos de puro conflito, no qual apenas um jogador pode vencer o jogo. Em outras palavras, a vitória de um jogador implica na derrota do outro.
+\begin{mydef}
+Jogos de **soma zero** são jogos de puro conflito, no qual apenas um jogador pode vencer o jogo. Em outras palavras, a vitória de um jogador implica na derrota do outro.
+\end{mydef}
 
 ## Minimax
 
@@ -99,7 +99,7 @@ A área de teoria combinatória dos jogos analisa os jogos de uma perspectiva um
 
 \begin{equation}
 	\label{eq:tjc_representacao_jogadas}
-	\tag{eq. T.C.J. Representação das Jogadas}
+	%\tag{eq. T.C.J. Representação das Jogadas}
 	\begin{split}
 		\{a,b,c,\ldots \vert f,g,h,\ldots\}
 	\end{split}
@@ -202,7 +202,7 @@ _Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar 
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.75\textwidth]{img/front}
+	\includegraphics[width=0.75\textwidth]{figuras/front}
 	\caption{Caixa do jogo \textbf{Big Points}}
 	\label{fig:front}
 \end{figure}
@@ -214,12 +214,12 @@ O jogo é composto por cinco peões, como demonstrado na figura \ref{fig:front},
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
-    	\includegraphics[width=\textwidth]{img/content}
+    	\includegraphics[width=\textwidth]{figuras/content}
     	\caption{Conteúdo do jogo \textbf{Big Points}}
     	\label{fig:content}
     \end{subfigure}
     \begin{subfigure}[b]{0.48\textwidth}
-    	\includegraphics[width=\textwidth]{img/setup}
+    	\includegraphics[width=\textwidth]{figuras/setup}
     	\caption{Preparação do jogo \textbf{Big Points}}
     	\label{fig:setup}
     \end{subfigure}
@@ -238,7 +238,7 @@ A pontuação do jogo é dependente da ordem de chegada dos peões na escada e d
 
 \begin{equation}
 	\label{eq:expontuacao}
-	\tag{eq. Exemplo de pontuação}
+	%\tag{eq. Exemplo de pontuação}
 	\begin{split}
 		P &= n_r \cdot (n_c - p_r) + n_g \cdot (n_c - p_g) + n_b \cdot (n_c - p_b)\\
 		P &= 2 \cdot (3 - 3) + 1 \cdot (3 - 2) + 3 \cdot (3 - 1)\\
@@ -292,7 +292,7 @@ Em todos as possíveis combinações de tabuleiros iniciais, o primeiro jogador 
 
 \begin{equation}
 	\label{eq:partidas}
-	\tag{eq. Quantidades de Partidas Distintas}
+	%\tag{eq. Quantidades de Partidas Distintas}
 	\begin{split}
 		Partidas\ &=\  (\#J-1) \cdot \binom{\#D_T}{\#D_W} \cdot \binom{\#D_{L1}}{\#D_K} \cdot \binom{\#D_{L2}}{\#D_R} \cdot \binom{\#D_{L3}}{\#D_G} \cdot \binom{\#D_{L4}}{\#D_B} \cdot \binom{\#D_{L5}}{\#D_Y} \cdot \binom{\#D_{L6}}{\#D_V}\\
 		Partidas\ &=\  4\cdot \binom{55}{5} \cdot \binom{50}{5} \cdot \binom{45}{9} \cdot \binom{36}{9} \cdot \binom{27}{9} \cdot \binom{18}{9} \cdot \binom{9}{9}\\
@@ -333,7 +333,7 @@ O cálculo para determinar os _bits_ necessários para armazenar as informaçõe
 
 \begin{equation}
 	\label{eq:bitstabuleiro}
-	\tag{eq. \emph{bits} de \_tabuleiro}
+	%\tag{eq. \emph{bits} de \_tabuleiro}
 	\begin{split}
 		\texttt{\_tabuleiro} &= n_c \cdot n_d\\
 		\texttt{\_tabuleiro} &= 5 \cdot 4\\
@@ -347,7 +347,7 @@ Na equação \ref{eq:bitstabuleiro}, $n_c$ e $n_d$ são o número de cores e o n
 
 \begin{equation}
 	\label{eq:bitspeao}
-	\tag{eq. \emph{bits} de \_peao}
+	%\tag{eq. \emph{bits} de \_peao}
 	\begin{split}
 		\texttt{\_peao} &= \lceil \log_2(n_d+1) \rceil \cdot n_p\\
 		\texttt{\_peao} &= \lceil \log_2(5 + 1)\rceil \cdot 4\\
@@ -362,7 +362,7 @@ Na segunda equação, \ref{eq:bitspeao}, o valor de $n_d$ é o número de discos
 
 \begin{equation}
 	\label{eq:bitsescada}
-	\tag{eq. \emph{bits} de \_escada}
+	%\tag{eq. \emph{bits} de \_escada}
 	\begin{split}
 		\texttt{\_escada} &= \lceil \log_2(n_p+1) \rceil\cdot n_p\\
 		\texttt{\_escada} &= \lceil \log_2(6) \rceil \cdot 5\\
@@ -377,14 +377,14 @@ A equação \ref{eq:bitsescada} possui as variáveis $n_p$ e $n_c$ com $n_p, n_c
 ### Cálculo de bits do atributo \texttt{jogadores}
 
 \begin{equation}
-	\label{eq:bitsjogadores}
-	\tag{eq. \emph{bits} de \_jogadores}
+	%\tag{eq. \emph{bits} de \_jogadores}
 	\begin{split}
 		\texttt{\_jogadores} &= \lceil \log_2(n_d+1) \rceil \cdot n_c \cdot n_j\\
 		\texttt{\_jogadores} &= \lceil \log_2(4+1) \rceil \cdot 5 \cdot 2\\
 		\texttt{\_jogadores} &= 3 \cdot 5 \cdot 2\\
 		\texttt{\_jogadores} &= 30\ \emph{bits}
 	\end{split}
+	\label{eq:bitsjogadores}
 \end{equation}
 
 A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demonstrado na equação \label{eq:bitjogadores}. As variáveis utilizadas nessa equação são: $n_d$, o número de discos $n_d \in \{1, 2, 3, 4, 5\}$; $n_c$, o número de cores $n_c \in \{1, 2, 3, 4, 5\}$; e $n_j$, o número de jogadores $n_j = 2$. A informação armazenada na mão dos jogadores, para cada disco, vai até o número máximo de discos mais um, pois o jogador pode pegar todos os discos no tabuleiro e o disco adquirido ao mover o peão para a escada. Para armazenar o número seis, são necessários $\lceil \log_2(6) \rceil = 3 \emph{bits}$
@@ -393,7 +393,7 @@ A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demons
 
 \begin{equation}
 	\label{eq:bitsatual}
-	\tag{eq. \emph{bits} de \_atual}
+	%\tag{eq. \emph{bits} de \_atual}
 	\begin{split}
 		\texttt{\_atual} &= \lceil \log_2(2) \rceil\\
 		\texttt{\_atual} &= 1\ \emph{bit}
