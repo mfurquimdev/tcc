@@ -261,6 +261,13 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 			}
 		}
 	};
+	\draw ($(14.south west)+(-1,-0.6)$) node {Vencedor:};
+	\draw ($(14.south west)+(1.1,-0.6)$) node {A};
+	\draw ($(14.south west)+(2.6,-0.6)$) node {B};
+	\draw ($(14.south west)+(4.3,-0.6)$) node {A};
+	\draw ($(14.south west)+(6.6,-0.6)$) node {B};
+	\draw ($(14.south west)+(8.4,-0.6)$) node {B};
+	\draw ($(14.south west)+(10.6,-0.6)$) node {A};
 	\end{tikzpicture}
 	\caption{Árvore do jogo Renée v Peter}
 	\label{fig:nim_tree}
