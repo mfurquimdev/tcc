@@ -3,7 +3,6 @@
 all:
 	$(MAKE) -C tex all
 	convert tcc.pdf -append tcc%d.png &> /dev/null &
-	apvlv tcc.pdf
 
 png:
 	convert tcc.pdf -append tcc%d.png &> /dev/null &
