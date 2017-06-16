@@ -44,7 +44,7 @@ No século seguinte, o matemático e filósofo Augustin Cournot fez uso da teori
 
 Mais recentemente, em 1913, Ernst Zermelo publicou o primeiro teorema matemático da teoria dos jogos \apud{zermelo_1913}{sartini_IIbienaldasbm}.
 Outros dois grandes matemáticos que se interessaram na teoria dos jogos foram Émile Borel e John von Neumann.
-Nas décadas de 1920 e 1930, Emile Borel publicou três artigos sobre jogos estratégicos \apud{borel_1921}{Prague_severalmilestones} \apud{borel_1924}{Prague_severalmilestones} \apud{borel_1927}{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista.
+Nas décadas de 1920 e 1930, Emile Borel publicou vários artigos sobre jogos estratégicos \apud{borel_1921}{Prague_severalmilestones} \apud{borel_1924}{Prague_severalmilestones} \apud{borel_1927}{Prague_severalmilestones}, introduzindo uma noção abstrada sobre jogo estratégico e estratégia mista.
 
 Em 1928, John von Neumann provou o teorema _minimax_, no qual há sempre uma solução racional para um conflito bem definido entre dois indivíduos cujos interesses são completamente opostos \apud{neumann_1928}{alecsandra_2006}.
 Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \apud{neumann_1944}{sartini_IIbienaldasbm}.
@@ -58,20 +58,23 @@ Em 1982, Elwyn Berlekamp, John Conway e Richard Guy publicaram um livro em dois 
 O campo da teoria dos jogos divide-se em três áreas:
 1) Teoria Econômica dos Jogos (T.E.J.), que normalmente analisa movimentos simultâneos de dois ou mais jogadores;
 2) Teoria Combinatória dos Jogos (T.C.J.), no qual os jogadores fazem movimentos alternadamente, e não faz uso de elementos de sorte, diferente da T.E.J. que também trata desse fenômeno; e
-3) Teoria Computacional dos Jogos, que engloba jogos que são possíveis resolver por força bruta ou inteligência artificial, como jogo da velha e xadrez respectivamente.
+3) Teoria Computacional dos Jogos, que engloba jogos que são possíveis resolver por força bruta ou inteligência artificial \cite{eyawtkagtbwata_2003}, como jogo da velha e xadrez respectivamente.
+Este trabalho fará uso de alguns conceitos da T.E.J. e da Teoria Computacional dos Jogos.
 
-É possível abstrair um jogo de várias maneiras para facilitar sua análise. Uma dessas maneiras é descrito na definição \ref{def:forma_extensiva}.
+O livro de _Winning Ways for your Mathematical Plays_ utiliza o jogo _Nim_ para explicar alguns conceitos e realizar análises utlizando a área combinatória da teoria dos jogos \cite{eyawtkagtbwata_2003} mas, a seguir, este jogo será utilizado como exemplo para o entendimento de alguns conceitos mais utilizados na área econômica.
+Considere a versão simplificada do jogo _Nim_, que começa com quatro palitos e dois montes (com dois palitos cada).
+Cada um dos dois jogadores joga alternadamente retirando quantos palitos quiser, mas de apenas um dos montes.
+O jogador que retirar o último palito do jogo perde \cite{jones_1980}.
+
+Começando com o conceito de abstração e representação de um jogo, existe uma maneira chamada forma extensiva que é descrito na definição \ref{def:forma_extensiva}.
+De acordo com esta definição, a árvore do jogo _Nim_ é representado como mostrado na figura \label{fig:nim_tree}.
+A árvore está representada apenas pela metade pois a outra metade dela é simétrica.
 
 \begin{mydef}
 \label{def:forma_extensiva}
 A \textbf{forma extensiva} de um jogo elimina as informações de como jogá-lo e passa a ser representado pelos movimentos possíveis e como o estado do jogo é alterado \cite{jones_1980}.
 Sua forma de representar o jogo é por uma árvore, onde os nós são os estados do jogo e as arestas são as possíveis maneiras de alterar aquele estado ou, em outras palavras, os movimentos permitidos a partir daquele estado.
 \end{mydef}
-
-Considere o jogo _Nim_ \cite{eyawtkagtbwata_2003}. De acordo com a definição \ref{def:forma_extensiva}, a árvore do jogo _Nim_ fica como mostrado na figura \label{fig:nim_tree}.
-A árvore está representada apenas pela metade pois a outra metade dela é simétrica.
-
-
 
 \begin{figure}[htb]
 	\centering
@@ -82,7 +85,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 		every node/.style = {font=\footnotesize},
 		sloped,
 		level 1/.style = {
-			sibling distance = 5.3cm,
+			sibling distance = 5.9cm,
 			level distance = 1.5cm
 		},
 		level 2/.style = {
@@ -98,17 +101,17 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 			level distance = 1.5cm
 		}
 	]
-	\draw (-10,0) node {A};
-	\draw [->][thick] (-9,0) -- (-8,0);
-	\draw (-10,-1.5) node {B};
-	\draw [->][thick] (-9,-1.5) -- (-8,-1.5);
-	\draw (-10,-3) node {A};
-	\draw [->][thick] (-9,-3) -- (-8,-3);
-	\draw (-10,-4.5) node {B};
-	\draw [->][thick] (-9,-4.5) -- (-8,-4.5);
-	\draw (-10,-6) node {A};
-	\draw [->][thick] (-9,-6) -- (-8,-6);
-	\node (1) { 1 
+	\draw (-9,0) node {$J_1$};
+	\draw [->][thick] (-8,0) -- (-7,0);
+	\draw (-9,-1.5) node {$J_2$};
+	\draw [->][thick] (-8,-1.5) -- (-7,-1.5);
+	\draw (-9,-3) node {$J_1$};
+	\draw [->][thick] (-8,-3) -- (-7,-3);
+	\draw (-9,-4.5) node {$J_2$};
+	\draw [->][thick] (-8,-4.5) -- (-7,-4.5);
+	\draw (-9,-6) node {$J_1$};
+	\draw [->][thick] (-8,-6) -- (-7,-6);
+	\node (1) { A 
 		\begin{tikzpicture} {
 			\draw (0,0) rectangle (1,0.7);
 			\draw
@@ -119,7 +122,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 		} \end{tikzpicture}
 	}
 	child {
-		node (2) { 2
+		node (2) { B
 			\begin{tikzpicture} {
 				\draw (0,0) rectangle (1,0.7);
 				\draw
@@ -128,7 +131,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 				(0.85,0.15) -- (0.85,0.55);
 			} \end{tikzpicture}} {
 			child {
-				node (4) { 4
+				node (4) { D
 					\begin{tikzpicture} {
 						\draw (0,0) rectangle (1,0.7);
 						\draw
@@ -137,7 +140,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 						(0.85,0.15) -- (0.85,0.55);
 					} \end{tikzpicture}}
 				child {
-					node (9) { 9
+					node (9) { I
 					\begin{tikzpicture} {
 						\draw (0,0) rectangle (1,0.7);
 						\draw
@@ -146,7 +149,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 					} \end{tikzpicture}
 					} 
 					child {
-						node (14) { 14
+						node (14) { N
 							\begin{tikzpicture} {
 								\draw (0,0) rectangle (1,0.7);
 								\draw
@@ -157,7 +160,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 					}
 				}
 				child {
-					node (10) { 10
+					node (10) { J
 						\begin{tikzpicture} {
 							\draw (0,0) rectangle (1,0.7);
 							\draw
@@ -168,7 +171,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 				}
 			}
 			child {
-				node (5) { 5
+				node (5) { E
 					\begin{tikzpicture} {
 						\draw (0,0) rectangle (1,0.7);
 						\draw
@@ -177,7 +180,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 					} \end{tikzpicture}
 				} 
 				child {
-					node (11) { 11
+					node (11) { K
 						\begin{tikzpicture} {
 							\draw (0,0) rectangle (1,0.7);
 							\draw
@@ -186,7 +189,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 						} \end{tikzpicture}
 					} 
 					child {
-						node (15) { 15
+						node (15) { O
 							\begin{tikzpicture} {
 								\draw (0,0) rectangle (1,0.7);
 								\draw
@@ -198,7 +201,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 				}
 			}
 			child {
-				node (6) { 6
+				node (6) { F
 					\begin{tikzpicture} {
 						\draw (0,0) rectangle (1,0.7);
 						\draw
@@ -207,7 +210,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 					} \end{tikzpicture}
 				} 
 				child {
-					node (12) { 12
+					node (12) { L
 						\begin{tikzpicture} {
 							\draw (0,0) rectangle (1,0.7);
 							\draw
@@ -220,7 +223,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 		}
 	}
 	child {
-		node (3) { 3
+		node (3) { C
 			\begin{tikzpicture} {
 				\draw (0,0) rectangle (1,0.7);
 				\draw
@@ -230,7 +233,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 			} \end{tikzpicture}
 		} { 
 			child {
-				node (7) { 7
+				node (7) { G
 					\begin{tikzpicture} {
 						\draw (0,0) rectangle (1,0.7);
 						\draw
@@ -239,7 +242,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 					} \end{tikzpicture}
 				} 
 				child {
-					node (13) { 13
+					node (13) { M
 						\begin{tikzpicture} {
 							\draw (0,0) rectangle (1,0.7);
 							\draw
@@ -250,7 +253,7 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 				}
 			}
 			child {
-				node (8) { 8
+				node (8) { H
 					\begin{tikzpicture} {
 						\draw (0,0) rectangle (1,0.7);
 						\draw 
@@ -262,16 +265,54 @@ A árvore está representada apenas pela metade pois a outra metade dela é sim�
 		}
 	};
 	\draw ($(14.south west)+(-1,-0.6)$) node {Vencedor:};
-	\draw ($(14.south west)+(1.1,-0.6)$) node {A};
-	\draw ($(14.south west)+(2.6,-0.6)$) node {B};
-	\draw ($(14.south west)+(4.3,-0.6)$) node {A};
-	\draw ($(14.south west)+(6.6,-0.6)$) node {B};
-	\draw ($(14.south west)+(8.4,-0.6)$) node {B};
-	\draw ($(14.south west)+(10.6,-0.6)$) node {A};
+	\draw ($(14.south west)+(1.1,-0.6)$) node {($J_1$)};
+	\draw ($(14.south west)+(2.6,-0.6)$) node {($J_2$)};
+	\draw ($(14.south west)+(4.2,-0.6)$) node {($J_1$)};
+	\draw ($(14.south west)+(6.6,-0.6)$) node {($J_2$)};
+	\draw ($(14.south west)+(8.9,-0.6)$) node {($J_2$)};
+	\draw ($(14.south west)+(11.2,-0.6)$) node {($J_1$)};
 	\end{tikzpicture}
-	\caption{Árvore do jogo Renée v Peter}
+	\caption{Árvore do jogo \textit{Nim}}
 	\label{fig:nim_tree}
 \end{figure}
+
+
+A ordem dos jogadores está sendo indicada ao lado esquerdo da figura \ref{fig:nim_tree}, de forma que o jogador $J_1$ é o primeiro a realizar um movimento, e o jogador $J_2$ é o segundo.
+O estado do jogo é representado por cada nó da árvore, sendo que os quatro palitos estão divididos em dois montes dentro do retângulo.
+Cada aresta representa uma jogada válida para o jogador atual.
+Como pode-se observar, o jogador $J_1$ possui quatro jogadas possíveis, mas duas dessas jogadas são simétricas às outras duas omitidas na árvore.
+No final da figura, há uma letra para cada folha[^leaf] para representar o vencedor no final daquela série de movimentos.
+Na aresta $\overrightarrow{B}$[^aresta] ou $(A,B)$, o jogador $J_1$
+
+[^leaf]: Um nó é considerado folha quando não há nenhum filho abaixo dele.
+
+[^aresta]: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \begin{mydef}
 \label{def:algo}
