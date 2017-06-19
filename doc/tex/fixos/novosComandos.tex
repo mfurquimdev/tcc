@@ -21,6 +21,8 @@
 	}
 }
 
+\newcommand{\eqname}[1]{\tag*{#1}}
+
 \renewcommand{\imprimircapa}{%
   \begin{capa}%
     \center
@@ -57,3 +59,206 @@
     \vspace*{2.2in}
   \end{capa}
 }
+
+\newcommand\nimtree{
+\begin{figure}[htb]
+	\centering
+	\begin{tikzpicture}
+	[
+		grow = down,
+		edge from parent/.style = {draw, -latex},
+		every node/.style = {font=\footnotesize},
+		sloped,
+		level 1/.style = {
+			sibling distance = 5.9cm,
+			level distance = 1.5cm
+		},
+		level 2/.style = {
+			sibling distance = 2.4cm,
+			level distance = 1.5cm
+		},
+		level 3/.style = {
+			sibling distance = 1.5cm,
+			level distance = 1.5cm
+		},
+		level 4/.style = {
+			sibling distance = 1.5cm,
+			level distance = 1.5cm
+		}
+	]
+	\draw (-9,0) node {$J_1$};
+	\draw [->][thick] (-8,0) -- (-7,0);
+	\draw (-9,-1.5) node {$J_2$};
+	\draw [->][thick] (-8,-1.5) -- (-7,-1.5);
+	\draw (-9,-3) node {$J_1$};
+	\draw [->][thick] (-8,-3) -- (-7,-3);
+	\draw (-9,-4.5) node {$J_2$};
+	\draw [->][thick] (-8,-4.5) -- (-7,-4.5);
+	\draw (-9,-6) node {$J_1$};
+	\draw [->][thick] (-8,-6) -- (-7,-6);
+	\node (1) { $A$ 
+		\begin{tikzpicture} {
+			\draw (0,0) rectangle (1,0.7);
+			\draw
+			(0.15,0.15) -- (0.15,0.55)
+			(0.3 ,0.15) -- (0.3 ,0.55)
+			(0.7 ,0.15) -- (0.7 ,0.55)
+			(0.85,0.15) -- (0.85,0.55);
+		} \end{tikzpicture}
+	}
+	child {
+		node (2) { $B$
+			\begin{tikzpicture} {
+				\draw (0,0) rectangle (1,0.7);
+				\draw
+				(0.3 ,0.15) -- (0.3 ,0.55)
+				(0.7 ,0.15) -- (0.7 ,0.55)
+				(0.85,0.15) -- (0.85,0.55);
+			} \end{tikzpicture}} {
+			child {
+				node (4) { $D$
+					\begin{tikzpicture} {
+						\draw (0,0) rectangle (1,0.7);
+						\draw
+						(0.15,0.35) -- (0.4 ,0.35)
+						(0.7 ,0.15) -- (0.7 ,0.55)
+						(0.85,0.15) -- (0.85,0.55);
+					} \end{tikzpicture}}
+				child {
+					node (9) { $I$
+					\begin{tikzpicture} {
+						\draw (0,0) rectangle (1,0.7);
+						\draw
+						(0.15,0.35) -- (0.4,0.35)
+						(0.7 ,0.15) -- (0.7,0.55);
+					} \end{tikzpicture}
+					} 
+					child {
+						node (14) { $N$
+							\begin{tikzpicture} {
+								\draw (0,0) rectangle (1,0.7);
+								\draw
+								(0.15,0.35) -- (0.4 ,0.35)
+								(0.6 ,0.35) -- (0.85,0.35);
+							} \end{tikzpicture}
+						}
+					}
+				}
+				child {
+					node (10) { $J$
+						\begin{tikzpicture} {
+							\draw (0,0) rectangle (1,0.7);
+							\draw
+							(0.15,0.35) -- (0.4 ,0.35)
+							(0.6 ,0.35) -- (0.85,0.35);
+						} \end{tikzpicture}
+					}
+				}
+			}
+			child {
+				node (5) { $E$
+					\begin{tikzpicture} {
+						\draw (0,0) rectangle (1,0.7);
+						\draw
+						(0.3,0.15) -- (0.3,0.55)
+						(0.7,0.15) -- (0.7,0.55);
+					} \end{tikzpicture}
+				} 
+				child {
+					node (11) { $K$
+						\begin{tikzpicture} {
+							\draw (0,0) rectangle (1,0.7);
+							\draw
+							(0.3 ,0.15) -- (0.3 ,0.55)
+							(0.6 ,0.35) -- (0.85,0.35);
+						} \end{tikzpicture}
+					} 
+					child {
+						node (15) { $O$
+							\begin{tikzpicture} {
+								\draw (0,0) rectangle (1,0.7);
+								\draw
+								(0.15,0.35) -- (0.4 ,0.35)
+								(0.6 ,0.35) -- (0.85,0.35);
+							} \end{tikzpicture}
+						} 
+					}
+				}
+			}
+			child {
+				node (6) { $F$
+					\begin{tikzpicture} {
+						\draw (0,0) rectangle (1,0.7);
+						\draw
+						(0.3 ,0.15) -- (0.3 ,0.55)
+						(0.6 ,0.35) -- (0.85,0.35);
+					} \end{tikzpicture}
+				} 
+				child {
+					node (12) { $L$
+						\begin{tikzpicture} {
+							\draw (0,0) rectangle (1,0.7);
+							\draw
+							(0.15,0.35) -- (0.4 ,0.35)
+							(0.6 ,0.35) -- (0.85,0.35);
+						} \end{tikzpicture}
+					} 
+				}
+			}
+		}
+	}
+	child {
+		node (3) { $C$
+			\begin{tikzpicture} {
+				\draw (0,0) rectangle (1,0.7);
+				\draw
+				(0.15,0.35) -- (0.4 ,0.35)
+				(0.7 ,0.15) -- (0.7 ,0.55)
+				(0.85,0.15) -- (0.85,0.55);
+			} \end{tikzpicture}
+		} { 
+			child {
+				node (7) { $G$
+					\begin{tikzpicture} {
+						\draw (0,0) rectangle (1,0.7);
+						\draw
+						(0.15,0.35) -- (0.4 ,0.35)
+						(0.7 ,0.15) -- (0.7 ,0.55);
+					} \end{tikzpicture}
+				} 
+				child {
+					node (13) { $M$
+						\begin{tikzpicture} {
+							\draw (0,0) rectangle (1,0.7);
+							\draw
+							(0.15,0.35) -- (0.4 ,0.35)
+							(0.6 ,0.35) -- (0.85,0.35);
+						} \end{tikzpicture}
+					} 
+				}
+			}
+			child {
+				node (8) { $H$
+					\begin{tikzpicture} {
+						\draw (0,0) rectangle (1,0.7);
+						\draw 
+						(0.15,0.35) -- (0.4 ,0.35)
+						(0.6 ,0.35) -- (0.85,0.35);
+					} \end{tikzpicture}
+				}
+			}
+		}
+	};
+	\draw ($(14.south west)+(-1,-0.6)$) node {Vencedor:};
+	\draw ($(14.south west)+(1.1,-0.6)$) node {($J_1$)};
+	\draw ($(14.south west)+(2.6,-0.6)$) node {($J_2$)};
+	\draw ($(14.south west)+(4.2,-0.6)$) node {($J_1$)};
+	\draw ($(14.south west)+(6.6,-0.6)$) node {($J_2$)};
+	\draw ($(14.south west)+(8.9,-0.6)$) node {($J_2$)};
+	\draw ($(14.south west)+(11.2,-0.6)$) node {($J_1$)};
+	\end{tikzpicture}
+	\caption{Árvore do jogo \textit{Nim}}
+	\label{fig:nim_tree}
+\end{figure}
+}
+

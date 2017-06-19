@@ -55,269 +55,205 @@ Em 1982, Elwyn Berlekamp, John Conway e Richard Guy publicaram um livro em dois 
 
 # Teoria dos Jogos
 
+A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas[^optimal_decision] sob condições de conflito[^conflict_condition].
 O campo da teoria dos jogos divide-se em três áreas:
-1) Teoria Econômica dos Jogos (T.E.J.), que normalmente analisa movimentos simultâneos de dois ou mais jogadores;
+1) Teoria Econômica dos Jogos (T.E.J.), que normalmente analisa movimentos simultâneos (definição \ref{def:movimentossimultaneos}) de dois ou mais jogadores;
 2) Teoria Combinatória dos Jogos (T.C.J.), no qual os jogadores fazem movimentos alternadamente, e não faz uso de elementos de sorte, diferente da T.E.J. que também trata desse fenômeno; e
 3) Teoria Computacional dos Jogos, que engloba jogos que são possíveis resolver por força bruta ou inteligência artificial \cite{eyawtkagtbwata_2003}, como jogo da velha e xadrez respectivamente.
 Este trabalho fará uso de alguns conceitos da T.E.J. e da Teoria Computacional dos Jogos.
 
-O livro de _Winning Ways for your Mathematical Plays_ utiliza o jogo _Nim_ para explicar alguns conceitos e realizar análises utlizando a área combinatória da teoria dos jogos \cite{eyawtkagtbwata_2003} mas, a seguir, este jogo será utilizado como exemplo para o entendimento de alguns conceitos mais utilizados na área econômica.
-Considere a versão simplificada do jogo _Nim_, que começa com quatro palitos e dois montes (com dois palitos cada).
+[^optimal_decision]: É considerado que os jogadores são seres racionais e que possuem conhecimento completo das regras do jogo.
+
+[^conflict_condition]: Condições de conflito são aquelas no qual dois ou mais jogadores possuem o mesmo objetivo.
+
+Os elementos básicos de um jogo são: o conjunto de jogadores ; o conjunto de estratégias para cada jogador; uma situação, ou perfil, para cada combinação de estratégias dos jogadores; uma função utilidade para atribuir um _payoff_, ou ganho, para os jogadores no final do jogo.
+Começando com o conjunto de **jogadores**, são dois ou mais seres racionais que possuem um mesmo objetivo e para alcançar esse objetivo, cada jogador possui um conjunto de **estratégias**.
+A partir das escolhas de estratégias de cada jogador, tem-se uma **situação** ou **perfil** e, no final do jogo, um **resultado** para cada perfil \cite{sartini_IIbienaldasbm}.
+Em outras palavras, os jogadores escolhem seus movimentos simultaneamente como explicado na Definição \ref{def:movimentossimultaneos}, o que levará a vitória de algum deles no final do jogo, ou a um empate.
+
+\begin{mydef}
+\label{def:movimentossimultaneos}
+Em jogos com \textbf{movimentos simultâneos}, os jogadores devem escolher o que fazer ao mesmo tempo ou, o que leva à mesma situação, as escolhas de cada jogador é escondida de seu oponente. Em qualquer um dos dois casos, o jogador deve escolher sua jogada levando em consideração a possível jogada do outro \cite{aguidetogametheory_2005}.
+\end{mydef}
+
+Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_**, ou **ganho**, para cada situação do jogo.
+Quando essa informação é inserida em uma matriz, tem-se uma **matriz de _payoff_** \cite{sartini_IIbienaldasbm}.
+Ou seja, matriz de ganho é a representação matricial dos _payoffs_ dos jogadores, onde as estratégia de um jogador estão representadas por cada linha e as de seu oponente estão representadas pelas colunas.
+
+Para um melhor entendimento destes conceitos, será utilizado uma versão pequena do jogo _Nim_ para explicar alguns conceitos utilizados neste trabalho.
+Considere a versão simplificada do jogo _Nim_, que começa com quatro palitos e dois montes (com dois palitos cada monte).
 Cada um dos dois jogadores joga alternadamente retirando quantos palitos quiser, mas de apenas um dos montes.
 O jogador que retirar o último palito do jogo perde \cite{jones_1980}.
 
 Começando com o conceito de abstração e representação de um jogo, existe uma maneira chamada forma extensiva que é descrito na definição \ref{def:forma_extensiva}.
-De acordo com esta definição, a árvore do jogo _Nim_ é representado como mostrado na figura \label{fig:nim_tree}.
-A árvore está representada apenas pela metade pois a outra metade dela é simétrica.
+De acordo com esta definição, a árvore do jogo _Nim_ é representado como mostrado na Figura \ref{fig:nim_tree}.
 
 \begin{mydef}
 \label{def:forma_extensiva}
-A \textbf{forma extensiva} de um jogo elimina as informações de como jogá-lo e passa a ser representado pelos movimentos possíveis e como o estado do jogo é alterado \cite{jones_1980}.
-Sua forma de representar o jogo é por uma árvore, onde os nós são os estados do jogo e as arestas são as possíveis maneiras de alterar aquele estado ou, em outras palavras, os movimentos permitidos a partir daquele estado.
+É dito que um jogo está representado na sua \textbf{forma extensiva} se a árvore do jogo reproduzir cada estado possível, junto com todas as possíveis decisões que levam a este estado, e todos os possíveis resultados a partir dele \cite[grifo nosso]{jones_1980}. Os nós são os estados do jogo e as arestas são as possíveis maneiras de alterar aquele estado, ou em outras palavaras, os movimentos permitidos a partir daquele estado.
 \end{mydef}
 
-\begin{figure}[htb]
-	\centering
-	\begin{tikzpicture}
-	[
-		grow = down,
-		edge from parent/.style = {draw, -latex},
-		every node/.style = {font=\footnotesize},
-		sloped,
-		level 1/.style = {
-			sibling distance = 5.9cm,
-			level distance = 1.5cm
-		},
-		level 2/.style = {
-			sibling distance = 2.4cm,
-			level distance = 1.5cm
-		},
-		level 3/.style = {
-			sibling distance = 1.5cm,
-			level distance = 1.5cm
-		},
-		level 4/.style = {
-			sibling distance = 1.5cm,
-			level distance = 1.5cm
-		}
-	]
-	\draw (-9,0) node {$J_1$};
-	\draw [->][thick] (-8,0) -- (-7,0);
-	\draw (-9,-1.5) node {$J_2$};
-	\draw [->][thick] (-8,-1.5) -- (-7,-1.5);
-	\draw (-9,-3) node {$J_1$};
-	\draw [->][thick] (-8,-3) -- (-7,-3);
-	\draw (-9,-4.5) node {$J_2$};
-	\draw [->][thick] (-8,-4.5) -- (-7,-4.5);
-	\draw (-9,-6) node {$J_1$};
-	\draw [->][thick] (-8,-6) -- (-7,-6);
-	\node (1) { A 
-		\begin{tikzpicture} {
-			\draw (0,0) rectangle (1,0.7);
-			\draw
-			(0.15,0.15) -- (0.15,0.55)
-			(0.3 ,0.15) -- (0.3 ,0.55)
-			(0.7 ,0.15) -- (0.7 ,0.55)
-			(0.85,0.15) -- (0.85,0.55);
-		} \end{tikzpicture}
-	}
-	child {
-		node (2) { B
-			\begin{tikzpicture} {
-				\draw (0,0) rectangle (1,0.7);
-				\draw
-				(0.3 ,0.15) -- (0.3 ,0.55)
-				(0.7 ,0.15) -- (0.7 ,0.55)
-				(0.85,0.15) -- (0.85,0.55);
-			} \end{tikzpicture}} {
-			child {
-				node (4) { D
-					\begin{tikzpicture} {
-						\draw (0,0) rectangle (1,0.7);
-						\draw
-						(0.15,0.35) -- (0.4 ,0.35)
-						(0.7 ,0.15) -- (0.7 ,0.55)
-						(0.85,0.15) -- (0.85,0.55);
-					} \end{tikzpicture}}
-				child {
-					node (9) { I
-					\begin{tikzpicture} {
-						\draw (0,0) rectangle (1,0.7);
-						\draw
-						(0.15,0.35) -- (0.4,0.35)
-						(0.7 ,0.15) -- (0.7,0.55);
-					} \end{tikzpicture}
-					} 
-					child {
-						node (14) { N
-							\begin{tikzpicture} {
-								\draw (0,0) rectangle (1,0.7);
-								\draw
-								(0.15,0.35) -- (0.4 ,0.35)
-								(0.6 ,0.35) -- (0.85,0.35);
-							} \end{tikzpicture}
-						}
-					}
-				}
-				child {
-					node (10) { J
-						\begin{tikzpicture} {
-							\draw (0,0) rectangle (1,0.7);
-							\draw
-							(0.15,0.35) -- (0.4 ,0.35)
-							(0.6 ,0.35) -- (0.85,0.35);
-						} \end{tikzpicture}
-					}
-				}
-			}
-			child {
-				node (5) { E
-					\begin{tikzpicture} {
-						\draw (0,0) rectangle (1,0.7);
-						\draw
-						(0.3,0.15) -- (0.3,0.55)
-						(0.7,0.15) -- (0.7,0.55);
-					} \end{tikzpicture}
-				} 
-				child {
-					node (11) { K
-						\begin{tikzpicture} {
-							\draw (0,0) rectangle (1,0.7);
-							\draw
-							(0.3 ,0.15) -- (0.3 ,0.55)
-							(0.6 ,0.35) -- (0.85,0.35);
-						} \end{tikzpicture}
-					} 
-					child {
-						node (15) { O
-							\begin{tikzpicture} {
-								\draw (0,0) rectangle (1,0.7);
-								\draw
-								(0.15,0.35) -- (0.4 ,0.35)
-								(0.6 ,0.35) -- (0.85,0.35);
-							} \end{tikzpicture}
-						} 
-					}
-				}
-			}
-			child {
-				node (6) { F
-					\begin{tikzpicture} {
-						\draw (0,0) rectangle (1,0.7);
-						\draw
-						(0.3 ,0.15) -- (0.3 ,0.55)
-						(0.6 ,0.35) -- (0.85,0.35);
-					} \end{tikzpicture}
-				} 
-				child {
-					node (12) { L
-						\begin{tikzpicture} {
-							\draw (0,0) rectangle (1,0.7);
-							\draw
-							(0.15,0.35) -- (0.4 ,0.35)
-							(0.6 ,0.35) -- (0.85,0.35);
-						} \end{tikzpicture}
-					} 
-				}
-			}
-		}
-	}
-	child {
-		node (3) { C
-			\begin{tikzpicture} {
-				\draw (0,0) rectangle (1,0.7);
-				\draw
-				(0.15,0.35) -- (0.4 ,0.35)
-				(0.7 ,0.15) -- (0.7 ,0.55)
-				(0.85,0.15) -- (0.85,0.55);
-			} \end{tikzpicture}
-		} { 
-			child {
-				node (7) { G
-					\begin{tikzpicture} {
-						\draw (0,0) rectangle (1,0.7);
-						\draw
-						(0.15,0.35) -- (0.4 ,0.35)
-						(0.7 ,0.15) -- (0.7 ,0.55);
-					} \end{tikzpicture}
-				} 
-				child {
-					node (13) { M
-						\begin{tikzpicture} {
-							\draw (0,0) rectangle (1,0.7);
-							\draw
-							(0.15,0.35) -- (0.4 ,0.35)
-							(0.6 ,0.35) -- (0.85,0.35);
-						} \end{tikzpicture}
-					} 
-				}
-			}
-			child {
-				node (8) { H
-					\begin{tikzpicture} {
-						\draw (0,0) rectangle (1,0.7);
-						\draw 
-						(0.15,0.35) -- (0.4 ,0.35)
-						(0.6 ,0.35) -- (0.85,0.35);
-					} \end{tikzpicture}
-				}
-			}
-		}
-	};
-	\draw ($(14.south west)+(-1,-0.6)$) node {Vencedor:};
-	\draw ($(14.south west)+(1.1,-0.6)$) node {($J_1$)};
-	\draw ($(14.south west)+(2.6,-0.6)$) node {($J_2$)};
-	\draw ($(14.south west)+(4.2,-0.6)$) node {($J_1$)};
-	\draw ($(14.south west)+(6.6,-0.6)$) node {($J_2$)};
-	\draw ($(14.south west)+(8.9,-0.6)$) node {($J_2$)};
-	\draw ($(14.south west)+(11.2,-0.6)$) node {($J_1$)};
-	\end{tikzpicture}
-	\caption{Árvore do jogo \textit{Nim}}
-	\label{fig:nim_tree}
-\end{figure}
+\nimtree
 
-
-A ordem dos jogadores está sendo indicada ao lado esquerdo da figura \ref{fig:nim_tree}, de forma que o jogador $J_1$ é o primeiro a realizar um movimento, e o jogador $J_2$ é o segundo.
+A ordem dos jogadores está sendo indicada ao lado esquerdo da figura, de forma que o jogador $J_1$ é o primeiro a realizar um movimento, o jogador $J_2$ é o segundo, o terceiro movimento é do $J_1$ e assim por diante.
 O estado do jogo é representado por cada nó da árvore, sendo que os quatro palitos estão divididos em dois montes dentro do retângulo.
 Cada aresta representa uma jogada válida para o jogador atual.
-Como pode-se observar, o jogador $J_1$ possui quatro jogadas possíveis, mas duas dessas jogadas são simétricas às outras duas omitidas na árvore.
+Ao analisar bem a primeira jogada, percebe-se que o jogador $J_1$ possui quatro jogadas possíveis: 1) retirar um palito do primeiro monte; 2) retirar dois palitos do primeiro monte; 3) retirar um palito do segundo monte; e 4) retirar dois palitos do segundo monte.
+As últimas jogadas foram omitidas da árvore do jogo por serem simétricas às outras duas primeiras.
+Na aresta $(A,B)$[^aresta], o jogador $J_1$ pegou apenas um palito de um dos montes de palito, enquanto a aresta $(A,C)$ representa o movimento de pegar todos os dois palitos de um monte.
+Da mesma maneira, as arestas $(B,D)$, $(B,E)$, $(B,F)$, $(C,G)$ e $(C,H)$ são os movimentos do jogador $J_2$ em resposta às jogadas do primeiro jogador.
+
+[^aresta]: A aresta pode ser representada como $(A,B)$, sendo a aresta que sai do nó $A$ e vai até o nó $B$, ou como $\overrightarrow{B}$, sendo a aresta que incide em $B$ \cite{algorithmsvelsky_1988}.
+
 No final da figura, há uma letra para cada folha[^leaf] para representar o vencedor no final daquela série de movimentos.
-Na aresta $\overrightarrow{B}$[^aresta] ou $(A,B)$, o jogador $J_1$
+Nos nós terminais $N$, $O$ e $H$, o jogador $J_2$ retirou o último palito do jogo, resultando na vitória de $J_1$.
+Para as folhas $J$, $L$ e $M$, a vitória é do segundo jogador.
 
-[^leaf]: Um nó é considerado folha quando não há nenhum filho abaixo dele.
+[^leaf]: Um nó é considerado folha (ou nó terminal) quando não há nenhum filho abaixo dele.
 
-[^aresta]: 
+Olhando para a árvore de baixo pra cima, o jogador $J_1$ ganhou na folha $N$.
+Na verdade, ele já havia ganhado no nó anterior ($I$), pois o jogador $J_2$ só tinha uma jogada a fazer.
+Como a decisão de chegar no nó $I$ é de escolha do jogado ao realizar a jogada $(D,I)$, pode-se dizer que essa jogada é um _winning move_ do jogador $J_1$.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Ao mesmo tempo que $J_1$ é um jogador inteligente que tenta sempre jogar da melhor maneira possível, o jogador $J_2$ também fará as melhores jogadas que puder.
+Sabendo que o nó $D$ garante sua derrota, ele fará de tudo para escolher outras jogadas.
+De fato, ao observar essa árvore com mais cuidado, o jogador $J_2$ sempre irá vencer, pois há sempre um nó no qual, a partir dele, lhe garante à vitória.
+Para entender melhor o por quê do jogador $J_2$ sempre ganha, será utilizado uma análise partindo do conceito de estratégia pura.
 
 \begin{mydef}
-\label{def:algo}
-Em jogos com \textbf{movimentos simultâneos}, os jogadores devem escolher o que fazer ao mesmo tempo ou, o que leva à mesma situação, as escolhas de cada jogador é escondida de seu oponente. Em qualquer um dos dois casos, o jogador deve escolher sua jogada levando em consideração a possível jogada do outro \cite{aguidetogametheory_2005}.
+\label{def:estrategia_pura}
+\textbf{Estratégia pura} é definido como um conjunto de decisões a serem feitas para cada ponto de decisão no jogo \cite[grifo nosso]{jones_1980}.
 \end{mydef}
+
+A estratégia pura também pode ser vista como um caminho[^path] único na árvore, que tem origem no primeiro nó de decisão do jogador e termina em uma folha.
+No caso do jogador $J_1$, o caminho começa na raíz, e no caso do jogador $J_2$, o caminho pode começar em $B$ ou em $C$.
+Devido à isso, $J_2$ deve considerar os dois casos e decidir de antemão o que fazer.
+A partir da definição de estratégia pura (\ref{def:estrategia_pura}), tem-se as estratégias de ambos os jogadores nas Tabelas \ref{tab:estrategia_pura_j1} e \ref{tab:estrategia_pura_j2}.
+
+[^path]: Uma sequência de arestas onde o nó no final de uma aresta coincide com o nó no começo da próxima aresta, é chamado de \textbf{caminho} \cite[grifo nosso]{sometopics_1971}.
+
+\begin{table}[htb]
+	\centering
+	\caption{Estratégias pura do jogador $J_1$. Fonte: \cite[p.~21]{jones_1980}}
+	\label{tab:estrategia_pura_j1}
+
+	\rowcolors{2}{gray!10}{white}
+	\begin{tabular}{cccc}
+		\toprule
+		\textbf{Estratégia} & \textbf{$\mathbf{1}^{\b{\tiny{o}}}$ Turno} & \multicolumn{2}{c}{\textbf{$\mathbf{2}^{\b{\tiny{o}}}$ Turno}} \\
+		                    &                                            & \footnotesize{Se em} & \footnotesize{Vá para}                  \\
+		\midrule
+		$\sigma_1$          & $A \rightarrow B$                          & $D$                  & $I$                                     \\
+		$\sigma_2$          & $A \rightarrow B$                          & $D$                  & $J$                                     \\
+		$\sigma_3$          & $A \rightarrow C$                          & \textendash          & \textendash                             \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[htb]
+	\centering
+	\caption{Estratégias pura do jogador $J_2$. Fonte: \cite[p.~21]{jones_1980}}
+	\label{tab:estrategia_pura_j2}
+	\begin{tabular}{ccc}
+		\toprule
+		\textbf{Estratégia}                             & \multicolumn{2}{c}{\textbf{$\mathbf{1}^{\b{\tiny{o}}}$ Turno}} \\
+		                                                & \footnotesize{Se em} & \footnotesize{Vá para}                  \\
+		\midrule
+		\rowcolor{gray!10}								& $B$                  & $D$                                     \\
+		\rowcolor{gray!10}\multirow{-2}{*}{$\tau_1$}	& $C$                  & $G$                                     \\
+													    & $B$                  & $E$                                     \\
+						  \multirow{-2}{*}{$\tau_2$}	& $C$                  & $G$                                     \\
+		\rowcolor{gray!10}  						    & $B$                  & $F$                                     \\
+		\rowcolor{gray!10}\multirow{-2}{*}{$\tau_3$}	& $C$                  & $G$                                     \\
+													    & $B$                  & $D$                                     \\
+						  \multirow{-2}{*}{$\tau_4$}	& $C$                  & $H$                                     \\
+		\rowcolor{gray!10}							    & $B$                  & $E$                                     \\
+		\rowcolor{gray!10}\multirow{-2}{*}{$\tau_5$}	& $C$                  & $H$                                     \\
+													    & $B$                  & $F$                                     \\
+						  \multirow{-2}{*}{$\tau_6$}	& $C$                  & $H$                                     \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Na Tabela \ref{tab:estrategia_pura_j1}, os movimentos de $J_1$ estão separadas em dois turnos.
+O primeiro turno é o nó raiz ($A$).
+A partir deste estado, o jogador possui duas escolhas $(A,B)$ ou $(A,C)$, representados na tabela como as estratégias pura $\sigma_1$ e $\sigma_3$.
+Mas além dessa informação, ainda deve-se representar a próxima decisão a ser feita após escolher $\sigma_1$.
+Se o jogador $J_2$ escolher certos movimentos que chegue no $D$, o jogador $J_1$ ainda tem mais uma escolha a fazer.
+Essa segunda escolha está representada nas colunas: _Se em_, no caso se o jogador estiver naquele nó; e _Vá para_, que são as possíveis jogadas a serem feitas.
+Então, a diferença de $\sigma_1$ e $\sigma_2$ é apenas nesta segunda escolha.
+Ao chegar em um nó terminal, acaba também a descrição de uma estratégia pura.
+
+\begin{mydef}
+\label{def:jogo}
+Considere um jogo no qual o jogador $J_1$ move primeiro e, a partir de então, ambos os jogadores alternam as jogadas.
+Ao chegar em um nó terminal, tem-se uma função para atribuir um valor ao jogador $J_1$ naquela folha.
+Essa sequência de movimento é chamado de \textbf{jogo}, e o valor na folha é chamado \textbf{resultado do jogo} \cite[p.~2]{algorithmsvelsky_1988}. 
+\end{mydef}
+
+De acordo com a definição de um jogo (\ref{def:jogo}), a versão reduzida do _Nim_ possui dezoito jogos no total, de forma que a quantidade de jogos pode ser calculado com $\sum_{i=1}^{n} \sum_{j=1}^{m} 1 = 18$, com $n = 3$ e $m = 6$.
+Alguns exemplos são monstrados a seguir:
+
+\begin{align*}
+\label{ex:jogossigmatau}
+	\sigma_1 & \text{ e } \tau_1 \text{ resultam no jogo } A \rightarrow B \rightarrow D \rightarrow I \rightarrow N\text{,} \\
+	\sigma_2 & \text{ e } \tau_1 \text{ resultam no jogo } A \rightarrow B \rightarrow D \rightarrow J \text{,} \\
+	\sigma_3 & \text{ e } \tau_2 \text{ resultam no jogo } A \rightarrow C \rightarrow G \rightarrow M \text{, etc.}
+\end{align*}
+
+Olhando para a tabela do jogador $J_2$ (\ref{tab:estrategia_pura_j2}), sua primeira jogada já depende da jogada do outro jogador.
+Por isso, cada estratégia $\tau_j$ com $j \in \{1,\cdots, m\}$ descreve duas possibiliades de movimento.
+Observando $\tau_1$, no primeiro turno seu movimento será $(B,D)$ se estiver em $B$, caso contrário, jogará $(C,G)$.
+
+\begin{mydef}
+\label{def:forma_normal}
+A \textbf{forma normal} é a representação do resultado do jogo a partir das escolhas de estratégia pura dos jogadores, onde, ciente das regras do jogo, cada jogador seleciona uma estratégia pura sem saber a escolha do outro.
+\end{mydef}
+
+Considere uma função $R(x,y)$ tal que ela representa o ganho para $J_1$ no final do jogo.
+
+Ao escolher suas estratégias pura, os jogadores percorrem a árvore até chegar a uma folha.
+Essa sequência de movimentos (a escolha de uma estratégia pura $\sigma_i$ e uma $\tau_j$) é chamada de \textbf{jogo}.
+Dependendo das escolhas de $J_1$ e $J_2$, tem-se um jogo diferente, como mostrados no exemplo \ref{ex:jogossigmatau}.
+Esses diferentes jogos são representados pela análise normal (definição \ref{def:forma_normal}) na Tabela \ref{tab:forma_normal}.
+
+\begin{table}[htb]
+	\centering
+	\caption{Forma Normal para o jogo \emph{Nim}. Fonte: \cite[p.~23]{jones_1980}}
+	\label{tab:forma_normal}
+	\begin{tabular}{cccccccc}
+		\toprule
+															&				& \multicolumn{6}{c}{$\mathbf{J_2}$} \\
+															&				& $\tau_1$ 	& $\tau_2$	& $\tau_3$	& $\tau_4$	& $\tau_5$	& $\tau_6$	\\
+		\midrule
+		\rowcolor{gray!10}									& $\sigma_1$	& $N$		& $O$		& $L$		& $N$		& $O$		& $L$		\\
+												   			& $\sigma_2$	& $J$		& $O$		& $L$		& $J$		& $O$		& $L$		\\
+		\rowcolor{gray!10}\multirow{-3}{*}{$\mathbf{J_1}$}	& $\sigma_3$	& $M$		& $M$		& $M$		& $H$		& $H$		& $H$		\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Na Tabela \ref{tab:forma_normal}, as estratégias dos jogadores estão nas linhas e colunas, e as folhas são os resultados de caminhos tomados a partir de cada estratégia $\sigma_i$ e $\tau_j$.
+Com essa análise, é possível montar uma tabela (Tabela \ref{tab:forma_normal}) considerando cada linha como uma estratégia pura de $J_1$ ($\sigma_i \forall i \in \{1, 2, 3\}$) e, cada coluna, uma estratégia de $J_2$ ($\tau_j \forall j \in \{1, 2, 3, 4, 5, 6\}$).
+Para transformar esta tabela em uma "matriz" de _payoff_, basta substituir os nós terminais pelo resultado do jogo.
+Se o jogador $J_1$ ganhar 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Às vezes o jogador também possui informação completa sobre o estado atual e do histórico de jogadas do jogo.
+
+
+
 
 \begin{mydef}
 Jogos de \textbf{soma zero} são jogos de puro conflito, no qual apenas um jogador pode vencer o jogo. Em outras palavras, a vitória de um jogador implica na derrota do outro.
@@ -341,6 +277,10 @@ Por exemplo, dois jogadores, na disputa por par ou ímpar, cada um com duas alte
 
 
 
+asd
+asd
+
+
 
 
 
@@ -357,26 +297,6 @@ A área de teoria combinatória dos jogos analisa os jogos de uma perspectiva um
 \end{equation}
 
 
-
-A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas[^optimal_decision] sob condições de conflito[^conflict_condition].
-Os elementos básicos de um jogo são o conjunto de **jogadores**, onde cada jogador possui um conjunto de **estratégias** e, a partir das escolhas de estratégias de cada jogador, temos uma **situação** ou **perfil**.
-Para cada perfil do jogo, tem-se um resultado no final do jogo.
-Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_**, ou **ganho**, para cada situação do jogo.
-
-Quando essa informação é inserida em uma matriz, tem-se uma **matriz de _payoff_**.
-Em outras palavras, matriz de ganho é a representação matricial dos _payoffs_ dos jogadores, onde as estratégia de um jogador estão representadas por cada linha e as de seu oponente estão representadas pelas colunas como mostra a tabela +@tbl:21.
-Além disso o ganho dos jogadores é representado como uma tupla (ou par) de valores, sendo que o primeiro é o ganho do primeiro jogador e o segundo valor, o do segundo jogador. 
-
-[^optimal_decision]: É considerado que os jogadores são seres racionais e que possuem conhecimento completo das regras do jogo. Às vezes o jogador também possui informação completa sobre o estado atual e do histórico de jogadas do jogo.
-
-[^conflict_condition]: Condições de conflito são aquelas no qual dois ou mais jogadores possuem o mesmo objetivo.
-
-  $P_2$ \\ $P_1$ | $E_{11}$ | $E_{12}$
-:---------------:|:--------:|:--------:
-     $E_{21}$    |  (1,0)   |  (2,3)
-     $E_{22}$    |  (3,4)   |  (0,2)
-
-Table: Matriz de ganho. {#tbl:21}
 
 Dessa forma, o primeiro jogador, que é representado por $P_1$, possui as estratégias $E_{11}$ e $E_{12}$.
 Semelhante ao primeiro jogador, tem-se o segundo jogador sendo representado por $P_2$ e com as estratégias $E_{21}$ e $E_{22}$.
