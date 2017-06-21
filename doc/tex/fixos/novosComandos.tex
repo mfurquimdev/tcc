@@ -1,3 +1,25 @@
+%%
+%% Customizações do abnTeX2 (http://abnTeX2.googlecode.com) para a Universidade XXXX
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is SEU_NOME, SEU_EMAIL
+%%
+%% Further information about abnTeX2 are available on https://github.com/abntex/abntex2
+%%
+
+% ---
+% INICIO DAS CUSTOMIZACOES PARA A FACULDADE UNB GAMA
+% ---
+
 \newcommand{\curso}[1]{\def\imprimircurso{#1}}
 
 \newcommand{\palavraChaveUm}[1]{\def\imprimirpalavrachaveum{#1}}
@@ -15,13 +37,11 @@
 			\vfill
 			\centering
 			\includegraphics[width=\paperwidth,height=\paperheight,%
-				keepaspectratio]{figuras/capa.jpg}%
+				keepaspectratio]{figuras/capa.eps}%
 			\vfill
 		}
 	}
 }
-
-\newcommand{\eqname}[1]{\tag*{#1}}
 
 \renewcommand{\imprimircapa}{%
   \begin{capa}%
@@ -46,9 +66,6 @@
     	\textbf{{\large{Autor: \imprimirautor}}}
 		\par
     	\textbf{{\large{Orientador: \imprimirorientador}}}
-		\par
-		\textbf{{\large{Coorientador: \imprimircoorientador}}}
-
 	\end{flushright}
 
     \vspace*{0.2in}
@@ -59,6 +76,10 @@
     \vspace*{2.2in}
   \end{capa}
 }
+
+% ---
+% FIM DAS CUSTOMIZACOES PARA A FACULDADE UNB GAMA
+% ---
 
 \newcommand\nimtree{
 \begin{figure}[htb]
@@ -96,7 +117,7 @@
 	\draw [->][thick] (-8,-4.5) -- (-7,-4.5);
 	\draw (-9,-6) node {$J_1$};
 	\draw [->][thick] (-8,-6) -- (-7,-6);
-	\node (1) { $A$ 
+	\node (1) { $A$
 		\begin{tikzpicture} {
 			\draw (0,0) rectangle (1,0.7);
 			\draw
@@ -132,7 +153,7 @@
 						(0.15,0.35) -- (0.4,0.35)
 						(0.7 ,0.15) -- (0.7,0.55);
 					} \end{tikzpicture}
-					} 
+					}
 					child {
 						node (14) { $N$
 							\begin{tikzpicture} {
@@ -163,7 +184,7 @@
 						(0.3,0.15) -- (0.3,0.55)
 						(0.7,0.15) -- (0.7,0.55);
 					} \end{tikzpicture}
-				} 
+				}
 				child {
 					node (11) { $K$
 						\begin{tikzpicture} {
@@ -172,7 +193,7 @@
 							(0.3 ,0.15) -- (0.3 ,0.55)
 							(0.6 ,0.35) -- (0.85,0.35);
 						} \end{tikzpicture}
-					} 
+					}
 					child {
 						node (15) { $O$
 							\begin{tikzpicture} {
@@ -181,7 +202,7 @@
 								(0.15,0.35) -- (0.4 ,0.35)
 								(0.6 ,0.35) -- (0.85,0.35);
 							} \end{tikzpicture}
-						} 
+						}
 					}
 				}
 			}
@@ -193,7 +214,7 @@
 						(0.3 ,0.15) -- (0.3 ,0.55)
 						(0.6 ,0.35) -- (0.85,0.35);
 					} \end{tikzpicture}
-				} 
+				}
 				child {
 					node (12) { $L$
 						\begin{tikzpicture} {
@@ -202,7 +223,7 @@
 							(0.15,0.35) -- (0.4 ,0.35)
 							(0.6 ,0.35) -- (0.85,0.35);
 						} \end{tikzpicture}
-					} 
+					}
 				}
 			}
 		}
@@ -216,7 +237,7 @@
 				(0.7 ,0.15) -- (0.7 ,0.55)
 				(0.85,0.15) -- (0.85,0.55);
 			} \end{tikzpicture}
-		} { 
+		} {
 			child {
 				node (7) { $G$
 					\begin{tikzpicture} {
@@ -225,7 +246,7 @@
 						(0.15,0.35) -- (0.4 ,0.35)
 						(0.7 ,0.15) -- (0.7 ,0.55);
 					} \end{tikzpicture}
-				} 
+				}
 				child {
 					node (13) { $M$
 						\begin{tikzpicture} {
@@ -234,14 +255,14 @@
 							(0.15,0.35) -- (0.4 ,0.35)
 							(0.6 ,0.35) -- (0.85,0.35);
 						} \end{tikzpicture}
-					} 
+					}
 				}
 			}
 			child {
 				node (8) { $H$
 					\begin{tikzpicture} {
 						\draw (0,0) rectangle (1,0.7);
-						\draw 
+						\draw
 						(0.15,0.35) -- (0.4 ,0.35)
 						(0.6 ,0.35) -- (0.85,0.35);
 					} \end{tikzpicture}
@@ -261,4 +282,3 @@
 	\label{fig:nim_tree}
 \end{figure}
 }
-

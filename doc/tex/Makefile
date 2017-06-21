@@ -13,6 +13,10 @@ AUX_FILE =    $(addsuffix .aux, $(basename $(TARGET)))
 
 BIBTEX = bibtex
 LATEX  = pdflatex
+#BIBTEX = bibtex
+#LATEX = latex
+#DVIPS = dvips
+#PS2PDF = ps2pdf
 
 FIXOS_DIR = fixos
 FIXOS_FILES = ${wildcard $(FIXOS_DIR)/*.tex}
@@ -35,6 +39,13 @@ FLAGS= --filter pandoc-eqnos --filter pandoc-tablenos --from=markdown --to=latex
 
 all:
 	@make tex
+#	$(LATEX) $(MAIN_FILE) $(SOURCES)
+#	$(BIBTEX) $(AUX_FILE)
+#	$(LATEX) $(MAIN_FILE) $(SOURCES)
+#	$(LATEX) $(MAIN_FILE) $(SOURCES)
+#	$(DVIPS) $(DVI_FILE)
+#	$(PS2PDF) $(PS_FILE)
+#	@cp $(PDF_FILE) $(TARGET)
 	@make pdf
 
 tex:

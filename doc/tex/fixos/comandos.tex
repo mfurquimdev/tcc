@@ -1,4 +1,6 @@
 \renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
 \renewcommand*{\lstlistingname}{Código}
 \renewcommand*{\lstlistlistingname}{Lista de \lstlistingname s}
 \renewcommand{\backref}{}

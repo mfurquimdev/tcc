@@ -1,5 +1,9 @@
 #!/bin/bash
 
+asciinema rec
+
+xdotool --delay 100 "#Testando o rec com script" Enter
+
 make
 
 D=2
