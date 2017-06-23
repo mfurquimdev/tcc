@@ -8,16 +8,16 @@ Capítulo 0 - Introdução
 Imagine que um grupo de pessoas concordam em obedecer certas regras e agir de forma individual, ou em grupos menores, sem violar as regras especificadas.
 No final, suas ações como um todo levará a uma certa situação chamada **resultado**.
 Os membros deste grupo são chamados de **jogadores** e as regras que eles concordaram em obedecer constitui um **jogo**.
-Estes conceitos são pequenos exemplos utilizados em análises baseadas na **teoria dos jogos**.
+Estes conceitos são exemplos das ideias utilizadas em análises baseadas na **teoria dos jogos**.
 
 **FALAR SOBRE AS POSSÍVEIS ANÁLISES E PKE FAZER ESSAS ANÁLISES**
 
 A proposta deste trabalho foi realizar uma destas análise em um jogo de tabuleiro chamado _Big Points_.
-A motivação que levou à realização deste trabalho foi identificar uma heurística na qual tem-se uma maior chance de ganhar uma partida.
-Dessa forma, seria possível a implementação de uma inteligência artificial (I.A.) com diferentes dificuldades para jogar contra uma pessoa.
+O que levou a realização deste trabalho foi verificar o balanceamento do jogo, ou seja, se quem começa a jogar tem vantagens sobre o segundo jogador.
 Dito isso, o objetivo principal deste trabalho foi analisar várias partidas distintas de uma versão reduzida do jogo.
+E como objetivos secundários, identificar uma heurística na qual tem-se uma maior chance de ganhar uma partida, dessa forma, seria possível a implementação de uma inteligência artificial (I.A.) com diferentes dificuldades para jogar contra uma pessoa.
 
-Uma análise possível para solucionar[^jogo_solucao] o jogo é utilizar o teorema _minimax_, onde cada jogador tenta aumentar sua pontuação e diminuir a pontuação do oponente.
+A análise utilizada para solucionar[^jogo_solucao] o jogo neste trabalho foi o teorema _minimax_, onde cada jogador tenta aumentar sua pontuação e diminuir a pontuação do oponente.
 Os resultados obtidos ao final da análise computacional baseadas neste teorema sugere a possibilidade do jogo completo ser desbalanceado[^jogo_balanceado], dando ao primeiro jogador uma maior chance de vencer o jogo.
 
 [^jogo_solucao]: Solucionar um jogo é percorrer todas as sua possibilidades de movimento e seus resultados.
@@ -204,7 +204,7 @@ Ao chegar em um nó terminal, tem-se uma função para atribuir um valor ao joga
 Essa sequência de movimento é chamado de \textbf{jogo}, e o valor na folha é chamado \textbf{resultado do jogo} \cite[p.~2]{algorithmsvelsky_1988}.
 \end{mydef}
 
-De acordo com a definição de um jogo (Definição \ref{def:jogo}), a versão reduzida do _Nim_ possui dezoito jogos no total, de forma que a quantidade de jogos pode ser calculado com $n \cdot m = 18$, com $n = 3$ e $m = 6$.
+De acordo com a definição de um jogo (Definição \ref{def:jogo}), a versão reduzida do _Nim_ possui dezoito jogos no total, de forma que a quantidade de jogos pode ser calculado com $n m = 18$, com $n = 3$ e $m = 6$.
 Alguns exemplos são monstrados a seguir:
 
 \begin{align*}
@@ -269,9 +269,22 @@ Se o primeiro jogador ganhar, seu ganho é $1$, se o segundo jogador vencer, o r
 
 # Programação dinâmica
 
-citar cormen introduction to algorithms MIT
+Dynamic programming typically applies to optimization problems in which we make a set of choices in order to arrive at an optimarl solutions.
+As we make each choice, subproblems of the same form often arise.
+Dynamic programming is effective when a given subproblem may arise from more than one partial set of choices; the key technique is to store the solution to each such subproblem in case it shoudl reapper.
 
-Programação dinâmica é uma técnica de programação capaz de reduzir significantemente o tempo de processamento de um problema no qual os estados possam se repetir.
+Dynamic programming, like the divide-and-conquer method, solves problems by combining the solution to subproblems. Divide and conquer algorithms partition the the problem into disjoint subproblems, solve the subproblems recursively, and then combine their solutions to solve the original problem. In contrast, dynamic programming applies when the subproblems overlap - that is, when subproblems share subsubproblmes. In this contextm a divide-and-conquer algorithm does more work than necessary, repeatedly solving the common subsubproblems. A dynamic-programming algorithm solves each subsubproblem just once and then saves its answer in a table, thereby avoiding the work of recomputing the answer every time it solves each subsubproblem.
+
+We typically apply dynamic programming to optimization problems.
+Such problems can have many possible solutions.
+Each solution has a value, and we wish to find a solution with the optimal (minimum or maximum) value.
+We call such a solution an optimal solution to the problem, as opposed to the optimal solution. 
+
+
+
+Programação dinâmica 
+é uma técnica de programação capaz de reduzir significantemente o tempo de processamento de um problema no qual os estados possam se repetir.
+\cite{cormen2001introduction}
 Um exemplo clássico é o programa de para calcular os números da sequência de _Fibonacci_.
 No Código \ref{lst:fibonacci1} está escrito um programa bem simples para resolver este problema.
 
