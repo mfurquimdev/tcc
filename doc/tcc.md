@@ -34,10 +34,10 @@ Capítulo 1 - Fundamentação Teórica
 \chapter{Fundamentação Teórica}
 \label{ch:fundamentacao_teorica}
 
-Para um bom entendimento da análise realizada no jogo _Big Points_ é preciso ter um conhecimento básico sobre teoria dos jogos e programação dinâmica.
+Para um bom entendimento da análise realizada no jogo _Big Points_ é preciso um conhecimento básico sobre teoria dos jogos e programação dinâmica.
 A primeira seção deste capítulo conta brevemente sobre a história da Teoria dos Jogos, com alguns nomes icônicos para esta área.
 A Seção \ref{teoria-dos-jogos} explica um pouco sobre os conceitos da Teoria dos Jogos, mas apenas o necessário para o entendimento deste trabalho.
-Na Seção \ref{programauxe7uxe3o-dinuxe2mica}, são explicados os conceitos sobre programação dinâmica e, na última seção, as regras do jogo \textit{Big Points} são explicadas.
+Na Seção \ref{programauxe7uxe3o-dinuxe2mica}, são apresentados os conceitos sobre programação dinâmica e, na última seção, as regras do jogo \textit{Big Points} são explicadas.
 
 # Histórico da Teoria dos Jogos
 
@@ -63,17 +63,17 @@ A partir de então, surgiram novas técnicas de solução de jogos e a teoria do
 Entre 1949 e 1953, Nash escreveu mais artigos ligados à solução de jogos estratégicos: _The Bargaining Problema_ (O Problema da Barganha, 1949) e _Two-Person Cooperative Games_ (Jogos Cooperativos de Duas Pessoas, 1953).
 Também escreveu artigos de matemática pura sobre variedades algébricas em 1951, e de arquitetura de computadores em 1954 \cite{alecsandra_2006}.
 
-Várias publicações contribuíram para este marco histórico da teoria dos jogos, mas o livro de Thomas Schelling, publicado em 1960, se destacou em um ponto de vista social\apud{schelling1960strategy}{aguidetogametheory_2005}.
+Várias publicações contribuíram para este marco histórico da teoria dos jogos, mas o livro de Thomas Schelling, publicado em 1960, se destacou em um ponto de vista social \apud{schelling1960strategy}{aguidetogametheory_2005}.
 Em 1982, Elwyn Berlekamp, John Conway e Richard Guy publicaram um livro em dois volumes que se tornou uma referência na área da teoria dos jogos combinatorial por explicar os conceitos fundamentais para a teoria dos jogos combinatorial \apud{elwyn_1982}{eyawtkagtbwata_2003}.
 
 # Teoria dos Jogos
 
 A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas[^optimal_decision] sob condições de conflito[^conflict_condition].
 O campo da teoria dos jogos divide-se em três áreas:
-Teoria Econômica dos Jogos que normalmente analisa movimentos simultâneos (definição \ref{def:movimentossimultaneos}) de dois ou mais jogadores;
+Teoria Econômica dos Jogos, que normalmente analisa movimentos simultâneos (Definição \ref{def:movimentossimultaneos}) de dois ou mais jogadores;
 Teoria Combinatória dos Jogos, no qual os jogadores fazem movimentos alternadamente, e não faz uso de elementos de sorte, diferente da Teoria Econômica dos Jogos que também trata desse fenômeno; e
-Teoria Computacional dos Jogos, que engloba jogos que são possíveis resolver por força bruta ou inteligência artificial \cite{eyawtkagtbwata_2003}, como jogo da velha e xadrez respectivamente.
-Nestre trabalho, será utilizado alguns conceitos da Teoria Econômica dos Jogos para analisar um jogo de movimentos alternados para ser resolvido computacionalmente.
+Teoria Computacional dos Jogos, que engloba jogos que são possíveis resolver por força bruta ou inteligência artificial \cite{eyawtkagtbwata_2003}, como jogo da velha e xadrez, respectivamente.
+Nestre trabalho serão utilizados alguns conceitos da Teoria Econômica dos Jogos para analisar um jogo de movimentos alternados, a ser resolvido computacionalmente.
 
 [^optimal_decision]: É considerado que os jogadores são seres racionais e possuem conhecimento completo das regras.
 
@@ -84,26 +84,26 @@ Nestre trabalho, será utilizado alguns conceitos da Teoria Econômica dos Jogos
 Em jogos com \textbf{movimentos simultâneos}, os jogadores devem escolher o que fazer ao mesmo tempo ou, o que leva à mesma situação, as escolhas de cada jogador é escondida de seu oponente. Em qualquer um dos dois casos, o jogador deve escolher sua jogada levando em consideração a possível jogada do outro \cite{aguidetogametheory_2005}.
 \end{mydef}
 
-Os elementos básicos de um jogo são: o conjunto de jogadores ; o conjunto de estratégias para cada jogador; uma situação, ou perfil, para cada combinação de estratégias dos jogadores; uma função utilidade para atribuir um _payoff_, ou ganho, para os jogadores no final do jogo.
-Começando com o conjunto de **jogadores**, são dois ou mais seres racionais que possuem um mesmo objetivo e para alcançar esse objetivo, cada jogador possui um conjunto de **estratégias**.
+Os elementos básicos de um jogo são: o conjunto de jogadores; o conjunto de estratégias para cada jogador; uma situação, ou perfil, para cada combinação de estratégias dos jogadores; e uma função utilidade para atribuir um _payoff_, ou ganho, para os jogadores no final do jogo.
+Os **jogadores** são dois ou mais seres racionais que possuem um mesmo objetivo e, para alcançar esse objetivo, cada jogador possui um conjunto de **estratégias**.
 A partir das escolhas de estratégias de cada jogador, tem-se uma **situação** ou **perfil** e, no final do jogo, um **resultado** para cada perfil \cite{sartini_IIbienaldasbm}.
-Em outras palavras, os jogadores escolhem seus movimentos simultaneamente como explicado na Definição \ref{def:movimentossimultaneos}, o que levará a vitória de algum deles no final do jogo, ou a um empate.
+Em outras palavras, os jogadores escolhem seus movimentos simultaneamente, como explicado na Definição \ref{def:movimentossimultaneos}, o que levará a vitória de algum deles no final do jogo, ou a um empate.
 
 Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_**, ou **ganho**, para cada situação do jogo.
 Quando essa informação é inserida em uma matriz, tem-se uma **matriz de _payoff_** \cite{sartini_IIbienaldasbm}.
-Ou seja, matriz de ganho é a representação matricial dos _payoffs_ dos jogadores, onde as estratégia de um jogador estão representadas por cada linha e as de seu oponente estão representadas pelas colunas.
+Em outras palavras, a matriz de ganho é a representação matricial dos _payoffs_ dos jogadores, onde as estratégia de um jogador estão representadas por cada linha e as de seu oponente estão representadas pelas colunas.
 
 Para um melhor entendimento destes conceitos, será utilizado uma versão curta do jogo \emph{Nim}.
-Considere a versão simplificada do jogo, que começa com quatro palitos e dois montes (com dois palitos cada monte).
+Esta versão simplificada do jogo começa com quatro palitos e dois montes (com dois palitos cada monte).
 Cada um dos dois jogadores joga alternadamente retirando quantos palitos quiser, mas de apenas um dos montes.
 O jogador que retirar o último palito do jogo perde \cite{jones_1980}.
 
-Começando com o conceito de abstração e representação de um jogo, existe uma maneira chamada forma extensiva que é descrito na Definição \ref{def:forma_extensiva}.
-De acordo com esta definição, a árvore do jogo \emph{Nim} é representada como mostrado na Figura \ref{fig:nim_tree}.
+Começando com o conceito de abstração e representação de um jogo, existe uma maneira de fazê-la chamada forma extensiva, a qual é descrita na Definição \ref{def:forma_extensiva}.
+De acordo com esta definição, a árvore do jogo \emph{Nim} simplificado é representada na Figura \ref{fig:nim_tree}.
 
 \begin{mydef}
 \label{def:forma_extensiva}
-É dito que um jogo está representado na sua \textbf{forma extensiva} se a árvore do jogo reproduzir cada estado possível, junto com todas as possíveis decisões que levam a este estado, e todos os possíveis resultados a partir dele \cite[grifo nosso]{jones_1980}. Os nós são os estados do jogo e as arestas são as possíveis maneiras de alterar aquele estado, ou em outras palavaras, os movimentos permitidos a partir daquele estado.
+É dito que um jogo está representado na sua \textbf{forma extensiva} se a árvore do jogo reproduzir cada estado possível, junto com todas as possíveis decisões que levam a este estado, e todos os possíveis resultados a partir dele \cite[grifo nosso]{jones_1980}. Os nós são os estados do jogo e as arestas são as possíveis maneiras de alterar aquele estado, isto é, os movimentos permitidos a partir daquele estado.
 \end{mydef}
 
 \nimtree
@@ -111,14 +111,14 @@ De acordo com esta definição, a árvore do jogo \emph{Nim} é representada com
 A ordem dos jogadores está sendo indicada ao lado esquerdo da figura, de forma que o jogador $J_1$ é o primeiro a realizar um movimento, o $J_2$ é o segundo, o terceiro movimento é do $J_1$ e assim por diante.
 O estado do jogo é representado por cada nó da árvore, sendo que os quatro palitos estão divididos em dois montes dentro do retângulo.
 Cada aresta representa uma jogada válida para o jogador atual.
-Ao analisar bem a primeira jogada, percebe-se que $J_1$ possui quatro jogadas possíveis: retirar um palito do primeiro monte; retirar dois palitos do primeiro monte; retirar um palito do segundo monte; e retirar dois palitos do segundo monte.
+Ao analisar a primeira jogada, percebe-se que $J_1$ possui quatro jogadas possíveis: retirar um palito do primeiro monte; retirar dois palitos do primeiro monte; retirar um palito do segundo monte; e retirar dois palitos do segundo monte.
 As últimas jogadas foram omitidas da árvore do jogo por serem simétricas às outras duas primeiras.
 Na aresta $(A,B)$[^aresta], o primeiro jogador pega apenas um palito de um dos montes de palito, enquanto a aresta $(A,C)$ representa o movimento de pegar todos os dois palitos de um monte.
 Da mesma maneira, as arestas $(B,D)$, $(B,E)$, $(B,F)$, $(C,G)$ e $(C,H)$ são os movimentos de $J_2$ em resposta às jogadas de $J_1$.
 
 [^aresta]: A aresta pode ser representada como $(A,B)$, sendo a aresta que sai do nó $A$ e vai até o nó $B$, ou como $\overrightarrow{B}$, sendo a aresta que incide em $B$ \cite{algorithmsvelsky_1988}.
 
-No final da figura, há uma representação para cada folha[^leaf] para representar o vencedor no final daquela série de movimentos.
+No final da Figura \ref{fig:nim_tree}, há uma representação para cada folha[^leaf] para representar o vencedor no final daquela série de movimentos.
 Nos nós terminais $N$, $O$ e $H$, o jogador $J_2$ retirou o último palito do jogo, resultando na vitória de $J_1$.
 Para as folhas $J$, $L$ e $M$, a vitória é do segundo jogador.
 
@@ -126,11 +126,13 @@ Para as folhas $J$, $L$ e $M$, a vitória é do segundo jogador.
 
 Olhando para a árvore de baixo pra cima, o jogador $J_1$ ganha na folha $N$.
 Na verdade, ele já havia ganhado no nó anterior ($I$), pois o jogador $J_2$ só tem uma jogada a fazer.
-Como a decisão de chegar no nó $I$ é de escolha do primeiro jogador ao realizar a jogada $(D,I)$, pode-se dizer que essa jogada é um de seus \emph{winning move}s.
+Como a decisão de chegar no nó $I$ é de escolha do primeiro jogador ao realizar a jogada $(D,I)$, pode-se dizer que essa jogada é um \emph{winning move}[^winning_move].
+
+[^winning_move]: Movimento que garante a vitória.
 
 Ao mesmo tempo que $J_1$ é um jogador inteligente que tenta sempre jogar da melhor maneira possível, o segundo jogador também fará as melhores jogadas que puder.
 Sabendo que o nó $D$ garante sua derrota, $J_2$ fará de tudo para escolher outras jogadas.
-De fato, ao observar essa árvore com mais cuidado, o jogador $J_2$ sempre irá vencer, pois há sempre um nó no qual, a partir dele, lhe garante à vitória.
+De fato, ao observar essa árvore com cuidado, o jogador $J_2$ sempre irá vencer, pois há sempre um nó no qual, a partir dele, lhe garante à vitória.
 Para entender melhor o por quê do jogador $J_2$ sempre ganhar, será utilizado uma análise partindo do conceito de estratégia pura (Definição \ref{def:estrategia_pura}).
 
 \begin{mydef}
@@ -253,7 +255,7 @@ Se o primeiro jogador ganhar, seu ganho é $1$, se o segundo jogador vencer, o r
 \begin{table}[htb]
 	\centering
 	\caption{Matriz de Ganho para o jogo \emph{Nim}}
-	\label{tab:forma_normal}
+	\label{tab:matriz_ganho}
 	\begin{tabular}{cccccccc}
 		\toprule
 															&				& \multicolumn{6}{c}{$\mathbf{J_2}$} \\
@@ -288,6 +290,11 @@ Programação dinâmica
 Um exemplo clássico é o programa de para calcular os números da sequência de _Fibonacci_.
 No Código \ref{lst:fibonacci1} está escrito um programa bem simples para resolver este problema.
 
+Take a problem, split in subproblems, solve the subproblems and reuse
+
+\fibtree
+
+
 \begin{lstlisting}[language=C++, caption=Funcao main de Fibonacci]
 #include <iostream>
 #include <map>
@@ -304,14 +311,14 @@ int main()
 }
 \end{lstlisting}
 
-\begin{lstlisting}[language=C++, caption=Fibonacci Simples]
+\begin{lstlisting}[language=C++, caption=Fibonacci Iterativo]
 int fibonacci(int n)
 {
     int fib_number = 0;
 
     int a_0 = 1;
     int a_1 = 1;
-    for (int i = n; n > 1; n--) {
+    for (int i = 1; n > n; n++) {
         fib_number = a_0 + a_1;
 
         a_0 = a_1;
@@ -326,11 +333,17 @@ int fibonacci(int n)
 \begin{lstlisting}[language=C++, caption=Fibonacci Recursivo]
 int fibonacci(int n)
 {
-    if (n == 1 || n == 0) {
-        return 1;
-    }
-    
-    return fibonacci(n-1) + fibonacci(n-2);
+	// Declara e inicia a variável
+	int fib_number = 0;
+
+	// Os dois primeiros termos são iguais a 1
+    if (n <= 2) fib_number = 1;
+	
+	// Cada número em seguida são a soma dos dois anteriores
+	else fib_number = fibonacci(n-1) + fibonacci(n-2);
+	
+	return fib_number;
+
 }   
 \end{lstlisting}
 
@@ -338,16 +351,22 @@ int fibonacci(int n)
 \begin{lstlisting}[language=C++, caption=Fibonacci com Programação Dinâmica]
 int fibonacci(int n)
 {
-    if (n == 1 || n == 0) {
-        return 1;
-    }
-
+	// Verifica se a_n já foi calculado
     auto it = memoization.find(n);
     if (it != memoization.end()) {
-        return memoization.at(n);
-    }
+		return memoization.at(n);
+	}
 
-    int fib_number = fibonacci(n-1) + fibonacci(n-2);
+	// Declara e inicia a variável
+	int fib_number = 0;
+
+	// Os dois primeiros termos são iguais a 1
+	if (n <= 2) fib_number = 1;
+	
+	// Cada número em seguida são a soma dos dois anteriores
+	else fib_number = fibonacci(n-1) + fibonacci(n-2);
+	
+	// Armazena a_n para referências futuras
     memoization[n] = fib_number;
 
     return fib_number;
@@ -537,7 +556,7 @@ No final do jogo, conta-se os pontos e ganha o jogador que tiver a maior pontua�
 A pontuação do jogo é dependente da ordem de chegada dos peões na escada e da quantidade de discos de cada cor que o jogador tiver.
 O primeiro peão que chegou na escada faz com que cada disco de sua cor valha quatro pontos.
 Os jogadores devem então multiplicar a quantidade de discos daquela cor pelo valor da ordem de chegada do peão da sua cor na escada.
-Exemplo: se o primeiro jogador tiver dois discos vermelhos, um disco verde e três azuis e a ordem de chegada deles for azul em primeiro lugar, verde logo em seguida e depois o vermelho, sua pontuação será descrita de acordo com a equação \label{eq:expontuacao}, onde $n_c$ é o número de cores do jogo, $n_r$, $n_g$ e $n_b$ são as quantidades de discos vermelhos, verdes e azuis, respectivamente, que o jogador possui e $p_r$, $p_g$ e $p_b$ são as posições dos peões vermelho, verde e azul, respectivamente, na escada.
+Exemplo: se o primeiro jogador tiver dois discos vermelhos, um disco verde e três azuis e a ordem de chegada deles for azul em primeiro lugar, verde logo em seguida e depois o vermelho, sua pontuação será descrita de acordo com a equação \ref{eq:expontuacao}, onde $n_c$ é o número de cores do jogo, $n_r$, $n_g$ e $n_b$ são as quantidades de discos vermelhos, verdes e azuis, respectivamente, que o jogador possui e $p_r$, $p_g$ e $p_b$ são as posições dos peões vermelho, verde e azul, respectivamente, na escada.
 
 \begin{equation}
 	\label{eq:expontuacao}
@@ -685,7 +704,7 @@ Cálculo de bits do atributo \texttt{jogadores}
 	\label{eq:bitsjogadores}
 \end{equation}
 
-A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demonstrado na equação \label{eq:bitjogadores}. As variáveis utilizadas nessa equação são: $n_d$, o número de discos $n_d \in \{1, 2, 3, 4, 5\}$; $n_c$, o número de cores $n_c \in \{1, 2, 3, 4, 5\}$; e $n_j$, o número de jogadores $n_j = 2$. A informação armazenada na mão dos jogadores, para cada disco, vai até o número máximo de discos mais um, pois o jogador pode pegar todos os discos no tabuleiro e o disco adquirido ao mover o peão para a escada. Para armazenar o número seis, são necessários $\lceil \log_2(6) \rceil = 3 \emph{bits}$
+A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demonstrado na equação \ref{eq:bitjogadores}. As variáveis utilizadas nessa equação são: $n_d$, o número de discos $n_d \in \{1, 2, 3, 4, 5\}$; $n_c$, o número de cores $n_c \in \{1, 2, 3, 4, 5\}$; e $n_j$, o número de jogadores $n_j = 2$. A informação armazenada na mão dos jogadores, para cada disco, vai até o número máximo de discos mais um, pois o jogador pode pegar todos os discos no tabuleiro e o disco adquirido ao mover o peão para a escada. Para armazenar o número seis, são necessários $\lceil \log_2(6) \rceil = 3 \emph{bits}$
 
 Cálculo de bits do atributo \texttt{atual}
 
@@ -806,4 +825,7 @@ Capítulo 4 - Considerações Finais
 
 Desenvolvimento de uma I.A. para competir contra um jogador humano.
 Análise mais complexa do jogo _Big Points_, utilizando processamento paralelo e distribuído.
+
+
+
 
