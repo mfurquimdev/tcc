@@ -124,8 +124,10 @@
 		}};
 
 	\pgfsetfillopacity{0.1}
-		\fill[fill=black] ($(3.north)+(0,0.5)$) -- (8.south west) -- (9.south east) -- cycle;
+		\draw ($(3.north)+(0,0.5)$) -- (8.south west) -- (9.south east) -- cycle;
 		\draw[dashed] ($(5.north)+(0,0.5)$) -- (6.south west) -- (7.south east) -- cycle;
+%		\fill[fill=black] ($(3.north)+(0,0.5)$) -- (8.south west) -- (9.south east) -- cycle;
+%		\draw[dashed] ($(5.north)+(0,0.5)$) -- (6.south west) -- (7.south east) -- cycle;
 %		\draw ($(5.south west)-(0,0)$) -- ($(5.north east)+(0,0)$);
 %		\draw ($(6.south west)-(0,0)$) -- ($(6.north east)+(0,0)$);
 %		\draw ($(7.south west)-(0,0)$) -- ($(7.north east)+(0,0)$);

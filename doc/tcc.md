@@ -116,13 +116,13 @@ As últimas jogadas foram omitidas da árvore do jogo por serem simétricas às 
 Na aresta $(A,B)$[^aresta], o primeiro jogador pega apenas um palito de um dos montes de palito, enquanto a aresta $(A,C)$ representa o movimento de pegar todos os dois palitos de um monte.
 Da mesma maneira, as arestas $(B,D)$, $(B,E)$, $(B,F)$, $(C,G)$ e $(C,H)$ são os movimentos de $J_2$ em resposta às jogadas de $J_1$.
 
-[^aresta]: A aresta pode ser representada como $(A,B)$, sendo a aresta que sai do nó $A$ e vai até o nó $B$, ou como $\overrightarrow{B}$, sendo a aresta que incide em $B$ \cite{algorithmsvelsky_1988}.
+[^aresta]: A aresta representada como $(A,B)$, sai do nó $A$ ao nó $B$. Uma notação alternativa seria $\overrightarrow{B}$, sendo a aresta que incide em $B$ \cite{algorithmsvelsky_1988}.
 
 No final da Figura \ref{fig:nim_tree}, há uma representação para cada folha[^leaf] para representar o vencedor no final daquela série de movimentos.
 Nos nós terminais $N$, $O$ e $H$, o jogador $J_2$ retirou o último palito do jogo, resultando na vitória de $J_1$.
 Para as folhas $J$, $L$ e $M$, a vitória é do segundo jogador.
 
-[^leaf]: Um nó é considerado folha (ou nó terminal) quando não há nenhum filho abaixo dele.
+[^leaf]: Um nó é considerado folha (ou nó terminal) quando não possuir nenhum filho.
 
 Olhando para a árvore de baixo pra cima, o jogador $J_1$ ganha na folha $N$.
 Na verdade, ele já havia ganhado no nó anterior ($I$), pois o jogador $J_2$ só tem uma jogada a fazer.
@@ -137,13 +137,13 @@ Para entender melhor o por quê do jogador $J_2$ sempre ganhar, será utilizado 
 
 \begin{mydef}
 \label{def:estrategia_pura}
-\textbf{Estratégia pura} é definido como um conjunto de decisões a serem feitas para cada ponto de decisão no jogo \cite[grifo nosso]{jones_1980}.
+\textbf{Estratégia pura} é definida como um conjunto de decisões a serem feitas para cada ponto de decisão no jogo \cite[grifo nosso]{jones_1980}.
 \end{mydef}
 
 A estratégia pura também pode ser vista como um caminho[^path] único na árvore, que tem origem no primeiro nó de decisão do jogador e termina em uma folha.
 No caso do jogador $J_1$, o caminho começa na raíz, e no caso do jogador $J_2$, o caminho pode começar em $B$ ou em $C$.
 Devido à isso, $J_2$ deve considerar os dois casos e decidir de antemão o que fazer.
-A partir da definição de estratégia pura (\ref{def:estrategia_pura}), tem-se as estratégias de ambos os jogadores nas Tabelas \ref{tab:estrategia_pura_j1} e \ref{tab:estrategia_pura_j2}.
+A partir da definição de estratégia pura (Definição \ref{def:estrategia_pura}), tem-se as estratégias de ambos os jogadores nas Tabelas \ref{tab:estrategia_pura_j1} e \ref{tab:estrategia_pura_j2}.
 
 [^path]: Uma sequência de arestas onde o nó no final de uma aresta coincide com o nó no começo da próxima aresta, é chamado de \textbf{caminho} \cite[grifo nosso]{sometopics_1971}.
 
@@ -206,17 +206,17 @@ Ao chegar em um nó terminal, tem-se uma função para atribuir um valor ao joga
 Essa sequência de movimento é chamado de \textbf{jogo}, e o valor na folha é chamado \textbf{resultado do jogo} \cite[p.~2]{algorithmsvelsky_1988}.
 \end{mydef}
 
-De acordo com a definição de um jogo (Definição \ref{def:jogo}), a versão reduzida do _Nim_ possui dezoito jogos no total, de forma que a quantidade de jogos pode ser calculado com $n m = 18$, com $n = 3$ e $m = 6$.
+De acordo com a definição de um jogo (Definição \ref{def:jogo}), a versão reduzida do _Nim_ possui dezoito jogos no total, de forma que a quantidade de jogos pode ser calculado com $n m = 18$, com $n = 3$ e $m = 6$, onde $n$ é o número de estratégias pura de $J_1$ e $m$ é o número de estratégias pura de $J_2$.
 Alguns exemplos são monstrados a seguir:
 
 \begin{align*}
 \label{ex:jogossigmatau}
 	\sigma_1 & \text{ e } \tau_1 \text{ resultam no jogo } A \rightarrow B \rightarrow D \rightarrow I \rightarrow N\text{,} \\
 	\sigma_2 & \text{ e } \tau_1 \text{ resultam no jogo } A \rightarrow B \rightarrow D \rightarrow J \text{,} \\
-	\sigma_3 & \text{ e } \tau_2 \text{ resultam no jogo } A \rightarrow C \rightarrow G \rightarrow M \text{, etc.}
+	\sigma_3 & \text{ e } \tau_2 \text{ resultam no jogo } A \rightarrow C \rightarrow G \rightarrow M \text{.}
 \end{align*}
 
-Olhando para a tabela do jogador $J_2$ (\ref{tab:estrategia_pura_j2}), sua primeira jogada já depende da jogada do outro jogador.
+Olhando para a tabela do jogador $J_2$ (Tabela \ref{tab:estrategia_pura_j2}), sua primeira jogada já depende da jogada do jogador $J_1$.
 Por isso, cada estratégia $\tau_j$ com $j \in \{1,\cdots, m\}$ descreve duas possibiliades de movimento.
 Observando $\tau_1$, no primeiro turno seu movimento será $(B,D)$ se estiver em $B$, caso contrário, jogará $(C,G)$.
 
@@ -228,7 +228,7 @@ A \textbf{forma normal} é a representação do resultado do jogo a partir das e
 Ao escolher suas estratégias pura, os jogadores percorrem a árvore até chegar a uma folha.
 Essa sequência de movimentos (a escolha de uma estratégia pura $\sigma_i$ e uma $\tau_j$) é chamada de \textbf{jogo}.
 Dependendo das escolhas de $J_1$ e $J_2$, tem-se um jogo diferente.
-Esses diferentes jogos são representados pela análise normal (definição \ref{def:forma_normal}) na Tabela \ref{tab:forma_normal}.
+Esses diferentes jogos são representados pela análise normal (Definição \ref{def:forma_normal}) na Tabela \ref{tab:forma_normal}.
 
 \begin{table}[htb]
 	\centering
@@ -249,7 +249,7 @@ Esses diferentes jogos são representados pela análise normal (definição \ref
 Nesta tabela, as estratégias dos jogadores estão nas linhas e colunas, e as folhas são os resultados de caminhos tomados a partir de cada estratégia $\sigma_i$ e $\tau_j$.
 Cada linha é uma estratégia pura de $J_1$ ($\sigma_i \forall i \in \{1, 2, 3\}$) e, cada coluna, uma estratégia de $J_2$ ($\tau_j \forall j \in \{1, 2, 3, 4, 5, 6\}$).
 Para transformar esta tabela em uma "matriz" de _payoff_, basta substituir os nós terminais pelo resultado do jogo.
-Se o primeiro jogador ganhar, seu ganho é $1$, se o segundo jogador vencer, o resultado para $J_1$ é $-1$.
+Se o primeiro jogador ganhar, seu ganho é $1$, e se o segundo jogador vencer, o resultado para $J_1$ é $-1$.
 
 
 \begin{table}[htb]
@@ -268,6 +268,7 @@ Se o primeiro jogador ganhar, seu ganho é $1$, se o segundo jogador vencer, o r
 	\end{tabular}
 \end{table}
 
+Dessa forma, pode-se ver na Tabela \ref{tab:matriz_ganho} que a estratégia $\tau_4$ sempre garante a vitória para $J_2$ independente da estratégia do jogador $J_1$.
 
 # Programação dinâmica
 
@@ -294,33 +295,40 @@ Take a problem, split in subproblems, solve the subproblems and reuse
 
 \fibtree
 
+Dependo da implementação do problema, o tempo de processamento para chegar no resultado desejado pode crescer exponencialmente.
+Nos Códigos \ref{lst:main_fib}
 
 \begin{lstlisting}[language=C++, caption=Funcao main de Fibonacci]
-#include <iostream>
-#include <map>
+#include <iostream>	// std::cout
+#include <map>		// std::map (P.D.)
 
-std::map<int,int> memoization;
-
+// Protótipo (declaração) da função
 int fibonacci(int);
 
 int main()
 {
+	// Calcula e escreve o décimo quinto termo
     std::cout << fibonacci(15) << std::endl;
 
     return 0;
 }
 \end{lstlisting}
+\label{lst:main_fib}
 
 \begin{lstlisting}[language=C++, caption=Fibonacci Iterativo]
 int fibonacci(int n)
 {
+	// Declara e inicia a variável
     int fib_number = 0;
 
+	// A sequência de fibonacci começa em: 1 e 1
     int a_0 = 1;
     int a_1 = 1;
     for (int i = 1; n > n; n++) {
+		// a_n é igual a soma dos dois termos anteriores
         fib_number = a_0 + a_1;
 
+		// Atualiza os termos
         a_0 = a_1;
         a_1 = fib_number;
     }
@@ -336,12 +344,15 @@ int fibonacci(int n)
 	// Declara e inicia a variável
 	int fib_number = 0;
 
-	// Os dois primeiros termos são iguais a 1
-    if (n <= 2) fib_number = 1;
-	
-	// Cada número em seguida são a soma dos dois anteriores
-	else fib_number = fibonacci(n-1) + fibonacci(n-2);
-	
+    if (n <= 2) {
+		// Os dois primeiros termos são iguais a 1
+		fib_number = 1;
+	}	
+	else {
+		// Cada número em seguida são a soma dos dois anteriores
+		fib_number = fibonacci(n-1) + fibonacci(n-2);
+	}
+
 	return fib_number;
 
 }   
@@ -349,6 +360,8 @@ int fibonacci(int n)
 
 
 \begin{lstlisting}[language=C++, caption=Fibonacci com Programação Dinâmica]
+std::map<int,int> memoization;
+
 int fibonacci(int n)
 {
 	// Verifica se a_n já foi calculado
@@ -360,11 +373,14 @@ int fibonacci(int n)
 	// Declara e inicia a variável
 	int fib_number = 0;
 
-	// Os dois primeiros termos são iguais a 1
-	if (n <= 2) fib_number = 1;
-	
-	// Cada número em seguida são a soma dos dois anteriores
-	else fib_number = fibonacci(n-1) + fibonacci(n-2);
+    if (n <= 2) {
+		// Os dois primeiros termos são iguais a 1
+		fib_number = 1;
+	}	
+	else {
+		// Cada número em seguida são a soma dos dois anteriores
+		fib_number = fibonacci(n-1) + fibonacci(n-2);
+	}
 	
 	// Armazena a_n para referências futuras
     memoization[n] = fib_number;
@@ -814,7 +830,26 @@ Neste caso, temos os jogos $j_i \in \{1122, 1212, 1221, 2112, 2121, 2211\}$, e p
 
 Em todos as possíveis combinações de tabuleiros iniciais, o primeiro jogador sempre ganha com dois pontos enquanto o segundo jogador consegue fazer no máximo um ponto, na maioria das vezes. Isso torna o jogo desequilibrado.
 
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/ordem_num_cores}
+	\caption{Resultados ordenado por número de cores}
+	\label{fig:bigpoints_cores}
+\end{figure}
 
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/ordem_num_discos}
+	\caption{Resultados ordenado por número de discos}
+	\label{fig:bigpoints_discos}
+\end{figure}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/ordem_tamanho}
+	\caption{Resultados ordenado por número total de peças}
+	\label{fig:bigpoints_total}
+\end{figure}
 <!--
 Capítulo 4 - Considerações Finais
 -->
