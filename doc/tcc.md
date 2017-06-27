@@ -247,8 +247,8 @@ Esses diferentes jogos são representados pela análise normal (Definição \ref
 \end{table}
 
 Nesta tabela, as estratégias dos jogadores estão nas linhas e colunas, e as folhas são os resultados de caminhos tomados a partir de cada estratégia $\sigma_i$ e $\tau_j$.
-Cada linha é uma estratégia pura de $J_1$ ($\sigma_i \forall i \in \{1, 2, 3\}$) e, cada coluna, uma estratégia de $J_2$ ($\tau_j \forall j \in \{1, 2, 3, 4, 5, 6\}$).
-Para transformar esta tabela em uma "matriz" de _payoff_, basta substituir os nós terminais pelo resultado do jogo.
+Cada linha é uma estratégia pura de $J_1$ ($\sigma_i, i \in \{1, 2, 3\}$) e, cada coluna, uma estratégia de $J_2$ ($\tau_j, j \in \{1, 2, 3, 4, 5, 6\}$).
+Para transformar esta tabela em uma matriz de _payoff_, basta substituir os nós terminais pelo ganho do jogo.
 Se o primeiro jogador ganhar, seu ganho é $1$, e se o segundo jogador vencer, o resultado para $J_1$ é $-1$.
 
 
@@ -289,16 +289,16 @@ Programação dinâmica
 é uma técnica de programação capaz de reduzir significantemente o tempo de processamento de um problema no qual os estados possam se repetir.
 \cite{cormen2001introduction}
 Um exemplo clássico é o programa de para calcular os números da sequência de _Fibonacci_.
-No Código \ref{lst:fibonacci1} está escrito um programa bem simples para resolver este problema.
+No Código \ref{lst:fib_main}, \ref{lst:fib_ite}, \ref{lst:fib_rec} e \ref{lst:fib_mem} está escrito um programa simples para resolver este problema.
 
 Take a problem, split in subproblems, solve the subproblems and reuse
 
 \fibtree
 
 Dependo da implementação do problema, o tempo de processamento para chegar no resultado desejado pode crescer exponencialmente.
-Nos Códigos \ref{lst:main_fib}
+Nos Códigos \ref{lst:fib_main}, \ref{lst:fib_ite}, \ref{lst:fib_rec} e \ref{lst:fib_mem}
 
-\begin{lstlisting}[language=C++, caption=Funcao main de Fibonacci]
+\begin{lstlisting}[language=C++, label=lst:fib_main, caption=Funcao main de Fibonacci]
 #include <iostream>	// std::cout
 #include <map>		// std::map (P.D.)
 
@@ -313,9 +313,8 @@ int main()
     return 0;
 }
 \end{lstlisting}
-\label{lst:main_fib}
 
-\begin{lstlisting}[language=C++, caption=Fibonacci Iterativo]
+\begin{lstlisting}[language=C++, label=lst:fib_ite, caption=Fibonacci Iterativo]
 int fibonacci(int n)
 {
 	// Declara e inicia a variável
@@ -338,7 +337,7 @@ int fibonacci(int n)
 \end{lstlisting}
 
 
-\begin{lstlisting}[language=C++, caption=Fibonacci Recursivo]
+\begin{lstlisting}[language=C++, label=lst:fib_rec, caption=Fibonacci Recursivo]
 int fibonacci(int n)
 {
 	// Declara e inicia a variável
@@ -359,7 +358,7 @@ int fibonacci(int n)
 \end{lstlisting}
 
 
-\begin{lstlisting}[language=C++, caption=Fibonacci com Programação Dinâmica]
+\begin{lstlisting}[language=C++, label=lst:fib_mem, caption=Fibonacci com Programação Dinâmica]
 std::map<int,int> memoization;
 
 int fibonacci(int n)
@@ -400,13 +399,13 @@ https://oeis.org/A000045/a000045_3.txt
 \begin{figure}[htb]
 	\centering
 	\includegraphics[width=\textwidth]{figuras/fib}
-	\caption{Comparação entre implementações de fibonacci}
+	\caption{Comparação entre implementações de \emph{Fibonacci}}
 	\label{fig:fibonacci}
 \end{figure}
 
 
 Na Figura \ref{fig:fibonacci} fica claro que a implementação recursiva do algoritmo cresce exponencialmente de acordo com o número de cálculos a ser realizado.
-Para tratar desse problema, a técnica de memorização armazena os valores da sequência de \emph{fibonacci} em um \emph{map} e depois acessa seus valores ao invés de recalcular aquele n-ésimo termo.
+Para tratar desse problema, a técnica de memorização armazena os valores da sequência de \emph{Fibonacci} em um \emph{map} e depois acessa seus valores ao invés de recalcular aquele $n$-ésimo termo.
 Isso faz com que o tempo do cálculo se torne 
 
 
@@ -530,8 +529,8 @@ _Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar 
 O jogo é composto por cinco peões, como demonstrado na Figura \ref{fig:front}, um de cada uma das seguintes cores, denominadas **cores comuns**: vermelha, verde, azul, amarela e violeta.
 Para cada cor de peão, tem-se dez discos, como mostrado na Figura \ref{fig:content}, (totalizando cinquenta discos) denominados **discos comuns**, e cinco discos das cores branca e preta (totalizando dez discos) denominados **discos especiais**.
 Por fim, há um pódio (ou escada) com um lugar para cada peão.
-A escada determinará a pontuação equivalente a cada disco da cor do peão, de maneira que o peão que ocupar o espaço mais alto no pódio (o primeiro a subir) fará sua cor valer quatro, o segundo peão, três pontos e assim por diante, até o último valer zero pontos.
-No caso de um jogo com menos de cinco peões, a seguinte fórmula se aplica: $Score = N_{c}-P_{pos}$, onde $Score$ é a pontuação daquela determinada cor, $N_{c}$ é o número de discos comuns e $P_{pos}$ é a posição do peão no pódio.
+A escada determinará a pontuação equivalente a cada disco da cor do peão, de maneira que o peão que ocupar o espaço mais alto no pódio (o primeiro a subir) fará sua cor valer quatro pontos, o segundo peão, três pontos e assim por diante, até o último valer zero ponto.
+No caso de um jogo com menos de cinco peões, a seguinte fórmula se aplica: $S = N_{c}-P_{pos}$, onde $S$ é a pontuação daquela determinada cor, $N_{c}$ é o número de discos comuns e $P_{pos}$ é a posição do peão no pódio.
 
 \begin{figure}
     \centering
@@ -548,31 +547,30 @@ No caso de um jogo com menos de cinco peões, a seguinte fórmula se aplica: $Sc
     \caption{Organização do jogo \emph{Big Points}}\label{fig:organization}
 \end{figure}
 
-No final da preparação, o jogo ficará parecido com as peças na Figura \ref{fig:setup}.
-A preparação do jogo ocorre em algumas etapas envolvendo a posição dos peões, a aleatoriedade do tabuleiro e alguns discos ao lado da escada.
-A primeira coisa é retirar um disco de cada cor comum e posicioná-los ao lado da escada, estes serão os discos coletados pelo jogador que subir o peão da sua cor para a escada.
+A preparação do jogo ocorre em algumas etapas, envolvendo a posição dos peões, a aleatoriedade do tabuleiro e alguns discos ao lado da escada.
+A primeira etapa é retirar um disco de cada cor comum e posicioná-los ao lado da escada: estes serão os discos coletados pelo jogador que levar o peão da sua cor para a escada.
 Com isso, restará nove discos de cada uma das cinco cores comuns mais cinco discos de cada uma das duas cores especiais resultando em $(n_{dc}-1) \cdot n_{cc} + n_{de} \cdot n_{ce} = (10-1) \cdot 5 + 5 \cdot 2 = 55\ discos$, onde $n_{dc}$ é o número de discos comuns, $n_{cc}$ é o número de cores comuns, $n_{de}$ é o número de discos especiais, e $n_{ce}$ é o número de cores especiais.
-Em seguida, deve-se embaralhar todos os 55 discos restantes e formar uma fila até a escada, estes são os discos possíveis de serem coletados e onde os peões andam até chegar na escada.
-Por último, é preciso posicionar os peões no começo da fila de discos, de forma que fique oposto à escada.
-
+Em seguida, deve-se embaralhar todos os 55 discos restantes e formar uma fila até a escada: estes são os discos possíveis de serem coletados e onde os peões andam até chegar na escada.
+Por último, é preciso posicionar os peões no começo da fila de discos, de forma que fiquem opostos à escada.
+No final da preparação, o jogo assumirá uma forma semelhante à apresentada na Figura \ref{fig:setup}.
 
 Após preparar o jogo, deve-se escolher o primeiro jogador de forma aleatória.
-Na sua vez, cada jogador deve escolher um peão, que não esteja na escada, para movê-lo até o disco à frente mais próximo de sua cor.
+Em sua vez, cada jogador deve escolher um peão, que não esteja na escada, para movê-lo até o disco à frente mais próximo de sua cor.
 Caso não haja um disco de sua cor para movê-lo, o peão sobe na escada para a posição mais alta que não esteja ocupada e coleta o disco daquela cor que está ao lado da escada.
-Em seguida, o jogador escolhe para pegar o primeiro disco disponível[^available_disc] à frente ou atrás da nova posição do peão.
+Em seguida, o jogador escolhe pegar o primeiro disco disponível[^available_disc] à frente ou atrás da nova posição do peão.
 Caso o disco não esteja disponível, verifique o próximo disco até encontrar um que esteja disponível.
-Ao encontrar um disco que o jogador possa pegar, retire-o do tabuleiro e coloque-o na mão do jogador atual.
+Ao encontrar um disco possa pegar, o jogador o retira do tabuleiro e o coloca em sua mão do jogador atual.
 A sua vez termina e passa para o próximo escolher um peão e pegar um disco.
 O jogo segue desta maneira até que todos os peões se encontrem na escada.
 No final do jogo, conta-se os pontos e ganha o jogador que tiver a maior pontuação.
 
-[^available_disc]: É dito disponível aquele disco presente no tabuleiro que não possui um peão em cima.
+[^available_disc]: É dito disponível aquele disco presente no tabuleiro, e que não possui um peão em cima.
 
 
 A pontuação do jogo é dependente da ordem de chegada dos peões na escada e da quantidade de discos de cada cor que o jogador tiver.
 O primeiro peão que chegou na escada faz com que cada disco de sua cor valha quatro pontos.
 Os jogadores devem então multiplicar a quantidade de discos daquela cor pelo valor da ordem de chegada do peão da sua cor na escada.
-Exemplo: se o primeiro jogador tiver dois discos vermelhos, um disco verde e três azuis e a ordem de chegada deles for azul em primeiro lugar, verde logo em seguida e depois o vermelho, sua pontuação será descrita de acordo com a equação \ref{eq:expontuacao}, onde $n_c$ é o número de cores do jogo, $n_r$, $n_g$ e $n_b$ são as quantidades de discos vermelhos, verdes e azuis, respectivamente, que o jogador possui e $p_r$, $p_g$ e $p_b$ são as posições dos peões vermelho, verde e azul, respectivamente, na escada.
+Exemplo: se o primeiro jogador tiver dois discos vermelhos, um disco verde e três azuis e a ordem de chegada deles for azul em primeiro lugar, verde logo em seguida e depois o vermelho, sua pontuação $S$ será descrita de acordo com a Equação \ref{eq:expontuacao}, onde $n_c$ é o número de cores do jogo, $n_r$, $n_g$ e $n_b$ são as quantidades de discos vermelhos, verdes e azuis, respectivamente, que o jogador possui e $p_r$, $p_g$ e $p_b$ são as posições dos peões vermelho, verde e azul, respectivamente, na escada.
 
 \begin{equation}
 	\label{eq:expontuacao}
@@ -590,18 +588,20 @@ Capítulo 2 - Metodologia
 \chapter{Metodologia}
 \label{ch:metodologia}
 
+**INSERIR PARÁGRAFO APRESENTANDO O CAPÍTULO**
+
 # Fluxo de Trabalho
 
-O _framework_ _scrum_ é ideal para o desenvolvimento de projetos complexos no qual a produtividade e a criatividade são essenciais para a entrega de um produto de alto valor \cite{the_scrum_guide}.
+O _framework_ _Scrum_ é ideal para o desenvolvimento de projetos complexos no qual a produtividade e a criatividade são essenciais para a entrega de um produto de alto valor \cite{the_scrum_guide}.
 Inicialmente, tal método de organização e gerenciamento do projeto foi aplicado para o desenvolvimento do sistema em questão.
-O _kanban_ do \href{https://waffle.io/mfurquim/tcc}{waffle.io}[^waffleio] foi utilizado para registrar tarefas devido à sua integração com as _issues_ do github[^github].
+O _kanban_ do \href{https://waffle.io/mfurquim/tcc}{waffle.io}[^waffleio] foi utilizado para registrar tarefas devido à sua integração com as _issues_ do \emph{GitHub}[^github].
 Reuniões com o orientador foram realizadas para discutir aspectos técnicos do jogo, como as estruturas de dados a serem utilizadas para reduzir os dados armazenados, e alguns métodos importantes para agilizar o processamento.
 
 [^waffleio]:https://waffle.io/mfurquim/tcc
 [^github]:https://github.com/mfurquim/tcc
 
 Porém, ao longo do tempo, o esforço para manter a rastreabilidade das tarefas tornou-se muito alto em relação à complexidade do projeto, e ao tamanho da equipe.
-As tarefas passaram a ser _branchs_ locais com nomes significativos, representando a funcionalidade a ser desenvolvida.
+As tarefas passaram a ser _branches_ locais com nomes significativos, representando a funcionalidade a ser desenvolvida.
 Após a conclusão da tarefa, testes simples e manuais foram aplicados para então unir à _branch_ mestre[^git_merge].
 Por fim, para trabalhar em outra _branch_, sempre foi necessário atualizá-la em relação à mestre[^git_rebase] para garantir a consistência do trabalho.
 
@@ -610,17 +610,21 @@ Por fim, para trabalhar em outra _branch_, sempre foi necessário atualizá-la e
 
 # Análise do jogo \textit{Big Points}
 
-Para analisar o jogo _Big Points_, é preciso realizar todas as jogadas de todos os jogos possíveis.
-Cada jogador, na sua vez, deve escolher uma jogada na qual lhe garanta a vitória, se houver mais de uma, escolha a que tiver a maior pontuação.
-Caso não tenha uma jogada para vencer, o jogador deve minimizar a pontuação do adversário.
-Após fazer isso para um jogo inicial, os resultados são escritos em um arquivo _csv_ para análise.
-Esse procedimento é repetido para _cada_ combinação possível do tabuleiro inicial.
+Para analisar o jogo _Big Points_, foram rastreadas todas as jogadas de todos os jogos possíveis.
+Em seguida, foi feita uma simulação onde cada jogador, na sua vez, escolheria uma jogada que lhe garantisse a vitória ou, se houver mais de uma possibilidade, escolhe a que resultasse em maior pontuação.
+Caso não existisse uma jogada que levasse à vitória, o jogador deveria minimizar a pontuação de seu adversário.
+Após fazer isso para um jogo escolhido, os resultados foram escritos em um arquivo _csv_[^csv] para análise.
+Esse procedimento foi repetido para _cada_ combinação possível do tabuleiro inicial.
+
+[^csv]: O tipo arquivo _csv_ (_comma separated value_) possui seu conteúdo separado por vírgula.
 
 Exaurir todas as possibilidades de jogadas é um trabalho computacional imenso e cresce exponencialmente de acordo com o tamanho do jogo.
-Para um jogo pequeno com apenas dois discos e duas cores comuns (sem especiais) as jogadas possíveis são: mover o peão vermelho e pegar o disco da direita, ou da esquerda; e mover o peão verde e pegar o disco da direita ou da esquerda.
+Para um jogo pequeno, com apenas dois discos e duas cores comuns (sem especiais), as jogadas possíveis são: mover o peão vermelho e pegar o disco da direita, ou da esquerda; e mover o peão verde e pegar o disco da direita ou da esquerda.
 Isso gera uma árvore onde cada nó possui quatro filhos e a altura média dessa árvore é quatro, totalizando uma quantidade de estados de aproximadamente $\sum_{h=0}^{4}4^{h} \approx 341$.
 
 ## Quantidade de partidas
+
+**INSERIR PARÁGRAFO APRESENTANDO O QUE VAI SER CALCULADO**
 
 \begin{equation}
 	\label{eq:partidas}
@@ -633,32 +637,36 @@ Isso gera uma árvore onde cada nó possui quatro filhos e a altura média dessa
 	\end{split}
 \end{equation}
 
-# Estrutura de dados
+**INSERIR PARÁGRAFO DETALHANDO AS VARIÁVEIS**
 
-Devido à enorme quantidade de estados de um jogo reduzido de _Big Points_, foi implementado duas funções para codificar e decodificar a _struct State_ para um _long long int_, de forme que ocupe apenas 64 _bits_ na memória. Após testar nos limites da capacidade da variável, percebeu-se um erro quando executado com quatro cores e cinco discos, o que levou à implementação por _bit fields_.
+# Representação e Codificação dos Estados
 
-## Estado do jogo
+Devido à enorme quantidade de estados de um jogo reduzido de _Big Points_, foram implementadas duas funções para codificar e decodificar a _struct State_ para um _long long int_, de forme que cada estado ocupasse apenas 64 _bits_ na memória. Após testar nos limites da capacidade da variável, percebeu-se um erro quando a simulação utilizava quatro cores e cinco discos, o que levou à implementação dos estados por _bit fields_.
 
-Para escrever a programação dinâmica capaz de otimizar o processamento recursivo, é necessário identificar as variáveis do jogo que representam um **estado**. 
-Um estado do jogo depende dos discos do tabuleiro, dos peões que estão na escada, da mão dos jogadores, e do jogador atual.
+Para escrever a rotina de programação dinâmica capaz de otimizar o processamento recursivo, foi necessário identificar as variáveis do jogo que representam um **estado**. 
+Um estado do jogo depende dos discos do tabuleiro, dos peões que estão na escada, da mão dos jogadores, e do jogador atual (o jogador que fará a próxima jogada).
 
-## \emph{Bit fields}
-
-Dentro da estrutura \texttt{State} foi declarado duas estruturas anônimas[^anonymous_struct] utilizando _bit fields_. As duas estruturas servem para garantir a utilização correta dos _bits_ quando as variáveis chegarem próximo ao limite da sua capacidade. Essas estruturas possuem variáveis do tipo \texttt{unsigned long long int}, que ocupa  64 _bits_. Após a declaração da variável, é declarado a quantidade de _bits_ que será utilizado para ela, de modo que \texttt{ll \_tabuleiro :20} ocupe apenas 20 _bits_ da variável \texttt{unsigned long long int}, \texttt{ll \_peao :15} ocupe 15 _bits_, e assim por diante de forma que não ultrapsse os 64 _bits_ da variável. Como o comportamento do armazenamento é desconhecido quando a variável é ultrapassada, e para garantir consistência no armazenamento, foi utilizado duas _structs_ com, no máximo, uma variável \texttt{unsigned long long int} (64 _bits_).
+Dentro da estrutura \texttt{State} foram declaradas duas estruturas anônimas[^anonymous_struct] utilizando _bit fields_. As duas estruturas servem para garantir a utilização correta dos _bits_ quando as variáveis chegarem próximo ao limite da sua capacidade. Essas estruturas possuem variáveis do tipo \texttt{unsigned long long int}, que ocupa  64 _bits_. Após a declaração de um membro da estrutura, é declarado a quantidade de _bits_ que será utilizado para ele, de modo que \texttt{ll \_tabuleiro :20} ocupe apenas 20 _bits_ da variável \texttt{unsigned long long int}, \texttt{ll \_peao :15} ocupe 15 _bits_, e assim por diante de forma que não ultrapsse os 64 _bits_ da variável. Como o comportamento do armazenamento é indeterminado quando a variável é ultrapassada, e para garantir consistência no armazenamento, foram utilizadas duas _structs_ com, tamanho máximo igual uma variável \texttt{unsigned long long int} (64 _bits_).
 
 [^anonymous_struct]: Estruturas anônimas permitem acesso às suas variáveis de forma direta, como por exemplo: \texttt{state.\_tabuleiro} acessa a variável \texttt{\_tabuleiro} dentro da estrutura anônima, que por sua vez se encontra dentro da estrutura \texttt{State}.
 
-A estrutura \texttt{State} possui cinco variáveis:
+A estrutura \texttt{State} possui cinco membros:
 \texttt{\_tabuleiro}, no qual pode armazenar informações sobre um tabuleiro até 20 discos[^tabuleiro];
-\texttt{\_peao}, que representa a posição $p_i \in \{0, 1,...,n_d, n_d+1\}$, onde $n_d$ é o número de discos de cores comuns no jogo e $p_i$ é o peão da cor $i$[^cor_peao];
+\texttt{\_peao}, que representa a posição do peão $p_i \in \{0, 1,...,n_d, n_d+1\}$, onde $n_d$ é o número de discos de cores comuns no jogo e $p_i$ é o peão da cor $i$[^cor_peao];
 \texttt{\_escada}, que indica as posições dos peões na escada, sendo a $p_i$_-ésima_ posição de \texttt{\_escada} é a posição do peao $p_i$;
 \texttt{\_jogadores}, possui informações sobre os discos coletados dos dois jogadores;
 e por fim, a variável \texttt{\_atual} que representa o jogador que fará a jogada.
+Esta estrutura está apresentada no Código \ref{lst:estrutura_state}.
 
 [^tabuleiro]: Cinco cores e quatro discos.
 [^cor_peao]: As cores de peão seguem a ordem RGBYP começando do $0$, onde $\textbf{R}ed = 0$, $\textbf{G}reen = 1$, $\textbf{B}lue = 2$, $\textbf{Y}ellow = 3$, e $\textbf{P}urple = 4$.
 
-\lstinputlisting[language=C++, firstnumber=10, linerange={10-31}, caption=Definição da estrutura \texttt{State}]{../../pd/inc/state.h}
+Na figura \ref{fig:diagram_struct}
+
+\diagramstruct
+
+
+\lstinputlisting[language=C++, label=lst:estrutura_state, firstnumber=10, linerange={10-31}, caption=Definição da estrutura \texttt{State}]{../../pd/inc/state.h}
 
 O cálculo para determinar os _bits_ necessários para armazenar as informações de cada variável foi realizado será explicado nas subseções seguintes.
 

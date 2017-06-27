@@ -1,8 +1,8 @@
 \renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
 \newcommand{\nocontentsline}[3]{}
 \newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
-\renewcommand*{\lstlistingname}{Código}
-\renewcommand*{\lstlistlistingname}{Lista de \lstlistingname s}
+\renewcommand*{\lstlistingname}{Código Fonte}
+\renewcommand*{\lstlistlistingname}{Lista de Códigos Fonte}
 \renewcommand{\backref}{}
 \renewcommand*{\backrefalt}[4]{
 	\ifcase #1 %
@@ -51,6 +51,8 @@
 %    title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 %}
 
+\newcommand\indexkeywords[1]{\index{keywords, #1}}
+
 \lstset{%
 	language=C++,           %linguagem
     showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
@@ -83,6 +85,12 @@
     numbersep=5pt,                   % how far the line-numbers are from the code
     numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
 	breaklines=true,
+	numberbychapter=false,
+	procnamekeys={program, procedure, function, código},
+	indexprocnames=true,
+	indexstyle=\index[keywords],
+	index={square},
+	index={[2]root},
 	%showstringspaces=false,
 	%stringstyle=\color{cyan},
 	basicstyle=\footnotesize        % the size of the fonts that are used for the code
