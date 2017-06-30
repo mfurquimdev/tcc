@@ -6,27 +6,26 @@ Capítulo 0 - Introdução
 \label{ch:introducao}
 
 Imagine que um grupo de pessoas concordam em obedecer certas regras e agir de forma individual, ou em grupos menores, sem violar as regras especificadas.
-No final, suas ações como um todo levará a uma certa situação chamada **resultado**.
-Os membros deste grupo são chamados de **jogadores** e as regras que eles concordaram em obedecer constitui um **jogo**.
-Estes conceitos são exemplos das ideias utilizadas em análises baseadas na **teoria dos jogos**.
+No final, suas ações como um todo levará a uma certa situação chamada resultado.
+Os membros deste grupo são chamados de jogadores e as regras que eles concordaram em obedecer constitui um jogo.
+Estes conceitos são exemplos das ideias utilizadas em análises baseadas na teoria dos jogos.
 
-**FALAR SOBRE AS POSSÍVEIS ANÁLISES E PKE FAZER ESSAS ANÁLISES**
+\section*{Objetivos}
 
-A proposta deste trabalho foi realizar uma destas análise em um jogo de tabuleiro chamado _Big Points_.
-O que levou a realização deste trabalho foi verificar o balanceamento do jogo, ou seja, se quem começa a jogar tem vantagens sobre o segundo jogador.
-Dito isso, o objetivo principal deste trabalho foi analisar várias partidas distintas de uma versão reduzida do jogo.
-E como objetivos secundários, identificar uma heurística na qual tem-se uma maior chance de ganhar uma partida, dessa forma, seria possível a implementação de uma inteligência artificial (I.A.) com diferentes dificuldades para jogar contra uma pessoa.
+O objetivo principal deste trabalho é realizar uma análise _minimax_ nas versões reduzidas do jogo _Big Points_.
+O jogo foi reduzido em questão da quantidade e tipo de algumas peças, visto que para o jogo completo seria um trabalho computacional imenso.
 
-A análise utilizada para solucionar[^jogo_solucao] o jogo neste trabalho foi o teorema _minimax_, onde cada jogador tenta aumentar sua pontuação e diminuir a pontuação do oponente.
-Os resultados obtidos ao final da análise computacional baseadas neste teorema sugere a possibilidade do jogo completo ser desbalanceado[^jogo_balanceado], dando ao primeiro jogador uma maior chance de vencer o jogo.
+\section*{Justificativa}
 
-[^jogo_solucao]: Solucionar um jogo é percorrer todas as sua possibilidades de movimento e seus resultados.
+A pergunta que motivou o desenvolvimento deste projeto foi a questão do balanceamento do jogo _Big Points_, isto é, se os jogadores jogarem de forma ótima, a chance de vitória é a mesma para todos os jogadores?
+Para responder esta pergunta, primeiro foi necessário fazer uma análise de viabilidade do cálculo computacional de todos os jogos.
+Após chegar à conclusão que seria impossível calcular um jogo inteiro, foi escrito um programa para percorrer todas as possibilidades de jogadas de um jogo reduzido de _Big Points_ e, por fim, interpretar os resultados para responder se o jogo (reduzido) é ou não balanceado.
 
-[^jogo_balanceado]: É dito um jogo balanceado aquele que a chance dos jogadores de ganhar é a mesma.
+\section*{Organização do Trabalho}
 
 Este trabalho foi dividido em quatro capítulos. O primeiro capítulo, Fundamentação Teórica, relata um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo.
-Em seguida, tem-se o capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto até sua conclusão, e no capítulo \ref{ch:resultados} os resultados desta análise são discutidos.
-Por último, o capítulo \ref{ch:conclusao} onde são feitas as considerações finais do trabalho e são citados alguns possíveis trabalhos futuros a partir do trabalho atual.
+Em seguida, tem-se o Capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto até sua conclusão, e no Capítulo \ref{ch:resultados} os resultados desta análise são discutidos.
+Por último, o Capítulo \ref{ch:conclusao} onde são feitas as considerações finais do trabalho e são citados alguns possíveis trabalhos futuros a partir do trabalho atual.
 
 <!--
 Capítulo 1 - Fundamentação Teórica
@@ -52,15 +51,15 @@ Em 1928, John von Neumann provou o teorema _minimax_, no qual há sempre uma sol
 Em 1944, Neumann publicou um trabalho junto a Oscar Morgenstern introduzindo a teoria dos jogos na área da economia e matemática aplicada \apud{neumann_1944}{sartini_IIbienaldasbm}.
 Além destas contribuições, John von Neumann ainda escreveu trabalhos com grande impacto na área da computação, incluindo a arquitetura de computadores, princípios de programação, e análise de algoritmos \cite{miyazawa_2010}.
 
-John Forbes Nash Junior, um matemático estadunidense que conquistou o prêmio Nobel de economia em 1994, é um dos principais nomes da história da Teoria dos Jogos.
-Foi formado pela Universidade de Princeton, em 1950, com a tese _Non-Cooperative Games_ (Jogos Não-Cooperativos, publicada em 1951).
+Um dos principais nomes da história da Teoria dos Jogos é John Forbes Nash Junior, um matemático estadunidense que conquistou o prêmio Nobel de economia em 1994.
+Foi formado pela Universidade de Princeton, em 1950, com a tese _Non-Cooperative Games_ (Jogos Não-Cooperativos, publicada em 1951) \apud{johnforbesnashjunior1950}{alecsandra_2006}.
 Nesta tese, Nash provou a existência de ao menos um ponto de equilíbrio em jogos de estratégias para múltiplos jogadores, mas para isso é necessário que os jogadores se comportem racionalmente \cite{alecsandra_2006}.
 
 O equilíbrio de Nash era utilizado apenas para jogos de informação completa.
 Posteriormente, com os trabalhos de Harsanyi e Selten, foi possível aplicar este método em jogos de informação incompleta.
 A partir de então, surgiram novas técnicas de solução de jogos e a teoria dos jogos passou a ser aplicada em diferentes áreas de estudo, como na economia, biologia e ciências políticas \cite{alecsandra_2006}.
 
-Entre 1949 e 1953, Nash escreveu mais artigos ligados à solução de jogos estratégicos: _The Bargaining Problema_ (O Problema da Barganha, 1949) e _Two-Person Cooperative Games_ (Jogos Cooperativos de Duas Pessoas, 1953).
+Entre 1949 e 1953, Nash escreveu mais artigos ligados à solução de jogos estratégicos: _The Bargaining Problema_ (O Problema da Barganha, 1949) \apud{nash_bargain1950}{alecsandra_2006} e _Two-Person Cooperative Games_ (Jogos Cooperativos de Duas Pessoas, 1953) \apud{johnforbesnashjunior1953}{alecsandra_2006}.
 Também escreveu artigos de matemática pura sobre variedades algébricas em 1951, e de arquitetura de computadores em 1954 \cite{alecsandra_2006}.
 
 Várias publicações contribuíram para este marco histórico da teoria dos jogos, mas o livro de Thomas Schelling, publicado em 1960, se destacou em um ponto de vista social \apud{schelling1960strategy}{aguidetogametheory_2005}.
@@ -140,6 +139,7 @@ Para entender melhor o por quê do jogador $J_2$ sempre ganhar, será utilizado 
 \textbf{Estratégia pura} é definida como um conjunto de decisões a serem feitas para cada ponto de decisão no jogo \cite[grifo nosso]{jones_1980}.
 \end{mydef}
 
+As estratégias pura do jogador $J_1$ são nomeadas $\sigma_i$ com $i \in \{1,\ldots,a\}$ e as do jogador $J_2$ são representadas por $\tau_j$ com $j \in \{1,\ldots,b\}$, onde $a$ e $b$ são a quantidade de estratégias pura de $J_1$ e $J_2$, respectivamente.
 A estratégia pura também pode ser vista como um caminho[^path] único na árvore, que tem origem no primeiro nó de decisão do jogador e termina em uma folha.
 No caso do jogador $J_1$, o caminho começa na raíz, e no caso do jogador $J_2$, o caminho pode começar em $B$ ou em $C$.
 Devido à isso, $J_2$ deve considerar os dois casos e decidir de antemão o que fazer.
@@ -152,7 +152,7 @@ A partir da definição de estratégia pura (Definição \ref{def:estrategia_pur
 	\caption{Estratégias pura do jogador $J_1$ para o jogo \emph{Nim}}
 	\label{tab:estrategia_pura_j1}
 
-	\rowcolors{2}{gray!10}{white}
+	\rowcolors{2}{gray!20}{white}
 	\begin{tabular}{cccc}
 		\toprule
 		\textbf{Estratégia} & \textbf{$\mathbf{1}^{\b{\tiny{o}}}$ Turno} & \multicolumn{2}{c}{\textbf{$\mathbf{2}^{\b{\tiny{o}}}$ Turno}} \\
@@ -174,16 +174,16 @@ A partir da definição de estratégia pura (Definição \ref{def:estrategia_pur
 		\textbf{Estratégia}                             & \multicolumn{2}{c}{\textbf{$\mathbf{1}^{\b{\tiny{o}}}$ Turno}} \\
 		                                                & \footnotesize{Se em} & \footnotesize{Vá para}                  \\
 		\midrule
-		\rowcolor{gray!10}								& $B$                  & $D$                                     \\
-		\rowcolor{gray!10}\multirow{-2}{*}{$\tau_1$}	& $C$                  & $G$                                     \\
+		\rowcolor{gray!20}								& $B$                  & $D$                                     \\
+		\rowcolor{gray!20}\multirow{-2}{*}{$\tau_1$}	& $C$                  & $G$                                     \\
 													    & $B$                  & $E$                                     \\
 						  \multirow{-2}{*}{$\tau_2$}	& $C$                  & $G$                                     \\
-		\rowcolor{gray!10}  						    & $B$                  & $F$                                     \\
-		\rowcolor{gray!10}\multirow{-2}{*}{$\tau_3$}	& $C$                  & $G$                                     \\
+		\rowcolor{gray!20}  						    & $B$                  & $F$                                     \\
+		\rowcolor{gray!20}\multirow{-2}{*}{$\tau_3$}	& $C$                  & $G$                                     \\
 													    & $B$                  & $D$                                     \\
 						  \multirow{-2}{*}{$\tau_4$}	& $C$                  & $H$                                     \\
-		\rowcolor{gray!10}							    & $B$                  & $E$                                     \\
-		\rowcolor{gray!10}\multirow{-2}{*}{$\tau_5$}	& $C$                  & $H$                                     \\
+		\rowcolor{gray!20}							    & $B$                  & $E$                                     \\
+		\rowcolor{gray!20}\multirow{-2}{*}{$\tau_5$}	& $C$                  & $H$                                     \\
 													    & $B$                  & $F$                                     \\
 						  \multirow{-2}{*}{$\tau_6$}	& $C$                  & $H$                                     \\
 		\bottomrule
@@ -206,7 +206,7 @@ Ao chegar em um nó terminal, tem-se uma função para atribuir um valor ao joga
 Essa sequência de movimento é chamado de \textbf{jogo}, e o valor na folha é chamado \textbf{resultado do jogo} \cite[p.~2]{algorithmsvelsky_1988}.
 \end{mydef}
 
-De acordo com a definição de um jogo (Definição \ref{def:jogo}), a versão reduzida do _Nim_ possui dezoito jogos no total, de forma que a quantidade de jogos pode ser calculado com $n m = 18$, com $n = 3$ e $m = 6$, onde $n$ é o número de estratégias pura de $J_1$ e $m$ é o número de estratégias pura de $J_2$.
+De acordo com a definição de um jogo (Definição \ref{def:jogo}), a versão reduzida do _Nim_ possui dezoito jogos no total, de forma que a quantidade de jogos pode ser calculado com $a b = 18$, com $a = 3$ e $b = 6$, onde $a$ é o número de estratégias pura de $J_1$ e $b$ é o número de estratégias pura de $J_2$.
 Alguns exemplos são monstrados a seguir:
 
 \begin{align*}
@@ -239,9 +239,9 @@ Esses diferentes jogos são representados pela análise normal (Definição \ref
 															&				& \multicolumn{6}{c}{$\mathbf{J_2}$} \\
 															&				& $\tau_1$ 	& $\tau_2$	& $\tau_3$	& $\tau_4$	& $\tau_5$	& $\tau_6$	\\
 		\midrule
-		\rowcolor{gray!10}									& $\sigma_1$	& $N$		& $O$		& $L$		& $N$		& $O$		& $L$		\\
+		\rowcolor{gray!20}									& $\sigma_1$	& $N$		& $O$		& $L$		& $N$		& $O$		& $L$		\\
 												   			& $\sigma_2$	& $J$		& $O$		& $L$		& $J$		& $O$		& $L$		\\
-		\rowcolor{gray!10}\multirow{-3}{*}{$\mathbf{J_1}$}	& $\sigma_3$	& $M$		& $M$		& $M$		& $H$		& $H$		& $H$		\\
+		\rowcolor{gray!20}\multirow{-3}{*}{$\mathbf{J_1}$}	& $\sigma_3$	& $M$		& $M$		& $M$		& $H$		& $H$		& $H$		\\
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -261,9 +261,9 @@ Se o primeiro jogador ganhar, seu ganho é $1$, e se o segundo jogador vencer, o
 															&				& \multicolumn{6}{c}{$\mathbf{J_2}$} \\
 															&				& $\tau_1$ 	& $\tau_2$	& $\tau_3$	& $\tau_4$	& $\tau_5$	& $\tau_6$	\\
 		\midrule
-		\rowcolor{gray!10}									& $\sigma_1$	& \texttt{ 1}	& \texttt{ 1}	& \texttt{-1}	& \texttt{ 1}	& \texttt{ 1}	& \texttt{-1} \\
+		\rowcolor{gray!20}									& $\sigma_1$	& \texttt{ 1}	& \texttt{ 1}	& \texttt{-1}	& \texttt{ 1}	& \texttt{ 1}	& \texttt{-1} \\
 												   			& $\sigma_2$	& \texttt{-1}	& \texttt{ 1}	& \texttt{-1}	& \texttt{-1}	& \texttt{ 1}	& \texttt{-1} \\
-		\rowcolor{gray!10}\multirow{-3}{*}{$\mathbf{J_1}$}	& $\sigma_3$	& \texttt{-1}	& \texttt{-1}	& \texttt{-1}	& \texttt{ 1}	& \texttt{ 1}	& \texttt{ 1} \\
+		\rowcolor{gray!20}\multirow{-3}{*}{$\mathbf{J_1}$}	& $\sigma_3$	& \texttt{-1}	& \texttt{-1}	& \texttt{-1}	& \texttt{ 1}	& \texttt{ 1}	& \texttt{ 1} \\
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -388,13 +388,9 @@ int fibonacci(int n)
 }
 \end{lstlisting}
 
-The Online Encyclopedia of Integers Sequences (OEIS)
+Os valores da sequência de \emph{Fibonacci} foram conferidos no site da enciclopédia online das sequências de números inteiros[^oeis].
 
-https://oeis.org/A000045
-
-https://oeis.org/A000045/a000045_3.txt
-
-
+[^oeis]: \emph{The Online Encyclopedia of Integers Sequences (OEIS)}, sequência A000045 no link https://oeis.org/A000045/a000045_3.txt
 
 \begin{figure}[htb]
 	\centering
@@ -403,117 +399,9 @@ https://oeis.org/A000045/a000045_3.txt
 	\label{fig:fibonacci}
 \end{figure}
 
-
 Na Figura \ref{fig:fibonacci} fica claro que a implementação recursiva do algoritmo cresce exponencialmente de acordo com o número de cálculos a ser realizado.
 Para tratar desse problema, a técnica de memorização armazena os valores da sequência de \emph{Fibonacci} em um \emph{map} e depois acessa seus valores ao invés de recalcular aquele $n$-ésimo termo.
 Isso faz com que o tempo do cálculo se torne 
-
-
-<!--
-
-Às vezes o jogador também possui informação completa sobre o estado atual e do histórico de jogadas do jogo.
-
-\begin{mydef}
-Jogos de \textbf{soma zero} são jogos de puro conflito, no qual apenas um jogador pode vencer o jogo. Em outras palavras, a vitória de um jogador implica na derrota do outro.
-\end{mydef}
-
-## Minimax
-
-O teorema minimax provado por John von Neumann é a peça principal da maior parte do trabalho matemático em economia e em atividades onde os atos das decisões são racionais.
-
-Segundo o teorema minimax, há sempre uma solução racional para um conflito entre dois indivíduos cujos interesses são completamente opostos, ou seja, o que é ganho por um lado é perdido pelo outro. Esse é um exemplo da chamada situação soma zero, uma vez que os ganhos dos dois jogadores somam zero.
-
-A combinação de estratégias, na qual o máximo dos mínimos é igual ao mínimo dos máximos, chama-se de ponto de equilíbrio do jogo, pois ao escolherem essas estratégias, os jogadores garantem para si um ganho mínimo independente do que o adversário venha a escolher.
-
-Trabalhando com estratégias puras, utilizamos o critério maximin para definir os valores máximo e mínimo do jogo.
-
-Em um jogo de dois jogadores com soma zero é racional para cada jogador escolher a estratégia que maximiza seu ganho mínimo ou que minimize o ganho máximo do adversário, conforme figura 1.
-
-Agora, considerando o uso de estratégias mistas, ou seja, aumentando as possibilidades de escolha, podemos usar o mesmo critério para definir os novos valores máximo e mínimo.
-
-Por exemplo, dois jogadores, na disputa por par ou ímpar, cada um com duas alternativas de escolha. O ganho será representado por 1 e perda por -1. O jogador par obterá ganho se ambos fizerem a mesma escolha, e neste cas ípar
-
-
-A área de teoria combinatória dos jogos analisa os jogos de uma perspectiva um pouco diferente. É considerado que dois jogadores alternam os movimentos em um jogo que não possui elementos de chance (rolagem de dados, saque de cartas, etc.) e que ambos jogadores possuem informação completa. É dito que os jogadores possuem informação completa se eles tiverem conhecimento de tudo o que está acontecendo no jogo a todo momento \cite{eyawtkagtbwata_2013}. Ao chegar na vez de algum jogador e ele não tiver nenhum movimento válido para realizar, então aquele jogador é considerado perdedor. Considerando os jogadores _esquerda_ e _direita_, podemos representar suas jogadas da maneira descrita em \ref{eq:tjc_representacao_jogadas}, onde o jogador _esquerda_ possui as jogadas $\{a,b,c,\ldots\}$ e o jogador _direita_, as jogadas $\{f,g,h,\ldots\}$.
-
-\begin{equation}
-	\label{eq:tjc_representacao_jogadas}
-	%\tag{eq. T.C.J. Representação das Jogadas}
-	\begin{split}
-		\{a,b,c,\ldots \vert f,g,h,\ldots\}
-	\end{split}
-\end{equation}
-
-
-
-Dessa forma, o primeiro jogador, que é representado por $P_1$, possui as estratégias $E_{11}$ e $E_{12}$.
-Semelhante ao primeiro jogador, tem-se o segundo jogador sendo representado por $P_2$ e com as estratégias $E_{21}$ e $E_{22}$.
-Os valores que se encontram na interseção da estratégia de $P_1$ e $P_2$ são os ganhos dos dois jogadores, dessa forma se as estratégias escolhidas forem $E_{12}$ e $E_{21}$, o primeiro jogador teria perdido com $3$ pontos e o segundo jogador venceria com $4$ pontos.
-
-De uma forma matemática mais genérica, tem-se o jogador $i \in \{1,2\}$ onde sua estratégia é representada por $\sigma_i \forall \sigma \in S_i$.
-
-[^mixed_strategy]: Estratégia mista é um conjunto de estratégias puras associadas a uma distribuição de probabilidade \cite{figueiredo_conceitos}.
-
-[^finite_game]: Jogos finitos são aqueles onde cada participante se depara com um conjunto finito de escolhas, ou seja, eles escolhem suas estratégias dentro de um conjunto finito de alternativas \cite{figueiredo_conceitos}.
-
-[^zero_sum]: Um jogo soma zero é um jogo no qual a vitória de um jogador implica na derrota do outro.
-
-
-## Minimax
-
-Como o jogo não possui nenhum elemento dependente da sorte, não serão usados estratégias mistas. O \textit{winning move} não foi analizado devido à complexidade da implementação da análise atual.
-
-e as estratégias $\sigma$ e $\tau$ para o primeiro e segundo jogador, respectivamente.
-para cada jogador, as estratégias $e \in \{1,2,\cdots,n\}$.
-Com isso, cada estratégia pode ser representada por $E_{je}$.
-Para determinar a pontuação dos jogadores, temos uma função ultilidade $u(E_{1e},E_{2e})$ tal que retorne uma tupla $(a,b)$ onde $a$ representa o ganho do jogador $1$ e $b$ representa o ganho do jogador $2$.
-
-## Soluções de um jogo
-
-Uma solução de um jogo é uma prescrição ou previsão sobre o resultado do jogo. Dois métodos importantes para encontrar a solução de um estado do jogo são **dominância** e **equilíbrio de Nash**.
-
-É dito que uma determinada estratégia é uma **estratégia dominante** quando esta é a única estratégia restante após aplicar a técnica de **dominância estrita iterada**.
-O encontro das estratégias dos jogadores é chamado de **equilíbrio de estratégia dominante**.
-
-**Dominância estrita iterada** nada mais é do que um processo onde se eliminam as estratégias que são estritamente dominadas.
-Obs.: faltou explicar o que é uma estratégia dominada.
-
-**Solução estratégica** ou **Equilíbrio de Nash** é um conjunto de estratégias para cada jogador onde cada um deles não tem incentivo de mudar sua estratégia se os demais jogadores não o fizerem.
-
-**Zero-sum game**: a vitória de um jogador implica na derrota do outro.
-No Big Points, o jogador com maior pontuação vence. Pode-se dar pontuação 1 caso o jogador em questão é o vencedor, e -1 para o jogador que perdeu. Caso haja mais de um jogador com a maior pontuação do jogo, é dado 0 para o payoff dos dois jogadores.
-
-Outra maneira, mais refinada, de demonstrar a vitória e derrota entre os jogadores é calcular a difereça da pontuação entre eles. O jogador com a maior pontuação mantém sua pontuação, e o restante tem sua pontuação subtraída daquela maior pontuação do jogo (dando um resultado negativo).
-
-Backward Induction
-- As long as every player take turns you can start at the end of the game and make your way to the begin.
-- One strategy for every decision node
-
-Game Theory
-the study of strategic interaction among rational decision makers
-players: people playing the game; each player has a set of strategies
-strategies: what they will do, how they'll respond
-payoffs: result of the interaction of strategies
-
-strategy is a set with what decision you will make for every decision making situation in the game
-
-each players is chosen an strategy,
-these strategies interact,
-and the game plays out to its conclusion.
-
-rationality and common knowledge
-
-
-
-Teoria dos jogos é o estudo do comportamento estratégico interdependente[^interdependent_strategy], não apenas o estudo de como vencer ou perder em um jogo, apesar de às vezes esses dois fatos coincidirem. Isso faz com que o escopo seja mais abranjente, desde comportamentos no qual as duas pessoas devem cooperar para ganhar, ou as duas tentam se ajudar para ganharem independente ou, por fim, comportamento de duas pessoas que tentam vencer individualmente \cite{spaniel_2011}.
-
-[^interdependent_strategy]: Estratégia interdependente significa que as ações de uma pessoa interfere no resultado da outra, e vice-versa.
-
-
-MIMIMIPROGRAM A SODIAMSDOUAHSDOIUG ADIFHGSDKJFHGSD FJGSkfdjgHSDfas
-asdasd
-
--->
 
 # \emph{Big Points}
 
@@ -526,7 +414,7 @@ _Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar 
 	\label{fig:front}
 \end{figure}
 
-O jogo é composto por cinco peões, como demonstrado na Figura \ref{fig:front}, um de cada uma das seguintes cores, denominadas **cores comuns**: vermelha, verde, azul, amarela e violeta.
+O jogo é composto por cinco peões, como demonstrado na Figura \ref{fig:front}, um de cada uma das seguintes cores, denominadas **cores comuns**: vermelha, verde, azul, amarela e roxo.
 Para cada cor de peão, tem-se dez discos, como mostrado na Figura \ref{fig:content}, (totalizando cinquenta discos) denominados **discos comuns**, e cinco discos das cores branca e preta (totalizando dez discos) denominados **discos especiais**.
 Por fim, há um pódio (ou escada) com um lugar para cada peão.
 A escada determinará a pontuação equivalente a cada disco da cor do peão, de maneira que o peão que ocupar o espaço mais alto no pódio (o primeiro a subir) fará sua cor valer quatro pontos, o segundo peão, três pontos e assim por diante, até o último valer zero ponto.
@@ -566,19 +454,21 @@ No final do jogo, conta-se os pontos e ganha o jogador que tiver a maior pontua�
 
 [^available_disc]: É dito disponível aquele disco presente no tabuleiro, e que não possui um peão em cima.
 
-
 A pontuação do jogo é dependente da ordem de chegada dos peões na escada e da quantidade de discos de cada cor que o jogador tiver.
 O primeiro peão que chegou na escada faz com que cada disco de sua cor valha quatro pontos.
 Os jogadores devem então multiplicar a quantidade de discos daquela cor pelo valor da ordem de chegada do peão da sua cor na escada.
-Exemplo: se o primeiro jogador tiver dois discos vermelhos, um disco verde e três azuis e a ordem de chegada deles for azul em primeiro lugar, verde logo em seguida e depois o vermelho, sua pontuação $S$ será descrita de acordo com a Equação \ref{eq:expontuacao}, onde $n_c$ é o número de cores do jogo, $n_r$, $n_g$ e $n_b$ são as quantidades de discos vermelhos, verdes e azuis, respectivamente, que o jogador possui e $p_r$, $p_g$ e $p_b$ são as posições dos peões vermelho, verde e azul, respectivamente, na escada.
+
+Exemplo: um jogador tem um disco da cor vermelha ($n_r$) , zero discos da cor verde ($n_g$), dois azuis ($n_b$), cinco amarelos ($n_y$), quatro roxos ($n_p$), dois brancos ($n_w$) e um preto ($n_k$).
+A ordem de chegada dos peões são, respectivamente, vermelho ($p_r$), verde ($p_g$), azul ($p_b$), amarelo ($p_y$) e roxo ($p_p$).
+Sua pontuação $S$ será descrita de acordo com a Equação \ref{eq:expontuacao}, onde $n_c$ é o número de cores distintas, com exceção da cor branca.
 
 \begin{equation}
 	\label{eq:expontuacao}
 	%\tag{eq. Exemplo de pontuação}
 	\begin{split}
-		S &= n_r \cdot (n_c - p_r) + n_g \cdot (n_c - p_g) + n_b \cdot (n_c - p_b)\\
-		S &= 2 \cdot (3 - 3) + 1 \cdot (3 - 2) + 3 \cdot (3 - 1)\\
-		S &= 7
+		S &= n_r \cdot p_r + n_g \cdot p_g + n_b \cdot p_b + n_y \cdot p_y + n_p \cdot p_p + n_w \cdot n_c  \\
+		S &= 1   \cdot 4   + 0   \cdot 3   + 2   \cdot 2   + 5   \cdot 1   + 4   \cdot 0   + 2   \cdot 5 \\
+		S &= 23
 	\end{split}
 \end{equation}
 
@@ -594,7 +484,7 @@ Capítulo 2 - Metodologia
 
 O _framework_ _Scrum_ é ideal para o desenvolvimento de projetos complexos no qual a produtividade e a criatividade são essenciais para a entrega de um produto de alto valor \cite{the_scrum_guide}.
 Inicialmente, tal método de organização e gerenciamento do projeto foi aplicado para o desenvolvimento do sistema em questão.
-O _kanban_ do \href{https://waffle.io/mfurquim/tcc}{waffle.io}[^waffleio] foi utilizado para registrar tarefas devido à sua integração com as _issues_ do \emph{GitHub}[^github].
+O _kanban_ do \href{https://waffle.io/mfurquim/tcc}{\emph{waffle.io}}[^waffleio] foi utilizado para registrar tarefas devido à sua integração com as _issues_ do \emph{GitHub}[^github].
 Reuniões com o orientador foram realizadas para discutir aspectos técnicos do jogo, como as estruturas de dados a serem utilizadas para reduzir os dados armazenados, e alguns métodos importantes para agilizar o processamento.
 
 [^waffleio]:https://waffle.io/mfurquim/tcc
@@ -624,13 +514,21 @@ Isso gera uma árvore onde cada nó possui quatro filhos e a altura média dessa
 
 ## Quantidade de partidas
 
+Para estudar a viabilidade de solucionar o jogo, foi preciso calcular a quantidade de partidas distintas do jogo \emph{Big Points}.
+A característica do jogo que muda de uma partida para outra são a quantidade de jogadores e o arranjo dos discos formando o tabuleiro.
+Para a quantidade $P$ de jogadores, tem-se $P \in [2,5]$.
+Agora, para a organização dos discos, faz-se uma combinação de cada cor, com a quantidade restante de discos.
+Na Equação \ref{eq:partidas}, a quantidade de discos de uma determinada cor é indicado por $n$, então para a quantidade dos discos brancos, utiliza-se $n_w$, para os pretos, $n_k$ e assim por diante.
+Para encurtar o cálculo, foi utilizado variáveis auxiliares para indicar a quantidade total de discos $d_t$ e a quantidade restante dos discos após a combinação anterior ($d_{l1}$, $d_{l2}$, $d_{l3}$, $d_{l4}$, $d_{l5}$ e $d_{l6}$).
+O total $d_t$ de discos são $d_t = 55$, para os discos restantes após as combinações, tem-se $d_{l1} =$
+
 **INSERIR PARÁGRAFO APRESENTANDO O QUE VAI SER CALCULADO**
 
 \begin{equation}
 	\label{eq:partidas}
 	%\tag{eq. Quantidades de Partidas Distintas}
 	\begin{split}
-		P\ &=\  (J-1) \binom{D_T}{D_W} \binom{D_{L1}}{D_K} \binom{D_{L2}}{D_R} \binom{D_{L3}}{D_G} \binom{D_{L4}}{D_B} \binom{D_{L5}}{D_Y} \binom{D_{L6}}{D_V}\\
+		P\ &=\  (J-1) \binom{d_t}{n_w} \binom{d_{l1}}{n_k} \binom{d_{l2}}{n_r} \binom{d_{l3}}{n_g} \binom{d_{l4}}{n_b} \binom{d_{l5}}{n_y} \binom{d_{l6}}{n_p}\\
 		P\ &=\  4\cdot \binom{55}{5} \binom{50}{5} \binom{45}{9} \binom{36}{9} \binom{27}{9} \binom{18}{9} \binom{9}{9}\\
 		P\ &=\ 560.483.776.167.774.018.942.304.261.616.685.408.000.000\\
 		P\ &\approx 5\times 10^{41}
@@ -665,110 +563,6 @@ Na figura \ref{fig:diagram_struct}
 
 \diagramstruct
 
-
-\lstinputlisting[language=C++, label=lst:estrutura_state, firstnumber=10, linerange={10-31}, caption=Definição da estrutura \texttt{State}]{../../pd/inc/state.h}
-
-O cálculo para determinar os _bits_ necessários para armazenar as informações de cada variável foi realizado será explicado nas subseções seguintes.
-
-Cálculo de bits do atributo \texttt{tabuleiro}
-
-\begin{equation}
-	\label{eq:bitstabuleiro}
-	%\tag{eq. \emph{bits} de \_tabuleiro}
-	\begin{split}
-		\texttt{\_tabuleiro} &= n_c \cdot n_d\\
-		\texttt{\_tabuleiro} &= 5 \cdot 4\\
-		\texttt{\_tabuleiro} &= 20\ \emph{bits}
-	\end{split}
-\end{equation}
-
-Na equação \ref{eq:bitstabuleiro}, $n_c$ e $n_d$ são o número de cores e o número de discos do jogo, respectivamente. Seus valores são, no máximo $n_c = 5$ e $n_d = 4$.
-
-Cálculo de bits do atributo \texttt{peao}
-
-\begin{equation}
-	\label{eq:bitspeao}
-	%\tag{eq. \emph{bits} de \_peao}
-	\begin{split}
-		\texttt{\_peao} &= \lceil \log_2(n_d+1) \rceil \cdot n_p\\
-		\texttt{\_peao} &= \lceil \log_2(5 + 1)\rceil \cdot 4\\
-		\texttt{\_peao} &= 3 \cdot 4\\
-		\texttt{\_peao} &= 15\ \emph{bits}
-	\end{split}
-\end{equation}
-
-Na segunda equação, \ref{eq:bitspeao}, o valor de $n_d$ é o número de discos e $n_p$ é o número de peões do jogo, que por sua vez é igual a $n_c$ (número de cores comuns). Cada peão pode estar: fora do tabuleiro, com $peao(p_i) = 0$; em cima de um disco da sua cor, com $peao(p_i) \in \{1, 2,..., n_d\}$ ; e na escada, com $peao(p_i) = n_d+1$.
-
-Cálculo de bits do atributo \texttt{escada}
-
-\begin{equation}
-	\label{eq:bitsescada}
-	%\tag{eq. \emph{bits} de \_escada}
-	\begin{split}
-		\texttt{\_escada} &= \lceil \log_2(n_p+1) \rceil\cdot n_p\\
-		\texttt{\_escada} &= \lceil \log_2(6) \rceil \cdot 5\\
-		\texttt{\_escada} &= 15\ \emph{bits}
-	\end{split}
-\end{equation}
-
-A equação \ref{eq:bitsescada} possui as variáveis $n_p$ e $n_c$ com $n_p, n_c \in \{2, 3, 4, 5\}$ e $n_p = n_c$. Cada peão tem um local na escada, que armazena a posição dele de forma que $0 \leqslant escada(p_i) \leqslant n_c$. As situações possíveis são: $escada(p_i) = 0$ quando o peão não estiver na escada; e $escada(p_i) \in \{1, 2, 3, 4, 5\}$ sendo a ordem de chegada do peão na escada[^chegada_escada].
-
-[^chegada_escada]: O primeiro peão $p_i$ a chegar na escada é indicado com $escada(p_i) = 1$.
-
-Cálculo de bits do atributo \texttt{jogadores}
-
-\begin{equation}
-	%\tag{eq. \emph{bits} de \_jogadores}
-	\begin{split}
-		\texttt{\_jogadores} &= \lceil \log_2(n_d+1) \rceil \cdot n_c \cdot n_j\\
-		\texttt{\_jogadores} &= \lceil \log_2(4+1) \rceil \cdot 5 \cdot 2\\
-		\texttt{\_jogadores} &= 3 \cdot 5 \cdot 2\\
-		\texttt{\_jogadores} &= 30\ \emph{bits}
-	\end{split}
-	\label{eq:bitsjogadores}
-\end{equation}
-
-A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demonstrado na equação \ref{eq:bitjogadores}. As variáveis utilizadas nessa equação são: $n_d$, o número de discos $n_d \in \{1, 2, 3, 4, 5\}$; $n_c$, o número de cores $n_c \in \{1, 2, 3, 4, 5\}$; e $n_j$, o número de jogadores $n_j = 2$. A informação armazenada na mão dos jogadores, para cada disco, vai até o número máximo de discos mais um, pois o jogador pode pegar todos os discos no tabuleiro e o disco adquirido ao mover o peão para a escada. Para armazenar o número seis, são necessários $\lceil \log_2(6) \rceil = 3 \emph{bits}$
-
-Cálculo de bits do atributo \texttt{atual}
-
-\begin{equation}
-	\label{eq:bitsatual}
-	%\tag{eq. \emph{bits} de \_atual}
-	\begin{split}
-		\texttt{\_atual} &= \lceil \log_2(2) \rceil\\
-		\texttt{\_atual} &= 1\ \emph{bit}
-	\end{split}
-\end{equation}
-
-## Funções de acesso da estrutura \texttt{State}
-
-A estrutura possui um construtor que atribui valores às variáveis através de RAII[^RAII], dessa forma não se faz necessário nenhuma extra implementação. Todas as variáveis possuem um valor padrão, verdadeiro para qualquer tamanho de tabuleiro $t_i$, onde $4 \leqslant t_i \leqslant 20$.
-
-\lstinputlisting[language=C++, firstnumber=33, linerange={33-39}, caption=Construtor da estrutura \texttt{State}]{../../pd/inc/state.h}
-
-[^RAII]: _Resource Aquisition Is Initialization_ é uma técnica de programação que vincula o ciclo de vida do recurso ao da estrutura \cite{cppreferenceraii}.
-
-cpp programing language criador do c++
-
-Atributo \texttt{tabuleiro}
-\lstinputlisting[language=C++, firstnumber=41, linerange={41-47}, caption=Funções de acesso ao atributo \texttt{tabuleiro}]{../../pd/inc/state.h}
-
-Atributo \texttt{peao}
-\lstinputlisting[language=C++, firstnumber=50, linerange={50-60}, caption=Funções de acesso ao atributo \texttt{peão}]{../../pd/inc/state.h}
-
-Atributo \texttt{escada}
-\lstinputlisting[language=C++, firstnumber=63, linerange={63-69}, caption=Funções de acesso ao atributo \texttt{escada}]{../../pd/inc/state.h}
-
-Atributo \texttt{jogador}
-\lstinputlisting[language=C++, firstnumber=72, linerange={72-83}, caption=Funções de acesso ao atributo \texttt{jogador}]{../../pd/inc/state.h}
-
-Atributo \texttt{atual}
-\lstinputlisting[language=C++, firstnumber=86, linerange={86-92}, caption=Funções de acesso ao atributo \texttt{atual}]{../../pd/inc/state.h}
-
-## Comparador da estrutura \texttt{State}
-
-\lstinputlisting[language=C++, firstnumber=95, linerange={95-102}, caption=Comparado da estrutura \texttt{State}]{../../pd/inc/state.h}
 
 # Implementação da Programação Dinâmica
 
@@ -810,6 +604,113 @@ Capítulo 3 - Resultados
 \chapter{Resultados}
 \label{ch:resultados}
 
+\lstinputlisting[language=C++, label=lst:estrutura_state, firstnumber=10, linerange={10-31}, caption=Definição da estrutura \texttt{State}]{../../pd/inc/state.h}
+
+O cálculo para determinar os _bits_ necessários para armazenar as informações de cada variável foi realizado será explicado a seguir.
+
+O cálculo de bits do atributo \texttt{tabuleiro} é apresentado na equação \ref{eq:bitstabuleiro}.
+
+\begin{equation}
+	\label{eq:bitstabuleiro}
+	%\tag{eq. \emph{bits} de \_tabuleiro}
+	\begin{split}
+		\texttt{\_tabuleiro} &= n_c \cdot n_d\\
+		\texttt{\_tabuleiro} &= 5 \cdot 4\\
+		\texttt{\_tabuleiro} &= 20\ \emph{bits}
+	\end{split}
+\end{equation}
+
+Na Equação \ref{eq:bitstabuleiro}, $n_c$ e $n_d$ são o número de cores e o número de discos do jogo, respectivamente. Seus valores são no máximo $n_c = 5$ e $n_d = 4$.
+
+O cálculo de bits do atributo \texttt{peao} é apresentado na equação \ref{eq:bitspeao}.
+
+\begin{equation}
+	\label{eq:bitspeao}
+	%\tag{eq. \emph{bits} de \_peao}
+	\begin{split}
+		\texttt{\_peao} &= \lceil \log_2(n_d+1) \rceil \cdot n_p\\
+		\texttt{\_peao} &= \lceil \log_2(5 + 1)\rceil \cdot 4\\
+		\texttt{\_peao} &= 3 \cdot 4\\
+		\texttt{\_peao} &= 15\ \emph{bits}
+	\end{split}
+\end{equation}
+
+Na Equação \ref{eq:bitspeao}, o valor de $n_d$ é o número de discos e $n_p$ é o número de peões do jogo, que por sua vez é igual a $n_c$ (número de cores comuns). Cada peão pode estar: fora do tabuleiro, com $peao(p_i) = 0$; em cima de um disco da sua cor, com $peao(p_i) \in \{1, 2,..., n_d\}$ ; e na escada, com $peao(p_i) = n_d+1$.
+
+O cálculo de bits do atributo \texttt{escada} é apresentado na equação \ref{eq:bitsescada}.
+
+
+\begin{equation}
+	\label{eq:bitsescada}
+	%\tag{eq. \emph{bits} de \_escada}
+	\begin{split}
+		\texttt{\_escada} &= \lceil \log_2(n_p+1) \rceil\cdot n_p\\
+		\texttt{\_escada} &= \lceil \log_2(6) \rceil \cdot 5\\
+		\texttt{\_escada} &= 15\ \emph{bits}
+	\end{split}
+\end{equation}
+
+A Equação \ref{eq:bitsescada} possui as variáveis $n_p$ e $n_c$ com $n_p, n_c \in \{2, 3, 4, 5\}$ e $n_p = n_c$. Cada peão tem um local na escada, que armazena a posição dele de forma que $0 \leqslant escada(p_i) \leqslant n_c$. As situações possíveis são: $escada(p_i) = 0$ quando o peão não estiver na escada; e $escada(p_i) \in \{1, 2, 3, 4, 5\}$ sendo a ordem de chegada do peão na escada[^chegada_escada].
+
+[^chegada_escada]: O primeiro peão $p_i$ a chegar na escada é indicado com $escada(p_i) = 1$.
+
+O cálculo de bits do atributo \texttt{jogadores} é apresentado na equação \ref{eq:bitsjogadores}.
+
+
+\begin{equation}
+	%\tag{eq. \emph{bits} de \_jogadores}
+	\begin{split}
+		\texttt{\_jogadores} &= \lceil \log_2(n_d+1) \rceil \cdot n_c \cdot n_j\\
+		\texttt{\_jogadores} &= \lceil \log_2(4+1) \rceil \cdot 5 \cdot 2\\
+		\texttt{\_jogadores} &= 3 \cdot 5 \cdot 2\\
+		\texttt{\_jogadores} &= 30\ \emph{bits}
+	\end{split}
+	\label{eq:bitsjogadores}
+\end{equation}
+
+A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demonstrado na equação \ref{eq:bitjogadores}. As variáveis utilizadas nessa equação são: $n_d$, o número de discos $n_d \in \{1, 2, 3, 4, 5\}$; $n_c$, o número de cores $n_c \in \{1, 2, 3, 4, 5\}$; e $n_j$, o número de jogadores $n_j = 2$. A informação armazenada na mão dos jogadores, para cada disco, vai até o número máximo de discos mais um, pois o jogador pode pegar todos os discos no tabuleiro e o disco adquirido ao mover o peão para a escada. Para armazenar o número seis, são necessários $\lceil \log_2(6) \rceil = 3 \emph{bits}$
+
+O cálculo de bits do atributo \texttt{atual} é apresentado na equação \ref{eq:bitsatual}.
+
+\begin{equation}
+	\label{eq:bitsatual}
+	%\tag{eq. \emph{bits} de \_atual}
+	\begin{split}
+		\texttt{\_atual} &= \lceil \log_2(2) \rceil\\
+		\texttt{\_atual} &= 1\ \emph{bit}
+	\end{split}
+\end{equation}
+
+# Funções de acesso da estrutura \texttt{State}
+
+A estrutura possui um construtor que atribui valores às variáveis através de RAII[^RAII], dessa forma não se faz necessário nenhuma extra implementação. Todas as variáveis possuem um valor padrão, verdadeiro para qualquer tamanho de tabuleiro $t_i$, onde $4 \leqslant t_i \leqslant 20$.
+
+\lstinputlisting[language=C++, firstnumber=33, linerange={33-39}, caption=Construtor da estrutura \texttt{State}]{../../pd/inc/state.h}
+
+[^RAII]: _Resource Aquisition Is Initialization_ é uma técnica de programação que vincula o ciclo de vida do recurso ao da estrutura \cite{cppreferenceraii}.
+
+cpp programing language criador do c++
+
+Atributo \texttt{tabuleiro}
+\lstinputlisting[language=C++, firstnumber=41, linerange={41-47}, caption=Funções de acesso ao atributo \texttt{tabuleiro}]{../../pd/inc/state.h}
+
+Atributo \texttt{peao}
+\lstinputlisting[language=C++, firstnumber=50, linerange={50-60}, caption=Funções de acesso ao atributo \texttt{peão}]{../../pd/inc/state.h}
+
+Atributo \texttt{escada}
+\lstinputlisting[language=C++, firstnumber=63, linerange={63-69}, caption=Funções de acesso ao atributo \texttt{escada}]{../../pd/inc/state.h}
+
+Atributo \texttt{jogador}
+\lstinputlisting[language=C++, firstnumber=72, linerange={72-83}, caption=Funções de acesso ao atributo \texttt{jogador}]{../../pd/inc/state.h}
+
+Atributo \texttt{atual}
+\lstinputlisting[language=C++, firstnumber=86, linerange={86-92}, caption=Funções de acesso ao atributo \texttt{atual}]{../../pd/inc/state.h}
+
+# Comparador da estrutura \texttt{State}
+
+\lstinputlisting[language=C++, firstnumber=95, linerange={95-102}, caption=Comparado da estrutura \texttt{State}]{../../pd/inc/state.h}
+
+
 Ao final do cálculo deste jogo reduzido, temos que o número de estados distintos varia entre 17 e 25, dependendo do estado inicial do tabuleiro.
 Devido a este grande número de estados repetidos, escrever o algoritmo fazendo uso de programação dinâmica economizou bastante tempo e processamento.
 
@@ -821,17 +722,17 @@ Neste caso, temos os jogos $j_i \in \{1122, 1212, 1221, 2112, 2121, 2211\}$, e p
 	\centering
 	\caption{Pontuação utilizando \emph{minimax}}
 	\label{tab:pont_minimax}
-	\rowcolors{2}{white}{gray!10}
-	\begin{tabular}{ccc}
+	\rowcolors{2}{white}{gray!20}
+	\begin{tabular}{cccc}
 		\toprule
-		\textbf{Jogo}	& \textbf{Pontuação}	&	\textbf{\#Estados}	\\
+		\textbf{Jogo}	& $\mathbf{J_1}$	& $\mathbf{J_2}$	&	\textbf{\#Estados}	\\
 		\midrule
-		1122			& (2,1)					& 17					\\
-		1212			& (2,0)					& 25					\\
-		1221			& (2,1)					& 25					\\
-		2112			& (2,1)					& 25					\\
-		2121			& (2,1)					& 25					\\
-		2211			& (2,0)					& 17					\\
+		1122			& 2					& 1					& 17					\\
+		1212			& 2					& 0					& 25					\\
+		1221			& 2					& 1					& 25					\\
+		2112			& 2					& 1					& 25					\\
+		2121			& 2					& 1					& 25					\\
+		2211			& 2					& 0					& 17					\\
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -863,6 +764,13 @@ Capítulo 4 - Considerações Finais
 -->
 \chapter{Considerações Finais}
 \label{ch:conclusao}
+
+A análise utilizada para solucionar[^jogo_solucao] o jogo neste trabalho foi o teorema _minimax_, onde cada jogador tenta aumentar sua pontuação e diminuir a pontuação do oponente.
+Os resultados obtidos ao final da análise computacional baseadas neste teorema sugere a possibilidade do jogo completo ser desbalanceado[^jogo_balanceado], dando ao primeiro jogador uma maior chance de vencer o jogo.
+
+[^jogo_solucao]: Solucionar um jogo é percorrer todas as sua possibilidades de movimento e seus resultados.
+
+[^jogo_balanceado]: É dito um jogo balanceado aquele que a chance dos jogadores de ganhar é a mesma.
 
 # Trabalhos futuros
 
