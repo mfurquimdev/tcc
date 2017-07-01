@@ -13,7 +13,7 @@ Estes conceitos são exemplos das ideias utilizadas em análises baseadas na teo
 \section*{Objetivos}
 
 O objetivo principal deste trabalho é realizar uma análise _minimax_ nas versões reduzidas do jogo _Big Points_.
-O jogo foi reduzido em questão da quantidade e tipo de algumas peças, visto que para o jogo completo seria um trabalho computacional imenso.
+O jogo foi reduzido em relação à quantidade e tipo de algumas peças, visto que para o jogo completo seria um trabalho computacional imenso.
 
 \section*{Justificativa}
 
@@ -26,6 +26,26 @@ Após chegar à conclusão que seria impossível calcular um jogo inteiro, foi e
 Este trabalho foi dividido em quatro capítulos. O primeiro capítulo, Fundamentação Teórica, relata um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo.
 Em seguida, tem-se o Capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto até sua conclusão, e no Capítulo \ref{ch:resultados} os resultados desta análise são discutidos.
 Por último, o Capítulo \ref{ch:conclusao} onde são feitas as considerações finais do trabalho e são citados alguns possíveis trabalhos futuros a partir do trabalho atual.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--
 Capítulo 1 - Fundamentação Teórica
@@ -62,13 +82,12 @@ A partir de então, surgiram novas técnicas de solução de jogos e a teoria do
 Entre 1949 e 1953, Nash escreveu mais artigos ligados à solução de jogos estratégicos: _The Bargaining Problema_ (O Problema da Barganha, 1949) \apud{nash_bargain1950}{alecsandra_2006} e _Two-Person Cooperative Games_ (Jogos Cooperativos de Duas Pessoas, 1953) \apud{johnforbesnashjunior1953}{alecsandra_2006}.
 Também escreveu artigos de matemática pura sobre variedades algébricas em 1951, e de arquitetura de computadores em 1954 \cite{alecsandra_2006}.
 
-Várias publicações contribuíram para este marco histórico da teoria dos jogos, mas o livro de Thomas Schelling, publicado em 1960, se destacou em um ponto de vista social \apud{schelling1960strategy}{aguidetogametheory_2005}.
-Em 1982, Elwyn Berlekamp, John Conway e Richard Guy publicaram um livro em dois volumes que se tornou uma referência na área da teoria dos jogos combinatorial por explicar os conceitos fundamentais para a teoria dos jogos combinatorial \apud{elwyn_1982}{eyawtkagtbwata_2003}.
+Mais recentemente, dois trabalhos se destacaram na área de Teoria dos Jogos: o livro de Thomas Schelling, publicado em 1960, que se destacou em um ponto de vista social \apud{schelling1960strategy}{aguidetogametheory_2005}; e um livro de dois volumes de Elwyn Berlekamp, John Conway e Richard Guy que se tornou uma referência na área da teoria dos jogos combinatorial por explicar os conceitos fundamentais para a teoria dos jogos combinatorial \apud{elwyn_1982}{eyawtkagtbwata_2003}.
 
 # Teoria dos Jogos
 
 A Teoria dos Jogos pode ser definida como a teoria dos modelos matemáticos que estuda a escolha de decisões ótimas[^optimal_decision] sob condições de conflito[^conflict_condition].
-O campo da teoria dos jogos divide-se em três áreas:
+Atualmente, o campo da teoria dos jogos divide-se em três áreas:
 Teoria Econômica dos Jogos, que normalmente analisa movimentos simultâneos (Definição \ref{def:movimentossimultaneos}) de dois ou mais jogadores;
 Teoria Combinatória dos Jogos, no qual os jogadores fazem movimentos alternadamente, e não faz uso de elementos de sorte, diferente da Teoria Econômica dos Jogos que também trata desse fenômeno; e
 Teoria Computacional dos Jogos, que engloba jogos que são possíveis resolver por força bruta ou inteligência artificial \cite{eyawtkagtbwata_2003}, como jogo da velha e xadrez, respectivamente.
@@ -109,7 +128,7 @@ De acordo com esta definição, a árvore do jogo \emph{Nim} simplificado é rep
 
 A ordem dos jogadores está sendo indicada ao lado esquerdo da figura, de forma que o jogador $J_1$ é o primeiro a realizar um movimento, o $J_2$ é o segundo, o terceiro movimento é do $J_1$ e assim por diante.
 O estado do jogo é representado por cada nó da árvore, sendo que os quatro palitos estão divididos em dois montes dentro do retângulo.
-Cada aresta representa uma jogada válida para o jogador atual.
+Cada aresta representa uma jogada válida para o jogador que vai realizar o moviment (jogador atual).
 Ao analisar a primeira jogada, percebe-se que $J_1$ possui quatro jogadas possíveis: retirar um palito do primeiro monte; retirar dois palitos do primeiro monte; retirar um palito do segundo monte; e retirar dois palitos do segundo monte.
 As últimas jogadas foram omitidas da árvore do jogo por serem simétricas às outras duas primeiras.
 Na aresta $(A,B)$[^aresta], o primeiro jogador pega apenas um palito de um dos montes de palito, enquanto a aresta $(A,C)$ representa o movimento de pegar todos os dois palitos de um monte.
@@ -117,7 +136,7 @@ Da mesma maneira, as arestas $(B,D)$, $(B,E)$, $(B,F)$, $(C,G)$ e $(C,H)$ são o
 
 [^aresta]: A aresta representada como $(A,B)$, sai do nó $A$ ao nó $B$. Uma notação alternativa seria $\overrightarrow{B}$, sendo a aresta que incide em $B$ \cite{algorithmsvelsky_1988}.
 
-No final da Figura \ref{fig:nim_tree}, há uma representação para cada folha[^leaf] para representar o vencedor no final daquela série de movimentos.
+No final da Figura \ref{fig:nim_tree}, há uma representação para cada folha[^leaf] para indicar o vencedor no final daquela série de movimentos.
 Nos nós terminais $N$, $O$ e $H$, o jogador $J_2$ retirou o último palito do jogo, resultando na vitória de $J_1$.
 Para as folhas $J$, $L$ e $M$, a vitória é do segundo jogador.
 
@@ -143,7 +162,7 @@ As estratégias pura do jogador $J_1$ são nomeadas $\sigma_i$ com $i \in \{1,\l
 A estratégia pura também pode ser vista como um caminho[^path] único na árvore, que tem origem no primeiro nó de decisão do jogador e termina em uma folha.
 No caso do jogador $J_1$, o caminho começa na raíz, e no caso do jogador $J_2$, o caminho pode começar em $B$ ou em $C$.
 Devido à isso, $J_2$ deve considerar os dois casos e decidir de antemão o que fazer.
-A partir da definição de estratégia pura (Definição \ref{def:estrategia_pura}), tem-se as estratégias de ambos os jogadores nas Tabelas \ref{tab:estrategia_pura_j1} e \ref{tab:estrategia_pura_j2}.
+A partir da Definição \ref{def:estrategia_pura}, tem-se as estratégias de ambos os jogadores nas Tabelas \ref{tab:estrategia_pura_j1} e \ref{tab:estrategia_pura_j2}.
 
 [^path]: Uma sequência de arestas onde o nó no final de uma aresta coincide com o nó no começo da próxima aresta, é chamado de \textbf{caminho} \cite[grifo nosso]{sometopics_1971}.
 
@@ -194,7 +213,7 @@ Na Tabela \ref{tab:estrategia_pura_j1}, os movimentos de $J_1$ estão separadas 
 O primeiro turno é o nó raiz ($A$).
 A partir deste estado, o jogador possui duas escolhas $(A,B)$ ou $(A,C)$, representados na tabela como as estratégias pura $\sigma_1$ e $\sigma_3$.
 Mas além dessa informação, ainda deve-se representar a próxima decisão a ser feita após escolher $(A,B)$.
-Se $J_2$ escolher certos movimentos que chegue no $D$, o primeiro $J_1$ ainda tem mais uma escolha a fazer.
+Se $J_2$ escolher certos movimentos que chegue no $D$, o primeiro jogador ainda tem mais uma escolha a fazer.
 Essa segunda escolha está representada nas colunas: _Se em_, no caso se o jogador estiver naquele nó; e _Vá para_, que são as possíveis jogadas a serem feitas a partir do nó em questão.
 Então, a diferença de $\sigma_1$ e $\sigma_2$ é apenas nesta segunda escolha.
 Ao chegar em um nó terminal, acaba também a descrição de uma estratégia pura.
@@ -206,8 +225,8 @@ Ao chegar em um nó terminal, tem-se uma função para atribuir um valor ao joga
 Essa sequência de movimento é chamado de \textbf{jogo}, e o valor na folha é chamado \textbf{resultado do jogo} \cite[p.~2]{algorithmsvelsky_1988}.
 \end{mydef}
 
-De acordo com a definição de um jogo (Definição \ref{def:jogo}), a versão reduzida do _Nim_ possui dezoito jogos no total, de forma que a quantidade de jogos pode ser calculado com $a b = 18$, com $a = 3$ e $b = 6$, onde $a$ é o número de estratégias pura de $J_1$ e $b$ é o número de estratégias pura de $J_2$.
-Alguns exemplos são monstrados a seguir:
+De acordo com a definição de um jogo (Definição \ref{def:jogo}), a versão reduzida do _Nim_ possui dezoito jogos no total, de forma que a quantidade de jogos pode ser calculado como $a b = 18$, com $a = 3$ e $b = 6$.
+Alguns exemplos são mostrados a seguir:
 
 \begin{align*}
 \label{ex:jogossigmatau}
@@ -217,7 +236,7 @@ Alguns exemplos são monstrados a seguir:
 \end{align*}
 
 Olhando para a tabela do jogador $J_2$ (Tabela \ref{tab:estrategia_pura_j2}), sua primeira jogada já depende da jogada do jogador $J_1$.
-Por isso, cada estratégia $\tau_j$ com $j \in \{1,\cdots, m\}$ descreve duas possibiliades de movimento.
+Por isso, cada estratégia $\tau_j$ com $j \in \{1,\cdots, b\}$ descreve duas possibiliades de movimento.
 Observando $\tau_1$, no primeiro turno seu movimento será $(B,D)$ se estiver em $B$, caso contrário, jogará $(C,G)$.
 
 \begin{mydef}
@@ -226,9 +245,9 @@ A \textbf{forma normal} é a representação do resultado do jogo a partir das e
 \end{mydef}
 
 Ao escolher suas estratégias pura, os jogadores percorrem a árvore até chegar a uma folha.
-Essa sequência de movimentos (a escolha de uma estratégia pura $\sigma_i$ e uma $\tau_j$) é chamada de \textbf{jogo}.
-Dependendo das escolhas de $J_1$ e $J_2$, tem-se um jogo diferente.
-Esses diferentes jogos são representados pela análise normal (Definição \ref{def:forma_normal}) na Tabela \ref{tab:forma_normal}.
+Essa sequência de movimentos (a escolha de uma estratégia pura $\sigma_i$ e uma $\tau_j$) é chamada de jogo.
+Para cada combinação de estratégias de estratégias de $J_1$ e $J_2$, tem-se um jogo diferente.
+Esses diferentes jogos são representados pela análise da forma normal (Definição \ref{def:forma_normal}) na Tabela \ref{tab:forma_normal}.
 
 \begin{table}[htb]
 	\centering
@@ -246,7 +265,7 @@ Esses diferentes jogos são representados pela análise normal (Definição \ref
 	\end{tabular}
 \end{table}
 
-Nesta tabela, as estratégias dos jogadores estão nas linhas e colunas, e as folhas são os resultados de caminhos tomados a partir de cada estratégia $\sigma_i$ e $\tau_j$.
+Nesta tabela, as estratégias dos jogadores estão nas linhas e colunas, e as letras representam as folhas, que são os resultados de caminhos tomados a partir de cada estratégia $\sigma_i$ e $\tau_j$.
 Cada linha é uma estratégia pura de $J_1$ ($\sigma_i, i \in \{1, 2, 3\}$) e, cada coluna, uma estratégia de $J_2$ ($\tau_j, j \in \{1, 2, 3, 4, 5, 6\}$).
 Para transformar esta tabela em uma matriz de _payoff_, basta substituir os nós terminais pelo ganho do jogo.
 Se o primeiro jogador ganhar, seu ganho é $1$, e se o segundo jogador vencer, o resultado para $J_1$ é $-1$.
@@ -272,6 +291,7 @@ Dessa forma, pode-se ver na Tabela \ref{tab:matriz_ganho} que a estratégia $\ta
 
 # Programação dinâmica
 
+<!--
 Dynamic programming typically applies to optimization problems in which we make a set of choices in order to arrive at an optimarl solutions.
 As we make each choice, subproblems of the same form often arise.
 Dynamic programming is effective when a given subproblem may arise from more than one partial set of choices; the key technique is to store the solution to each such subproblem in case it shoudl reapper.
@@ -282,11 +302,10 @@ We typically apply dynamic programming to optimization problems.
 Such problems can have many possible solutions.
 Each solution has a value, and we wish to find a solution with the optimal (minimum or maximum) value.
 We call such a solution an optimal solution to the problem, as opposed to the optimal solution. 
+-->
 
 
-
-Programação dinâmica 
-é uma técnica de programação capaz de reduzir significantemente o tempo de processamento de um problema no qual os estados possam se repetir.
+Programação dinâmica é uma técnica de programação capaz de reduzir significantemente o tempo de processamento de um problema no qual os estados possam se repetir.
 \cite{cormen2001introduction}
 Um exemplo clássico é o programa de para calcular os números da sequência de _Fibonacci_.
 No Código \ref{lst:fib_main}, \ref{lst:fib_ite}, \ref{lst:fib_rec} e \ref{lst:fib_mem} está escrito um programa simples para resolver este problema.
@@ -403,7 +422,7 @@ Na Figura \ref{fig:fibonacci} fica claro que a implementação recursiva do algo
 Para tratar desse problema, a técnica de memorização armazena os valores da sequência de \emph{Fibonacci} em um \emph{map} e depois acessa seus valores ao invés de recalcular aquele $n$-ésimo termo.
 Isso faz com que o tempo do cálculo se torne 
 
-# \emph{Big Points}
+\section{\texorpdfstring{\emph{Big Points}}{}}\label{sec:big_points}
 
 _Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar peças que pode ser jogado de dois a cinco jogadores. São cinco peões de cores distintas, que podem ser usadas por qualquer jogador, para percorrer um caminho de discos coloridos até chegar à escada. Durante o percurso, os jogadores coletam alguns destes discos e sua pontuação final é determinada a partir da ordem de chegada dos peões ao pódio e a quantidade de discos adquiridos daquela cor. Ganha o jogador com a maior pontuação.
 
@@ -472,6 +491,26 @@ Sua pontuação $S$ será descrita de acordo com a Equação \ref{eq:expontuacao
 	\end{split}
 \end{equation}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--
 Capítulo 2 - Metodologia
 -->
@@ -508,41 +547,82 @@ Esse procedimento foi repetido para _cada_ combinação possível do tabuleiro i
 
 [^csv]: O tipo arquivo _csv_ (_comma separated value_) possui seu conteúdo separado por vírgula.
 
-Exaurir todas as possibilidades de jogadas é um trabalho computacional imenso e cresce exponencialmente de acordo com o tamanho do jogo.
-Para um jogo pequeno, com apenas dois discos e duas cores comuns (sem especiais), as jogadas possíveis são: mover o peão vermelho e pegar o disco da direita, ou da esquerda; e mover o peão verde e pegar o disco da direita ou da esquerda.
-Isso gera uma árvore onde cada nó possui quatro filhos e a altura média dessa árvore é quatro, totalizando uma quantidade de estados de aproximadamente $\sum_{h=0}^{4}4^{h} \approx 341$.
-
 ## Quantidade de partidas
 
 Para estudar a viabilidade de solucionar o jogo, foi preciso calcular a quantidade de partidas distintas do jogo \emph{Big Points}.
 A característica do jogo que muda de uma partida para outra são a quantidade de jogadores e o arranjo dos discos formando o tabuleiro.
-Para a quantidade $P$ de jogadores, tem-se $P \in [2,5]$.
+Para a quantidade $P$ de jogadores, tem-se $J \in [2,5]$.
 Agora, para a organização dos discos, faz-se uma combinação de cada cor, com a quantidade restante de discos.
-Na Equação \ref{eq:partidas}, a quantidade de discos de uma determinada cor é indicado por $n$, então para a quantidade dos discos brancos, utiliza-se $n_w$, para os pretos, $n_k$ e assim por diante.
-Para encurtar o cálculo, foi utilizado variáveis auxiliares para indicar a quantidade total de discos $d_t$ e a quantidade restante dos discos após a combinação anterior ($d_{l1}$, $d_{l2}$, $d_{l3}$, $d_{l4}$, $d_{l5}$ e $d_{l6}$).
-O total $d_t$ de discos são $d_t = 55$, para os discos restantes após as combinações, tem-se $d_{l1} =$
-
-**INSERIR PARÁGRAFO APRESENTANDO O QUE VAI SER CALCULADO**
 
 \begin{equation}
 	\label{eq:partidas}
 	%\tag{eq. Quantidades de Partidas Distintas}
 	\begin{split}
 		P\ &=\  (J-1) \binom{d_t}{n_w} \binom{d_{l1}}{n_k} \binom{d_{l2}}{n_r} \binom{d_{l3}}{n_g} \binom{d_{l4}}{n_b} \binom{d_{l5}}{n_y} \binom{d_{l6}}{n_p}\\
-		P\ &=\  4\cdot \binom{55}{5} \binom{50}{5} \binom{45}{9} \binom{36}{9} \binom{27}{9} \binom{18}{9} \binom{9}{9}\\
+		P\ &=\  4 \binom{55}{5} \binom{50}{5} \binom{45}{9} \binom{36}{9} \binom{27}{9} \binom{18}{9} \binom{9}{9}\\
 		P\ &=\ 560.483.776.167.774.018.942.304.261.616.685.408.000.000\\
 		P\ &\approx 5\times 10^{41}
 	\end{split}
 \end{equation}
 
-**INSERIR PARÁGRAFO DETALHANDO AS VARIÁVEIS**
+Na Equação \ref{eq:partidas}, a quantidade de discos de uma determinada cor é indicado por $n$, então para a quantidade de discos da cor vermelha, verde, azul, amarela, roxa, branca, e preta são, respectivamente, $n_r$, $n_g$, $n_b$, $n_y$, $n_p$, $n_w$, e $n_k$.
+Para encurtar o cálculo, foi utilizado variáveis auxiliares para indicar a quantidade total de discos $d_t$ e a quantidade restante dos discos após a combinação anterior ($d_{l1}$, $d_{l2}$, $d_{l3}$, $d_{l4}$, $d_{l5}$ e $d_{l6}$).
+
+O valor total $d_t$ de peças é igual a $d_t = n_r + n_g + n_b + n_y + n_p + n_w + n_k$ que valem, como dito na Seção \ref{sec:big_points}, $n_w = n_k = 5$ para as cores especiais, e $n_r = n_g = n_b = n_y = n_p = 9$ para as cores comuns.
+As outras variáveis restantes após as combinações são: $d_{l1} = d_t - d_w$, para a combinação dos discos totais com os discos brancos; $d_{l2} = d_{l1} - d_k$, para a combinação dos discos restantes da combinação passada com os discos pretos; e assim por diante.
+
+## Quantidade de jogadas
+
+O próximo passo é exaurir todas as possibilidades de jogadas.
+Porém, o trabalho computacional é imenso e cresce exponencialmente de acordo com o tamanho do jogo.
+Para um jogo pequeno, com apenas dois discos e duas cores comuns (sem especiais), as jogadas possíveis são: mover o peão vermelho e pegar o disco da direita, ou da esquerda; e mover o peão verde e pegar o disco da direita ou da esquerda.
+Um jogo deste tamanho termina, em média, no quarto turno, como será mostrado na Sub-Seção \ref{verificauxe7uxe3o-dos-estados}.
+Isso gera uma árvore onde cada nó possui quatro filhos (jogadas possíveis) e altura média de quatro (número de turnos), totalizando uma quantidade de estados de aproximadamente $\sum_{h=0}^{4}f^{h} \approx 341$, com $f = 4$.
+
+Seguindo esta linha de raciocínio, um jogo completo (com 55 discos e todas as cores disponíeveis) teriam as possibilidades de jogada: mover os peões vermelho, verde, azul, amarelo, ou roxo; pegar o disco da direita ou da esquerda; e utiliziar, ou não, o disco preto para jogar novamente.
+Com $5$ peões, $2$ opções para pegar os discos (esquerda ou direita) e a opção de usar ou não a peça preta, totaliza $5 \cdot 2 \cdot 2 = 20$ possibilidades de jogada.
+Como o jogo possui 55 discos, pode-se estimar que o jogo irá terminar no quinquagésimo quinto turno, totalizando $\sum_{h=0}^{55} f^{h} \approx 3 \times 10^{71}$ estados possíveis[^num_jogadas].
+ 
+[^num_jogadas]: $\sum_{h=0}^{55} f^{h} \approx 379250494936462821052631578947368421052631578947368421052631578947368421$.
 
 # Representação e Codificação dos Estados
 
-Devido à enorme quantidade de estados de um jogo reduzido de _Big Points_, foram implementadas duas funções para codificar e decodificar a _struct State_ para um _long long int_, de forme que cada estado ocupasse apenas 64 _bits_ na memória. Após testar nos limites da capacidade da variável, percebeu-se um erro quando a simulação utilizava quatro cores e cinco discos, o que levou à implementação dos estados por _bit fields_.
-
 Para escrever a rotina de programação dinâmica capaz de otimizar o processamento recursivo, foi necessário identificar as variáveis do jogo que representam um **estado**. 
 Um estado do jogo depende dos discos do tabuleiro, dos peões que estão na escada, da mão dos jogadores, e do jogador atual (o jogador que fará a próxima jogada).
+
+Devido à enorme quantidade de estados do jogo _Big Points_, se fez necessário armazenar essas informações na menor quantidade de _bits_.
+Para isso foi proposto uma função para codificar, e outra para decodificar, uma _struct_ em uma variável com o objetivo de reduzir o espaço ocupado na memória.
+Após implementar e testar nos limites da capacidade da maior variável disponível (\texttt{unsigned long long int}), percebeu-se um erro quando o cálculo utilizava quatro cores e cinco discos, o que levou a outra solução: a implementação dos estados por _bit fields_.
+
+# Verificação dos estados
+
+Para garantir a implementação correta da P.D., foram escritos em \textit{post-it}s os estados, e suas transições, do menor jogo possível, como mostrado na Figura \ref{fig:}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+Capítulo 3 - Resultados
+-->
+\chapter{Resultados}
+\label{ch:resultados}
 
 Dentro da estrutura \texttt{State} foram declaradas duas estruturas anônimas[^anonymous_struct] utilizando _bit fields_. As duas estruturas servem para garantir a utilização correta dos _bits_ quando as variáveis chegarem próximo ao limite da sua capacidade. Essas estruturas possuem variáveis do tipo \texttt{unsigned long long int}, que ocupa  64 _bits_. Após a declaração de um membro da estrutura, é declarado a quantidade de _bits_ que será utilizado para ele, de modo que \texttt{ll \_tabuleiro :20} ocupe apenas 20 _bits_ da variável \texttt{unsigned long long int}, \texttt{ll \_peao :15} ocupe 15 _bits_, e assim por diante de forma que não ultrapsse os 64 _bits_ da variável. Como o comportamento do armazenamento é indeterminado quando a variável é ultrapassada, e para garantir consistência no armazenamento, foram utilizadas duas _structs_ com, tamanho máximo igual uma variável \texttt{unsigned long long int} (64 _bits_).
 
@@ -559,12 +639,7 @@ Esta estrutura está apresentada no Código \ref{lst:estrutura_state}.
 [^tabuleiro]: Cinco cores e quatro discos.
 [^cor_peao]: As cores de peão seguem a ordem RGBYP começando do $0$, onde $\textbf{R}ed = 0$, $\textbf{G}reen = 1$, $\textbf{B}lue = 2$, $\textbf{Y}ellow = 3$, e $\textbf{P}urple = 4$.
 
-Na figura \ref{fig:diagram_struct}
-
-\diagramstruct
-
-
-# Implementação da Programação Dinâmica
+# Projeto da Programação Dinâmica
 
 Programação dinâmica é um método para a construção de algoritmos no qual há uma memorização de cada estado distinto para evitar recálculo, caso este estado apareça novamente. A memorização dos estados do jogo _Big Points_ foi feita em uma _hash_, com a chave sendo o estado do jogo e o valor armazenado, a pontuação máxima dos dois jogadores a partir daquele nó.
 
@@ -593,16 +668,11 @@ A função \texttt{play} foi implementada com o objetivo de separar a lógica do
 # Implementação do Minimax
 
 \lstinputlisting[language=C++, firstnumber=158, linerange={158-228}, caption=Implementação do \emph{Minimax}]{../../pd/src/dp.cpp}
+_long long int_, de forma que cada estado ocupasse apenas 64 _bits_ na memória.
 
-# Verificação dos estados
+Na figura \ref{fig:diagram_struct}
 
-Foi escrito os estados e suas transições em \textit{post-it}s para garantir que a _DP_ foi feita corretamente. Os estados
-
-<!--
-Capítulo 3 - Resultados
--->
-\chapter{Resultados}
-\label{ch:resultados}
+\diagramstruct
 
 \lstinputlisting[language=C++, label=lst:estrutura_state, firstnumber=10, linerange={10-31}, caption=Definição da estrutura \texttt{State}]{../../pd/inc/state.h}
 
@@ -759,6 +829,27 @@ Em todos as possíveis combinações de tabuleiros iniciais, o primeiro jogador 
 	\caption{Resultados ordenado por número total de peças}
 	\label{fig:bigpoints_total}
 \end{figure}
+
+
+
+
+_long long int_, de forma que cada estado ocupasse apenas 64 _bits_ na memória.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--
 Capítulo 4 - Considerações Finais
 -->
