@@ -16,3 +16,4 @@ pdf:
 
 clean:
 	$(MAKE) -C tex clean
+	rm -rvf *.pdf *.png

@@ -39,13 +39,6 @@ FLAGS= --filter pandoc-eqnos --filter pandoc-tablenos --from=markdown --to=latex
 
 all:
 	@make tex
-#	$(LATEX) $(MAIN_FILE) $(SOURCES)
-#	$(BIBTEX) $(AUX_FILE)
-#	$(LATEX) $(MAIN_FILE) $(SOURCES)
-#	$(LATEX) $(MAIN_FILE) $(SOURCES)
-#	$(DVIPS) $(DVI_FILE)
-#	$(PS2PDF) $(PS_FILE)
-#	@cp $(PDF_FILE) $(TARGET)
 	@make pdf
 
 tex:

@@ -44,9 +44,6 @@ Por último, o Capítulo \ref{ch:conclusao} onde são feitas as considerações 
 
 
 
-
-
-
 <!--
 Capítulo 1 - Fundamentação Teórica
 -->
@@ -319,7 +316,7 @@ Nos Códigos \ref{lst:fib_main}, \ref{lst:fib_ite}, \ref{lst:fib_rec} e \ref{lst
 
 \begin{lstlisting}[language=C++, label=lst:fib_main, caption=Funcao main de Fibonacci]
 #include <iostream>	// std::cout
-#include <map>		// std::map (P.D.)
+#include <map>		// std::map (PD)
 
 // Protótipo (declaração) da função
 int fibonacci(int);
@@ -424,34 +421,30 @@ Isso faz com que o tempo do cálculo se torne
 
 \section{\texorpdfstring{\emph{Big Points}}{}}\label{sec:big_points}
 
-_Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar peças que pode ser jogado de dois a cinco jogadores. São cinco peões de cores distintas, que podem ser usadas por qualquer jogador, para percorrer um caminho de discos coloridos até chegar à escada. Durante o percurso, os jogadores coletam alguns destes discos e sua pontuação final é determinada a partir da ordem de chegada dos peões ao pódio e a quantidade de discos adquiridos daquela cor. Ganha o jogador com a maior pontuação.
+_Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar peças que pode ser jogado de dois a cinco jogadores.
+São cinco peões de cores distintas, que podem ser usadas por qualquer jogador, para percorrer um caminho de discos coloridos até chegar à escada.
+Durante o percurso, os jogadores coletam alguns destes discos e sua pontuação final é determinada a partir da ordem de chegada dos peões ao pódio e a quantidade de discos adquiridos daquela cor.
+Ganha o jogador com a maior pontuação.
+
+O jogo é composto por cinco peões, como demonstrado na Figura, um de cada uma das seguintes cores, denominadas **cores comuns**: vermelha, verde, azul, amarela e roxo.
+Para cada cor de peão, tem-se dez discos, como mostrado na Figura \ref{fig:content}, (totalizando cinquenta discos) denominados **discos comuns**, e cinco discos das cores branca e preta (totalizando dez discos) denominados **discos especiais**.
 
 \begin{figure}[htb]
-	\centering
-	\includegraphics[width=0.75\textwidth]{figuras/front}
-	\caption{Caixa do jogo \emph{Big Points}}
-	\label{fig:front}
+    \centering
+   	\includegraphics[width=0.7\textwidth]{figuras/content}
+   	\caption{Conteúdo do jogo \emph{Big Points}}
+   	\label{fig:content}
 \end{figure}
 
-O jogo é composto por cinco peões, como demonstrado na Figura \ref{fig:front}, um de cada uma das seguintes cores, denominadas **cores comuns**: vermelha, verde, azul, amarela e roxo.
-Para cada cor de peão, tem-se dez discos, como mostrado na Figura \ref{fig:content}, (totalizando cinquenta discos) denominados **discos comuns**, e cinco discos das cores branca e preta (totalizando dez discos) denominados **discos especiais**.
 Por fim, há um pódio (ou escada) com um lugar para cada peão.
 A escada determinará a pontuação equivalente a cada disco da cor do peão, de maneira que o peão que ocupar o espaço mais alto no pódio (o primeiro a subir) fará sua cor valer quatro pontos, o segundo peão, três pontos e assim por diante, até o último valer zero ponto.
 No caso de um jogo com menos de cinco peões, a seguinte fórmula se aplica: $S = N_{c}-P_{pos}$, onde $S$ é a pontuação daquela determinada cor, $N_{c}$ é o número de discos comuns e $P_{pos}$ é a posição do peão no pódio.
 
-\begin{figure}
+\begin{figure}[htb]
     \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-    	\includegraphics[width=\textwidth]{figuras/content}
-    	\caption{Conteúdo do jogo \emph{Big Points}}
-    	\label{fig:content}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.48\textwidth}
-    	\includegraphics[width=\textwidth]{figuras/setup}
-    	\caption{Preparação do jogo \emph{Big Points}}
-    	\label{fig:setup}
-    \end{subfigure}
-    \caption{Organização do jogo \emph{Big Points}}\label{fig:organization}
+   	\includegraphics[width=0.7\textwidth]{figuras/setup}
+   	\caption{Preparação do jogo \emph{Big Points}}
+   	\label{fig:setup}
 \end{figure}
 
 A preparação do jogo ocorre em algumas etapas, envolvendo a posição dos peões, a aleatoriedade do tabuleiro e alguns discos ao lado da escada.
@@ -510,14 +503,17 @@ Sua pontuação $S$ será descrita de acordo com a Equação \ref{eq:expontuacao
 
 
 
-
 <!--
 Capítulo 2 - Metodologia
 -->
 \chapter{Metodologia}
 \label{ch:metodologia}
 
-**INSERIR PARÁGRAFO APRESENTANDO O CAPÍTULO**
+Após o entendimento dos conceitos de Teoria dos Jogos, Programação Dinâmica e das regras do jogo _Big Points_, serão explicados a metodologia seguida para a construção do projeto.
+A primeira seção explica como foram as reuniões com o orientador e a organização das tarefas.
+Na Seção \ref{anuxe1lise-do-jogo}, são feitas as análises da quantidade de jogos distintos e das jogadas para exaurir todas as possibilidades do jogo.
+Em seguida, na Seção \ref{representauxe7uxe3o-e-codificauxe7uxe3o-dos-estados}, é explicado como os estados do jogo foram armazenados para ocupar o menor espaço possível.
+Por último, a Seção \ref{implementauxe7uxe3o-da-programauxe7uxe3o-dinuxe2mica} trata sobre a implementação da programação dinâmica e a verificação e validação do programa.
 
 # Fluxo de Trabalho
 
@@ -588,20 +584,55 @@ Como o jogo possui 55 discos, pode-se estimar que o jogo irá terminar no quinqu
 # Representação e Codificação dos Estados
 
 Para escrever a rotina de programação dinâmica capaz de otimizar o processamento recursivo, foi necessário identificar as variáveis do jogo que representam um **estado**. 
-Um estado do jogo depende dos discos do tabuleiro, dos peões que estão na escada, da mão dos jogadores, e do jogador atual (o jogador que fará a próxima jogada).
+Um estado do jogo, como mostrado na Figura \ref{fig:estadouml}, depende dos discos do tabuleiro, dos peões que estão na escada, da mão dos jogadores, e do jogador atual (o jogador que fará a próxima jogada).
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/estadouml}
+	\caption{Diagrama UML da Classe \emph{State}}
+	\label{fig:estadouml}
+\end{figure}
 
 Devido à enorme quantidade de estados do jogo _Big Points_, se fez necessário armazenar essas informações na menor quantidade de _bits_.
-Para isso foi proposto uma função para codificar, e outra para decodificar, uma _struct_ em uma variável com o objetivo de reduzir o espaço ocupado na memória.
-Após implementar e testar nos limites da capacidade da maior variável disponível (\texttt{unsigned long long int}), percebeu-se um erro quando o cálculo utilizava quatro cores e cinco discos, o que levou a outra solução: a implementação dos estados por _bit fields_.
+Para isso foi proposto uma função para codificar, e outra para decodificar, uma a classe em uma variável, como mostrado no Código \ref{lst:coddecod}, com o objetivo de reduzir o espaço ocupado na memória.
+Após implementar e testar nos limites da capacidade da maior variável disponível (\texttt{unsigned long long int}), percebeu-se um erro quando o cálculo utilizava quatro cores e cinco discos, o que levou a outra solução: a implementação dos estados por _bit fields_, implementado no capítulo seguinte.
+
+\begin{lstlisting}[language=C++, label=lst:coddecod, caption=Função de Codificação e Decodificação]
+// Inicialização da classe
+State state = new State();
+
+// Protótipo das funções
+unsigned long long int codificacao(State);
+State decodificacao(unsigned long long int);
+\end{lstlisting}
 
 # Verificação dos estados
 
-Para garantir a implementação correta da P.D., foram escritos em \textit{post-it}s os estados, e suas transições, do menor jogo possível, como mostrado na Figura \ref{fig:}.
+Para garantir a implementação correta da PD, foram escritos em \textit{post-it}s os estados, e suas transições, do menor jogo possível, como mostrado na Figura \ref{fig:}.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/board_state_tree0}
+	\caption{Resultados ordenado por número de cores}
+	\label{fig:board_state_tree0}
+\end{figure}
 
 
-
-
-
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+    	\includegraphics[width=\textwidth]{figuras/board_state_tree2}
+    	\caption{Conteúdo do jogo \textbf{Big Points}}
+    	\label{fig:content}
+    \end{subfigure}
+	\quad
+    \begin{subfigure}[b]{0.48\textwidth}
+    	\includegraphics[width=\textwidth]{figuras/board_state_tree3}
+    	\caption{Preparação do jogo \textbf{Big Points}}
+    	\label{fig:setup}
+    \end{subfigure}
+    \caption{Organização do jogo \textbf{Big Points}}\label{fig:organization}
+\end{figure}
 
 
 
@@ -623,6 +654,13 @@ Capítulo 3 - Resultados
 -->
 \chapter{Resultados}
 \label{ch:resultados}
+
+Após identificar quais características representam um estado no jogo, e qual a melhor abordagem para escrever o código, foi feito um cálculo para saber quanto de memória foi necessário para armazenar um estado do jogo. Neste capítulo, são relatados os passos necessários para implementar a PD do jogo e seus resultados.
+
+
+# Implementação da Estrutura de Armazenamento
+
+
 
 Dentro da estrutura \texttt{State} foram declaradas duas estruturas anônimas[^anonymous_struct] utilizando _bit fields_. As duas estruturas servem para garantir a utilização correta dos _bits_ quando as variáveis chegarem próximo ao limite da sua capacidade. Essas estruturas possuem variáveis do tipo \texttt{unsigned long long int}, que ocupa  64 _bits_. Após a declaração de um membro da estrutura, é declarado a quantidade de _bits_ que será utilizado para ele, de modo que \texttt{ll \_tabuleiro :20} ocupe apenas 20 _bits_ da variável \texttt{unsigned long long int}, \texttt{ll \_peao :15} ocupe 15 _bits_, e assim por diante de forma que não ultrapsse os 64 _bits_ da variável. Como o comportamento do armazenamento é indeterminado quando a variável é ultrapassada, e para garantir consistência no armazenamento, foram utilizadas duas _structs_ com, tamanho máximo igual uma variável \texttt{unsigned long long int} (64 _bits_).
 
@@ -812,21 +850,21 @@ Em todos as possíveis combinações de tabuleiros iniciais, o primeiro jogador 
 \begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{figuras/ordem_num_cores}
-	\caption{Resultados ordenado por número de cores}
+	\caption{Resultados ordenados por número de cores}
 	\label{fig:bigpoints_cores}
 \end{figure}
 
 \begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{figuras/ordem_num_discos}
-	\caption{Resultados ordenado por número de discos}
+	\caption{Resultados ordenados por número de discos}
 	\label{fig:bigpoints_discos}
 \end{figure}
 
 \begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{figuras/ordem_tamanho}
-	\caption{Resultados ordenado por número total de peças}
+	\caption{Resultados ordenados por número total de peças}
 	\label{fig:bigpoints_total}
 \end{figure}
 

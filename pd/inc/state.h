@@ -25,7 +25,7 @@ struct State
 		// 0..5 discos (3bits) * 5 cores * 2 jogadores
 		ll _jogadores :30;
 		
-		// Jogador 1 ou Jogador 2
+		// Jogador 1 ou Jogador 2 (quem fará a próxima jogada)
 		ll _atual :1;
 	};
 
