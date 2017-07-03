@@ -6,20 +6,23 @@ Capítulo 0 - Introdução
 \label{ch:introducao}
 
 Imagine que um grupo de pessoas concordam em obedecer certas regras e agir de forma individual, ou em grupos menores, sem violar as regras especificadas.
-No final, suas ações como um todo levará a uma certa situação chamada resultado.
-Os membros deste grupo são chamados de jogadores e as regras que eles concordaram em obedecer constitui um jogo.
-Estes conceitos são exemplos das ideias utilizadas em análises baseadas na teoria dos jogos.
+Suas ações como um todo, no final, levarão a uma situação chamada resultado.
+Os membros do grupo são chamados de jogadores e as regras que concordaram em obedecer constitui um jogo.
+Estes conceitos são exemplos de ideias utilizadas em análises baseadas na teoria dos jogos.
 
 \section*{Objetivos}
 
 O objetivo principal deste trabalho é realizar uma análise _minimax_ nas versões reduzidas do jogo _Big Points_.
-O jogo foi reduzido em relação à quantidade e tipo de algumas peças, visto que para o jogo completo seria um trabalho computacional imenso.
+O jogo foi reduzido em relação ao tipo e quantidade de certas peças, pois para analisar o jogo completo exigiria um trabalho computacional imenso.
 
 \section*{Justificativa}
 
-A pergunta que motivou o desenvolvimento deste projeto foi a questão do balanceamento do jogo _Big Points_, isto é, se os jogadores jogarem de forma ótima, a chance de vitória é a mesma para todos os jogadores?
+A pergunta que motivou o desenvolvimento deste projeto foi a questão do balanceamento do jogo _Big Points_.
+Isto é, se os jogadores jogarem de forma ótima, a chance de vitória é a mesma para todos os jogadores?
 Para responder esta pergunta, primeiro foi necessário fazer uma análise de viabilidade do cálculo computacional de todos os jogos.
+
 Após chegar à conclusão que seria impossível calcular um jogo inteiro, foi escrito um programa para percorrer todas as possibilidades de jogadas de um jogo reduzido de _Big Points_ e, por fim, interpretar os resultados para responder se o jogo (reduzido) é ou não balanceado.
+A partir da análise investigativa do balanceamento de um jogo aparentemente simples como o _Big Points_, pode-se fornecer recursos para a construção de programas ou modelos para análise de balanceamento de estruturas mais complexas, aplicáveis também a áreas de Teoria dos Jogos como biologia, política e economia.
 
 \section*{Organização do Trabalho}
 
@@ -165,7 +168,7 @@ A partir da Definição \ref{def:estrategia_pura}, tem-se as estratégias de amb
 
 \begin{table}[htb]
 	\centering
-	\caption{Estratégias pura do jogador $J_1$ para o jogo \emph{Nim}}
+	\caption{Estratégias pura do jogador $J_1$ para o jogo \emph{Nim}. Fonte: \cite{jones_1980}}
 	\label{tab:estrategia_pura_j1}
 
 	\rowcolors{2}{gray!20}{white}
@@ -183,7 +186,7 @@ A partir da Definição \ref{def:estrategia_pura}, tem-se as estratégias de amb
 
 \begin{table}[htb]
 	\centering
-	\caption{Estratégias pura do jogador $J_2$ para o jogo \emph{Nim}}
+	\caption{Estratégias pura do jogador $J_2$ para o jogo \emph{Nim}. Fonte: \cite{jones_1980}}
 	\label{tab:estrategia_pura_j2}
 	\begin{tabular}{ccc}
 		\toprule
@@ -248,7 +251,7 @@ Esses diferentes jogos são representados pela análise da forma normal (Defini�
 
 \begin{table}[htb]
 	\centering
-	\caption{Forma Normal para o jogo \emph{Nim}}
+	\caption{Forma Normal para o jogo \emph{Nim}. Fonte: \cite{jones_1980}}
 	\label{tab:forma_normal}
 	\begin{tabular}{cccccccc}
 		\toprule
@@ -267,15 +270,14 @@ Cada linha é uma estratégia pura de $J_1$ ($\sigma_i, i \in \{1, 2, 3\}$) e, c
 Para transformar esta tabela em uma matriz de _payoff_, basta substituir os nós terminais pelo ganho do jogo.
 Se o primeiro jogador ganhar, seu ganho é $1$, e se o segundo jogador vencer, o resultado para $J_1$ é $-1$.
 
-
 \begin{table}[htb]
 	\centering
-	\caption{Matriz de Ganho para o jogo \emph{Nim}}
+	\caption{Matriz de Ganho para o jogo \emph{Nim}. Fonte: \cite{jones_1980}}
 	\label{tab:matriz_ganho}
 	\begin{tabular}{cccccccc}
 		\toprule
 															&				& \multicolumn{6}{c}{$\mathbf{J_2}$} \\
-															&				& $\tau_1$ 	& $\tau_2$	& $\tau_3$	& $\tau_4$	& $\tau_5$	& $\tau_6$	\\
+															&				& $\tau_1$ 		& $\tau_2$		& $\tau_3$		& $\tau_4$		& $\tau_5$		& $\tau_6$	\\
 		\midrule
 		\rowcolor{gray!20}									& $\sigma_1$	& \texttt{ 1}	& \texttt{ 1}	& \texttt{-1}	& \texttt{ 1}	& \texttt{ 1}	& \texttt{-1} \\
 												   			& $\sigma_2$	& \texttt{-1}	& \texttt{ 1}	& \texttt{-1}	& \texttt{-1}	& \texttt{ 1}	& \texttt{-1} \\
@@ -284,35 +286,42 @@ Se o primeiro jogador ganhar, seu ganho é $1$, e se o segundo jogador vencer, o
 	\end{tabular}
 \end{table}
 
-Dessa forma, pode-se ver na Tabela \ref{tab:matriz_ganho} que a estratégia $\tau_4$ sempre garante a vitória para $J_2$ independente da estratégia do jogador $J_1$.
+Após a representação pela matriz de ganho, é escrito no final de cada coluna, o seu maior valor, que indica o melhor caso para $J_1$.
+Desses melhores casos, o objetivo de $J_2$ é diminuir o ganho de $J_1$.
+De forma similar, é escrito no final de cada linha, o seu menor valor, indicando o pior caso para $J_1$.
+De seus piores casos, o jogador 1 quer maximiziar sua pontuação.
+
+\begin{table}[htb]
+	\centering
+	\caption{Análise \emph{minimax} para o jogo \emph{Nim}}
+	\label{tab:matriz_minimax}
+	\begin{tabular}{ccccccccc}
+		\toprule
+															&				& \multicolumn{6}{c}{$\mathbf{J_2}$}															&					\\
+															&				& $\tau_1$ 		& $\tau_2$		& $\tau_3$		& $\tau_4$		& $\tau_5$		& $\tau_6$		& mínimo das linhas	\\
+		\midrule
+		\rowcolor{gray!20}									& $\sigma_1$	& \texttt{ 1}	& \texttt{ 1}	& \texttt{-1}	& \texttt{ 1}	& \texttt{ 1}	& \texttt{-1}	& \texttt{-1} \\
+												   			& $\sigma_2$	& \texttt{-1}	& \texttt{ 1}	& \texttt{-1}	& \texttt{-1}	& \texttt{ 1}	& \texttt{-1}	& \texttt{-1} \\
+		\rowcolor{gray!20}\multirow{-3}{*}{$\mathbf{J_1}$}	& $\sigma_3$	& \texttt{-1}	& \texttt{-1}	& \texttt{-1}	& \texttt{ 1}	& \texttt{ 1}	& \texttt{ 1}	& \texttt{-1} \\
+		\multicolumn{2}{c}{máximo das colunas}								& \texttt{ 1}	& \texttt{ 1}	& \textbf{\texttt{-1}}	& \texttt{ 1}	& \texttt{ 1}	& \texttt{ 1}	&  \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Para encontrar a solução do jogo, encontre o valor mínimo da linha _máximo das colunas_ (_minimax_) e o valor máximo da coluna _mínimo das linhas_ (_maximin_).
+Tanto o _maximin_ quanto o _minimax_ são valores negativos, o que leva sempre à vitória de $J_2$.
+Dessa forma, pode-se ver na Tabela \ref{tab:matriz_minimax} que a estratégia $\tau_3$ sempre garante a vitória para $J_2$ independente da estratégia do jogador $J_1$.
 
 # Programação dinâmica
 
-<!--
-Dynamic programming typically applies to optimization problems in which we make a set of choices in order to arrive at an optimarl solutions.
-As we make each choice, subproblems of the same form often arise.
-Dynamic programming is effective when a given subproblem may arise from more than one partial set of choices; the key technique is to store the solution to each such subproblem in case it shoudl reapper.
-
-Dynamic programming, like the divide-and-conquer method, solves problems by combining the solution to subproblems. Divide and conquer algorithms partition the the problem into disjoint subproblems, solve the subproblems recursively, and then combine their solutions to solve the original problem. In contrast, dynamic programming applies when the subproblems overlap - that is, when subproblems share subsubproblmes. In this contextm a divide-and-conquer algorithm does more work than necessary, repeatedly solving the common subsubproblems. A dynamic-programming algorithm solves each subsubproblem just once and then saves its answer in a table, thereby avoiding the work of recomputing the answer every time it solves each subsubproblem.
-
-We typically apply dynamic programming to optimization problems.
-Such problems can have many possible solutions.
-Each solution has a value, and we wish to find a solution with the optimal (minimum or maximum) value.
-We call such a solution an optimal solution to the problem, as opposed to the optimal solution. 
--->
-
-
-Programação dinâmica é uma técnica de programação capaz de reduzir significantemente o tempo de processamento de um problema no qual os estados possam se repetir.
-\cite{cormen2001introduction}
-Um exemplo clássico é o programa de para calcular os números da sequência de _Fibonacci_.
-No Código \ref{lst:fib_main}, \ref{lst:fib_ite}, \ref{lst:fib_rec} e \ref{lst:fib_mem} está escrito um programa simples para resolver este problema.
-
-Take a problem, split in subproblems, solve the subproblems and reuse
-
-\fibtree
-
+Programação dinâmica é uma técnica de programação capaz de reduzir significantemente o tempo de processamento de um problema no qual os estados possam se repetir \cite{cormen2001introduction}.
+Um exemplo clássico é o programa de para calcular os números da sequência de _Fibonacci_, onde os dois primeiros elementos valem um ($F_1 = F_2 = 1$) e os próximos elementos são calculados com a soma dos dois anteriores, de forma que $F_3 = F_2 + F_1 = 2$ e assim por diante. 
 Dependo da implementação do problema, o tempo de processamento para chegar no resultado desejado pode crescer exponencialmente.
-Nos Códigos \ref{lst:fib_main}, \ref{lst:fib_ite}, \ref{lst:fib_rec} e \ref{lst:fib_mem}
+
+Nos Códigos \ref{lst:fib_main}, \ref{lst:fib_ite}, \ref{lst:fib_rec} e \ref{lst:fib_mem} é demonstrado a diversas implementações para este problema e, na Figura \ref{fig:fibonacci}, está representado em gráfico o tempo de cálculo do $n$-ésimo termo de _fibonacci_.
+Os valores da sequência de \emph{Fibonacci} foram conferidos no site da enciclopédia online das sequências de números inteiros[^oeis].
+
+[^oeis]: \emph{The Online Encyclopedia of Integers Sequences (OEIS)}, sequência A000045 no link https://oeis.org/A000045/a000045_3.txt
 
 \begin{lstlisting}[language=C++, label=lst:fib_main, caption=Funcao main de Fibonacci]
 #include <iostream>	// std::cout
@@ -330,30 +339,37 @@ int main()
 }
 \end{lstlisting}
 
-\begin{lstlisting}[language=C++, label=lst:fib_ite, caption=Fibonacci Iterativo]
+O Código \ref{lst:fib_main} mostra a função principal do código para chamar a função de fibonacci, calculando o décimo quinto elemento da sequência.
+As diferentes implementações seguem nos código seguintes.
+No Código \ref{lst:fib_ite}, foi implementado a sequência de _Fibonacci_ com o cálculo iterativo.
+Os Códigos \ref{lst:fib_rec} e \ref{lst:fib_mem} utilizam recursão, mas o segundo deles faz uso da memorização dos termos para evitar calculá-los novamente.
+
+\begin{lstlisting}[language=C++, firstnumber=15, label=lst:fib_ite, caption=Fibonacci Iterativo]
 int fibonacci(int n)
 {
 	// Declara e inicia a variável
     int fib_number = 0;
 
-	// A sequência de fibonacci começa em: 1 e 1
-    int a_0 = 1;
+	// Os dois primeiros termos são iguais a 1
     int a_1 = 1;
-    for (int i = 1; n > n; n++) {
+    int a_2 = 1;
+    for (int i = 1; i < n; i++) {
 		// a_n é igual a soma dos dois termos anteriores
-        fib_number = a_0 + a_1;
+        fib_number = a_1 + a_2;
 
 		// Atualiza os termos
-        a_0 = a_1;
-        a_1 = fib_number;
+        a_1 = a_2;
+        a_2 = fib_number;
     }
 
     return fib_number;
 }
 \end{lstlisting}
 
+O Código \ref{lst:fib_ite} calcula a sequência de forma iterativa.
+Tem-se os valores dos dois primeiros termos \texttt{a\_1} e \texttt{a\_2} e, dentro do _loop_, é calculado os próximos termos até o $n$-ésimo termo.
 
-\begin{lstlisting}[language=C++, label=lst:fib_rec, caption=Fibonacci Recursivo]
+\begin{lstlisting}[language=C++, firstnumber=15, label=lst:fib_rec, caption=Fibonacci Recursivo]
 int fibonacci(int n)
 {
 	// Declara e inicia a variável
@@ -373,8 +389,18 @@ int fibonacci(int n)
 }   
 \end{lstlisting}
 
+O cálculo recursivo (Código \ref{lst:fib_rec}) precisa de um caso base, onde a chamada recursiva vai parar de chamar a si mesma e retorna os valores dos dois primeiros termos.
+Caso \texttt{n > 2}, é realizado a soma dos dois termos anteriores para descobrir o número atual (\texttt{n}) da sequência.
+Por fim, o valor é retornado para as funções anteriores que foram chamadas recursivamente até a função \texttt{fibonacci(15)} na função principal.
 
-\begin{lstlisting}[language=C++, label=lst:fib_mem, caption=Fibonacci com Programação Dinâmica]
+\fibtree
+
+Para entender melhor o código escrito utilizando a técnica de programação dinâmica, observe a árvore recursiva na Figura \ref{fig:fib_tree} que calcula $F_n$, com $n = 5$ de forma que $F_{n-4} = F_{n-3} = 1$ são os casos base.
+Nesta árvore, o cálculo de $F_{n-2}$ é realizado duas vezes como mostrado no triângulo com traço contínuo e no triângulo tracejado.
+A ideia da programação dinâmica é memorizar aquele valor para não desperdiçar processamento calculando novamente o seu valor.
+Com a técnica de memorização, o resultado do triângulo tracejado estará armazenado no \texttt{std::map} e seu valor será apenas retornado.
+
+\begin{lstlisting}[language=C++, firstnumber=15, label=lst:fib_mem, caption=Fibonacci com Programação Dinâmica]
 std::map<int,int> memoization;
 
 int fibonacci(int n)
@@ -404,9 +430,10 @@ int fibonacci(int n)
 }
 \end{lstlisting}
 
-Os valores da sequência de \emph{Fibonacci} foram conferidos no site da enciclopédia online das sequências de números inteiros[^oeis].
-
-[^oeis]: \emph{The Online Encyclopedia of Integers Sequences (OEIS)}, sequência A000045 no link https://oeis.org/A000045/a000045_3.txt
+A única diferença entre o Código \ref{lst:fib_mem} para o Código \ref{lst:fib_rec} é o \texttt{std::map} utilizado para armazenar os valores já calculados.
+Dentro da função recursiva, antes dos casos base, é verificado com \texttt{auto it = memoization.find(n);} se aquele termo de _Fibonacci_ já foi calculado.
+Se o valor se encontrar no mapa, apenas retorne-o.
+Caso contrário, calcule _Fibonacci_ de forma recursiva normalmente, mas armaenando seu valor no mapa com \texttt{memoization[n] = fib\_number;} antes de retornar a função.
 
 \begin{figure}[htb]
 	\centering
@@ -416,8 +443,8 @@ Os valores da sequência de \emph{Fibonacci} foram conferidos no site da enciclo
 \end{figure}
 
 Na Figura \ref{fig:fibonacci} fica claro que a implementação recursiva do algoritmo cresce exponencialmente de acordo com o número de cálculos a ser realizado.
-Para tratar desse problema, a técnica de memorização armazena os valores da sequência de \emph{Fibonacci} em um \emph{map} e depois acessa seus valores ao invés de recalcular aquele $n$-ésimo termo.
-Isso faz com que o tempo do cálculo se torne 
+Para tratar desse problema, a técnica de memorização armazena os valores da sequência de \emph{Fibonacci} em um \texttt{map} e depois acessa seus valores ao invés de recalcular aquele $n$-ésimo termo.
+Isso faz com que o tempo do cálculo deixe de ser exponencial e passe a ficar mais parecido com o cálculo utilizando algoritmo iterativo.
 
 \section{\texorpdfstring{\emph{Big Points}}{}}\label{sec:big_points}
 
@@ -470,8 +497,8 @@ A pontuação do jogo é dependente da ordem de chegada dos peões na escada e d
 O primeiro peão que chegou na escada faz com que cada disco de sua cor valha quatro pontos.
 Os jogadores devem então multiplicar a quantidade de discos daquela cor pelo valor da ordem de chegada do peão da sua cor na escada.
 
-Exemplo: um jogador tem um disco da cor vermelha ($n_r$) , zero discos da cor verde ($n_g$), dois azuis ($n_b$), cinco amarelos ($n_y$), quatro roxos ($n_p$), dois brancos ($n_w$) e um preto ($n_k$).
-A ordem de chegada dos peões são, respectivamente, vermelho ($p_r$), verde ($p_g$), azul ($p_b$), amarelo ($p_y$) e roxo ($p_p$).
+Exemplo: um jogador tem três disco da cor vermelha ($n_r$), quatro discos da cor verde ($n_g$), quatro azuis ($n_b$), um amarelo ($n_y$), três roxos ($n_p$), um branco ($n_w$) e um preto ($n_k$).
+A ordem de chegada do primeiro ao último peão são, respectivamente, vermelho ($p_r$), verde ($p_g$), azul ($p_b$), amarelo ($p_y$) e roxo ($p_p$).
 Sua pontuação $S$ será descrita de acordo com a Equação \ref{eq:expontuacao}, onde $n_c$ é o número de cores distintas, com exceção da cor branca.
 
 \begin{equation}
@@ -479,8 +506,8 @@ Sua pontuação $S$ será descrita de acordo com a Equação \ref{eq:expontuacao
 	%\tag{eq. Exemplo de pontuação}
 	\begin{split}
 		S &= n_r \cdot p_r + n_g \cdot p_g + n_b \cdot p_b + n_y \cdot p_y + n_p \cdot p_p + n_w \cdot n_c  \\
-		S &= 1   \cdot 4   + 0   \cdot 3   + 2   \cdot 2   + 5   \cdot 1   + 4   \cdot 0   + 2   \cdot 5 \\
-		S &= 23
+		S &= 3   \cdot 4   + 4   \cdot 3   + 4   \cdot 2   + 1   \cdot 1   + 3   \cdot 0   + 1   \cdot 6 \\
+		S &= 39
 	\end{split}
 \end{equation}
 
@@ -513,7 +540,7 @@ Após o entendimento dos conceitos de Teoria dos Jogos, Programação Dinâmica 
 A primeira seção explica como foram as reuniões com o orientador e a organização das tarefas.
 Na Seção \ref{anuxe1lise-do-jogo}, são feitas as análises da quantidade de jogos distintos e das jogadas para exaurir todas as possibilidades do jogo.
 Em seguida, na Seção \ref{representauxe7uxe3o-e-codificauxe7uxe3o-dos-estados}, é explicado como os estados do jogo foram armazenados para ocupar o menor espaço possível.
-Por último, a Seção \ref{implementauxe7uxe3o-da-programauxe7uxe3o-dinuxe2mica} trata sobre a implementação da programação dinâmica e a verificação e validação do programa.
+Por último, as Seções \ref{representauxe7uxe3o-e-codificauxe7uxe3o-dos-estados} e \ref{verificauxe7uxe3o-dos-estados-e-validauxe7uxe3o-da-programauxe7uxe3o-dinuxe2mica} que tratam, respectivamente, sobre o projeto da programação dinâmica e a verificação e validação do programa.
 
 # Fluxo de Trabalho
 
@@ -588,7 +615,7 @@ Um estado do jogo, como mostrado na Figura \ref{fig:estadouml}, depende dos disc
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/estadouml}
+	\includegraphics[width=\textwidth]{figuras/estadouml}
 	\caption{Diagrama UML da Classe \emph{State}}
 	\label{fig:estadouml}
 \end{figure}
@@ -606,37 +633,33 @@ unsigned long long int codificacao(State);
 State decodificacao(unsigned long long int);
 \end{lstlisting}
 
-# Verificação dos estados
+# Verificação dos Estados e Validação da Programação Dinâmica
 
-Para garantir a implementação correta da PD, foram escritos em \textit{post-it}s os estados, e suas transições, do menor jogo possível, como mostrado na Figura \ref{fig:}.
+Para garantir a implementação correta da PD, foram escritos em \textit{post-it}s os estados e as transições do menor jogo possível, como mostrado nas Figuras \ref{fig:tree0} e \ref{fig:tree3}.
 
 \begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.8\textwidth]{figuras/board_state_tree0}
-	\caption{Resultados ordenado por número de cores}
-	\label{fig:board_state_tree0}
+	\caption{Três primeiros movimentos do menor jogo de \emph{Big Poits}}
+	\label{fig:tree0}
+\end{figure}
+
+A estrutura da árvore foi escrita de maneira semelhante à mostrada na Figura \ref{fig:tree0}.
+O nó raiz é desenhado no topo e, para cada transformação válida no estado do jogo, é desenhado sua aresta até o nó filho, modificando os valores dentro do estado.
+
+Os valores dentro do estado do jogo são: o tabuleiro (em cima e na esquerda), com os números indicando a cor do disco, e as letras indicando a cor dos peões; a escada (em cima, direita), com os números indicando a cor do peão; e a mão dos jogadores, sendo os dois números da esquerda a mão do jogador 1 e os dois números da direita, do jogador 2.
+
+Na mão dos jogadores e na escada, a posição dos números indica qual cor da peça. Sendo que, na mão dos jogadores, o número mais à esquerda representa a quantidade de discos vermelhos e o número à direita, a quantidade de discos verdes. Na escada, os números indicam a ordem de chegada do peão daquela cor, com o número 1 indicando que aquela cor de peão chegou em primeiro e está posicionado no topo da escada.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=\textwidth]{figuras/state_tree}
+	\caption{Estados do menor jogo de \emph{Big Poits} possível em \emph{postits}}
+	\label{fig:tree3}
 \end{figure}
 
 
-\begin{figure}
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-    	\includegraphics[width=\textwidth]{figuras/board_state_tree2}
-    	\caption{Conteúdo do jogo \textbf{Big Points}}
-    	\label{fig:content}
-    \end{subfigure}
-	\quad
-    \begin{subfigure}[b]{0.48\textwidth}
-    	\includegraphics[width=\textwidth]{figuras/board_state_tree3}
-    	\caption{Preparação do jogo \textbf{Big Points}}
-    	\label{fig:setup}
-    \end{subfigure}
-    \caption{Organização do jogo \textbf{Big Points}}\label{fig:organization}
-\end{figure}
-
-
-
-
+Da mesma forma de como foi mostrado na Figura \ref{fig:tree0}, foi escrito todas as possibilidades de estado e transições do jogo em \emph{post-it}s (Figura \ref{fig:tree3}) para verificar os estados calculados e validar a implementação da PD.
 
 
 
