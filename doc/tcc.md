@@ -19,9 +19,6 @@ O jogo foi reduzido em relação ao tipo e quantidade de certas peças, pois par
 
 A pergunta que motivou o desenvolvimento deste projeto foi a questão do balanceamento do jogo _Big Points_.
 Isto é, se os jogadores jogarem de forma ótima, a chance de vitória é a mesma para todos os jogadores?
-Para responder esta pergunta, primeiro foi necessário fazer uma análise de viabilidade do cálculo computacional de todos os jogos.
-
-Após chegar à conclusão que seria impossível calcular um jogo inteiro, foi escrito um programa para percorrer todas as possibilidades de jogadas de um jogo reduzido de _Big Points_ e, por fim, interpretar os resultados para responder se o jogo (reduzido) é ou não balanceado.
 A partir da análise investigativa do balanceamento de um jogo aparentemente simples como o _Big Points_, pode-se fornecer recursos para a construção de programas ou modelos para análise de balanceamento de estruturas mais complexas, aplicáveis também a áreas de Teoria dos Jogos como biologia, política e economia.
 
 \section*{Organização do Trabalho}
@@ -29,7 +26,6 @@ A partir da análise investigativa do balanceamento de um jogo aparentemente sim
 Este trabalho foi dividido em quatro capítulos. O primeiro capítulo, Fundamentação Teórica, relata um pouco sobre a história da teoria dos jogos, esclarece alguns conceitos relevantes para o entendimento do trabalho, e explica as regras do próprio jogo.
 Em seguida, tem-se o Capítulo \ref{ch:metodologia}, referente à análise e ao desenvolvimento do projeto até sua conclusão, e no Capítulo \ref{ch:resultados} os resultados desta análise são discutidos.
 Por último, o Capítulo \ref{ch:conclusao} onde são feitas as considerações finais do trabalho e são citados alguns possíveis trabalhos futuros a partir do trabalho atual.
-
 
 
 
@@ -99,16 +95,28 @@ Nestre trabalho serão utilizados alguns conceitos da Teoria Econômica dos Jogo
 
 \begin{mydef}
 \label{def:movimentossimultaneos}
-Em jogos com \textbf{movimentos simultâneos}, os jogadores devem escolher o que fazer ao mesmo tempo ou, o que leva à mesma situação, as escolhas de cada jogador é escondida de seu oponente. Em qualquer um dos dois casos, o jogador deve escolher sua jogada levando em consideração a possível jogada do outro \cite{aguidetogametheory_2005}.
+Em jogos com \textbf{movimentos simultâneos}, os jogadores devem escolher o que fazer ao mesmo tempo ou, o que leva à mesma situação, as escolhas de cada jogador são escondida de seu oponente. Em qualquer um dos dois casos, o jogador deve escolher sua jogada levando em consideração a possível jogada do adversário \cite{aguidetogametheory_2005}.
 \end{mydef}
 
 Os elementos básicos de um jogo são: o conjunto de jogadores; o conjunto de estratégias para cada jogador; uma situação, ou perfil, para cada combinação de estratégias dos jogadores; e uma função utilidade para atribuir um _payoff_, ou ganho, para os jogadores no final do jogo.
-Os **jogadores** são dois ou mais seres racionais que possuem um mesmo objetivo e, para alcançar esse objetivo, cada jogador possui um conjunto de **estratégias**.
+Os **jogadores** $J$ são dois ou mais seres racionais que possuem um mesmo objetivo e, para alcançar esse objetivo, cada jogador possui um conjunto $S$ de **estratégias**.
 A partir das escolhas de estratégias de cada jogador, tem-se uma **situação** ou **perfil** e, no final do jogo, um **resultado** para cada perfil \cite{sartini_IIbienaldasbm}.
 Em outras palavras, os jogadores escolhem seus movimentos simultaneamente, como explicado na Definição \ref{def:movimentossimultaneos}, o que levará a vitória de algum deles no final do jogo, ou a um empate.
 
-Em termos matemáticos é dito que um jogador tem uma **função utilidade**, que atribui um **_payoff_**, ou **ganho**, para cada situação do jogo.
-Quando essa informação é inserida em uma matriz, tem-se uma **matriz de _payoff_** \cite{sartini_IIbienaldasbm}.
+Em termos matemáticos é dito que um jogo $\Gamma$ é composto por um conjunto $J$ de jogadores, que por sua vez possuem um conjunto de estratégia $S$. Além disso, cada jogador tem uma **função utilidade** $P_i$, que atribui um **_payoff_**, ou **ganho**, para cada situação do jogo, como mostra a Equação \ref{eq:definicao}.
+
+\begin{equation}
+	\label{eq:definicao}
+	\begin{split}
+    \texttt{Game} &=\ <J,S,P> \\
+  J\ &=\ \{j_1, j_2\}\\
+  S_{i}\ &=\ \{s_{i1},s_{i2},...,s_{ij}\},\\
+  \forall j_i\!\in\!J&,\ \exists\ s_{ij}\!\in\!S_i\\
+  P_i &: S_{i}\rightarrow\mathbb{R}
+	\end{split}
+\end{equation}
+
+Quando essa informação do ganho é inserida em uma matriz, tem-se uma **matriz de _payoff_** \cite{sartini_IIbienaldasbm}.
 Em outras palavras, a matriz de ganho é a representação matricial dos _payoffs_ dos jogadores, onde as estratégia de um jogador estão representadas por cada linha e as de seu oponente estão representadas pelas colunas.
 
 Para um melhor entendimento destes conceitos, será utilizado uma versão curta do jogo \emph{Nim}.
@@ -128,9 +136,9 @@ De acordo com esta definição, a árvore do jogo \emph{Nim} simplificado é rep
 
 A ordem dos jogadores está sendo indicada ao lado esquerdo da figura, de forma que o jogador $J_1$ é o primeiro a realizar um movimento, o $J_2$ é o segundo, o terceiro movimento é do $J_1$ e assim por diante.
 O estado do jogo é representado por cada nó da árvore, sendo que os quatro palitos estão divididos em dois montes dentro do retângulo.
-Cada aresta representa uma jogada válida para o jogador que vai realizar o moviment (jogador atual).
+Cada aresta representa uma jogada válida para o jogador que vai realizar o movimento (jogador atual).
 Ao analisar a primeira jogada, percebe-se que $J_1$ possui quatro jogadas possíveis: retirar um palito do primeiro monte; retirar dois palitos do primeiro monte; retirar um palito do segundo monte; e retirar dois palitos do segundo monte.
-As últimas jogadas foram omitidas da árvore do jogo por serem simétricas às outras duas primeiras.
+Por serem simétricas às duas primeiras, as últimas duas jogadas foram omitidas da árvore do jogo 
 Na aresta $(A,B)$[^aresta], o primeiro jogador pega apenas um palito de um dos montes de palito, enquanto a aresta $(A,C)$ representa o movimento de pegar todos os dois palitos de um monte.
 Da mesma maneira, as arestas $(B,D)$, $(B,E)$, $(B,F)$, $(C,G)$ e $(C,H)$ são os movimentos de $J_2$ em resposta às jogadas de $J_1$.
 
@@ -159,7 +167,7 @@ Para entender melhor o por quê do jogador $J_2$ sempre ganhar, será utilizado 
 \end{mydef}
 
 As estratégias pura do jogador $J_1$ são nomeadas $\sigma_i$ com $i \in \{1,\ldots,a\}$ e as do jogador $J_2$ são representadas por $\tau_j$ com $j \in \{1,\ldots,b\}$, onde $a$ e $b$ são a quantidade de estratégias pura de $J_1$ e $J_2$, respectivamente.
-A estratégia pura também pode ser vista como um caminho[^path] único na árvore, que tem origem no primeiro nó de decisão do jogador e termina em uma folha.
+A estratégia pura também pode ser vista como um caminho[^path] único na árvore, que tem origem no primeiro nó de decisão do jogador e vai até o último nó de decisão do mesmo jogador.
 No caso do jogador $J_1$, o caminho começa na raíz, e no caso do jogador $J_2$, o caminho pode começar em $B$ ou em $C$.
 Devido à isso, $J_2$ deve considerar os dois casos e decidir de antemão o que fazer.
 A partir da Definição \ref{def:estrategia_pura}, tem-se as estratégias de ambos os jogadores nas Tabelas \ref{tab:estrategia_pura_j1} e \ref{tab:estrategia_pura_j2}.
@@ -168,7 +176,7 @@ A partir da Definição \ref{def:estrategia_pura}, tem-se as estratégias de amb
 
 \begin{table}[htb]
 	\centering
-	\caption{Estratégias pura do jogador $J_1$ para o jogo \emph{Nim}. Fonte: \cite{jones_1980}}
+	\caption{Estratégias puras $\sigma_i$ de $J_1$ para o jogo \emph{Nim}. Fonte: \cite{jones_1980}}
 	\label{tab:estrategia_pura_j1}
 
 	\rowcolors{2}{gray!20}{white}
@@ -186,7 +194,7 @@ A partir da Definição \ref{def:estrategia_pura}, tem-se as estratégias de amb
 
 \begin{table}[htb]
 	\centering
-	\caption{Estratégias pura do jogador $J_2$ para o jogo \emph{Nim}. Fonte: \cite{jones_1980}}
+	\caption{Estratégias puras $\tau_j$ de $J_2$ para o jogo \emph{Nim}. Fonte: \cite{jones_1980}}
 	\label{tab:estrategia_pura_j2}
 	\begin{tabular}{ccc}
 		\toprule
@@ -311,6 +319,7 @@ De seus piores casos, o jogador 1 quer maximiziar sua pontuação.
 Para encontrar a solução do jogo, encontre o valor mínimo da linha _máximo das colunas_ (_minimax_) e o valor máximo da coluna _mínimo das linhas_ (_maximin_).
 Tanto o _maximin_ quanto o _minimax_ são valores negativos, o que leva sempre à vitória de $J_2$.
 Dessa forma, pode-se ver na Tabela \ref{tab:matriz_minimax} que a estratégia $\tau_3$ sempre garante a vitória para $J_2$ independente da estratégia do jogador $J_1$.
+Isso torna o jogo desbalanceado, pois para um jogo ser balanceado não deve ter uma estratégia dominante, que em outras palavras quer dizer que não deve haver uma estratégia que um jogador sempre ganha.
 
 # Programação dinâmica
 
@@ -449,12 +458,16 @@ Isso faz com que o tempo do cálculo deixe de ser exponencial e passe a ficar ma
 \section{\texorpdfstring{\emph{Big Points}}{}}\label{sec:big_points}
 
 _Big Points_ é um jogo abstrato e estratégico com uma mecânica de colecionar peças que pode ser jogado de dois a cinco jogadores.
+Foi criado no ano de 2008 e seus criados são um casal alemão chamado Brigitte Ditt e Wolfgang Ditt[^big_points_criadores].
+
+[^big_points_criadores]: https://boardgamegeek.com/boardgame/34004/big-points
+
 São cinco peões de cores distintas, que podem ser usadas por qualquer jogador, para percorrer um caminho de discos coloridos até chegar à escada.
 Durante o percurso, os jogadores coletam alguns destes discos e sua pontuação final é determinada a partir da ordem de chegada dos peões ao pódio e a quantidade de discos adquiridos daquela cor.
 Ganha o jogador com a maior pontuação.
 
-O jogo é composto por cinco peões, como demonstrado na Figura, um de cada uma das seguintes cores, denominadas **cores comuns**: vermelha, verde, azul, amarela e roxo.
-Para cada cor de peão, tem-se dez discos, como mostrado na Figura \ref{fig:content}, (totalizando cinquenta discos) denominados **discos comuns**, e cinco discos das cores branca e preta (totalizando dez discos) denominados **discos especiais**.
+Como mostrado na Figura \ref{fig:content}, o jogo é composto por cinco peões, um de cada uma das seguintes cores, denominadas **cores comuns**: vermelha, verde, azul, amarela e roxo.
+Para cada cor de peão, tem-se dez discos (totalizando cinquenta discos) denominados **discos comuns**, e cinco discos das cores branca e preta (totalizando dez discos) denominados **discos especiais**.
 
 \begin{figure}[htb]
     \centering
@@ -463,9 +476,8 @@ Para cada cor de peão, tem-se dez discos, como mostrado na Figura \ref{fig:cont
    	\label{fig:content}
 \end{figure}
 
-Por fim, há um pódio (ou escada) com um lugar para cada peão.
+Por fim, há uma escada com um lugar para cada peão.
 A escada determinará a pontuação equivalente a cada disco da cor do peão, de maneira que o peão que ocupar o espaço mais alto no pódio (o primeiro a subir) fará sua cor valer quatro pontos, o segundo peão, três pontos e assim por diante, até o último valer zero ponto.
-No caso de um jogo com menos de cinco peões, a seguinte fórmula se aplica: $S = N_{c}-P_{pos}$, onde $S$ é a pontuação daquela determinada cor, $N_{c}$ é o número de discos comuns e $P_{pos}$ é a posição do peão no pódio.
 
 \begin{figure}[htb]
     \centering
@@ -548,9 +560,18 @@ O _framework_ _Scrum_ é ideal para o desenvolvimento de projetos complexos no q
 Inicialmente, tal método de organização e gerenciamento do projeto foi aplicado para o desenvolvimento do sistema em questão.
 O _kanban_ do \href{https://waffle.io/mfurquim/tcc}{\emph{waffle.io}}[^waffleio] foi utilizado para registrar tarefas devido à sua integração com as _issues_ do \emph{GitHub}[^github].
 Reuniões com o orientador foram realizadas para discutir aspectos técnicos do jogo, como as estruturas de dados a serem utilizadas para reduzir os dados armazenados, e alguns métodos importantes para agilizar o processamento.
+O tempo trabalhado no projeto foi rastreado utilizando o programa wakatime[^wakatime], chegando a quase 140 horas em 17 semanas, como mostrado na Figura \ref{fig:wakatime}.
 
 [^waffleio]:https://waffle.io/mfurquim/tcc
 [^github]:https://github.com/mfurquim/tcc
+[^wakatime]: https://wakatime.com/project/tcc
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=\textwidth]{figuras/wakatime}
+	\caption{Tempo Rastreado com \emph{Wakatime}}
+	\label{fig:wakatime}
+\end{figure}
 
 Porém, ao longo do tempo, o esforço para manter a rastreabilidade das tarefas tornou-se muito alto em relação à complexidade do projeto, e ao tamanho da equipe.
 As tarefas passaram a ser _branches_ locais com nomes significativos, representando a funcionalidade a ser desenvolvida.
@@ -572,10 +593,12 @@ Esse procedimento foi repetido para _cada_ combinação possível do tabuleiro i
 
 ## Quantidade de partidas
 
-Para estudar a viabilidade de solucionar o jogo, foi preciso calcular a quantidade de partidas distintas do jogo \emph{Big Points}.
+Para estudar a viabilidade de solucionar[^jogo_solucao] o jogo, foi preciso calcular a quantidade de partidas distintas do jogo \emph{Big Points}.
 A característica do jogo que muda de uma partida para outra são a quantidade de jogadores e o arranjo dos discos formando o tabuleiro.
 Para a quantidade $P$ de jogadores, tem-se $J \in [2,5]$.
 Agora, para a organização dos discos, faz-se uma combinação de cada cor, com a quantidade restante de discos.
+
+[^jogo_solucao]: Solucionar um jogo é percorrer todas as sua possibilidades de movimento e seus resultados.
 
 \begin{equation}
 	\label{eq:partidas}
@@ -599,14 +622,14 @@ As outras variáveis restantes após as combinações são: $d_{l1} = d_t - d_w$
 O próximo passo é exaurir todas as possibilidades de jogadas.
 Porém, o trabalho computacional é imenso e cresce exponencialmente de acordo com o tamanho do jogo.
 Para um jogo pequeno, com apenas dois discos e duas cores comuns (sem especiais), as jogadas possíveis são: mover o peão vermelho e pegar o disco da direita, ou da esquerda; e mover o peão verde e pegar o disco da direita ou da esquerda.
-Um jogo deste tamanho termina, em média, no quarto turno, como será mostrado na Sub-Seção \ref{verificauxe7uxe3o-dos-estados}.
-Isso gera uma árvore onde cada nó possui quatro filhos (jogadas possíveis) e altura média de quatro (número de turnos), totalizando uma quantidade de estados de aproximadamente $\sum_{h=0}^{4}f^{h} \approx 341$, com $f = 4$.
+Um jogo deste tamanho termina, em média, no quarto turno, como será mostrado na Seção \ref{verificauxe7uxe3o-dos-estados-e-validauxe7uxe3o-da-programauxe7uxe3o-dinuxe2mica}.
+Isso gera uma árvore onde cada nó possui um número médio $f$ de quatro filhos (jogadas possíveis) e uma altura média $h$ de quatro (número de turnos), totalizando uma quantidade de estados de aproximadamente $\sum_{h=0}^{4}f^{h} \approx 341$, com $f = 4$ e $h = 4$.
 
 Seguindo esta linha de raciocínio, um jogo completo (com 55 discos e todas as cores disponíeveis) teriam as possibilidades de jogada: mover os peões vermelho, verde, azul, amarelo, ou roxo; pegar o disco da direita ou da esquerda; e utiliziar, ou não, o disco preto para jogar novamente.
 Com $5$ peões, $2$ opções para pegar os discos (esquerda ou direita) e a opção de usar ou não a peça preta, totaliza $5 \cdot 2 \cdot 2 = 20$ possibilidades de jogada.
 Como o jogo possui 55 discos, pode-se estimar que o jogo irá terminar no quinquagésimo quinto turno, totalizando $\sum_{h=0}^{55} f^{h} \approx 3 \times 10^{71}$ estados possíveis[^num_jogadas].
  
-[^num_jogadas]: $\sum_{h=0}^{55} f^{h} \approx 379250494936462821052631578947368421052631578947368421052631578947368421$.
+[^num_jogadas]: $\sum_{h=0}^{55} f^{h} \approx 379.250.494.936.462.821.052.631.578.947.368.421.052.631.578.947.368.421.052.631.578.947.368.421$.
 
 # Representação e Codificação dos Estados
 
@@ -616,12 +639,12 @@ Um estado do jogo, como mostrado na Figura \ref{fig:estadouml}, depende dos disc
 \begin{figure}[htb]
 	\centering
 	\includegraphics[width=\textwidth]{figuras/estadouml}
-	\caption{Diagrama UML da Classe \emph{State}}
+	\caption{Diagrama UML da Classe \texttt{State}}
 	\label{fig:estadouml}
 \end{figure}
 
 Devido à enorme quantidade de estados do jogo _Big Points_, se fez necessário armazenar essas informações na menor quantidade de _bits_.
-Para isso foi proposto uma função para codificar, e outra para decodificar, uma a classe em uma variável, como mostrado no Código \ref{lst:coddecod}, com o objetivo de reduzir o espaço ocupado na memória.
+Para isso foi proposto uma função para codificar, e outra para decodificar, cada estado em uma variável, como mostrado no Código \ref{lst:coddecod}, com o objetivo de reduzir o espaço ocupado na memória.
 Após implementar e testar nos limites da capacidade da maior variável disponível (\texttt{unsigned long long int}), percebeu-se um erro quando o cálculo utilizava quatro cores e cinco discos, o que levou a outra solução: a implementação dos estados por _bit fields_, implementado no capítulo seguinte.
 
 \begin{lstlisting}[language=C++, label=lst:coddecod, caption=Função de Codificação e Decodificação]
@@ -658,8 +681,9 @@ Na mão dos jogadores e na escada, a posição dos números indica qual cor da p
 	\label{fig:tree3}
 \end{figure}
 
-
 Da mesma forma de como foi mostrado na Figura \ref{fig:tree0}, foi escrito todas as possibilidades de estado e transições do jogo em \emph{post-it}s (Figura \ref{fig:tree3}) para verificar os estados calculados e validar a implementação da PD.
+Os movimentos inválidos foram representados com um \texttt{X} e um rótulo para indicar qual o problema daquela jogada.
+Estes rótulos foram úteis para a implementação da programação dinâmica para impedir que o processamento continue por este caminho inválido.
 
 
 
@@ -678,68 +702,26 @@ Capítulo 3 - Resultados
 \chapter{Resultados}
 \label{ch:resultados}
 
-Após identificar quais características representam um estado no jogo, e qual a melhor abordagem para escrever o código, foi feito um cálculo para saber quanto de memória foi necessário para armazenar um estado do jogo. Neste capítulo, são relatados os passos necessários para implementar a PD do jogo e seus resultados.
+Após identificar quais características representam um estado no jogo, e a melhor abordagem para escrever o código, foi feito um cálculo para saber quanto de memória foi necessário para armazenar um estado do jogo.
+Neste capítulo, são relatados os passos necessários para realizar este cálculo, implementar o código do jogo utilizando a técnica de memorização da programação dinâmica, e os resultados do processamento deste programa.
 
+# Estrutura de Armazenamento
 
-# Implementação da Estrutura de Armazenamento
-
-
-
-Dentro da estrutura \texttt{State} foram declaradas duas estruturas anônimas[^anonymous_struct] utilizando _bit fields_. As duas estruturas servem para garantir a utilização correta dos _bits_ quando as variáveis chegarem próximo ao limite da sua capacidade. Essas estruturas possuem variáveis do tipo \texttt{unsigned long long int}, que ocupa  64 _bits_. Após a declaração de um membro da estrutura, é declarado a quantidade de _bits_ que será utilizado para ele, de modo que \texttt{ll \_tabuleiro :20} ocupe apenas 20 _bits_ da variável \texttt{unsigned long long int}, \texttt{ll \_peao :15} ocupe 15 _bits_, e assim por diante de forma que não ultrapsse os 64 _bits_ da variável. Como o comportamento do armazenamento é indeterminado quando a variável é ultrapassada, e para garantir consistência no armazenamento, foram utilizadas duas _structs_ com, tamanho máximo igual uma variável \texttt{unsigned long long int} (64 _bits_).
-
-[^anonymous_struct]: Estruturas anônimas permitem acesso às suas variáveis de forma direta, como por exemplo: \texttt{state.\_tabuleiro} acessa a variável \texttt{\_tabuleiro} dentro da estrutura anônima, que por sua vez se encontra dentro da estrutura \texttt{State}.
-
+Foi decidido implementar a estrutura de armazenamento como uma \texttt{struct} ao invés de uma classe, devido à rapidez do acesso aos atributos e ao espaço reduzido ocupado na memória.
 A estrutura \texttt{State} possui cinco membros:
-\texttt{\_tabuleiro}, no qual pode armazenar informações sobre um tabuleiro até 20 discos[^tabuleiro];
-\texttt{\_peao}, que representa a posição do peão $p_i \in \{0, 1,...,n_d, n_d+1\}$, onde $n_d$ é o número de discos de cores comuns no jogo e $p_i$ é o peão da cor $i$[^cor_peao];
-\texttt{\_escada}, que indica as posições dos peões na escada, sendo a $p_i$_-ésima_ posição de \texttt{\_escada} é a posição do peao $p_i$;
-\texttt{\_jogadores}, possui informações sobre os discos coletados dos dois jogadores;
-e por fim, a variável \texttt{\_atual} que representa o jogador que fará a jogada.
-Esta estrutura está apresentada no Código \ref{lst:estrutura_state}.
+\texttt{\_tabuleiro}, no qual pode armazenar informações sobre um tabuleiro de até 20 discos[^tabuleiro];
+\texttt{\_peao}, que representa a posição do peão $p_i \in \{0, 1,...,n_d, n_d+1\}$, onde $n_d$ é o número de discos de cores comuns[^cor_peao] no jogo e $p_i$ é o peão da cor $i$;
+\texttt{\_escada}, que indica as posições dos peões na escada, sendo a $i$_-ésima_ posição da \texttt{\_escada} é a posição do peao $p_i$;
+\texttt{\_jogadores}, que possui informações sobre os discos coletados dos dois jogadores;
+e, por fim, a variável \texttt{\_atual} que representa o jogador que fará a próxima jogada.
+Com isso em mente, foi realizado um cálculo para descobrir quantos \emph{bits} serão necessários para armazenar cada uma destas informações.
 
-[^tabuleiro]: Cinco cores e quatro discos.
+[^tabuleiro]: Em um jogo reduzido de cinco cores de discos e quatro discos de cada cor, totaliza vinte discos no tabuleiro.
 [^cor_peao]: As cores de peão seguem a ordem RGBYP começando do $0$, onde $\textbf{R}ed = 0$, $\textbf{G}reen = 1$, $\textbf{B}lue = 2$, $\textbf{Y}ellow = 3$, e $\textbf{P}urple = 4$.
 
-# Projeto da Programação Dinâmica
+## Cálculo dos Membros da Estrutura \texttt{State}
 
-Programação dinâmica é um método para a construção de algoritmos no qual há uma memorização de cada estado distinto para evitar recálculo, caso este estado apareça novamente. A memorização dos estados do jogo _Big Points_ foi feita em uma _hash_, com a chave sendo o estado do jogo e o valor armazenado, a pontuação máxima dos dois jogadores a partir daquele nó.
-
-a melhor jogada para ganhar maximizar seus pontos. Caso não Na vez de cada
-Caso a quantidade de jogos vencidos pelo primeiro jogador seja aproximadamente $50\%$
-
-Para analizar o jogo, é preciso exaurir todas as jogadas possíveis a partir de um jogo inicial. Como
-
-utilizando programação dinâmica[^dynamic_programing]
-onde os estados são armazenados em uma _hash_, tem-se que o número de estados distintos varia entre 17 e 25.
-
-Devido ao imenso número de jogadas possíveis ao longo do do jogo, decidiu-se utilizar a programação dinâmica para
-- Duas funções para melhor entendimento da DP e regras do jogo
-
-A função \texttt{dp} possui os casos base para retornar a função,
-
-\lstinputlisting[language=C++, firstnumber=129, linerange={129-156}, caption=Programação Dinâmica]{../../pd/src/dp.cpp}
-
-
-A função \texttt{play} foi implementada com o objetivo de separar a lógica do jogo da lógica da programação dinâmica.
-
-\lstinputlisting[language=C++, firstnumber=13, linerange={13-127}, caption=Função Play]{../../pd/src/dp.cpp}
-
-- Explicação da DP e da função Play (função para realizar as jogadas)
-
-# Implementação do Minimax
-
-\lstinputlisting[language=C++, firstnumber=158, linerange={158-228}, caption=Implementação do \emph{Minimax}]{../../pd/src/dp.cpp}
-_long long int_, de forma que cada estado ocupasse apenas 64 _bits_ na memória.
-
-Na figura \ref{fig:diagram_struct}
-
-\diagramstruct
-
-\lstinputlisting[language=C++, label=lst:estrutura_state, firstnumber=10, linerange={10-31}, caption=Definição da estrutura \texttt{State}]{../../pd/inc/state.h}
-
-O cálculo para determinar os _bits_ necessários para armazenar as informações de cada variável foi realizado será explicado a seguir.
-
-O cálculo de bits do atributo \texttt{tabuleiro} é apresentado na equação \ref{eq:bitstabuleiro}.
+Para os cálculos de um jogo reduzido de _Big Points_ implementado neste trabalho, foram utilizados as seguintes variáveis e seus limites: $n_c$, para a quantidade de cores, com $n_c \in [2,5]$; $n_p$, para a quantidade de peões, com $n_c = n_p$; $n_d$, para a quantidade de discos, com $n_d \in [2,4]$; e $d_t$, para a quantiade máxima de peões, com $d_t \in [4,20]$.
 
 \begin{equation}
 	\label{eq:bitstabuleiro}
@@ -751,25 +733,26 @@ O cálculo de bits do atributo \texttt{tabuleiro} é apresentado na equação \r
 	\end{split}
 \end{equation}
 
-Na Equação \ref{eq:bitstabuleiro}, $n_c$ e $n_d$ são o número de cores e o número de discos do jogo, respectivamente. Seus valores são no máximo $n_c = 5$ e $n_d = 4$.
-
-O cálculo de bits do atributo \texttt{peao} é apresentado na equação \ref{eq:bitspeao}.
+Sabendo de antemão a ordem dos discos do tabuleiro, a única informação que é necessário guardar a respeito do tabuleiro é a disponibilidade do disco, ou seja, se os discos foram ou não pegos pelos jogadores.
+Desta forma, é preciso apenas um bit por disco no tabuleiro.
+A Equação \ref{eq:bitstabuleiro} demonstra que só se faz necessário $20$ _bits_ para armazenar se um determinado disco está ou não disponível.
 
 \begin{equation}
 	\label{eq:bitspeao}
 	%\tag{eq. \emph{bits} de \_peao}
 	\begin{split}
-		\texttt{\_peao} &= \lceil \log_2(n_d+1) \rceil \cdot n_p\\
-		\texttt{\_peao} &= \lceil \log_2(5 + 1)\rceil \cdot 4\\
-		\texttt{\_peao} &= 3 \cdot 4\\
+		\texttt{\_peao} &= \lceil \log_2(n_d+1) \rceil \cdot n_c\\
+		\texttt{\_peao} &= \lceil \log_2(4 + 1)\rceil \cdot 5\\
+		\texttt{\_peao} &= 3 \cdot 5\\
 		\texttt{\_peao} &= 15\ \emph{bits}
 	\end{split}
 \end{equation}
 
-Na Equação \ref{eq:bitspeao}, o valor de $n_d$ é o número de discos e $n_p$ é o número de peões do jogo, que por sua vez é igual a $n_c$ (número de cores comuns). Cada peão pode estar: fora do tabuleiro, com $peao(p_i) = 0$; em cima de um disco da sua cor, com $peao(p_i) \in \{1, 2,..., n_d\}$ ; e na escada, com $peao(p_i) = n_d+1$.
-
-O cálculo de bits do atributo \texttt{escada} é apresentado na equação \ref{eq:bitsescada}.
-
+A Equação \ref{eq:bitspeao} trata dos peões, o qual é necessário saber apenas em qual posição eles se encontram.
+Novamente com o conhecimento da configuração inicial do tabuleiro, é preciso saber apenas em qual disco de sua cor o peão se encontra, ao invés de saber a posição em relação a todos os discos do tabuleiro.
+A posição em relação aos discos totais no tabuleiro está no intervalo $[1,d_t]$ e a posição em relação aos discos de uma só cor está no intervalo $[1,n_c]$.
+Cada peão pode estar: fora do tabuleiro, com $\texttt{peao}(p_i) = 0$; em cima de um disco da sua cor, com $\texttt{peao}(p_i) \in \{1, 2,..., n_d\}$; e na escada, com $\texttt{peao}(p_i) = n_d+1$.
+Dessa forma, é preciso apenas $\log_2(1 + n_d + 1) = 3$ _bits_ para cada peão.
 
 \begin{equation}
 	\label{eq:bitsescada}
@@ -781,14 +764,14 @@ O cálculo de bits do atributo \texttt{escada} é apresentado na equação \ref{
 	\end{split}
 \end{equation}
 
-A Equação \ref{eq:bitsescada} possui as variáveis $n_p$ e $n_c$ com $n_p, n_c \in \{2, 3, 4, 5\}$ e $n_p = n_c$. Cada peão tem um local na escada, que armazena a posição dele de forma que $0 \leqslant escada(p_i) \leqslant n_c$. As situações possíveis são: $escada(p_i) = 0$ quando o peão não estiver na escada; e $escada(p_i) \in \{1, 2, 3, 4, 5\}$ sendo a ordem de chegada do peão na escada[^chegada_escada].
+O cálculo de quantos _bits_ a escada vai ocupar (Equação \ref{eq:bitsescada}) é similar ao dos peões, mas ao invés de armazenar a quantidade dos discos de uma cor, a escada armazena a ordem de chegada de cada peão.
+Cada peão tem um local na escada, que armazena a sua posição de forma que $0 \leqslant \texttt{escada}(p_i) \leqslant n_c$.
+As situações possíveis são: $\texttt{escada}(p_i) = 0$, quando o peão não estiver na escada; e $\texttt{escada}(p_i) \in [1,n_c]$, sendo $\texttt{escada}(p_i)$ a ordem de chegada do peão na escada[^chegada_escada] indicando se foi o primeiro, segundo, terceiro, quarto ou quinto, com $n_c = 5$.
 
-[^chegada_escada]: O primeiro peão $p_i$ a chegar na escada é indicado com $escada(p_i) = 1$.
-
-O cálculo de bits do atributo \texttt{jogadores} é apresentado na equação \ref{eq:bitsjogadores}.
-
+[^chegada_escada]: O primeiro peão $p_i$ a chegar na escada é indicado com $\texttt{escada}(p_i) = 1$.
 
 \begin{equation}
+	\label{eq:bitsjogadores}
 	%\tag{eq. \emph{bits} de \_jogadores}
 	\begin{split}
 		\texttt{\_jogadores} &= \lceil \log_2(n_d+1) \rceil \cdot n_c \cdot n_j\\
@@ -796,12 +779,13 @@ O cálculo de bits do atributo \texttt{jogadores} é apresentado na equação \r
 		\texttt{\_jogadores} &= 3 \cdot 5 \cdot 2\\
 		\texttt{\_jogadores} &= 30\ \emph{bits}
 	\end{split}
-	\label{eq:bitsjogadores}
 \end{equation}
 
-A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demonstrado na equação \ref{eq:bitjogadores}. As variáveis utilizadas nessa equação são: $n_d$, o número de discos $n_d \in \{1, 2, 3, 4, 5\}$; $n_c$, o número de cores $n_c \in \{1, 2, 3, 4, 5\}$; e $n_j$, o número de jogadores $n_j = 2$. A informação armazenada na mão dos jogadores, para cada disco, vai até o número máximo de discos mais um, pois o jogador pode pegar todos os discos no tabuleiro e o disco adquirido ao mover o peão para a escada. Para armazenar o número seis, são necessários $\lceil \log_2(6) \rceil = 3 \emph{bits}$
-
-O cálculo de bits do atributo \texttt{atual} é apresentado na equação \ref{eq:bitsatual}.
+O atributo \texttt{jogadores}, que corresponde aos discos na mão dos jogadores, é o que ocupa mais espaço na \texttt{struct}.
+A capacidade da variável \texttt{\_jogadores} é de 30 \emph{bits}, como demonstrado na Equação \ref{eq:bitsjogadores}.
+A informação armazenada na mão dos jogadores, para cada disco, vai até o número máximo de discos mais um ($\texttt{\_jogadores} \in [0,n_d+1]$), pois o jogador pode pegar todos os discos no tabuleiro além do disco adquirido ao mover o peão para a escada.
+Para armazenar a quantidade $5$ de discos de uma determinada cor na mão de um jogador, são necessários $\lceil \log_2(5) \rceil = 3$ _bits_, que seria \texttt{$101_2$} em binário.
+Como são cinco cores e dois jogadores, faz-se necessário $30$ _bits_ para armazenar as informações deste atributo.
 
 \begin{equation}
 	\label{eq:bitsatual}
@@ -812,42 +796,159 @@ O cálculo de bits do atributo \texttt{atual} é apresentado na equação \ref{e
 	\end{split}
 \end{equation}
 
-# Funções de acesso da estrutura \texttt{State}
+O cálculo mais simples é do atributo \texttt{atual}, apresentado na equação \ref{eq:bitsatual}, que precisa indicar apenas se o próximo jogador a realizar o movimento é o $J_1$ ou o $J_2$.
 
-A estrutura possui um construtor que atribui valores às variáveis através de RAII[^RAII], dessa forma não se faz necessário nenhuma extra implementação. Todas as variáveis possuem um valor padrão, verdadeiro para qualquer tamanho de tabuleiro $t_i$, onde $4 \leqslant t_i \leqslant 20$.
+Somando os _bits_ de todos os membros da \texttt{struct State}, tem-se a Equação \ref{eq:bitsstructstate}.
 
-\lstinputlisting[language=C++, firstnumber=33, linerange={33-39}, caption=Construtor da estrutura \texttt{State}]{../../pd/inc/state.h}
+\begin{equation}
+	\label{eq:bitsstructstate}
+	\begin{split}
+		\texttt{State} &= \texttt{\_tabuleiro} + \texttt{\_peao} + \texttt{\_escada} + \texttt{\_jogadores} + \texttt{\_atual}\\
+		\texttt{State} &= 20 + 15 + 15 + 30 + 1\\
+		\texttt{State} &= 81\ \emph{bits}
+	\end{split}
+\end{equation}
 
-[^RAII]: _Resource Aquisition Is Initialization_ é uma técnica de programação que vincula o ciclo de vida do recurso ao da estrutura \cite{cppreferenceraii}.
+## Implementação da Estrutura \texttt{State}
 
-cpp programing language criador do c++
+Para a implementação na linguagem C/C++, utilizou-se de uma \texttt{struct} com duas outras \texttt{struct}s anônimas dentro e _bit fields_ nas variáveis.
 
-Atributo \texttt{tabuleiro}
-\lstinputlisting[language=C++, firstnumber=41, linerange={41-47}, caption=Funções de acesso ao atributo \texttt{tabuleiro}]{../../pd/inc/state.h}
+\lstinputlisting[language=C++, label=lst:estrutura_state, firstnumber=10, linerange={10-31}, caption=Definição da estrutura \texttt{State}]{../../pd/inc/state.h}
 
-Atributo \texttt{peao}
-\lstinputlisting[language=C++, firstnumber=50, linerange={50-60}, caption=Funções de acesso ao atributo \texttt{peão}]{../../pd/inc/state.h}
+Dentro da estrutura \texttt{State} (Código \ref{lst:estrutura_state}) foram utilizados _bit fields_, que ocupa apenas parte da memória da variável, e variáveis do tipo \texttt{unsigned long long int}[^ulli], que ocupa  64 _bits_.
+Após a declaração de um membro da estrutura, é declarado a quantidade de _bits_ que será utilizado para ele, de modo que \texttt{ll \_tabuleiro :20} ocupe apenas 20 _bits_ da variável \texttt{unsigned long long int}, \texttt{ll \_peao :15} ocupe 15 _bits_, e assim por diante de forma que não ultrapsse os 64 _bits_ da variável.
 
-Atributo \texttt{escada}
-\lstinputlisting[language=C++, firstnumber=63, linerange={63-69}, caption=Funções de acesso ao atributo \texttt{escada}]{../../pd/inc/state.h}
+Para armazenar a \texttt{struct State} em um \texttt{std::map} com o objetivo de memorizar os cálculos, foram criadas duas estruturas anônimas[^anonymous_struct], como mostrado na Figura \ref{fig:diagram_struct}.
+Estas duas estruturas servem para garantir o alinhamento correto dos _bits_, desta forma, garantindo a consistência no armazenamento.
+Por exemplo: ao armazenar a \texttt{struct State} com todos os valores iguais a zero, menos o valor de \texttt{\_atual}, e o _bit_ de \texttt{\_atual} for o último, espera-se que o valor armazenado seja $2^{61}_2$, e não $1_2$.
 
-Atributo \texttt{jogador}
-\lstinputlisting[language=C++, firstnumber=72, linerange={72-83}, caption=Funções de acesso ao atributo \texttt{jogador}]{../../pd/inc/state.h}
+[^anonymous_struct]: Estruturas anônimas permitem acesso às suas variáveis de forma direta, como por exemplo: \texttt{state.\_tabuleiro} acessa a variável \texttt{\_tabuleiro} dentro da estrutura anônima, que por sua vez se encontra dentro da estrutura \texttt{State}.
 
-Atributo \texttt{atual}
-\lstinputlisting[language=C++, firstnumber=86, linerange={86-92}, caption=Funções de acesso ao atributo \texttt{atual}]{../../pd/inc/state.h}
+[^ulli]: No código foi utilizado \texttt{using unsigned long long int = ll;} para facilitar a implementação.
 
-# Comparador da estrutura \texttt{State}
+\diagramstruct
 
-\lstinputlisting[language=C++, firstnumber=95, linerange={95-102}, caption=Comparado da estrutura \texttt{State}]{../../pd/inc/state.h}
+## Funções de Acesso e Comparador da Estrutura \texttt{State}
 
+A estrutura possui um construtor e algumas funções para acessar seus membros de forma rápida, implementados com operadores _bit wise_ e máscara de _bits_.
 
-Ao final do cálculo deste jogo reduzido, temos que o número de estados distintos varia entre 17 e 25, dependendo do estado inicial do tabuleiro.
-Devido a este grande número de estados repetidos, escrever o algoritmo fazendo uso de programação dinâmica economizou bastante tempo e processamento.
+\lstinputlisting[language=C++, firstnumber=33, linerange={33-39}, label=lst:state_construtor, caption=Construtor da estrutura \texttt{State}]{../../pd/inc/state.h}
 
-O jogo seria um jogo balanceado se ambos os jogadores ganharem aproximadamente metade das vezes.
-Se existem seis jogos diferentes (combinação de duas cores com dois discos cada), o jogo é considerado balanceado se cada jogador ganhar três jogos.
-Neste caso, temos os jogos $j_i \in \{1122, 1212, 1221, 2112, 2121, 2211\}$, e para cada $j_i$ temos a pontuação máxima e a quantidade de estados distintos, como demonstrado na tabela +@tbl:1.
+A estrutura possui um construtor que atribui valores, e une o ciclo de vida das variáveis à própria estrutura, seguindo o princípio de RAII[^RAII], dessa forma não se faz necessário nenhuma implementação extra. Todas as variáveis possuem um valor padrão, válido para qualquer tamanho de tabuleiro $n_d \in [4,20]$.
+
+[^RAII]: _Resource Aquisition Is Initialization_ é uma técnica de programação que vincula o ciclo de vida do recurso ao da estrutura \cite{cormen2001introduction}.
+
+\lstinputlisting[language=C++, firstnumber=41, linerange={41-47}, label=lst:state_tabuleiro, caption=Funções de acesso ao atributo \texttt{tabuleiro}]{../../pd/inc/state.h}
+
+As funções de acesso ao atributo \texttt{\_tabuleiro}, implementadas no Código \ref{lst:state_tabuleiro}, servem para tornar um disco no tabuleiro disponível ou indisponível.
+É passado um valor inteiro para ele que será utilizado como uma máscara binária, realizando um _shift_ para acessar apenas aquele _bit_ na variável, desta forma, sendo possível recuperar e alterar o seu valor.
+
+\lstinputlisting[language=C++, firstnumber=50, linerange={50-60}, label=lst:state_peao, caption=Funções de acesso ao atributo \texttt{peão}]{../../pd/inc/state.h}
+
+O Código \ref{lst:state_peao} mostra a implementação das funções para modificar o \texttt{\_peao}.
+Como cada peão ocupa três _bits_, o acesso é realizado com o número \texttt{7} (ou \texttt{$111_2$} em binário).
+Esta máscara binária é movida até o índice da cor desejada, o operador _bit wise_ \texttt{\&} (_and_) é aplicado na variável para extrair apenas a informação daquele peão e, por fim, é realizado outro _shift_ pra trazer os três bits para os três valores menos significativos.
+Para modificar o valor de \texttt{\_peao}, é feito um processo semelhante ao de recuperá-lo, mas antes é preciso zerar os valores naquele índice para depois utilizar o operador _bit wise_ \texttt{|} (_or_) para adicionar o novo valor.
+
+\lstinputlisting[language=C++, firstnumber=63, linerange={63-69}, label=lst:state_escada, caption=Funções de acesso ao atributo \texttt{escada}]{../../pd/inc/state.h}
+
+Os processos, que foram utilizados no código do \texttt{\_peao}, de dar _shift_ na máscara binária, e acessar ou alterar o valor com os operadores _bit wise_, foram usados novamente no Código \ref{lst:state_escada}.
+
+\lstinputlisting[language=C++, firstnumber=72, linerange={72-83}, label=lst:state_jogador, caption=Funções de acesso ao atributo \texttt{jogador}]{../../pd/inc/state.h}
+
+Para acessar os valores dos discos na mão dos jogadores (Código \ref{lst:state_jogador}), foi utilizado um _shift_ de tamanho \texttt{15} para selecionar apenas a mão de determinado jogador.
+Em seguida, o valor dos discos são acessados da mesma maneira que os peões no Código \ref{lst:state_peao}.
+
+\lstinputlisting[language=C++, firstnumber=86, linerange={86-92}, label=lst:state_atual, caption=Funções de acesso ao atributo \texttt{atual}]{../../pd/inc/state.h}
+
+Por fim, a atualização do jogador \texttt{\_atual}, que basta inverter o _bit_ com o operador _\^_ (_xor_).
+
+Para utilizar a estrutura em um mapa, é preciso criar uma função de comparação para que o \texttt{std::map} saiba como comparar os estados e armazená-los internamente.
+
+\lstinputlisting[language=C++, firstnumber=95, linerange={95-102}, label=lst:comparador_state ,caption=Comparado da estrutura \texttt{State}]{../../pd/inc/state.h}
+
+No Código \ref{lst:comparador_state}, os membros da estrutura \texttt{State} são apenas comparados em ordem arbitrária, caso eles sejam diferentes.
+
+# Implementação da Programação Dinâmica
+
+Programação dinâmica é um método para a construção de algoritmos no qual há uma memorização de cada estado distinto para evitar recálculo \cite{cormen2001introduction}.
+A memorização dos estados do jogo _Big Points_ foi feita em um mapa, com a chave sendo o estado do jogo e com o valor armazenado sendo a pontuação máxima dos dois jogadores a partir daquele nó.
+
+Para facilitar a implementação da programação dinâmica, o código foi separado em duas funções: a função \texttt{dp()} (Código \ref{lst:bigpointsdp}), que é responsável pela chamada recursiva da programação dinâmica, e do retorno nos casos base e nos casos onde o valor já está memorizado no mapa; e a função \texttt{play()}, que realiza toda a lógica do jogo reduzido de _Big Points_.
+
+\lstinputlisting[language=C++, firstnumber=129, linerange={129-156}, label=lst:bigpointsdp, caption=Programação Dinâmica]{../../pd/src/dp.cpp}
+
+A função \texttt{dp()} recebe como argumentos o mapa dos estados já memorizados anteriormente, uma cópia da estrutura que armazena informações relevantes a respeito do jogo, e a estrutura mais importante que é a \texttt{state}. 
+Seu caso base é quando todos os peões se encontram na escada, que isso indica o final do jogo, e então é calculado a pontuação dos dois jogadores e retornado.
+A memorização ocorre no final da função \texttt{play()}, logo após a chamada da função \texttt{dp()}.
+
+Em seguida, é verificado se o estado já foi calculado e se encontra no mapa.
+Caso contrário, o _loop_ será executado $n_c$ vezes e, para cada vez, chamará a função \texttt{play()} duas vezes, a primeira vez para jogar com o peão da cor \texttt{pawn} e pegar o disco da direita, e a segunda vez para jogar com o mesmo peão, mas pegando o disco da esquerda.
+
+Os resultados das jogadas são: um valor _booleano_, verdadeiro se a jogada foi válida e falso se for inválida; e um par de inteiros com as pontuações do primeiro e do segundo jogador.
+Se a jogada for válida, a pontuação dos jogadores é colocada em um vetor que será ordenado posteriormente de acordo com o \texttt{state.atual()}.
+
+A função \texttt{play} foi implementada com o objetivo de separar a lógica do jogo da lógica da programação dinâmica.
+
+\lstinputlisting[language=C++, firstnumber=13, linerange={13-18}, label=lst:bigpointsplay0, caption=Função Play: Inicialização de Variáveis]{../../pd/src/dp.cpp}
+
+No Código \ref{lst:bigpointsplay0}, foi escrito o começo da função com os parâmetros e a inicialização de algumas variáveis que são utilizadas pelo resto da função.
+
+\lstinputlisting[language=C++, firstnumber=20, linerange={20-24}, label=lst:bigpointsplay1, caption=Função Play: Movimento Inválido]{../../pd/src/dp.cpp}
+
+Caso o peão esteja na escada, como mostrado no Código \ref{lst:bigpointsplay2}, o jogador não pode realizar esse movimento e a função deve retornar imediatamente com o primeiro valor falso para indicar uma jogada inválida.
+
+\lstinputlisting[language=C++, firstnumber=26, linerange={26-31}, label=lst:bigpointsplay2, caption=Função Play: Remoção de Discos]{../../pd/src/dp.cpp}
+
+O Código \ref{lst:bigpointsplay2} remove os discos indisponíveis da \texttt{string game.board} para que o jogador não possa mover com o peão pra cima daquele disco e nem coletá-lo.
+
+\lstinputlisting[language=C++, firstnumber=13, linerange={33-44}, label=lst:bigpointsplay3, caption=Função Play: Movimento do Peão]{../../pd/src/dp.cpp}
+
+Em seguida, no Código \ref{lst:bigpointsplay3}, se ainda tiver discos na frente do peão, ele é movido para o próximo disco de sua cor.
+Caso o disco não esteja disponível, a variável \texttt{bool available} será igual a falso e o _loop_ vai continuar.
+Se não tiver nenhum disco disponível à sua frente, a _flag_ \texttt{bool in\_range} recebe o valor falso e o _loop_ é quebrado.
+
+\lstinputlisting[language=C++, firstnumber=46, linerange={46-53}, label=lst:bigpointsplay4, caption=Função Play: Subir a Escada]{../../pd/src/dp.cpp}
+
+Se não tiver nenhum disco à sua frente, o peão sobe a escada para a posição mais alta não ocupada (Código \ref{lst:bigpointsplay4}).
+
+\lstinputlisting[language=C++, firstnumber=55, linerange={55-68}, label=lst:bigpointsplay5, caption=Função Play: Atualiza Tabuleiro]{../../pd/src/dp.cpp}
+
+Após o movimento do peão, é realizado duas atualizações no estado do jogo, escrito no Código \ref{lst:bigpointsplay5}.
+A primeira atualização é se o peão se moveu pra cima de um disco no tabuleiro, aquele disco agora se torna indisponível.
+E a segunda é, se o peão estava em cima do tabuleiro antes de se mover, aquele disco agora se torna disponível para coletar.
+
+\lstinputlisting[language=C++, firstnumber=70, linerange={70-122}, label=lst:bigpointsplay6, caption=Função Play: Coleta Disco]{../../pd/src/dp.cpp}
+
+O próximo passo (Código \ref{lst:bigpointsplay6}) é coletar o disco de acordo com a variável \texttt{pick\_right}.
+Se o seu valor for verdadeiro, então o _loop_ vai procurando por discos disponíveis à direita do peão movido, caso contrário, irá procurar por discos disponíveis à esquerda.
+Se houver disco disponível pra pegar, a variável \texttt{pick} terá um valor verdadeiro, e entrará no bloco \texttt{if (pick)} para o jogador coletar o disco e pra retirar o disco do tabuleiro.
+
+\lstinputlisting[language=C++, firstnumber=124, linerange={124-127}, label=lst:bigpointsplay7, caption=Função Play: Retorno da Função]{../../pd/src/dp.cpp}
+
+Por fim, a função é retornada de acordo com o Código \ref{lst:bigpointsplay7} com a melhor pontuação para o jogador \texttt{\_atual} que é resultado da função \texttt{dp()}.
+
+## Implementação do \emph{Minimax}
+
+De acordo com o teorema _minimax_, o jogador \texttt{\_atual} quer maximizar sua pontuação e minimizar a pontuação de seu oponente.
+
+\lstinputlisting[language=C++, firstnumber=158, linerange={158-186}, label=lst:minimaxp1, caption=Implementação do \emph{Minimax}]{../../pd/src/dp.cpp}
+
+Para maximizar sua pontuação, o primeiro jogador ordena suas possíveis jogadas baseada na ordem crescente das suas pontuações e em ordem decrescente da pontuação de seu adversário.
+
+\lstinputlisting[language=C++, firstnumber=188, linerange={188-216}, label=lst:minimaxp2, caption=Implementação do \emph{Minimax}]{../../pd/src/dp.cpp}
+
+Da mesma forma que o primeiro jogador, $J_2$ vai ordenar suas jogadas baseado na ordem crescente de suas pontuações e em ordem decrescente da pontuação de $J_1$.
+
+\lstinputlisting[language=C++, firstnumber=219, linerange={219-229}, label=lst:minimax, caption=Implementação do \emph{Minimax}]{../../pd/src/dp.cpp}
+
+O \texttt{if()} serve para ordenar o vetor de pontuações de acordo com qual dos dois jogadores vão jogar.
+Depois de ordenar o vetor, o valor da frente (o melhor para aquele jogador) é armazenado no mapa e retornado da função \texttt{dp()}.
+
+# Cálculo das Partidas Reduzidas
+
+Para o menor jogo trabalhado neste projeto, foi escolhido a quantidade de cores $n_c = 2$ e a quantidade de discos $n_d = 2$.
+Com isso, tem-se os jogos $j_i \in \{1122, 1212, 1221, 2112, 2121, 2211\}$ e, para cada $j_i$, é executado o algorítmo implementado para descobrir a pontuação máxima de ambos os jogadores e a quantidade de estados distintos, como demonstrado na tabela \ref{tab:pont_minimax}.
 
 \begin{table}[htb]
 	\centering
@@ -868,7 +969,13 @@ Neste caso, temos os jogos $j_i \in \{1122, 1212, 1221, 2112, 2121, 2211\}$, e p
 	\end{tabular}
 \end{table}
 
-Em todos as possíveis combinações de tabuleiros iniciais, o primeiro jogador sempre ganha com dois pontos enquanto o segundo jogador consegue fazer no máximo um ponto, na maioria das vezes. Isso torna o jogo desequilibrado.
+Ao final do cálculo deste jogo reduzido, tem-se que o número de estados distintos varia entre 17 e 25, dependendo do estado inicial do tabuleiro.
+Em todos as possíveis combinações de tabuleiros iniciais, o primeiro jogador sempre ganha com dois pontos enquanto o segundo jogador consegue fazer no máximo um ponto.
+A partir desta informação, infere-se que o jogo completo pode ser desbalanceado, pois apenas o jogador $J_1$ vence.
+
+Foi calculado vários jogos com diversas configurações iniciais: duas cores e dois discos; duas cores e três discos; duas cores e quatro discos; três cores e dois discos; três cores e três discos; três cores e quatro discos; e quatro cores e dois discos.
+O resultado desse processamento foi compilado nas Figuras \ref{fig:bigpoints_cores}, \ref{fig:bigpoints_discos} e \ref{fig:bigpoints_total}.
+Cada uma dessas figuras estão ordenadas de uma maneira diferente para tentar encontrar um padrão que possibilite estimar os valores de jogos futuros.
 
 \begin{figure}[htb]
 	\centering
@@ -892,9 +999,12 @@ Em todos as possíveis combinações de tabuleiros iniciais, o primeiro jogador 
 \end{figure}
 
 
+Como visto na Tabela \ref{tab:pont_minimax}, o primeiro jogador sempre vence.
+Essa vitória de $100\%$ das vezes está sendo representado nos gráficos pelo círculo no canto mais esquerdo.
+O triângulo indica a porcentagem de empates e o quadrado representa a vitória do segundo jogador.
+Percebe-se que para todos os jogos reduzido calculados, o jogo é desbalanceado, dando uma vantagem enorme para o primeiro jogador.
+Estes resultados sugerem que o jogo completo é desbalanceado.
 
-
-_long long int_, de forma que cada estado ocupasse apenas 64 _bits_ na memória.
 
 
 
@@ -917,18 +1027,14 @@ Capítulo 4 - Considerações Finais
 \chapter{Considerações Finais}
 \label{ch:conclusao}
 
-A análise utilizada para solucionar[^jogo_solucao] o jogo neste trabalho foi o teorema _minimax_, onde cada jogador tenta aumentar sua pontuação e diminuir a pontuação do oponente.
-Os resultados obtidos ao final da análise computacional baseadas neste teorema sugere a possibilidade do jogo completo ser desbalanceado[^jogo_balanceado], dando ao primeiro jogador uma maior chance de vencer o jogo.
-
-[^jogo_solucao]: Solucionar um jogo é percorrer todas as sua possibilidades de movimento e seus resultados.
-
-[^jogo_balanceado]: É dito um jogo balanceado aquele que a chance dos jogadores de ganhar é a mesma.
+A análise utilizada para solucionar o jogo neste trabalho foi o teorema _minimax_, onde cada jogador tenta aumentar sua pontuação e diminuir a pontuação do oponente.
+O programa escrito utilizando a técnica de memorização da programação dinâmica conseguiu rodar uma quantidade significativa de dados em um período de três semanas.
+Os resultados obtidos ao final da análise computacional baseadas neste teorema sugerem a possibilidade do jogo completo ser desbalanceado, dando ao primeiro jogador uma maior chance de vencer o jogo.
 
 # Trabalhos futuros
 
-Desenvolvimento de uma I.A. para competir contra um jogador humano.
-Análise mais complexa do jogo _Big Points_, utilizando processamento paralelo e distribuído.
+Como proposta para trabalhos futuros:
 
-
-
-
+- Identificação de uma heurística para competir contra um jogador humano.
+- Desenvolvimento de uma I.A. para competir contra um jogador humano.
+- Análise mais complexa do jogo _Big Points_, utilizando processamento paralelo e distribuído.
