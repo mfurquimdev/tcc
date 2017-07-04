@@ -1,0 +1,101 @@
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
+\renewcommand*{\lstlistingname}{Código}
+\renewcommand*{\lstlistlistingname}{Lista de Códigos}
+\renewcommand{\backref}{}
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+\counterwithout{equation}{section}
+
+\providecommand{\tightlist}{%
+	  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstloadlanguages{[GNU]C++} % Load Cpp syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+
+%\lstset{
+%    backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+%    basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+%    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+%    breaklines=true,                 % sets automatic line breaking
+%    captionpos=b,                    % sets the caption-position to bottom
+%    commentstyle=\color{mygreen},    % comment style
+%    deletekeywords={...},            % if you want to delete keywords from the given language
+%    escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+%    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+%    frame=single,                    % adds a frame around the code
+%    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+%    keywordstyle=\color{blue},       % keyword style
+%    language=[GNU]C++,                 % the language of the code
+%    otherkeywords={*,...},           % if you want to add more keywords to the set
+%    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+%    numbersep=5pt,                   % how far the line-numbers are from the code
+%    numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+%    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+%    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+%    showstringspaces=false,          % underline spaces within strings only
+%    showtabs=false,                  % show tabs within strings adding particular underscores
+%    stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+%    stringstyle=\color{mymauve},     % string literal style
+%    tabsize=2,                       % sets default tabsize to 2 spaces
+%literate={á}{{\'a}}1 {à}{{\`a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {É}{{\'E}}1 {ê}{{\^e}}1 {õ}{{\~o}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ç}{{\c c}}1 {³}{{$^3$}}1 {Ω}{{$\Omega$}}1,
+%    title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+%}
+
+\newcommand\indexkeywords[1]{\index{keywords, #1}}
+
+\lstset{%
+	language=C++,           %linguagem
+    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    stringstyle=\color{mymauve},     % string literal style
+	numbers=left,           %posição dos números
+	stepnumber=1,           %frequencia de aparição dos números
+    backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+    breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
+    breaklines=true,                 % sets automatic line breaking
+    captionpos=t,                    % sets the caption-position to top
+    commentstyle=\color{mygreen},    % comment style
+    deletekeywords={...},            % if you want to delete keywords from the given language
+    escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	%numberstyle=\zebra{gray!15}{white!35},
+	%basewidth={0.6em,0.45em},
+	fontadjust=true,
+	%mathescape=true,
+	tabsize=4,
+	literate={á}{{\'a}}1 {à}{{\`a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {É}{{\'E}}1 {ê}{{\^e}}1 {õ}{{\~o}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ç}{{\c c}}1 {³}{{$^3$}}1 {Ω}{{$\Omega$}}1,
+    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+    keywordstyle=\color{blue},       % keyword style
+    language=[GNU]C++,                 % the language of the code
+    otherkeywords={*,...},           % if you want to add more keywords to the set
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=3pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	numberbychapter=false,
+	procnamekeys={program, procedure, function, código},
+	indexprocnames=true,
+	indexstyle=\index[keywords],
+	index={square},
+	index={[2]root},
+	%showstringspaces=false,
+	%stringstyle=\color{cyan},
+	basicstyle=\scriptsize        % the size of the fonts that are used for the code
+}
+\usetikzlibrary{shapes,snakes}
+\usetikzlibrary{calc}
+
+\theoremstyle{definition}
+\newtheorem{myex}{Exemplo}
+\newtheorem{mydef}{Definição}

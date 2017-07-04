@@ -7,6 +7,8 @@ doc/tex/tmp.tex
 doc/tex/tcc.tex
 doc/tex/tcc.pdf
 doc/ref
+doc/tex/figuras
+*.swp
 *.aux
 *.bbl
 *.blg
@@ -18,6 +20,7 @@ doc/ref
 *.toc
 *.txt
 *.nav
+*.lol
 
 # PDF files
 
