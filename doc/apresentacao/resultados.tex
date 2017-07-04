@@ -1,0 +1,160 @@
+\section{Resultados Parciais}
+
+\subsection{Cálculo do Número de Partidas e Estados}
+\subsubsection{Quantidade de Partidas Distintas}
+\begin{frame}[fragile]
+	\frametitle{\subsecname - \subsubsecname}
+\begin{equation*}
+\begin{split}
+	Partidas\ &=\  4\cdot \binom{55}{5} \cdot \binom{50}{5} \cdot \binom{45}{9} \cdot \binom{36}{9} \cdot \binom{27}{9} \cdot \binom{18}{9} \cdot \binom{9}{9}\\
+	Partidas\ &\approx 5\times 10^{41}
+\end{split}
+\end{equation*}
+\end{frame}
+
+\subsubsection{Espaço na Memória}
+\begin{frame}[fragile]
+	\frametitle{\subsecname - \subsubsecname}
+\begin{equation*}
+\begin{split}
+	Bytes\ &=\ \dfrac{\text{\emph{Mask}}}{8} + 5\text{ Peões}\cdot\text{char} + 5\text{ Jogadores}\cdot 7\text{ Cores}\cdot\text{char}\\
+	Bytes\ &=\ \dfrac{55}{8} + 5\cdot1 + 5\cdot7\cdot1\\
+	Bytes\ &=\ 47\ bytes
+\end{split}
+\end{equation*}
+\end{frame}
+
+\subsubsection{Quantidade de Estados}
+\begin{frame}[fragile]
+	\frametitle{\subsecname - \subsubsecname}
+
+\begin{equation*}
+\begin{split}
+	Estados\ &=\ [B]\cdot[P]\cdot[E]\cdot[D]\cdot[J]\\
+	[B]\ &=\ 55\text{ discos, disponíveis ou não}\\
+	[P]\ &=\ 5\text{ peões, com }61\text{ locais possíveis}\\
+	[E]\ &=\ \displaystyle\sum_{i=0}^{5} A_{5,i}\\
+	[D]\ &=\ \binom{15}{5}\cdot\binom{10}{5}\\
+	[J]\ &=\ 5\\
+	Estados\ &=\ 2^{55}\cdot61^{5}\cdot326\cdot3003^{5}\cdot252^{2}\cdot5\\
+	Estados\ &\approx 6\times 10^{37}
+\end{split}
+\end{equation*}
+\end{frame}
+
+\subsubsection{Poda por Posição}
+\begin{frame}[fragile]
+	\frametitle{\subsecname - \subsubsecname}
+\begin{equation*}
+\begin{split}
+	Estados\ &=\ 2^{55}\cdot11^{5}\cdot326\cdot3003^{5}\cdot252^{2}\cdot5\\
+	Estados\ &\approx 1\times 10^{34}
+\end{split}
+\end{equation*}
+\end{frame}
+
+\subsection{Tempo de Cálculo dos Estados}
+\begin{frame}
+\frametitle{\secname - \subsecname}
+Dado $d\!\in\![2,9]$ discos e $\ p\!\in\![2,5]$ peões, tem-se \#\emph{B} estados do tabuleiro calculados em \emph{Seg} segundos:
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\emph{p} & \emph{d} & \#\emph{B} & \emph{Seg}\tabularnewline
+\hline
+\hline
+2 & 2 & 27 & 0\tabularnewline
+\hline
+2 & 3 & 102 & 0\tabularnewline
+\hline
+2 & 4 & 361 & 0\tabularnewline
+\hline
+2 & 5 & 1251 & 0\tabularnewline
+\hline
+2 & 6 & 4296 & 0\tabularnewline
+\hline
+2 & 7 & 14746 & 1\tabularnewline
+\hline
+2 & 8 & 50746 & 3\tabularnewline
+\hline
+2 & 9 & 175230 & 19\tabularnewline
+\hline
+\end{tabular}
+\caption{Quantidade de Estados e Tempo com \emph{p} = 2}
+\label{tab:quantidade-de-estados-e-tempo-com-p-2}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{\secname - \subsecname}
+Dado $d\!\in\![2,9]$ discos e $\ p\!\in\![2,5]$ peões, tem-se \#\emph{B} estados do tabuleiro calculados em \emph{Seg} segundos:
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\emph{p} & \emph{d} & \#\emph{B} & \emph{Seg}\tabularnewline
+\hline
+\hline
+3 & 2 & 150 & 0\tabularnewline
+\hline
+3 & 3 & 1219 & 1\tabularnewline
+\hline
+3 & 4 & 9082 & 1\tabularnewline
+\hline
+3 & 5 & 65195 & 19\tabularnewline
+\hline
+3 & 6 & 457855 & 653\tabularnewline
+\hline
+3 & 7 & 3173596 & 19929\tabularnewline
+\hline
+\end{tabular}
+\caption{Quantidade de Estados e Tempo com \emph{p} = 3}
+\label{tab:quantidade-de-estados-e-tempo-com-p-3}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{\secname - \subsecname}
+Dado $d\!\in\![2,9]$ discos e $\ p\!\in\![2,5]$ peões, tem-se \#\emph{B} estados do tabuleiro calculados em \emph{Seg} segundos:
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\emph{p} & \emph{d} & \#\emph{B} & \emph{Seg}\tabularnewline
+\hline
+\hline
+4 & 2 & 825 & 0\tabularnewline
+\hline
+4 & 3 & 14907 & 2\tabularnewline
+\hline
+4 & 4 & 243200 & 462\tabularnewline
+\hline
+\end{tabular}
+\caption{Quantidade de Estados e Tempo com \emph{p} = 4}
+\label{tab:quantidade-de-estados-e-tempo-com-p-4}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{\secname - \subsecname}
+Dado $d\!\in\![2,9]$ discos e $\ p\!\in\![2,5]$ peões, tem-se \#\emph{B} estados do tabuleiro calculados em \emph{Seg} segundos:
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\emph{p} & \emph{d} & \#\emph{B} & \emph{Seg}\tabularnewline
+\hline
+\hline
+5 & 2 & 4513 & 0\tabularnewline
+\hline
+5 & 3 & 178898 & 505\tabularnewline
+\hline
+5 & 4 & 6303528 & 526949\tabularnewline
+\hline
+\end{tabular}
+\caption{Quantidade de Estados e Tempo com \emph{p} = 5}
+\label{tab:quantidade-de-estados-e-tempo-com-p-5}
+\end{table}
+\end{frame}
