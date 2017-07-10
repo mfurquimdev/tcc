@@ -42,7 +42,7 @@ for (f in 1:length(files)) {
 
 print(paste(names, "->", w1s, ":", ties, ":", w2s, sep=""))
 
-png(filename="./ordem_num_cores.png", height=360, width=640, bg="white")
+png(filename="./ordem_num_cores.png", height=480, width=854, bg="white")
 plot_colors <- c("blue","red","forestgreen")
 data <- data.frame(w1s,w2s,ties)
 plot(data$w1s, type="b", col=plot_colors[1], ylim=c(0,100), axes=FALSE, ann=FALSE)
@@ -92,7 +92,7 @@ names[5] <- tmp
 
 print(paste(names, "->", w1s, ":", ties, ":", w2s, sep=""))
 
-png(filename="./ordem_tamanho.png", height=360, width=640, bg="white")
+png(filename="./ordem_tamanho.png", height=480, width=854, bg="white")
 plot_colors <- c("blue","red","forestgreen")
 data <- data.frame(w1s,w2s,ties)
 plot(data$w1s, type="b", col=plot_colors[1], ylim=c(0,100), axes=FALSE, ann=FALSE)
@@ -137,7 +137,7 @@ names[6] <- names[4]
 names[4] <- tmp
 
 print(paste(names, "->", w1s, ":", ties, ":", w2s, sep=""))
-png(filename="./ordem_num_discos.png", height=360, width=640, bg="white")
+png(filename="./ordem_num_discos.png", height=480, width=854, bg="white")
 plot_colors <- c("blue","red","forestgreen")
 data <- data.frame(w1s,w2s,ties)
 plot(data$w1s, type="b", col=plot_colors[1], ylim=c(0,100), axes=FALSE, ann=FALSE)

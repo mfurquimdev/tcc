@@ -51,13 +51,13 @@ Game::~Game()
 		delete(this->_pawnmenu);
 		this->_pawnmenu = NULL;
 	}
-	
+
 	if (this->_discmenu != NULL) {
 		if (DEBUG) fprintf(stderr, "[%p]\tdiscmenu\n", (void*) this->_discmenu);
 		delete(this->_discmenu);
 		this->_discmenu = NULL;
 	}
-	
+
 	if (this->_blackmenu != NULL) {
 		if (DEBUG) fprintf(stderr, "[%p]\tblackmenu\n", (void*) this->_blackmenu);
 		delete(this->_blackmenu);
@@ -165,9 +165,16 @@ Game::pawn_stair(int pawn_position)
 void
 Game::print_color_stair()
 {
+
+
 	int num_pawns = number_pawns();
 	for (int i = 0; i < number_pawns(); i++) {
-		printw("                                                                                 ");
+		for (size_t n = 0; n < 16; n++) {
+			printw(" ");
+		}
+		for (size_t n = 0; n < 2*((number_discs()*number_pawns())+number_pawns()-1); n++) {
+			printw(" ");
+		}
 		for (int j = 0; j < (num_pawns-i-1)*2; j++) {
 			printw(" ");
 		}
@@ -192,7 +199,9 @@ Game::print_color_stair()
 void
 Game::print_color_board()
 {
-	printw("                                     ");
+	for (size_t n = 0; n < 6; n++) {
+		printw(" ");
+	}
 
 	string board = this->board();
 	for (unsigned int i = 0; i < board.length(); i++) {
@@ -311,7 +320,9 @@ void
 Game::print_color_players()
 {
 	string player_discs;
-	printw("                                     ");
+	for (size_t n = 0; n < 6; n++) {
+		printw(" ");
+	}
 	attron(COLOR_PAIR(Color::Foreground_White));
 	printw("(%d) ", calculate_score(0));
 	if (this->_player_turn == 0 ) {
@@ -402,7 +413,9 @@ Game::print_color_players()
 	printw("\n");
 	printw("\n");
 
-	printw("                                     ");
+	for (size_t n = 0; n < 6; n++) {
+		printw(" ");
+	}
 	attron(COLOR_PAIR(Color::Foreground_White));
 	printw("(%d) ", calculate_score(1));
 	if (this->_player_turn == 1 ) {
@@ -510,7 +523,7 @@ Game::print_menu()
 void
 Game::draw() {
 	clear();
-	move(10,0);
+	move(3,0);
 	print_color_players();
 	print_color_stair();
 	print_color_board();

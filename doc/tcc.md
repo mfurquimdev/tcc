@@ -599,7 +599,7 @@ Esse procedimento foi repetido para _cada_ combinação possível do tabuleiro i
 
 Para estudar a viabilidade de solucionar[^jogo_solucao] o jogo, foi preciso calcular a quantidade de partidas distintas do jogo \emph{Big Points}.
 A característica do jogo que muda de uma partida para outra são a quantidade de jogadores e o arranjo dos discos formando o tabuleiro.
-Para a quantidade $P$ de jogadores, tem-se $J \in [2,5]$.
+Para a quantidade $J$ de jogadores, tem-se $J \in [2,5]$.
 Agora, para a organização dos discos, faz-se uma combinação de cada cor, com a quantidade restante de discos.
 
 [^jogo_solucao]: Solucionar um jogo é percorrer todas as sua possibilidades de movimento e seus resultados.
