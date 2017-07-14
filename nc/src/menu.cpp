@@ -44,7 +44,7 @@ Menu::~Menu()
 void
 Menu::draw()
 {
-	 if(DEBUG) fprintf(stderr, "draw\n");
+	if(DEBUG) fprintf(stderr, "draw\n");
 	WINDOW* window = this->window();
 	const char** choices = this->choices();
 	int num_choices = this->num_choices();
@@ -67,7 +67,7 @@ Menu::draw()
 int
 Menu::wait_choice()
 {
-	 if(DEBUG) fprintf(stderr, "wait_choice\n");
+	if(DEBUG) fprintf(stderr, "wait_choice\n");
 	int c = 0;
 	c = wgetch(window());
 	switch (c) {
@@ -100,7 +100,7 @@ Menu::wait_choice()
 void
 Menu::choices(const char** char_choices, int num_choices)
 {
-	 if(DEBUG) fprintf(stderr, "set choices\n");
+	if(DEBUG) fprintf(stderr, "set choices\n");
 	this->_num_choices = num_choices;
 	this->_choices = NULL;
 	this->_choices = (char**) malloc (sizeof(char)*num_choices);
@@ -117,7 +117,7 @@ Menu::choices(const char** char_choices, int num_choices)
 void
 Menu::update()
 {
-	 if(DEBUG) fprintf(stderr, "update\n");
+	if(DEBUG) fprintf(stderr, "update\n");
 	wrefresh(window());
 
 	return ;
@@ -126,23 +126,23 @@ Menu::update()
 const char**
 Menu::choices(void)
 {
-	 if(DEBUG) fprintf(stderr, "get choices\n");
+	if(DEBUG) fprintf(stderr, "get choices\n");
 	return (const char**) this->_choices;
 }
 
 int
 Menu::num_choices(void)
 {
-	 if(DEBUG) fprintf(stderr, "get num_choices\n");
+	if(DEBUG) fprintf(stderr, "get num_choices\n");
 	return this->_num_choices;
 }
 
 void
 Menu::window(pair<int, int> position, pair<int, int> window_size)
 {
-	 if(DEBUG) fprintf(stderr, "set window\n");
-	 if(DEBUG) fprintf(stderr, "(x,y)\t(%d,%d)\n", position.first, position.second);
-	 if(DEBUG) fprintf(stderr, "(w,h)\t(%d,%d)\n", window_size.first, window_size.second);
+	if(DEBUG) fprintf(stderr, "set window\n");
+	if(DEBUG) fprintf(stderr, "(x,y)\t(%d,%d)\n", position.first, position.second);
+	if(DEBUG) fprintf(stderr, "(w,h)\t(%d,%d)\n", window_size.first, window_size.second);
 	this->_window = newwin(window_size.second, window_size.first, position.second, position.first);
 	return ;
 }
@@ -150,14 +150,14 @@ Menu::window(pair<int, int> position, pair<int, int> window_size)
 WINDOW*
 Menu::window(void)
 {
-	 if(DEBUG) fprintf(stderr, "get window\n");
+	if(DEBUG) fprintf(stderr, "get window\n");
 	return this->_window;
 }
 
 void
 Menu::window_size(int columns, int lines)
 {
-	 if(DEBUG) fprintf(stderr, "set window_size\n");
+	if(DEBUG) fprintf(stderr, "set window_size\n");
 	this->_window_size = make_pair(columns, lines);
 	return ;
 }
@@ -165,14 +165,14 @@ Menu::window_size(int columns, int lines)
 pair<int, int>
 Menu::window_size(void)
 {
-	 if(DEBUG) fprintf(stderr, "get window_size\n");
+	if(DEBUG) fprintf(stderr, "get window_size\n");
 	return this->_window_size;
 }
 
 void
 Menu::position(int x, int y)
 {
-	 if(DEBUG) fprintf(stderr, "set position\n");
+	if(DEBUG) fprintf(stderr, "set position\n");
 	this->_position = make_pair(x, y);
 	return ;
 }
@@ -180,7 +180,7 @@ Menu::position(int x, int y)
 pair<int, int>
 Menu::position(void)
 {
-	 if(DEBUG) fprintf(stderr, "get position\n");
+	if(DEBUG) fprintf(stderr, "get position\n");
 	return this->_position;
 }
 
