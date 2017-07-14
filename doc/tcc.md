@@ -592,9 +592,18 @@ Por último, as Seções \ref{representauxe7uxe3o-e-codificauxe7uxe3o-dos-estado
 
 Inicialmente, foi utilizado o _kanban_ do \href{https://waffle.io/mfurquim/tcc}{\emph{waffle.io}}[^waffleio] foi utilizado para registrar tarefas devido à sua integração com as _issues_ do \emph{GitHub}[^github].
 Reuniões com o orientador foram realizadas para discutir aspectos técnicos do jogo, como as estruturas de dados a serem utilizadas para reduzir os dados armazenados, e alguns métodos importantes para agilizar o processamento.
+O tempo trabalhado no projeto foi rastreado utilizando o programa wakatime[^wakatime], chegando a quase 140 horas em 17 semanas, como mostrado na Figura \ref{fig:wakatime}.
 
 [^waffleio]:https://waffle.io/mfurquim/tcc
 [^github]:https://github.com/mfurquim/tcc
+[^wakatime]: https://wakatime.com/project/tcc
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=\textwidth]{figuras/wakatime}
+	\caption{Tempo Rastreado com \emph{Wakatime}}
+	\label{fig:wakatime}
+\end{figure}
 
 Porém, ao longo do tempo, o esforço para manter a rastreabilidade das tarefas tornou-se muito alto em relação à complexidade do projeto, e ao tamanho da equipe.
 As tarefas passaram a ser _branches_ locais com nomes significativos, representando a funcionalidade a ser desenvolvida.
@@ -781,7 +790,6 @@ Por fim, a pontuação é calculada de acordo com as Tabelas \ref{tab:pontreduzi
 
 
 
-
 <!--
 Capítulo 3 - Resultados
 -->
@@ -796,6 +804,7 @@ Neste capítulo, são relatados os passos necessários para realizar este cálcu
 
 Foi decidido implementar a estrutura de armazenamento como uma \texttt{struct} ao invés de uma classe, devido à rapidez do acesso aos atributos e ao espaço reduzido ocupado na memória.
 A estrutura \texttt{State} possui cinco membros:
+<<<<<<< HEAD
 \texttt{tabuleiro}, no qual pode armazenar informações sobre um tabuleiro de até 20 discos[^tabuleiro];
 \texttt{peao}, que representa a posição do peão $p_i \in \{0, 1,...,n_d, n_d+1\}$, onde $n_d$ é o número de discos de cores comuns[^cor_peao] no jogo e $p_i$ é o peão da cor $i$;
 \texttt{escada}, que indica as posições dos peões na escada, sendo a $i$_-ésima_ posição da \texttt{escada} é a posição do peao $p_i$;
@@ -1155,6 +1164,5 @@ Considerando que haja peões na escada, o objetivo deve ser coletar a maior quan
 Para uma boa implementação deste um jogo (por ser multiplayer), o jogador deve ter a opção de jogar contra o computador. Isso pode ser alcançado fazendo uso de inteligência artificial para competir contra um jogador humano.
 
 Em relação a realizar uma análise mais completa do jogo _Big Points_, pode-se pensar em processamento paralelo e distribuído. Dessa forma, seria possível distribuir a carga de processamento, a partir de certos estados da árvore, para diversos nós, ou clusters.
-
 
 
